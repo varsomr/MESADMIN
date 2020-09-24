@@ -1,0 +1,40 @@
+﻿<!--<div class="container"> -->
+    <div style="padding-bottom:5px;">
+	<a class="btn btn-default" href="http://denm2008mesadm:94/#/" align="center">Home</a>
+	<a class="btn btn-default" href="#/Grid" align="center">Projects</a>
+    <img src="../LeprinoLogo.png" style="width:50px;height:33px;" align="right">
+        <header> <h3 align="center">MES Apps Project-Hours Utilization</h3> </header>
+    </div>
+   <!-- <ul class="nav nav-tabs" data-tabs="tabs" id="myTabs">
+        <li class="active"><a data-toggle="tab" data-target="#grid">Project List</a></li>
+        
+    </ul>-->
+
+   <!-- <div class="tab-content">
+
+        <div id="grid" class="tab-pane fade in active">-->
+            <div ng-controller="ProjectRescontroller" style="display:block; width : 1520PX">
+                <!--Login name: <input type="text" name="FirstName" value="Mickey"><br>-->
+                <div style="display:inline-block;padding-bottom:5px; padding-left:0px;">
+                    <button ng-click="refreshGrid()">Refresh</button>
+                    <button ng-click="clearFilters()">Reset</button>
+                 <!--<button ng-click="addRow()">AddRow</button>
+                    <input type="checkbox" name="noTIMEcontent" id="nobody" value="0"> Display Main Projects ONLY-->   
+                </div>
+
+                <!--
+                    <strong>Data Length:</strong> {{ gridOptions.data.length | number }}
+                <strong>Last Cell Edited:</strong> {{lastCellEdited}}
+                <br>
+                    -->
+                <div id="grid" ui-grid="gridOptions" ui-grid-edit ui-grid-selection class="grid" ui-grid-pagination style="width:1540PX"></div>
+                <div class="grid-msg-overlay" ng-hide="!loading" >
+                    <div class="msg">
+                        <span >Loading Data...:) :) <i class="fa fa-spinner fa-spin"></i></span>
+                    </div>
+                </div>
+
+        </div>
+
+
+

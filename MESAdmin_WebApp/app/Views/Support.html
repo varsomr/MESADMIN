@@ -1,0 +1,1028 @@
+<HTML>
+<head>
+
+    <style>
+        .p1 {
+            background: url(MESPortal.png) no-repeat right fixed;
+            background-size: 700px;
+            opacity: 2.2;
+            filter: alpha(opacity=220);
+        }
+
+        body {
+            /*padding-top: 50px;
+            padding-bottom: 20px;*/
+            padding-left: 0px;
+            background-color: black;
+            border-style: solid;
+            border-bottom-width: thick;
+            border-color: black;
+            font-family: Arial, Helvetica, sans-serif;
+            background: url(MESPortal.png) no-repeat center fixed;
+            color: white;
+        }
+
+
+
+        /* Set padding to keep content from hitting the edges */
+        .body-content {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 40%;
+        }
+
+
+        .imgcontainer {
+            text-align: center;
+            margin: 24px 0 12px 0;
+        }
+
+        img.avatar {
+            width: 20%;
+            border-radius: 50%;
+        }
+
+        .container {
+            padding: 16px;
+        }
+
+        .dl-horizontal dt {
+            white-space: normal;
+        }
+
+
+        textarea {
+            max-width: 1350px;
+        }
+
+
+
+        header {
+            background-color: orangered;
+            color: white;
+            display: block;
+        }
+
+
+
+        label {
+            font-family: 'Open Sans';
+            font-weight: 800;
+            font-size: x-small;
+        }
+
+
+
+
+        .your-hover-class {
+            color: red;
+        }
+
+        .md-button {
+            padding: 0 6px 0 6px;
+            margin: 6px 8px 6px 8px;
+            min-width: 88px;
+            border-radius: 3px;
+            font-size: 14px;
+            text-align: center;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: none;
+            outline: none;
+        }
+
+        .btn {
+            /*background-color: #692218;*/
+            background-color: #17561b;
+            color: white;
+            height: 35px;
+            width: 80px;
+            font-size: x-small;
+        }
+
+
+
+            .btn:hover {
+                /*background-color: #FFD740;*/
+                /*color: #1565C0;*/
+                background-color: white;
+                color: black;
+                border-color: white;
+                border: outset;
+                /*border-width:thick;*/
+            }
+
+            .btn:focus {
+                outline: 0 !important;
+            }
+
+            .btn:active {
+                outline: 0;
+                color: #fff;
+                background-color: #428bca;
+                /*border-color: #357ebd;*/
+            }
+
+
+        table, tr {
+            border: 1px groove;
+            width: 40%;
+            background-color: black;
+        }
+
+        div {
+            background-color: black;
+        }
+
+
+
+        label[] {
+            /*background-color: #f7c50d;#f7620d*/
+            background-color: black;
+            /*font-size: 10px;*/
+            color: white;
+            font-family: 'Open Sans';
+            font-weight: 200;
+            font-size: small;
+        }
+
+
+        label[type="progressBar"] {
+            /*background-color: #f7c50d;#f7620d*/
+            background-color: black;
+            /*font-size: 10px;*/
+            color: black;
+            font-family: 'Open Sans';
+            font-weight: 100;
+            font-size: xx-small;
+        }
+
+        input {
+            /*font-family: Arial;*/
+            font-family: 'Open Sans';
+            font-weight: 100;
+            font-size: x-small;
+            height: 18px;
+            /*color: white;*/
+        }
+
+            input[type="text"] {
+                background-color: lightyellow;
+                border: .5px solid #4D90FE !important;
+                /*-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;*/
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-family: 'Open Sans';
+                font-weight: 100;
+                font-size: small;
+                height: 20px;
+                color: black;
+            }
+
+            input[type="user"] {
+                background-color: white;
+                border: .5px solid #4D90FE !important;
+                -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-family: 'Open Sans';
+                font-weight: 100;
+                font-size: x-small;
+                height: 20px;
+                color: black;
+            }
+
+            input[type="summary"] {
+                background-color: lightyellow;
+                border: .5px solid #4D90FE !important;
+                /*-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;*/
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-family: 'Open Sans';
+                font-weight: 100;
+                font-size: medium;
+                height: 20px;
+                color: black;
+            }
+
+            input[type="text"]:focus {
+                background-color: lightblue;
+                border: .5px solid #4D90FE !important;
+                /*-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;*/
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-family: 'Open Sans';
+                font-weight: 100;
+                font-size: small;
+                color: black;
+            }
+
+            input[type="Date"] {
+                border: 1px solid #4D90FE !important;
+                -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                background-color: lightyellow;
+                font-family: 'Open Sans';
+                font-weight: bold;
+                font-size: xx-small;
+                height: 25PX;
+            }
+
+            input[type="password"]:focus {
+                background-color: #FFEC9C;
+                border: 1px solid #4D90FE !important;
+                -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-size: xx-small;
+            }
+
+            input[type="user"]:focus {
+                background-color: #FFEC9C;
+                border: 1px solid #4D90FE !important;
+                -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-size: xx-small;
+            }
+
+            input[Disabled] {
+                border: 1px solid #4D90FE !important;
+                color: black;
+                outline: none !important;
+                font-size: xx-small;
+            }
+
+        .advancedSearchTextbox {
+            width: 526px;
+            margin-right: -4px;
+        }
+
+        textarea:focus {
+            padding-top: 10px;
+            background-color: #FFEC9C;
+            min-width: 50%;
+            border: 1px solid #000;
+        }
+
+
+        textarea {
+            min-height: 4em;
+            height: auto;
+            width: 50%;
+            margin: 0 auto;
+            background-color: white;
+            vertical-align: middle;
+            font-size: xx-small;
+        }
+
+
+
+        select {
+            background-color: darkslategrey;
+            color: white;
+            font-family: 'Open Sans';
+            font-weight: 100;
+            font-size: xx-small;
+            /*border: outset;*/
+        }
+
+            select option {
+                margin: 40px;
+                background: rgba(0, 0, 0, 0.3);
+                color: #fff;
+                text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+            }
+
+
+
+        .bg {
+            background-size: 100% auto;
+        }
+
+
+
+        .yellowCell {
+            background-color: forestgreen;
+        }
+
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: black;
+            color: white;
+            text-align: right;
+        }
+
+
+        .container {
+            position: relative;
+            max-width: 850px;
+            position: relative;
+            margin: auto;
+        }
+
+        /* Hide the images by default */
+        .mySlides {
+            display: none;
+        }
+
+        /* Add a pointer when hovering over the thumbnail images */
+        .cursor {
+            cursor: pointer;
+        }
+
+        /* Next & previous buttons */
+        .prev,
+        .next {
+            cursor: pointer;
+            position: absolute;
+            top: 40%;
+            width: auto;
+            padding: 16px;
+            margin-top: -50px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* Position the "next button" to the right */
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+            /* On hover, add a black background color with a little bit see-through */
+            .prev:hover,
+            .next:hover {
+                background-color: rgba(0, 0, 0, 0.8);
+            }
+
+        /* Number text (1/3 etc) */
+        .numbertext {
+            color: #f2f2f2;
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+        }
+
+        /* Container for image text */
+        .caption-container {
+            text-align: center;
+            background-color: #222;
+            padding: 2px 16px;
+            color: white;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Six columns side by side */
+        .column {
+            float: left;
+            width: 16.66%;
+        }
+
+        /* Add a transparency effect for thumnbail images */
+        .demo {
+            opacity: 0.6;
+        }
+
+            .active,
+            .demo:hover {
+                opacity: 1;
+            }
+
+
+        /* Add a black background color to the top navigation */
+        .topnav {
+            background-color: #333;
+            overflow: hidden;
+            /*padding-left: 1.5%;*/
+            position: fixed;
+            width: 100%;
+        }
+
+            /* Style the links inside the navigation bar */
+            .topnav a {
+                float: left;
+                color: #f2f2f2;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-size: 17px;
+            }
+
+                /* Change the color of links on hover */
+                .topnav a:hover {
+                    background-color: #ddd;
+                    color: black;
+                }
+
+                /* Add a color to the active/current link */
+                .topnav a.active {
+                    background-color: #4CAF50;
+                    color: white;
+                }
+
+
+
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 70px;
+            left: 0;
+            background-color: #332;
+            overflow-x: hidden;
+            padding-top: 0px;
+        }
+
+            .sidenav a {
+                padding: 16px 16px 16px 42px;
+                text-decoration: none;
+                font-size: 18px;
+                color: #818181;
+                display: block;
+            }
+
+                .sidenav a:hover {
+                    color: #f1f1f1;
+                }
+
+
+
+        .sidenavI {
+            height: 100%;
+            width: 30%;
+            position: fixed;
+            z-index: 1;
+            /*top: 320px;*/
+            top: 70px;
+            left: 25%;
+            background-color: #332;
+            overflow-x: hidden;
+            padding-top: 0px;
+        }
+
+            .sidenavI a {
+                padding: 16px 16px 16px 42px;
+                text-decoration: none;
+                font-size: 18px;
+                color: #818181;
+                display: block;
+            }
+
+                .sidenavI a:hover {
+                    color: #f1f1f1;
+                }
+
+        .sidenavRight {
+            height: 100%;
+            width: 100%;
+            /*width:0;*/
+            position: fixed;
+            z-index: 1;
+            top: 70px;
+            right: 0;
+            background-color: darkslategray;
+            overflow-x: hidden;
+            transition: 0.5s;
+            color: #FFEC9C;
+            /*padding-top: 60px;*/
+        }
+
+            .sidenavRight a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 18px;
+                color: #818181;
+                display: block;
+                transition: 0.3s;
+            }
+
+                .sidenavRight a:hover {
+                    color: #f1f1f1;
+                }
+
+            .sidenavRight .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+
+
+
+        @media screen and (max-height: 450px) {
+            .sidenavRight {
+                padding-top: 15px;
+            }
+
+                .sidenavRight a {
+                    font-size: 18px;
+                }
+        }
+
+        .sidenavRightI {
+            height: 100%;
+            /*width: 45%;*/
+            width: 45%;
+            position: fixed;
+            z-index: 1;
+            /*top: 320px;*/
+            top: 70px;
+            right: 0;
+            background-color: darkslategray;
+            overflow-x: hidden;
+            transition: 0.5s;
+            color: #FFEC9C;
+            /*padding-top: 60px;*/
+        }
+
+            .sidenavRightI a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 18px;
+                color: #818181;
+                display: block;
+                transition: 0.3s;
+            }
+
+                .sidenavRightI a:hover {
+                    color: #f1f1f1;
+                }
+
+            .sidenavRightI .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+
+
+
+        @media screen and (max-height: 450px) {
+            .sidenavRightI {
+                padding-top: 15px;
+            }
+
+            .sidenavRight a {
+                font-size: 18px;
+            }
+        }
+
+
+
+        .sidenavRightS {
+            height: 100%;
+            width: 90.352%;
+            position: page;
+            z-index: 1;
+            top: 20%;
+            right: 0;
+            background-color: darkslategray;
+            overflow: visible;
+            transition: 0.6s;
+            color: #FFEC9C;
+            /*padding-top: 60px;*/
+        }
+
+            .sidenavRightS a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 18px;
+                color: #818181;
+                display: block;
+                transition: 0.6s;
+            }
+
+                .sidenavRightS a:hover {
+                    color: #f1f1f1;
+                }
+
+            .sidenavRightS .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+
+
+
+        @media screen and (max-height: 450px) {
+            .sidenavRightS {
+                padding-top: 15px;
+            }
+
+                .sidenavRightS a {
+                    font-size: 18px;
+                }
+        }
+
+
+
+
+        h1 {
+            color: #444;
+            /*font-family: "Eau Naturelle", "Helvetica", "Arial", "Lucida Grande", "Gill Sans", "Verdana", sans-serif;*/
+            font-weight: 500;
+        }
+
+        a {
+            /*color: #4a9;
+            text-decoration: none;
+            font-style: italic;
+            font-weight: 800;*/
+        }
+
+
+
+        /*Click DropDown*/
+        .dropbtn {
+            background-color: #3498DB;
+            color: white;
+            padding: 12px;
+            font-size: 12px;
+            border: none;
+            cursor: pointer;
+        }
+
+        *.dropbtnB {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px;
+            font-size: 12px;
+            border: none;
+        }
+
+        .dropbtn:hover, .dropbtn:focus {
+            background-color: #2980B9;
+        }
+
+        .dropbtnB:hover, .dropbtn:focus {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /*.dropdown {
+            position: relative;
+            display: inline-block;
+        }*/
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            overflow: auto;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+        .dropdown a:hover {
+            background-color: #ddd
+        }
+
+        .show {
+            display: block;
+        }
+
+
+
+
+        /*body {
+                    margin: 0;
+
+                }*/
+        body::-webkit-scrollbar {
+            display: normal;
+        }
+
+        html, body {
+            -ms-overflow-style: none;
+            overflow: auto;
+        }
+
+        .icon-bar {
+            position: fixed;
+            top: 15%;
+            -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+        }
+
+            .icon-bar a {
+                display: block;
+                text-align: center;
+                padding: 16px;
+                transition: all 0.3s ease;
+                color: white;
+                font-size: 14px;
+            }
+
+                .icon-bar a:hover {
+                    background-color: #000;
+                }
+
+        .pln {
+            background: #3B5998;
+            color: white;
+        }
+
+        .cls {
+            background: #55ACEE;
+            color: white;
+        }
+
+
+        .content {
+            margin-left: 75px;
+            font-size: 30px;
+        }
+
+
+        .specialColor {
+            /* Whatever color  you want */
+            background-color: #2d4240;
+            color: white;
+        }
+
+
+        /*input[type="text"] {
+            font-size: 12px;
+            text-align-last:center;
+        }*/
+
+
+        /* Style The Dropdown Button */
+        .dropbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px;
+            font-size: 12px;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* The container <div> - needed to position the dropdown content */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Dropdown Content (Hidden by Default) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+            /* Links inside the dropdown */
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                /* Change color of dropdown links on hover */
+                .dropdown-content a:hover {
+                    background-color: #f1f1f1
+                }
+
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Change the background color of the dropdown button when the dropdown content is shown */
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+        }
+
+        .right {
+            position: absolute;
+            right: 0px;
+            padding: 10px;
+        }
+
+        .left {
+            position: absolute;
+            left: 0px;
+            padding: 10px;
+        }
+
+        .center {
+            position: absolute;
+            left: 50%;
+            right: 50%;
+            padding: 10px;
+        }
+
+
+        .dropbtnU {
+            background-color: white;
+            color: black;
+            padding: 0;
+            font-size: 12px;
+            border: thick;
+        }
+
+        .dropup {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropup-content {
+            display: none;
+            position: absolute;
+            background-color: darkslategray;
+            color: white;
+            min-width: 50px;
+            min-height: 50px;
+            bottom: 10px;
+            z-index: 1;
+            margin-top: 50px;
+            /*width: 360px;
+            height: 170px;*/
+            padding: 10px;
+            font-size: 12px;
+            /*border-radius: 10px;
+            border: 10px solid #EE872A;*/
+        }
+
+            .dropup-content a {
+                color: white;
+                /*padding: 12px 16px;*/
+                text-decoration: none;
+                display: block;
+            }
+
+                .dropup-content a:hover {
+                    background-color: transparent;
+                    color: white;
+                }
+
+        .dropup:hover .dropup-content {
+            display: block;
+            font-size: 12px;
+        }
+
+        .dropup:hover .dropbtnU {
+            background-color: transparent;
+            color: white;
+            font-size: 12px;
+        }
+
+
+
+
+        /*DropDown///////////////////////////////////////*/
+    </style>
+
+
+</head>
+<BODY>
+
+    <div class="topnav">
+        <a href="#/">Home</a>
+        <a href="#/MES">MES Login</a>
+        <label style="padding-left:450px; background-color:transparent; color:white; font-size:x-large">MESApps 24x7 Support</label>
+        <input id="LoggedIn" name="LoggedIn" ng-model="LoggedIn" onload="function_two('uname')" class="form-control" placeholder="Not Logged in!" style="width: 140px;height:30px;background-color:Highlight; font-size:medium; color:darkgreen" type="hidden" />
+        <img src="../LeprinoLogo.png" style="width:76px;height:50px; background-color:white" align="right">
+    </div>
+
+    <div class="sidenavRight" style="text-align:center;background-color:black;color:white">
+
+
+
+        <div style="text-align:left;width:50%;height:40%;float:left; border:outset">
+
+            <div style="text-align:center;background-color:darkred;color:white;border:outset">
+                <h2>Emergency Situations</h2>
+
+
+                <div style="text-align:left">
+                    <label style="background-color:red;font-size:X-LARGE">Priority 1  Critical:</label>
+                    An incident affecting a business critical application or service that impacts a high number of Users for which a delay in restoring service is not acceptable. It needs to be resolved as soon as possible. It has a significant relationship to the business which could lead to negative production, brand or financial impact. Typically a serious outage or major loss of functionality in a business critical application that has no workaround and must be restored for work to continue.
+
+                    <BR />
+                    <label style="background-color:red;font-size:X-LARGE; color:white">Priority 2 High: </label>
+                    An incident affecting a business important application or a service is significantly degraded wherein a high number of Users cannot carry out normal work responsibilities, there is no workaround or alternative available and for which a delay in services being restored is not acceptable.
+
+                </div>
+            </div>
+        </div>
+        <div style="text-align:left;width:50%;height:40%;float:left; border:outset">
+            <div style="text-align:center;width:20%;height:100%; background-color:black;color:white;float:left; border:outset;">
+
+                <div style="text-align:center; background-color:transparent; color:white"> <label typeof="LabelBox">Internal within Leprino</label> </div>
+                <div style="text-align:center;"><label typeof="LabelBox"> Dial the Extension</label> <h2><b>5374</b></h2>  </div>
+
+            </div>
+
+            <div style="text-align:center;width:30%;height:100%;background-color:black;color:white;border:outset;float:left">
+
+                <div style="text-align:center;background-color:black; color:white; height:50%"> <label typeof="LabelBox">External</label> </div>
+                <div style="text-align:center;background-color:black; color:white; height:50%"><h4><b>303-264-5374</b>  </h4></div>
+
+            </div>
+            <div style="text-align:center;width:50%;height:100%;background-color:black;color:white;border:outset;float:left">
+
+                <div style="text-align:center;background-color:darkred; color:white"> Emails </div>
+                <div style="text-align:center"><label typeof="LabelBox"> <a href="mailto:mesappsdev@leprinofoods.com?Subject=MES%20Request" target="_top">mesappsdev@leprinofoods.com</a>  </label> </div>
+
+            </div>
+        </div>
+
+
+
+        <div style="text-align:left;width:50%;height:25%;float:left;background-color:white;color:black">
+
+            <div style="text-align:center;background-color:darkolivegreen;color:white">
+                <h2>Non Emergency</h2>
+            </div>
+            <div style="text-align:left; background-color:white;color:black">
+                <b style="background-color:yellowgreen">Priority 3 Medium:</b> An incident affecting normal (non-critical) applications and a limited number of Users, systems or components are down or degraded performance, but the requestor can carry out some work responsibilities and/or a temporary workaround is available. Usually an impact to a single User that does not involve business critical applications.
+
+                <b style="background-color:dodgerblue; color:white">Priority 4 Low:</b> An incident with Low or no visibility and no direct impact on systems, Customers, Users or revenue. Example is a end-user documentation guide has some misleading/erroneous details that need to be updated.
+            </div>
+
+        </div>
+        <div style="text-align:left;width:50%;height:25%;float:left;background-color:white;color:black">
+
+            <div style="text-align:center;background-color:darkolivegreen;color:white">
+                <h2>Email ONLY</h2>
+            </div>
+            <div style="text-align:center;width:100%; background-color:white;color:black">
+                <a href="mailto:mesappsdev@leprinofoods.com?Subject=MES%20Request" target="_top">mesappsdev@leprinofoods.com</a>
+
+               
+            </div>
+
+        </div>
+
+
+
+        <div>
+
+            <div style="text-align:center; background-color:white;color:black"> <div> <label typeof="LabelBox">Team Contact Info</label></div> </div>
+            <div style="text-align:center"><div><label typeof="LabelBox"> Chad Givens: 970-380-4098 | Varun Somuri: 214-714-0501 | Vamshi Neeli: 859-749-8655 | Matthew Sherbahn: 847-767-3313 |  <br /> Seonyong Shina:973-727-7663 | Sri Doddapanini:303-949-1169 | Iftekhar Hasan: 720-305-7452</label> </div></div>
+
+        </div>
+
+
+
+        <div>
+
+            <div style="text-align:center; background-color:white;color:black"> <div> <label typeof="LabelBox">Plant IT Support (For HMI, PC or Network Related Issue)</label></div> </div>
+            <div style="text-align:center"><div><label typeof="LabelBox"> ALN - Chris Jones | FTM – Russ Kleensang | GRE – Michael Sifuentes | LEM – Steve Ferreira |  <br /> LEW –Curtis Symonds | REM – Carl Dean/Ed Hofferber | ROS – Mark Innis | TRA – Mike Hansen | WAV – Chuck Reid | OR Service Desk 7777</label> </div></div>
+
+        </div>
+
+    </div>
+    <div class="footer">
+        <p><label typeof="LabelBox"> MES Applications Team- Contact via email at <a href="mailto:mesappsdev@leprinofoods.com?Subject=MES%20Request" target="_top">mesappsdev@leprinofoods.com</a></label> <label typeof="LabelBox" style="padding-left:20px"> or Dial the Extension</label> <b>5374</b> or <b>303-264-5374</b></p>
+    </div>
+</BODY>
+</HTML>

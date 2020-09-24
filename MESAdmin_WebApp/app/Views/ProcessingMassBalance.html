@@ -1,0 +1,72 @@
+﻿<html>
+<head>
+    <style>
+        span.highlight {
+            background-color: midnightblue;border:solid;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="topnav">
+        <a href="#/">Home</a>
+        <a class="active" href="" onclick="this.href='#/LRSCorp?uname='+document.getElementById('LoggedIn').value+'&dom=DEN'">Reports</a>
+        <a href="#/Support">Support</a>
+        <label style="padding-left:200px; background-color:transparent; color:white; font-size:x-large">Processing Mass Balance Report</label><label style="background-color:transparent; color:white; font-size:medium"> - Production Reports (Corporate Edition)</label>
+        <input id="LoggedIn" name="LoggedIn" ng-model="LoggedIn" onload="function_two('uname')" class="form-control" placeholder="Not Logged in!" style="width: 140px;height:30px;background-color:Highlight; font-size:medium; color:darkgreen" type="hidden" />
+        <img src="../LeprinoLogo.png" style="width:76px;height:50px; background-color:white" align="right">
+
+    </div>
+    
+    <ul class="nav nav-tabs" data-tabs="tabs" id="myTabs">
+        <li class="active"><a data-toggle="tab" data-target="#grid">Processing Mass Balance Report</a></li>
+
+    </ul>
+
+    <div class="tab-content">
+
+        <div id="grid" class="tab-pane fade in active">
+            <div ng-controller="ProcessingMassBalanceController" style="display:block; width : 1440px">
+                <!--Login name: <input type="text" name="FirstName" value="Mickey"><br>-->
+                <div style="display:inline-block;padding-bottom:15px; padding-left:10px;">
+
+                    <form action="/ProcessingMassBalance.html" method="get" id="form1">
+                        <!-- ProductionOrder: <input id="ProductionOrder" type="text" name="ProductionOrder">
+                         Line(1,2,3): <input id="Line" type="text" name="Line">
+                         ProductCode:<input id="ProductCode" type="text" name="ProductCode">-->
+                        Start Date: <input id="SDate" type="date" name="SDate">
+                        End Date: <input id="EDate" type="date" name="EDate">
+
+
+                        <span class="highlight"><font size="2" face="verdana" color="white"><label id="plant" name="plant">Submit</label></font></span>
+
+
+                        <!--      <button id="plant" name="plant">Submit</button>
+                        <button ng-click="refreshGrid()">Refresh</button>
+                        <button ng-click="clearFilters()">Reset</button>-->
+                    </form>
+                </div>
+                <!--
+                    <strong>Data Length:</strong> {{ gridOptions.data.length | number }}
+                <strong>Last Cell Edited:</strong> {{lastCellEdited}}
+                <br>
+                    -->
+                <div id="grid" ui-grid="gridOptions" ui-grid-edit ui-grid-selection class="grid" ui-grid-pagination style="width:1440PX"></div>
+                <div class="grid-msg-overlay" ng-hide="!loading">
+                    <div class="msg">
+                        <span>Data Load will take 2 minutes...Thanks for your patience<i class="fa fa-spinner fa-spin"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+
+
+            <a href="file://///lfc-nas/public/OpsAccounting/Processing_Mass_Balance.xls">Excel file is located here- \\lfc-nas\public\OpsAccounting\Processing_Mass_Balance.xls</a>
+            <br /> <a href="https://chrome.google.com/extensions/detail/jllpkdkcdjndhggodimiphkghogcpida">Chrome users, please download this Plugin - if the link above does not open</a>
+        </div>
+    </div>
+    <!--</div>-->
+
+</body>
+</html>

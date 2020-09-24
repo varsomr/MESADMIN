@@ -1,0 +1,261 @@
+<HTML>
+<head>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            border: none;
+        }
+
+        table {
+            border: none;
+        }
+
+        tr {
+            border: none;
+        }
+
+        label {
+        }
+
+        .button {
+            display: inline-block;
+            border-radius: 4px;
+            background-color: #f4511e;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 14px;
+            padding: 20px;
+            width: 200px;
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+            .button span {
+                cursor: pointer;
+                display: inline-block;
+                position: relative;
+                transition: 0.5s;
+            }
+
+                .button span:after {
+                    content: '\00bb';
+                    position: absolute;
+                    opacity: 0;
+                    top: 0;
+                    right: -20px;
+                    transition: 0.5s;
+                }
+
+            .button:hover span {
+                padding-right: 25px;
+            }
+
+                .button:hover span:after {
+                    opacity: 1;
+                    right: 0;
+                }
+
+        .buttonP {
+            display: inline-block;
+            border-radius: 4px;
+            background-color: #008CBA;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 14px;
+            padding: 20px;
+            width: 200px;
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+            .buttonP span {
+                cursor: pointer;
+                display: inline-block;
+                position: relative;
+                transition: 0.5s;
+            }
+
+                .buttonP span:after {
+                    content: '\00bb';
+                    position: absolute;
+                    opacity: 0;
+                    top: 0;
+                    right: -20px;
+                    transition: 0.5s;
+                }
+
+            .buttonP:hover span {
+                padding-right: 25px;
+            }
+
+                .buttonP:hover span:after {
+                    opacity: 1;
+                    right: 0;
+                }
+
+        .page {
+            position: relative;
+            width: 100px;
+            height: 100px;
+        }
+
+            .page::before {
+                content: '';
+                display: block;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background: url('../MESPortal.PNG');
+                opacity: 0.2;
+                z-index: -1;
+            }
+
+        .box {
+            display: inline;
+            background: red;
+        }
+
+
+        .th {
+            width: 1200px;
+        }
+
+        .navButton {
+            font-family: Oswald;
+            background-color: #161414;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: medium;
+            font-weight: bold;
+            line-height: 1.428571429;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -o-user-select: none;
+            user-select: none;
+            width: 40%;
+        }
+
+        a.navButton:hover {
+            /*border: outset;
+            border-color: orange;*/
+            color: yellowgreen;
+            background-color: #50504f
+        }
+    </style>
+</head>
+<BODY>
+    <div class="topnav">
+        <a class="active" href="#/">Home</a>
+        <a href="#/MES">MES Login</a>
+        <a href="#/Support">Support</a>
+        <label style="padding-left:375px; background-color:transparent; color:white; font-size:x-large"> LIT Server Locations</label>
+        <input id="LoggedIn" name="LoggedIn" ng-model="LoggedIn" onload="function_two('uname')" class="form-control" placeholder="Not Logged in!" style="width: 140px;height:30px;background-color:Highlight; font-size:medium; color:darkgreen" type="hidden" />
+        <img src="../LeprinoLogo.png" style="width:76px;height:50px; background-color:white" align="right">
+    </div>
+
+
+    <!--<table align="center">
+
+        <tr>
+            <td>-->
+    <br />
+    <div style="left:0; width:50%;float:left">
+        <div>
+            <a class="navButton" href="http://denm2012crplitt:88/#/">Allendale Training<img style="width:25px;height:25px" src="RIGHT.png" /></a>
+
+            <a class="navButton" href="http://ALNC2012LIT:96/#/">Allendale Prod<img style="width:25px;height:25px" src="RIGHT.png" /></a>
+            <label typeof"LabelBox">Plant#1030 || Training Share: \\alnc2012mesdbt\LITRepository</label>
+        </div>
+
+        <div>
+            <a class="navButton" href="http://denm2012crplitt:90/#/">Remus Training<img style="width:25px;height:25px" src="RIGHT.png" /></a>
+            <a class="navButton" href="http://remc2012lit:96/#/">Remus Prod<img style="width:25px;height:25px" src="RIGHT.png" /></a>
+
+            <label typeof"LabelBox"> Plant#1060 || Training Share: \\remc2012mesdbt\LITRepository</label>
+        </div>
+
+        <div>
+            <a class="navButton" href="http://denm2012crplitt:96/#/">FtMorgan Training<img style="width:25px;height:25px" src="RIGHT.png" /></a>
+            <a class="navButton" align="right" href="http://ftmc2012lit.leprino.local:96/#/">FtMorgan Prod<img style="width:25px;height:25px" src="RIGHT.png" /></a>
+
+            <label typeof"LabelBox"> Plant#1020 || Training Share: \\ftmc2012mesdbt\LITRepository</label>
+        </div>
+
+        <div>
+            <a class="navButton" align="right" href="http://denm2012crplitt:89/#/">Greeley Training<img style="width:25px;height:25px" src="RIGHT.png" /></a>
+            <a class="navButton" align="right" href="http://grec2012lit.leprino.local:96/#/">Greeley Prod<img style="width:25px;height:25px" src="RIGHT.png" /></a>
+
+            <label typeof"LabelBox"> Plant#1100 || Training Share: \\grec2012mesdbt\LITRepository</label>
+        </div>
+        <div>
+            <a class="navButton" align="right" href="http://denm2012crplitt:92/#/">LemooreWest Training<img style="width:25px;height:25px" src="RIGHT.png" /></a>
+            <a class="navButton" align="right" href="http://lewc2012lit/#/LIT?plant=LEW">LemooreWest Prod<img style="width:25px;height:25px" src="RIGHT.png" /></a>
+
+            <label typeof"LabelBox"> Plant#1040 || Training Share: \\lewc2012mesdbt\LITRepository</label>
+        </div>
+    </div>
+    <div style="right:0; width:50%;float:left">
+        <div>
+            <a class="navButton" align="right" href="http://denm2012crplitt:97/#/">Tracy Training<img style="width:25px;height:25px" src="RIGHT.png" /></a>
+            <a class="navButton" align="right" href="http://trac2012lit.leprino.local:96/#/">Tracy Prod<img style="width:25px;height:25px" src="RIGHT.png" /></a>
+            <br />
+            <label typeof"LabelBox"> Plant#1080 || Training Share: \\trac2012mesdbt\LITRepository</label>
+        </div>
+
+
+        <div>
+            <a class="navButton" href="http://denm2012crplitt:91/#/">LemooreEast Training<img style="width:25px;height:25px" src="RIGHT.png" /></a>
+            <a class="navButton" href="http://lemc2012lit.leprino.local:96/#/">LemooreEast Prod<img style="width:25px;height:25px" src="RIGHT.png" /></a>
+            <br /><label typeof"LabelBox"> Plant#1010 || Training Share: \\lemc2012mesdbt\LITRepository</label>
+        </div>
+
+        <div>
+            <a class="navButton" href="http://denm2012crplitt:94/#/">Waverly Training<img style="width:25px;height:25px" src="RIGHT.png" /></a>
+            <a class="navButton" href="http://wavc2012lit.leprino.local:96/#/">Waverly Prod<img style="width:25px;height:25px" src="RIGHT.png" /></a>
+            <br />
+            <label typeof"LabelBox"> Plant#1090 || Training Share: \\wavc2012mesdbt\LITRepository</label>
+        </div>
+
+        <div>
+            <a class="navButton" href="http://denm2012crplitt:93/#/">Roswell Training<img style="width:25px;height:25px" src="RIGHT.png" /></a>
+            <a class="navButton" align="right" href="http://rosc2012lit.leprino.local:96/#/">Roswell Prod<img style="width:25px;height:25px" src="RIGHT.png" /></a>
+            <br />
+            <label typeof"LabelBox"> Plant#1070 || Training Share: \\rosc2012mesdbt\LITRepository</label>
+        </div>
+        <div>
+            <a class="navButton" href="">Pilot Plant Training <img style="width:25px;height:25px" src="RIGHT.png" /></a>
+            <a class="navButton" align="right" href="http://denc2012pltlit:96/#/">Pilot Plant Prod<img style="width:25px;height:25px" src="RIGHT.png" /></a>
+            <br />
+            <label typeof"LabelBox"> Plant#9000 ||</label>
+        </div>
+
+    </div>
+    <div style="left:0; padding-left:35%; width:50%;float:left">
+        <div>
+
+            <a class="navButton" style="width:85%; font-size:small" href="http://denm2008litd:96/#/">DENM2008LITD-LIT DEVELOPMENT<img style="width:25px;height:25px" src="RIGHT.png" /></a>
+        </div>
+        <div> <a class="navButton" style="width:85%; font-size:small" href="http://denm2012crplitp:96/#/">CORPLITPROD- DENM2012LITP<img style="width:25px;height:25px" src="RIGHT.png" /></a> </div>
+        <div> <a class="navButton" style="width:85%; font-size:small" href="http://DENM2012LITT:96/#/">CORPLITTRAINING- DENM2012LITT<img style="width:25px;height:25px" src="RIGHT.png" /></a> </div>
+        <div> <a class="navButton" style="width:85%; font-size:small" href="http://DENM2012LITD:96/#/">CORPLITDEV - DENM2012LITD<img style="width:25px;height:25px" src="RIGHT.png" /></a> </div>
+    </div>
+    <div class="footer">
+        <p><label typeof="LabelBox"> MES Applications Team- Contact via email at <a href="mailto:mesappsdev@leprinofoods.com?Subject=MES%20Request" target="_top">mesappsdev@leprinofoods.com<img style="width:25px;height:25px" src="RIGHT.png" /></a></label> <label typeof="LabelBox" style="padding-left:20px"> or Dial the Extension</label> <b>5374</b> or <b>303-264-5374</b></p>
+    </div>
+</BODY>
+</HTML>

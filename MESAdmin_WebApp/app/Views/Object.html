@@ -1,0 +1,19 @@
+﻿
+<div class="container" ng-controller="ObjectController" >
+    <div style="padding-bottom:20px;">
+        <img src="../LeprinoLogo.png" style="width:100px;height:66px;" align="right">
+        <header> <h3 align="center">MES Issue Management System</h3> </header>
+    </div>
+
+    <div style="display:inline-block;padding-bottom:10px; padding-left:10px;">
+        <!--<input type="submit" ng-click="editTextarea()" onclick="this.value= 'As XML'" value="As Text" id="editbtn">--><!--As Text </input>-->
+        <input type="submit" ng-click="editTextarea()" value="Add Comment" id="editbtn" /> 
+        <button ng-click="saveTextarea()" id="saveBtn" name="saveBtn">Save Comment</button>
+    </div>
+
+    <div>
+        <!--<input type="text" name="FirstName" value="Mickey"><br>-->
+        <textarea name="xmlarea" id = "xmlarea"  rows="20" style="width:60%"  ng-readonly="truefalse" ng-model="xmlcontent" ng-change></textarea>
+    </div>
+    </div>
+

@@ -1,0 +1,1575 @@
+﻿<html>
+<head>
+    <style>
+        .p1 {
+            background: url(MESPortal.png) no-repeat right fixed;
+            background-size: 700px;
+            opacity: 2.2;
+            filter: alpha(opacity=220);
+        }
+        body {
+            /*padding-top: 50px;
+            padding-bottom: 20px;*/
+            padding-left: 0px;
+            background-color: white;
+            border-style: solid;
+            border-bottom-width: thick;
+            border-color: burlywood;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+
+
+        /* Set padding to keep content from hitting the edges */
+        .body-content {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 40%;
+        }
+        .imgcontainer {
+            text-align: center;
+            margin: 24px 0 12px 0;
+        }
+
+        img.avatar {
+            width: 20%;
+            border-radius: 50%;
+        }
+
+        .container {
+            padding: 16px;
+            /*-ms-overflow-style: none;
+            overflow: auto;*/
+        }
+
+        /* Override the default bootstrap behavior where horizontal description lists
+           will truncate terms that are too long to fit in the left column
+        */
+        .dl-horizontal dt {
+            white-space: normal;
+        }
+
+
+        textarea {
+            max-width: 1350px;
+        }
+
+
+
+        #grid .ui-grid-cell-contents {
+            text-align: center;
+        }
+
+        #servicegrid .ui-grid-cell-contents {
+            text-align: center;
+        }
+
+        header {
+            background-color: orangered;
+            color: white;
+            display: block;
+        }
+
+        /*.grid {
+            width: 1400px;
+            height: 300px;
+            
+            bottom: 0;
+            color: black !important;
+            border-top-color: forestgreen;
+            
+        }
+
+        .ui-grid-row-selected.ui-grid-row:nth-child(odd) .ui-grid-cell,
+        .ui-grid-row-selected.ui-grid-row:nth-child(even) .ui-grid-cell {
+            color: black;
+            
+            background: lightgreen;
+            border-radius: 10px;
+            color: black;
+            overflow: hidden;
+        }
+
+            .ui-grid-row-selected.ui-grid-row:nth-child(odd) .ui-grid-cell.ui-grid-cell-focus,
+            .ui-grid-row-selected.ui-grid-row:nth-child(even) .ui-grid-cell.ui-grid-cell-focus {
+                outline: 0;
+                color: brown;
+                background-color: olivedrab;
+            }
+
+        .ui-grid-row-selected.ui-grid-row:nth-child(odd):hover .ui-grid-cell,
+        .ui-grid-row-selected.ui-grid-row:nth-child(even):hover .ui-grid-cell {
+            color: brown;
+            font-weight: bolder;
+            font-size: x-small;
+            background-color: Highlight;
+        }
+
+        .grey .ui-grid-cell-contents {
+            background-color: lightseagreen;
+            font-weight: bold;
+            color: brown;
+        }
+
+
+        label {
+            font-family: 'Open Sans';
+            font-weight: 800;
+            font-size: x-small;
+        }
+
+        .grid .ui-grid-cell-contents {
+            padding: 2px 2px;
+        }
+
+        .grid .ui-grid-render-container-body .ui-grid-header-cell,
+        .grid .ui-grid-header-cell {
+            background-color: forestgreen;
+            color: white;
+        }
+
+
+
+        .grid .ui-grid-filter-container {
+            padding: 1px 3px;
+        }
+
+        .grid-msg-overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+            .grid-msg-overlay .msg {
+                opacity: 1;
+                position: absolute;
+                top: 0%;
+                left: 1%;
+                width: 100%;
+                height: 50%;
+                background-color: cyan;
+                border-radius: 1px;
+                border: 1px solid #556;
+                text-align: center;
+                font-size: 24px;
+                display: table;
+            }
+
+        grid[type="secondary"] {
+            background-color: #692218;
+            color: white;
+            scrollbar-base-color: forestgreen;
+        }
+
+        .grid-msg-overlay .msg span {
+            display: table-cell;
+            vertical-align: middle;
+        }*/
+
+
+
+
+        .grid {
+            width: 1200px;
+            height: 300px;
+            /*background-color: #2E4A62 !important;*/
+            background-color: black !important;
+            bottom: 0;
+            color: lightgoldenrodyellow !important;
+            grid-gap: 5px;
+            font-size: medium;
+            text-align: center;
+        }
+
+        .gridP {
+            width: 1200px;
+            height: 300px;
+            /*background-color: #2E4A62 !important;*/
+            background-color: black !important;
+            bottom: 0;
+            color: lightgoldenrodyellow !important;
+            grid-gap: 5px;
+            font-size: medium;
+            text-align: center;
+        }
+        .ui-grid-row:nth-child(odd) .ui-grid-cell {
+            background-color: black;
+            border: none;
+            color: white;
+        }
+
+        .ui-grid-row:nth-child(even) .ui-grid-cell {
+            background-color: black;
+            color: white;
+            border: none;
+        }
+
+
+
+        .ui-grid-cell-focus {
+            outline: 0;
+            background-color: #ada624;
+            border: outset;
+        }
+
+
+        .ui-grid-row-selected.ui-grid-row:nth-child(odd) .ui-grid-cell,
+        .ui-grid-row-selected.ui-grid-row:nth-child(even) .ui-grid-cell {
+            background-color: white;
+            border: outset;
+            color: darkslategrey;
+            font-weight: bold;
+        }
+
+            .ui-grid-row-selected.ui-grid-row:nth-child(odd) .ui-grid-cell.ui-grid-cell-focus,
+            .ui-grid-row-selected.ui-grid-row:nth-child(even) .ui-grid-cell.ui-grid-cell-focus {
+                outline: 0;
+                background-color: white;
+                font-weight: bold;
+            }
+
+        .ui-grid-row-selected.ui-grid-row:nth-child(odd):hover .ui-grid-cell,
+        .ui-grid-row-selected.ui-grid-row:nth-child(even):hover .ui-grid-cell {
+            color: darkslategrey;
+            background-color: white;
+            font-weight: bold;
+        }
+
+        .grid .ui-grid-render-container-body .ui-grid-header-cell,
+        .grid .ui-grid-header-cell {
+            background-color: black;
+            color: white;
+            font-size: 10px;
+        }
+        .gridP .ui-grid-render-container-body .ui-grid-header-cell,
+        .gridP .ui-grid-header-cell {
+            background-color: black;
+            color: white;
+            font-size: 10px;
+        }
+
+        .grid .ui-grid-render-container-body .ui-grid-cell-contents-break,
+        .grid .ui-grid-cell-contents-break {
+            padding: 5px;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            overflow: hidden;
+            height: 100%;
+            word-break: break-all;
+            text-align: center;
+        }
+
+
+
+
+        .grid .ui-grid-filter-container {
+            padding: 1px 1px;
+        }
+
+        .grid-msg-overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 90%;
+        }
+
+            .grid-msg-overlay .msg {
+                opacity: 1;
+                position: absolute;
+                top: 5%;
+                left: 1%;
+                width: 100%;
+                height: 60%;
+                background-color: black;
+                /*border: 1px solid #556;*/
+                text-align: center;
+                font-size: 24px;
+                display: table;
+                color: white;
+            }
+
+
+                .grid-msg-overlay .msg span {
+                    display: table-cell;
+                    vertical-align: middle;
+                }
+
+
+        /*#grid .ui-grid-cell-contents {
+            text-align: center;
+            -ms-text-overflow: clip;
+            -o-text-overflow: clip;
+            text-overflow: clip;
+            align-content: stretch;
+            word-wrap: break-word;
+        }*/
+
+
+        /*#grid .ui-grid-cell {
+            font-size: 12px;
+            font-weight: 500;
+        }*/
+
+
+        .grey .ui-grid-cell-contents {
+            /*background-color: #006E6D;
+            font-weight: bold;*/
+            background-color: darkgreen;
+            color: white;
+        }
+
+
+        .green {
+            background-color: darkgreen;
+            color: white;
+            /*font-weight: bold;*/
+        }
+
+        .blue {
+            background-color: #1fe0f0;
+            color: #153ff0;
+        }
+
+
+
+        .your-hover-class {
+            color: red;
+        }
+
+
+        .ui-grid-filter-container .ui-grid-filter-button {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+        }
+
+            .ui-grid-filter-container .ui-grid-filter-button [class^="ui-grid-icon"] {
+                position: absolute;
+                top: 50%;
+                line-height: 32px;
+                margin-top: -16px;
+                right: 10px;
+                opacity: 0.66;
+                background-color: black;
+                color: green;
+            }
+
+                .ui-grid-filter-container .ui-grid-filter-button [class^="ui-grid-icon"]:hover {
+                    opacity: 1;
+                }
+
+        .ui-grid-filter-container .ui-grid-filter-button-select {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+        }
+
+            .ui-grid-filter-container .ui-grid-filter-button-select [class^="ui-grid-icon"] {
+                position: absolute;
+                top: 50%;
+                line-height: 32px;
+                margin-top: -16px;
+                right: 0px;
+                opacity: 0.66;
+            }
+
+                .ui-grid-filter-container .ui-grid-filter-button-select [class^="ui-grid-icon"]:hover {
+                    opacity: 1;
+                }
+
+        input[type="text"].ui-grid-filter-input {
+            padding: 0;
+            margin: 0;
+            border: 0;
+            width: 100%;
+            border: 1px solid #cd7b06;
+            font-size: 11px;
+            text-align: center;
+            -webkit-border-top-right-radius: 0px;
+            -webkit-border-bottom-right-radius: 0;
+            -webkit-border-bottom-left-radius: 0;
+            -webkit-border-top-left-radius: 0;
+            -moz-border-radius-topright: 0px;
+            -moz-border-radius-bottomright: 0;
+            -moz-border-radius-bottomleft: 0;
+            -moz-border-radius-topleft: 0;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+            border-top-left-radius: 0;
+            -moz-background-clip: padding-box;
+            -webkit-background-clip: padding-box;
+            background-clip: padding-box;
+        }
+
+            input[type="text"].ui-grid-filter-input:focus {
+                border: 1px solid #d4d4d4;
+                background-color: brown;
+                color: white;
+            }
+
+            input[type="text"].ui-grid-filter-input:hover {
+                border: 1px solid #d4d4d4;
+                background-color: darkslategray;
+                color: white;
+            }
+
+
+
+        .md-button {
+            padding: 0 6px 0 6px;
+            margin: 6px 8px 6px 8px;
+            min-width: 88px;
+            border-radius: 3px;
+            font-size: 14px;
+            text-align: center;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: none;
+            outline: none;
+        }
+
+        .btn {
+            /*background-color: #692218;*/
+            background-color: #17561b;
+            color: white;
+            height: 35px;
+            width: 80px;
+            font-size: x-small;
+        }
+
+
+
+            .btn:hover {
+                /*background-color: #FFD740;*/
+                /*color: #1565C0;*/
+                background-color: white;
+                color: black;
+                border-color: white;
+                border: outset;
+                /*border-width:thick;*/
+            }
+
+            .btn:focus {
+                outline: 0 !important;
+            }
+
+            .btn:active {
+                outline: 0;
+                color: #fff;
+                background-color: #428bca;
+                /*border-color: #357ebd;*/
+            }
+
+
+        table, tr {
+            border: 1px groove;
+            width: 40%;
+            background-color: transparent;
+        }
+
+        div {
+            background-color: transparent;
+        }
+
+
+
+        label[type="labelBox"] {
+            /*background-color: #f7c50d;#f7620d*/
+            background-color: transparent;
+            /*font-size: 10px;*/
+            color: black;
+            font-family: 'Open Sans';
+            font-weight: 200;
+            font-size: small;
+        }
+
+
+        label[type="progressBar"] {
+            /*background-color: #f7c50d;#f7620d*/
+            background-color: black;
+            /*font-size: 10px;*/
+            color: black;
+            font-family: 'Open Sans';
+            font-weight: 100;
+            font-size: xx-small;
+        }
+
+        input {
+            /*font-family: Arial;*/
+            font-family: 'Open Sans';
+            font-weight: 100;
+            font-size: x-small;
+            height: 18px;
+            /*color: white;*/
+        }
+
+            input[type="text"] {
+                background-color: lightyellow;
+                border: .5px solid #4D90FE !important;
+                -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-family: 'Open Sans';
+                font-weight: 100;
+                font-size: x-small;
+                height: 20px;
+                color: black;
+            }
+
+            input[type="user"] {
+                background-color: white;
+                border: .5px solid #4D90FE !important;
+                -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-family: 'Open Sans';
+                font-weight: 100;
+                font-size: x-small;
+                height: 20px;
+                color: black;
+            }
+
+            input[type="text"]:focus {
+                background-color: #fff;
+                border: .5px solid #4D90FE !important;
+                -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-family: 'Open Sans';
+                font-weight: 100;
+                font-size: x-small;
+                color: black;
+            }
+
+            input[type="Date"] {
+                border: 1px solid #4D90FE !important;
+                -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                background-color: lightyellow;
+                font-family: 'Open Sans';
+                font-weight: bold;
+                font-size: xx-small;
+                height: 25PX;
+            }
+
+            input[type="password"]:focus {
+                background-color: #FFEC9C;
+                border: 1px solid #4D90FE !important;
+                -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-size: xx-small;
+            }
+
+            input[type="user"]:focus {
+                background-color: #FFEC9C;
+                border: 1px solid #4D90FE !important;
+                -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-size: xx-small;
+            }
+
+            input[Disabled] {
+                border: hidden;
+                color: black;
+                outline: none !important;
+                font-size: xx-small;
+            }
+
+        textarea:focus {
+            padding-top: 10px;
+            background-color: #FFEC9C;
+            min-width: 50%;
+            border: 1px solid #000;
+        }
+
+
+        textarea {
+            min-height: 4em;
+            height: auto;
+            width: 50%;
+            margin: 0 auto;
+            background-color: white;
+            vertical-align: middle;
+            font-size: xx-small;
+        }
+
+
+
+        select {
+            background-color: white;
+            color: black;
+            font-family: 'Open Sans';
+            font-weight: 100;
+            font-size: xx-small;
+            /*border: outset;*/
+        }
+
+
+
+        #myProgress {
+            width: 100%;
+            background-color: ghostwhite;
+        }
+
+        #myBar {
+            width: 1%;
+            height: 30px;
+            background-color: black;
+        }
+
+        .bg {
+            background-size: 100% auto;
+        }
+
+
+
+        .yellowCell {
+            background-color: forestgreen;
+        }
+
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: black;
+            color: white;
+            text-align: right;
+        }
+
+        /* {box-sizing:border-box}
+
+        /* Slideshow container */
+        /*.slideshow-container {
+            max-width: 1000px;
+            position: relative;
+            margin: auto;
+        }
+
+
+        .mySlides {
+            display: none;
+        }
+
+
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -22px;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+        }
+
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+
+            .prev:hover, .next:hover {
+                background-color: rgba(0,0,0,0.8);
+            }
+
+
+        .text {
+            color: #f2f2f2;
+            font-size: 15px;
+            padding: 8px 12px;
+            position: absolute;
+            bottom: 8px;
+            width: 100%;
+            text-align: center;
+        }
+
+
+        .numbertext {
+            color: #f2f2f2;
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+        }
+
+
+        .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 1.6s ease;
+        }
+
+            .active, .dot:hover {
+                background-color: #717171;
+            }
+
+
+        .fade {
+            -webkit-animation-name: fade;
+            -webkit-animation-duration: 0.5s;
+            -webkit-transition: opacity 3s ease-in-out;
+            animation-name: fade;
+            animation-duration: 0.5s;
+            opacity: 1;
+        }
+
+        @-webkit-keyframes fade {
+            from {
+                opacity: .4
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes fade {
+            from {
+                opacity: .4
+            }
+
+            to {
+                opacity: 1
+            }
+        }*/
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Position the image container (needed to position the left and right arrows) */
+        .container {
+            position: relative;
+            max-width: 850px;
+            position: relative;
+            margin: auto;
+        }
+
+        /* Hide the images by default */
+        .mySlides {
+            display: none;
+        }
+
+        /* Add a pointer when hovering over the thumbnail images */
+        .cursor {
+            cursor: pointer;
+        }
+
+        /* Next & previous buttons */
+        .prev,
+        .next {
+            cursor: pointer;
+            position: absolute;
+            top: 40%;
+            width: auto;
+            padding: 16px;
+            margin-top: -50px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* Position the "next button" to the right */
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+            /* On hover, add a black background color with a little bit see-through */
+            .prev:hover,
+            .next:hover {
+                background-color: rgba(0, 0, 0, 0.8);
+            }
+
+        /* Number text (1/3 etc) */
+        .numbertext {
+            color: #f2f2f2;
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+        }
+
+        /* Container for image text */
+        .caption-container {
+            text-align: center;
+            background-color: #222;
+            padding: 2px 16px;
+            color: white;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Six columns side by side */
+        .column {
+            float: left;
+            width: 16.66%;
+        }
+
+        /* Add a transparency effect for thumnbail images */
+        .demo {
+            opacity: 0.6;
+        }
+
+            .active,
+            .demo:hover {
+                opacity: 1;
+            }
+
+
+        /* Add a black background color to the top navigation */
+        .topnav {
+            background-color: white;
+            overflow: hidden;
+            /*padding-left: 1.5%;*/
+            position: fixed;
+            width: 95%;
+            height: 5%;
+            top: 0;
+            left: 5%;
+        }
+
+            /* Style the links inside the navigation bar */
+            .topnav a {
+                float: left;
+                color: #f2f2f2;
+                text-align: center;
+                /*padding: 14px 16px;*/
+                text-decoration: none;
+                font-size: 14px;
+                top: 0;
+            }
+
+                /* Change the color of links on hover */
+                .topnav a:hover {
+                    background-color: Highlight;
+                    color: white;
+                    border: inset;
+                }
+
+                /* Add a color to the active/current link */
+                .topnav a.active {
+                    background-color: #201d1d;
+                    color: white;
+                }
+
+
+
+        .sidenav {
+            height: 100%;
+            width: 5.0%;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: black;
+            /*overflow: hidden;*/
+            padding-top: 0px;
+            align-content: center;
+            border: outset;
+            border-color: darkslategrey;
+            color: lightgoldenrodyellow;
+        }
+
+            .sidenav a {
+                /*padding: 5px 5px 5px 42px;*/
+                text-decoration: none;
+                font-size: 16px;
+                color: #818181;
+                display: block;
+                border: outset;
+            }
+
+                .sidenav a:hover {
+                    color: #f1f1f1;
+                    border: outset;
+                }
+
+        #main {
+            transition: margin-left .5s;
+            padding: 12px;
+        }
+
+        .sidenavRight {
+            height: 100%;
+            width: 95%;
+            position: fixed;
+            z-index: 1;
+            top: 5%;
+            right: 0;
+            background-color: black;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+            .sidenavRight a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #818181;
+                display: block;
+                transition: 0.3s;
+            }
+
+                .sidenavRight a:hover {
+                    color: #f1f1f1;
+                }
+
+            .sidenavRight .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+       
+
+        /*@media screen and (max-height: 350px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+
+                .sidenav a {
+                    font-size: 18px;
+                }
+
+            .sidenavRight {
+                padding-top: 15px;
+            }
+
+                .sidenavRight a {
+                    font-size: 18px;
+                }
+        }*/
+
+        @media screen and (max-height: 450px) {
+            .sidenavRight {
+                padding-top: 15px;
+            }
+
+                .sidenavRight a {
+                    font-size: 18px;
+                }
+        }
+
+
+
+        .holds-the-iframe {
+            background: url(../LRS.png) center center no-repeat;
+        }
+
+        #canvas {
+            border-bottom: 1px solid rgba(0,0,0,0.3);
+            background-color: #FFF;
+            box-shadow: 0 9px 20px -5px rgba(0,0,0,0.8);
+        }
+
+        #d {
+            text-align: center;
+        }
+
+        h1 {
+            color: #444;
+            /*font-family: "Eau Naturelle", "Helvetica", "Arial", "Lucida Grande", "Gill Sans", "Verdana", sans-serif;*/
+            font-weight: 500;
+        }
+
+        a {
+            /*color: #4a9;
+            text-decoration: none;
+            font-style: italic;
+            font-weight: 800;*/
+        }
+
+
+
+        /*Click DropDown*/
+        .dropbtn {
+            background-color: #3498DB;
+            color: white;
+            padding: 12px;
+            font-size: 12px;
+            border: none;
+            cursor: pointer;
+        }
+
+        *.dropbtnB {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px;
+            font-size: 12px;
+            border: none;
+        }
+
+        .dropbtn:hover, .dropbtn:focus {
+            background-color: #2980B9;
+        }
+
+        .dropbtnB:hover, .dropbtn:focus {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /*.dropdown {
+            position: relative;
+            display: inline-block;
+        }*/
+
+
+
+        .dropbtnU {
+            background-color: black;
+            color: white;
+            padding: 0;
+            font-size: 12px;
+            border: thick;
+            border-radius: 3px;
+            border: outset;
+            top: 0;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            overflow: auto;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+        .dropdown a:hover {
+            background-color: #ddd
+        }
+
+        .show {
+            display: block;
+        }
+
+
+
+
+        /*body {
+                    margin: 0;
+
+                }*/
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        html, body {
+            -ms-overflow-style: none;
+            overflow: auto;
+        }
+
+        .icon-bar {
+            position: fixed;
+            top: 15%;
+            -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+        }
+
+            .icon-bar a {
+                display: block;
+                text-align: center;
+                padding: 16px;
+                transition: all 0.3s ease;
+                color: white;
+                font-size: 14px;
+            }
+
+                .icon-bar a:hover {
+                    background-color: #000;
+                }
+
+        .pln {
+            background: #3B5998;
+            color: white;
+        }
+
+        .cls {
+            background: #55ACEE;
+            color: white;
+        }
+
+
+        .content {
+            margin-left: 75px;
+            font-size: 30px;
+        }
+
+
+        #slideout {
+            /* position: absolute; */
+            position: fixed;
+            top: 50%;
+            right: 0;
+            width: 35px;
+            -webkit-transition-duration: 0.3s;
+            -moz-transition-duration: 0.3s;
+            -o-transition-duration: 0.3s;
+            transition-duration: 0.3s;
+        }
+
+        #slideout_tab {
+            position: relative;
+            top: 0;
+            left: 0;
+            padding: 12px 6px 12px 12px;
+            text-align: center;
+            background: #86B135;
+            color: #fff;
+            cursor: pointer;
+            -webkit-border-radius: 15px 0 0 15px;
+            -moz-border-radius: 15px 0 0 15px;
+            border-radius: 15px 0 0 15px;
+        }
+
+        #slideout_inner {
+            position: absolute;
+            top: -50px;
+            left: 35px;
+            background: darkslategrey;
+            width: 1000px;
+            padding: 15px;
+            height: 400px;
+            cursor: auto;
+            -webkit-border-radius: 5px 0 0 5px;
+            -moz-border-radius: 5px 0 0 5px;
+            border-radius: 5px 0 0 5px;
+        }
+
+        #showblock:checked + #slideout {
+            right: 1200px;
+        }
+
+        #showblock {
+            display: none;
+        }
+
+
+        /* Style The Dropdown Button */
+        .dropbtnLeftBar {
+            background-color: black;
+            border-color: #201e1e;
+            color: black;
+            border: none;
+            font-size: large;
+            font-weight: bold;
+            cursor: pointer;
+            height: 35px;
+            width: 80%;
+            padding-top: 5%;
+            padding-bottom: 5%;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+
+
+
+        /* Modal Content */
+        .modal-content {
+            position: fixed;
+            bottom: 0;
+            background-color: black;
+            color: white;
+            width: 100%;
+            height: 95%;
+            border: outset;
+            border-color: brown;
+            -webkit-animation-name: slideIn;
+            -webkit-animation-duration: 0.4s;
+            animation-name: slideIn;
+            animation-duration: 0.4s
+        }
+
+        /* The Close Button */
+        .close {
+            color: black;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            background-color: white;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: white;
+                background-color: darkgoldenrod;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+        .modal-header {
+            padding: 2px 8px;
+            background-color: darkslategrey;
+            color: lightgoldenrodyellow;
+        }
+
+        .modal-body {
+            padding: 2px 8px;
+        }
+
+        .modal-footer {
+            padding: 2px 8px;
+            background-color: black;
+            color: white;
+        }
+
+        /* Add Animation */
+        @-webkit-keyframes slideIn {
+            from {
+                bottom: -300px;
+                opacity: 0
+            }
+
+            to {
+                bottom: 0;
+                opacity: 1
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                bottom: -300px;
+                opacity: 0
+            }
+
+            to {
+                bottom: 0;
+                opacity: 1
+            }
+        }
+
+        @-webkit-keyframes fadeIn {
+            from {
+                opacity: 0
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        /*********************Grid Webkits to Customize Scroll Bars************************************/
+        /* Let's get this party started */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px lightgoldenrodyellow; /*rgba(0,0,0,0.3);*/
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            background: #FFEC9C /*rgba(255,0,0,0.8)*/;
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+        }
+
+            ::-webkit-scrollbar-thumb:window-inactive {
+                background: rgba(255,0,0,0.4);
+            }
+
+
+        .floating-menuTop {
+            animation: 3s ease-out 0s 1 slideInFromLeft;
+            font-family: sans-serif;
+            padding-left: 5%;
+            top: 6.5%;
+            left: 0;
+            background: #161414;
+            color: yellowgreen;
+            width: 30%;
+            z-index: 100;
+            position: fixed;
+        }
+
+            .floating-menuTop a,
+            .floating-menuTop h3 {
+                font-size: 0.9em;
+                display: block;
+                margin: 0 0.5em;
+                color: white;
+            }
+
+        .navButton {
+            font-family: Oswald;
+            background-color: #161414;
+            color: white;
+            text-decoration: none;
+            display: block;
+            margin-top: 0;
+            /*padding: 6px 12px;*/
+            /*margin-top: 0;*/
+            padding-bottom: 2px;
+            font-size: large;
+            font-weight: bold;
+            line-height: 1.428571429;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: top;
+            cursor: pointer;
+            /*border: 1px solid transparent;
+            border-radius: 2px;*/
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -o-user-select: none;
+            user-select: none;
+        }
+
+        a.navButton:hover {
+            border: outset;
+            border-top: hidden;
+            border-bottom: hidden;
+            border-color: whitesmoke;
+            color: #161414; /*whitesmoke;*/
+            background-color: lightgoldenrodyellow;
+            font-style: oblique;
+        }
+
+
+        .floating-menuRight {
+            /*animation: 2s ease-out 0s 1 slideInFromLeft;*/
+            font-family: sans-serif;
+            padding-left: 5%;
+            top: 6.5%;
+            right: 0;
+            background: #161414;
+            color: yellowgreen;
+            width: 70%;
+            height: 80.5%;
+            z-index: 100;
+            position: fixed;
+        }
+
+            .floating-menuRight a,
+            .floating-menuRight h3 {
+                font-size: 0.9em;
+                display: block;
+                margin: 0 0.5em;
+                color: white;
+            }
+
+
+
+    </style>
+</head>
+<body>
+    
+    <div ng-controller="CasesValidationcontroller">
+        <div class="topnav" style="background-color:black; border:outset; border-color:darkslategray; cursor:pointer;">
+            <button type="button" id="mainpage" style="width:75px;height:30px;font-size:small;background-color:black;color:white;border:outset;border-color:darkslategray;float:left" ng-click="openURL('/#')">HOME</button>
+            <button type="button" id="mainpage" style="width:75px;height:30px;font-size:small;background-color:black;color:white;border:outset;border-color:darkslategray;float:left" ng-click="openURL('#/LRSCorp')">LRS</button>
+            <button type="button" id="mainpage" style="width:75px;height:30px;font-size:small;background-color:black;color:white;border:outset;border-color:darkslategray;float:left" ng-click="openURL('#/Support')">SUPPORT</button>
+
+            <label style="padding-left:100px; background-color:transparent; color:white; font-size:large;float:left">Case Barcode Validation </label>
+            <label style="background-color:transparent; color:white; font-size:medium;float:left"> - Data Connectivity between Controls and MES</label>
+            <input id="LoggedIn" name="LoggedIn" ng-model="LoggedIn" onload="function_two('uname')" class="form-control" placeholder="Not Logged in!" style="width: 140px;height:30px;background-color:Highlight; font-size:medium; color:darkgreen" type="hidden" />
+
+
+            <input type="checkbox" id="ckLock" style="background-color:black;color:lightgoldenrodyellow;float:right;width:5%;height:60%" ng-model="checkedLock">
+            <label style="background-color:transparent; color:white; font-size:large;float:right">
+                Lock
+            </label>
+            <input id="VATPlantOff" placeholder="NoPlantSelected" style="width:15%;height:100%; font-size:large; float:left;text-align:center;background-color:black;color:lightgoldenrodyellow " disabled="disabled" name="VATPlantOff">
+        </div>
+        <div id="mySidenav" class="sidenav">
+            <!--<div class="icon-bar">-->
+            
+                <img src="../LeprinoLogo.png" style="width:76px;height:50px; background-color:black;border:outset black">
+
+
+            
+                <div align="center" style="bottom:0;position:absolute; height:90%;width:100%; border:outset;border-color:darkslategray;border-left-color:black; border-bottom-right-radius:16px; ">
+
+
+
+                    <p style="color:lightgoldenrodyellow; font-size:x-small; background-color:black;border:hidden;border-color:darkslategrey;font-style:italic">Select A PLANT</p>
+                    <div style="top:10%;position:absolute; height:50%;width:100%; border:none;border-color:darkcyan; ">
+
+                        <button type="button" style="background-color:transparent;color:lightgoldenrodyellow;transition: 0.3s; border:outset;border-color:darkslategray; border-top-left-radius:1px; border-bottom-left-radius:8px;width:100%" ng-click="GridfromButton('LEW');closeNav();">
+                            LEW
+                        </button>
+                        <button type="button" style="background-color:transparent;color:lightgoldenrodyellow;transition: 0.3s; border:outset;border-color:darkslategray; border-top-left-radius:1px; border-bottom-left-radius:8px;width:100%" ng-click="GridfromButton('LEM');closeNav();">
+                            LEM
+                        </button>
+                        <button type="button" style="background-color:transparent;color:lightgoldenrodyellow;transition: 0.3s; border:outset;border-color:darkslategray; border-top-left-radius:1px; border-bottom-left-radius:8px;width:100%" ng-click="GridfromButton('GRE');closeNav();">
+                            GRE
+                        </button>
+                        <button type="button" style="background-color:transparent;color:lightgoldenrodyellow;transition: 0.3s; border:outset;border-color:darkslategray; border-top-left-radius:1px; border-bottom-left-radius:8px;width:100%" ng-click="GridfromButton('ROS');closeNav();">
+                            ROS
+                        </button>
+                        <button type="button" style="background-color:transparent;color:lightgoldenrodyellow;transition: 0.3s; border:outset;border-color:darkslategray; border-top-left-radius:1px; border-bottom-left-radius:8px;width:100%" ng-click="GridfromButton('TRA');closeNav();">
+                            TRA
+                        </button>
+                        <button type="button" style="background-color:transparent;color:lightgoldenrodyellow;transition: 0.3s; border:outset;border-color:darkslategray; border-top-left-radius:1px; border-bottom-left-radius:8px;width:100%" ng-click="GridfromButton('ALN');closeNav();">
+                            ALN
+                        </button>
+                        <button type="button" style="background-color:transparent;color:lightgoldenrodyellow;transition: 0.3s; border:outset;border-color:darkslategray; border-top-left-radius:1px; border-bottom-left-radius:8px;width:100%" ng-click="GridfromButton('REM');closeNav();">
+                            REM
+                        </button>
+                        <button type="button" style="background-color:transparent;color:lightgoldenrodyellow;transition: 0.3s; border:outset;border-color:darkslategray; border-top-left-radius:1px; border-bottom-left-radius:8px;width:100%" ng-click="GridfromButton('FTM');closeNav();">
+                            FTM
+                        </button>
+                        <button type="button" style="background-color:transparent;color:lightgoldenrodyellow;transition: 0.3s; border:outset;border-color:darkslategray; border-top-left-radius:1px; border-bottom-left-radius:8px;width:100%" ng-click="GridfromButton('WAV');closeNav();">
+                            WAV
+                        </button>
+
+
+
+
+
+                    </div>
+                    
+                    <div align="center" style="position: absolute; bottom: 0px; width:100%">
+                        <button class="dropbtnU" id="RecalibrateB" type="button" style="font-size:small; width:24px; transition: 0.3s; border:outset;border-color:darkslategray; border-top-left-radius:1px; border-bottom-left-radius:8px;font-size:small;height:25px;float:left" ng-click="refreshGrid();"><img src="REFRESH.png" title="refresh" style="width:18px;height:18px;" /></button>
+                        <button class="dropbtnU" id="RecalibrateS" type="button" style="font-size:xx-small; width:24px; transition: 0.3s; border:outset;border-color:darkslategray; border-top-left-radius:1px; border-bottom-left-radius:8px;height:25px;float:left" ng-click="clearFilters();">CLR</button>
+                        <button class="dropbtnU" id="RecalibrateA" type="button" style="font-size:xx-small; width:24px; transition: 0.3s; border:outset;border-color:darkslategray; border-top-left-radius:1px; border-bottom-left-radius:8px;height:25px;float:left" ng-click="exportDriver();">exp</button>
+                        <label style="background-color:black; font-size:x-small;color:lightgreen; border:outset black; border-top-color:brown; text-decoration-style:wavy;width:100%">Cases Validation</label>
+                        <label style="float:left;width:100%;font-size:xx-small;border:outset;border-color:black; border-left-color:brown;">Screen Size:</label>
+                        <input id="screensz" placeholder="local" style="width:100%;background-color:black;  font-size:xx-small; color:lightgoldenrodyellow;border-color:black; border:outset; border-left-color:brown;border-top-color:black;border-right-color:black;border-bottom-color:black; float:left;text-align:left;" disabled="disabled" />
+
+                        <label style="float:left;width:100%;font-size:xx-small;border:outset;border-color:black; border-left-color:brown;display:none">IP Address:</label>
+                        <div id="list" style="background-color:black; font-size:xx-small; font-style:italic; color:lightgoldenrodyellow;text-align:center;width:100%;float:left;border:outset; border-color:brown;border-top-color:black;border-right-color:black; border-bottom-left-radius:8px; border-bottom-right-radius:0px;display:none"></div>
+
+
+                    </div>
+
+                    <!--<iframe id="Reports" name="Reports" onload="ajaxStop()" class="holds-the-iframe" src="" height="644" width="1500"></iframe>-->
+                </div>
+        </div>
+       
+        <div id="gridholder" class="sidenavRight" style="padding-top:20px">
+            <div id="grid" ui-grid="gridOptions" ui-grid-edit ui-grid-selection class="grid" style="width:1200px; height: 80vh;border:outset;border-color:brown;border-radius:4px;font-size:medium;background-color:black;color:white"></div>
+            <div style="padding-left: 120px; padding-top: 400px;background-color:transparent; color:lightgreen" class="grid-msg-overlay" ng-hide="!loading">
+                <div style="padding-left: 120px; background-color:black; color:white" class="msg">
+                    <span>Please wait while Loading Data...<br /><br />Working on Retrieving info from plant...</span>
+
+                </div>
+            </div>
+        </div>
+        <div id="mysidenavRight" class="sidenavRight">
+
+            <span><img class="img" src="../LPSCases.png" style="background-color:white" align="middle" id="cv"></span>
+            <br /><div style="padding-left:30%; color:white">Please Select a Plant from Left to display Cases Barcode Validation Data....</div>
+            <div style="padding-left:30%; color:white">
+                <a target="_blank" align="right" href="../LPSCasesJobAid.png">Click for <b>Job Aid</b></a>
+            </div>
+        </div>
+
+
+        <!-- The Modal -->
+        <div id="mysidenavRightSaveMessage" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <!--<div class="modal-header">
+                <h4>Please Log In!</h4>
+            </div>-->
+                <div class="modal-body" style="height:100%;">
+                    <div style="width:100%; text-align:center;left:20%">
+                        <label id="modalMessage" style="font-size:x-large;font-weight:bold;background-color:black;color:white">HMI Display</label>
+
+
+                        <button id="closeSaveMessage" type="button" ng-click="cancelModal()" style="transition: 1s;background:fixed 2px black; color:white;float:left;border-radius:24px;font-size:large;float:left">X</button>
+                        <button class="dropbtn" id="getMgmt" type="button" style="transition: 1s;background-color:transparent; border:none; color:white;float:right; " ng-click="GridfromButtonL();">
+                            <img src="REFRESH.png" title="refresh" style="width:25px;height:25px; border:outset; border-radius:16px" />
+                        </button>
+                        <label style="background-color:transparent; color:white;padding-left:10%; font-size:medium;float:left">Area:</label>
+                        <input id="Area" style="background-color:transparent; color:white; border:none; font-size:large; width:auto;text-align:center; float:left" disabled="disabled" />
+
+                        <div id="gridL" ui-grid="gridOptionsL" ui-grid-selection class="gridP" style="width:1200px; height: 80vh;border:outset;border-color:brown;font-size:medium;background-color:black;color:white"></div>
+
+                        <div style="padding-left: 120px; padding-top: 400px;background-color:black; color:white" class="grid-msg-overlay" ng-hide="!loading">
+                            <div style="padding-left: 120px; background-color:transparent; color:white" class="msg">
+                                <span>Please wait while Loading Data...<br /><br />Working on Retrieving info from plant...</span>
+
+                            </div>
+                        </div>
+                        <br /><br />
+
+
+                        <!--<button type="button" class="dropbtnU" ng-click="closeNavInputForm()" style="transition: 1s;background:fixed 2px darkred; color:white;float:left;border-radius:24px;width:120px;height:80px; font-size:xx-large;left:40%;float:left">EXIT</button>-->
+
+                    </div>
+
+
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+
+
+    </div>
+
+</body>
+</html>

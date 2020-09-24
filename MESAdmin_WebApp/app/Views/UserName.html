@@ -1,0 +1,28 @@
+<!-- The Name of this File = test2.html --><HTML>
+<HEAD> <TITLE>VBScript ->Getting UserName</TITLE>
+<SCRIPT LANGUAGE="VBScript">
+Dim objNet
+On Error Resume Next 'If fail to create object then display error
+' (press no message)
+Set objNet = CreateObject("WScript.NetWork")
+If Err.Number <> 0 Then	'If err
+MsgBox "Do not press ""No"" If your browser warns you."
+Document.Location = "test2.html"	'Display document by placing name again
+End if
+
+Dim strInfo
+strInfo = "User Name is " & objNet.UserName & vbCRLF & _
+"Computer Name is " & objNet.ComputerName & vbCRLF & _
+"Domain Name is " & objNet.UserDomain
+MsgBox strInfo
+
+
+Set objNet = Nothing	'Destroy the Object
+</SCRIPT>
+</HEAD>
+<BODY>
+<H1 align="center">That's It</H1>
+<H4 align="center">NoseBleeD@TechIMO<BR></H4>
+
+</BODY>
+</HTML>

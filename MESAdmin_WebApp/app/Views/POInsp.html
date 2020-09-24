@@ -1,0 +1,2328 @@
+﻿<html>
+<head>
+
+    <style>
+        /*###################################### Start Calling GRID FEATURES #############################################*/
+
+        @import url("../../Content/GridFormat.css");
+
+
+        /*###################################### End Calling GRID FEATURES #############################################*/
+
+
+
+        .p1 {
+            background: url(MESPortal.png) no-repeat right fixed;
+            background-size: 700px;
+            opacity: 2.2;
+            filter: alpha(opacity=220);
+        }
+
+        body {
+            /*padding-top: 50px;
+            padding-bottom: 20px;*/
+            padding-left: 0px;
+            background-color: darkslategray;
+            border-style: solid;
+            border-bottom-width: thick;
+            border-color: burlywood;
+            font-family: Arial, Helvetica, sans-serif;
+            background: url(MESPortal.png) no-repeat center fixed;
+        }
+
+
+
+        /* Set padding to keep content from hitting the edges */
+        .body-content {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 40%;
+        }
+
+
+
+        #sidepanel {
+            position: absolute;
+            min-width: 30px;
+            height: 60%;
+            top: 10%;
+            right: 0;
+        }
+
+        #bar {
+            display: table;
+            background-color: #2F404F;
+            color: white;
+            width: 30px;
+            height: 100%;
+            text-align: center;
+        }
+
+            #bar div {
+                display: table-cell;
+                vertical-align: top;
+                padding-top: 40px;
+            }
+
+        #panel {
+            display: none;
+            background-color: #2F404F;
+            color: orangered;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+
+            #panel div {
+                display: table-cell;
+                vertical-align: top;
+            }
+
+        #sidepanel:hover #bar {
+            display: none;
+        }
+
+        #sidepanel:hover #panel {
+            display: table;
+        }
+
+        /*.input-value {
+            transition: .7s;
+            width: 75px;
+        }
+
+        .input-expand {
+            transition: .7s;
+            width: 300px;
+        }*/
+
+        div {
+            /*resize: both;
+            overflow: auto;*/
+        }
+
+        divS {
+            resize: both;
+            /*overflow: scroll;*/
+        }
+
+        .imgcontainer {
+            text-align: center;
+            margin: 24px 0 12px 0;
+        }
+
+        img.avatar {
+            width: 20%;
+            border-radius: 50%;
+        }
+
+        .container {
+            padding: 16px;
+        }
+
+        /* Override the default bootstrap behavior where horizontal description lists
+           will truncate terms that are too long to fit in the left column
+        */
+        .dl-horizontal dt {
+            white-space: normal;
+        }
+
+
+        textarea {
+            max-width: 1350px;
+        }
+
+
+
+
+
+        header {
+            background-color: orangered;
+            color: white;
+            display: block;
+        }
+
+        label {
+            font-family: 'Open Sans';
+            font-weight: 800;
+            font-size: x-small;
+        }
+
+
+        .grid {
+            width: 1200px;
+            height: 300px;
+            background-color: black !important;
+            bottom: 0;
+            color: lightgoldenrodyellow !important;
+            grid-gap: 5px;
+            /*grid-template-columns: repeat(auto-fit, minmax(min-content, 400px));*/
+            
+        }
+
+
+        /*.ui-grid-row-selected.ui-grid-row:nth-child(odd) .ui-grid-cell.ui-grid-cell-focus,
+        .ui-grid-row-selected.ui-grid-row:nth-child(even) .ui-grid-cell.ui-grid-cell-focus {
+            outline: 10px;
+
+        }*/
+
+        .ui-grid-row:nth-child(odd) .ui-grid-cell {
+            background-color: darkslategrey;
+            border: none;
+        }
+
+        .ui-grid-row:nth-child(even) .ui-grid-cell {
+            background-color: darkslategrey;
+            border: none;
+        }
+
+
+
+        .ui-grid-cell-focus {
+            outline: 0;
+            background-color: #ada624;
+            border: none;
+        }
+
+        .ui-grid-row-selected.ui-grid-row:nth-child(odd) .ui-grid-cell,
+        .ui-grid-row-selected.ui-grid-row:nth-child(even) .ui-grid-cell {
+            background-color: white;
+            border: outset;
+            color: darkslategrey;
+            font-weight: bolder;
+        }
+
+            .ui-grid-row-selected.ui-grid-row:nth-child(odd) .ui-grid-cell.ui-grid-cell-focus,
+            .ui-grid-row-selected.ui-grid-row:nth-child(even) .ui-grid-cell.ui-grid-cell-focus {
+                outline: 0;
+                background-color: white;
+                font-weight: bolder;
+            }
+
+        .ui-grid-row-selected.ui-grid-row:nth-child(odd):hover .ui-grid-cell,
+        .ui-grid-row-selected.ui-grid-row:nth-child(even):hover .ui-grid-cell {
+            color: darkslategrey;
+            background-color: white;
+            font-weight: bolder;
+        }
+
+        .grey .ui-grid-cell-contents {
+            background-color: darkslategrey;
+            font-weight: bold;
+            color: white;
+        }
+
+
+        .green {
+            background-color: #2dff07;
+            color: red;
+        }
+
+        .blue {
+            background-color: #1fe0f0;
+            color: #153ff0;
+        }
+
+        label {
+            font-family: 'Open Sans';
+            font-weight: 800;
+            font-size: x-small;
+        }
+
+
+
+        .grid .ui-grid-render-container-body .ui-grid-header-cell,
+        .grid .ui-grid-header-cell {
+            background-color: darkgreen;
+            color: white;
+        }
+
+
+
+        .grid .ui-grid-filter-container {
+            padding: 1px 1px;
+        }
+
+        .grid-msg-overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 50%;
+        }
+
+            .grid-msg-overlay .msg {
+                opacity: 1;
+                position: absolute;
+                top: 0%;
+                left: 1%;
+                width: 50%;
+                height: 50%;
+                background-color: #4D90FE;
+                /*border: 1px solid #556;*/
+                text-align: center;
+                font-size: 24px;
+                display: table;
+            }
+
+
+                .grid-msg-overlay .msg span {
+                    display: table-cell;
+                    vertical-align: middle;
+                }
+
+        .ui-grid-viewport {
+            overflow-anchor: none;
+        }
+        #grid, #gridSchd .ui-grid-cell-contents {
+            text-align: center;
+            -ms-text-overflow: clip;
+            -o-text-overflow: clip;
+            text-overflow: clip;
+            align-content: stretch;
+            word-wrap: break-word;
+        }
+
+
+            #grid .ui-grid-cell {
+                font-size: 12px;
+                font-weight: 500;
+            }
+
+            #grid .ui-grid-header-cell {
+                background-color: #444;
+                color: white;
+            }
+
+
+
+        #gridSchd .ui-grid-cell {
+            font-size: 12px;
+            font-weight: 500;
+        }
+        /*#gridSchd .ui-grid-row-selected {
+            font-size: 14px;
+            font-weight: 500;
+            border: thick;
+            background-color: Highlight;
+
+        }*/
+        #gridSchd .ui-grid-header-cell {
+            background-color: #444;
+            color: white;
+        }
+
+
+        #gridJS .ui-grid-cell {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        #gridJS .ui-grid-header-cell {
+            background-color: darkslategray;
+            color: lightgoldenrodyellow;
+        }
+
+        #gridBOMItem .ui-grid-cell-contents {
+            text-align: center;
+        }
+
+        #gridBOMItem .ui-grid-cell {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        #gridBOMItem .ui-grid-header-cell {
+            background-color: #473f3f;
+            color: white;
+        }
+
+
+        #gridSpec .ui-grid-cell-contents {
+            text-align: center;
+        }
+
+        #gridSpec .ui-grid-cell {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        #gridSpec .ui-grid-header-cell {
+            background-color: #3a3535;
+            color: white;
+        }
+
+
+
+        #gridInspSchd .ui-grid-cell-contents {
+            text-align: center;
+            -ms-text-overflow: clip;
+            -o-text-overflow: clip;
+            text-overflow: clip;
+            height: auto !important;
+            align-content: stretch;
+            word-wrap: break-word;
+        }
+
+        #gridInsp .ui-grid-cell {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        #gridInsp .ui-grid-header-cell {
+            background-color: #345c33;
+            color: white;
+        }
+
+        #gridInsp .ui-grid-cell-contents {
+            text-align: center;
+        }
+
+
+        #gridInspSchd .ui-grid-cell {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        #gridInspSchd .ui-grid-header-cell {
+            background-color: #345c33;
+            color: white;
+        }
+
+        #gridPOPopup .ui-grid-cell {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        #gridPOPopup .ui-grid-header-cell {
+            background-color: #345c33;
+            color: white;
+        }
+
+        #gridPOPopup .ui-grid-cell-contents {
+            text-align: center;
+        }
+
+        #gridAttribute .ui-grid-cell-contents {
+            text-align: center;
+        }
+
+        #gridAttribute .ui-grid-cell {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        #gridAttribute .ui-grid-header-cell {
+            background-color: #473f3f;
+            color: white;
+        }
+
+        #gridAttributeGroup .ui-grid-cell-contents {
+            text-align: center;
+        }
+
+        #gridAttributeGroup .ui-grid-cell {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        #gridAttributeGroup .ui-grid-header-cell {
+            background-color: #3a3535;
+            color: white;
+        }
+
+        #gridAGPopup {
+            background-color: #3a3535;
+        }
+
+            #gridAGPopup .ui-grid-cell {
+                background-color: #3a3535;
+                color: white;
+                font-size: 12px;
+                font-weight: 500;
+            }
+
+            #gridAGPopup .ui-grid-header-cell {
+                background-color: #3a3535;
+                color: white;
+            }
+
+
+        .your-hover-class {
+            color: red;
+        }
+
+        .md-button {
+            padding: 0 6px 0 6px;
+            margin: 6px 8px 6px 8px;
+            min-width: 88px;
+            border-radius: 3px;
+            font-size: 14px;
+            text-align: center;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: none;
+            outline: none;
+        }
+
+        .btn {
+            /*background-color: #692218;*/
+            background-color: #17561b;
+            color: white;
+            height: 35px;
+            width: 80px;
+            font-size: x-small;
+        }
+
+
+
+            .btn:hover {
+                /*background-color: #FFD740;*/
+                /*color: #1565C0;*/
+                background-color: white;
+                color: black;
+                border-color: white;
+                border: outset;
+                /*border-width:thick;*/
+            }
+
+            .btn:focus {
+                outline: 0 !important;
+            }
+
+            .btn:active {
+                outline: 0;
+                color: #fff;
+                background-color: #428bca;
+                /*border-color: #357ebd;*/
+            }
+
+
+        table, tr {
+            border: 1px groove;
+            width: 40%;
+            background-color: transparent;
+        }
+
+        div {
+            background-color: transparent;
+        }
+
+
+        .printSelection {
+            width: 600px;
+            margin-top: 10px;
+        }
+
+        .highlight {
+            background-color: #b3c4c7 !important;
+        }
+
+        /*.productionorder:nth-child(even) {
+            background: red
+        }
+
+        .productionorder:nth-child(odd) {
+            background: green
+        }*/
+
+
+
+
+        /*input {
+            font-family: 'Open Sans';
+            font-weight: 100;
+            font-size: x-small;
+            height: 18px;
+
+        }*/
+
+        /*input[type="text"] {
+                background-color: lightyellow;
+                border: .5px solid #4D90FE !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-family: 'Open Sans';
+                font-weight: 100;
+                font-size: small;
+                height: 20px;
+                color: black;
+            }*/
+
+        input {
+            border: 2px solid white;
+            -webkit-box-shadow: inset 0 0 8px rgba(0,0,0,0.1), 0 0 16px rgba(0,0,0,0.1);
+            -moz-box-shadow: inset 0 0 8px rgba(0,0,0,0.1), 0 0 16px rgba(0,0,0,0.1);
+            box-shadow: inset 0 0 8px rgba(0,0,0,0.1), 0 0 16px rgba(0,0,0,0.1);
+            padding: 10px;
+            background: rgba(255,255,255,0.5);
+            margin: 0 0 5px 0;
+            font-size: medium;
+            color: brown;
+        }
+
+
+            input:focus {
+                background-color: #b1834e;
+                color: white;
+            }
+
+            input[type="user"] {
+                background-color: white;
+                border: .5px solid #4D90FE !important;
+                -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-family: 'Open Sans';
+                font-weight: 100;
+                font-size: small;
+                height: 20px;
+                color: black;
+            }
+
+            input[type="summary"] {
+                background-color: lightyellow;
+                border: .5px solid #4D90FE !important;
+                /*-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;*/
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-family: 'Open Sans';
+                font-weight: 100;
+                font-size: medium;
+                height: 20px;
+                color: black;
+            }
+
+            /*input[type="text"]:focus {
+                background-color: lightblue;
+                border: .5px solid #4D90FE !important;
+                -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-family: 'Open Sans';
+                font-weight: 100;
+                font-size: small;
+                color: black;
+            }*/
+
+            input[type="Date"] {
+                border: 1px solid #4D90FE !important;
+                -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                background-color: lightyellow;
+                font-family: 'Open Sans';
+                font-weight: bold;
+                font-size: small;
+                height: 25px;
+            }
+
+            input[type="password"]:focus {
+                background-color: #FFEC9C;
+                border: 1px solid #4D90FE !important;
+                -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-size: xx-small;
+            }
+
+            input[type="user"]:focus {
+                background-color: #FFEC9C;
+                border: 1px solid #4D90FE !important;
+                -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-size: xx-small;
+            }
+
+            input[Disabled] {
+                border: 1px solid #4D90FE !important;
+                color: black;
+                outline: none !important;
+                font-size: xx-small;
+            }
+
+        .advancedSearchTextbox {
+            width: 526px;
+            margin-right: -4px;
+        }
+
+        textarea:focus {
+            padding-top: 10px;
+            background-color: #FFEC9C;
+            min-width: 50%;
+            border: 1px solid #000;
+        }
+
+
+        textarea {
+            min-height: 4em;
+            height: auto;
+            width: 50%;
+            margin: 0 auto;
+            background-color: white;
+            vertical-align: middle;
+            font-size: xx-small;
+        }
+
+
+
+        select {
+            background-color: white;
+            color: black;
+            font-family: 'Open Sans';
+            font-weight: 100;
+            font-size: xx-small;
+            /*border: outset;*/
+        }
+
+
+
+        #myProgress {
+            width: 100%;
+            background-color: ghostwhite;
+        }
+
+        #myBar {
+            width: 1%;
+            height: 30px;
+            background-color: black;
+        }
+
+        .bg {
+            background-size: 100% auto;
+        }
+
+
+
+        .yellowCell {
+            background-color: forestgreen;
+        }
+
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: black;
+            color: white;
+            text-align: right;
+        }
+
+
+        .container {
+            position: relative;
+            max-width: 850px;
+            position: relative;
+            margin: auto;
+        }
+
+        /* Hide the images by default */
+        .mySlides {
+            display: none;
+        }
+
+        /* Add a pointer when hovering over the thumbnail images */
+        .cursor {
+            cursor: pointer;
+        }
+
+        /* Next & previous buttons */
+        .prev,
+        .next {
+            cursor: pointer;
+            position: absolute;
+            top: 40%;
+            width: auto;
+            padding: 16px;
+            margin-top: -50px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* Position the "next button" to the right */
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+            /* On hover, add a black background color with a little bit see-through */
+            .prev:hover,
+            .next:hover {
+                background-color: rgba(0, 0, 0, 0.8);
+            }
+
+        /* Number text (1/3 etc) */
+        .numbertext {
+            color: #f2f2f2;
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+        }
+
+        /* Container for image text */
+        .caption-container {
+            text-align: center;
+            background-color: #222;
+            padding: 2px 16px;
+            color: white;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Six columns side by side */
+        .column {
+            float: left;
+            width: 16.66%;
+        }
+
+        /* Add a transparency effect for thumnbail images */
+        .demo {
+            opacity: 0.6;
+        }
+
+            .active,
+            .demo:hover {
+                opacity: 1;
+            }
+
+
+        /* Add a black background color to the top navigation */
+        .topnav {
+            background-color: black;
+            overflow: hidden;
+            /*padding-left: 1.5%;*/
+            position: fixed;
+            width: 100%;
+        }
+
+            /* Style the links inside the navigation bar */
+            .topnav a {
+                float: left;
+                color: #f2f2f2;
+                text-align: center;
+                /*padding: 14px 16px;*/
+                text-decoration: none;
+                font-size: 15px;
+            }
+
+                /* Change the color of links on hover */
+                .topnav a:hover {
+                    background-color: #ddd;
+                    color: black;
+                }
+
+                /* Add a color to the active/current link */
+                .topnav a.active {
+                    background-color: #4CAF50;
+                    color: white;
+                }
+
+
+
+        .sidenav {
+            height: 100%;
+            width: 5.0%;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: black;
+            /*overflow: hidden;*/
+            padding-top: 0px;
+            align-content: center;
+        }
+
+            .sidenav a {
+                /*padding: 5px 5px 5px 42px;*/
+                text-decoration: none;
+                font-size: 16px;
+                color: #818181;
+                display: block;
+            }
+
+                .sidenav a:hover {
+                    color: #f1f1f1;
+                }
+
+        #main {
+            transition: margin-left .5s;
+            padding: 12px;
+        }
+
+        .sidenavRight {
+            height: 95%;
+            /*width: 90.352%;*/
+            width: 95%;
+            position: fixed;
+            z-index: 1;
+            top: 5%;
+            right: 0;
+            background-color: #168817;
+            /*overflow-y: scroll;*/
+            transition: 0.5s;
+            color: #FFEC9C;
+            /*padding-top: 60px;*/
+        }
+
+            .sidenavRight a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #168817;
+                display: block;
+                transition: 0.3s;
+            }
+
+                .sidenavRight a:hover {
+                    color: #f1f1f1;
+                }
+
+            .sidenavRight .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+
+
+
+        @media screen and (max-height: 450px) {
+            .sidenavRight {
+                padding-top: 15px;
+            }
+
+                .sidenavRight a {
+                    font-size: 18px;
+                }
+        }
+
+        .sidenavRightS {
+            height: 100%;
+            width: 90.352%;
+            position: page;
+            z-index: 1;
+            top: 20%;
+            right: 0;
+            background-color: #33a03f;
+            /*overflow:no-display;*/
+            transition: 0.6s;
+            color: #FFEC9C;
+            /*padding-top: 60px;*/
+        }
+
+            .sidenavRightS a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #818181;
+                display: block;
+                transition: 0.6s;
+            }
+
+                .sidenavRightS a:hover {
+                    color: #f1f1f1;
+                }
+
+            .sidenavRightS .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+
+
+
+        @media screen and (max-height: 450px) {
+            .sidenavRightS {
+                padding-top: 15px;
+            }
+
+                .sidenavRightS a {
+                    font-size: 18px;
+                }
+        }
+
+
+        #canvas {
+            border-bottom: 1px solid rgba(0,0,0,0.3);
+            background-color: #FFF;
+            box-shadow: 0 9px 20px -5px rgba(0,0,0,0.8);
+        }
+
+        #d {
+            text-align: center;
+        }
+
+        h1 {
+            color: #444;
+            /*font-family: "Eau Naturelle", "Helvetica", "Arial", "Lucida Grande", "Gill Sans", "Verdana", sans-serif;*/
+            font-weight: 500;
+        }
+
+        a {
+            /*color: #4a9;
+            text-decoration: none;
+            font-style: italic;
+            font-weight: 800;*/
+        }
+
+
+
+        /*Click DropDown*/
+        .dropbtn {
+            background-color: #3498DB;
+            color: white;
+            padding: 12px;
+            font-size: 12px;
+            border: none;
+            cursor: pointer;
+        }
+
+        *.dropbtnB {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px;
+            font-size: 12px;
+            border: none;
+        }
+
+        .dropbtn:hover, .dropbtn:focus {
+            background-color: #2980B9;
+        }
+
+        .dropbtnB:hover, .dropbtn:focus {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /*.dropdown {
+            position: relative;
+            display: inline-block;
+        }*/
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            overflow: auto;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+        .dropdown a:hover {
+            background-color: #ddd
+        }
+
+        .show {
+            display: block;
+        }
+
+
+
+
+        /*body {
+                    margin: 0;
+
+                }*/
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        html, body {
+            -ms-overflow-style: none;
+            /*overflow: auto;*/
+        }
+
+        .icon-bar {
+            position: fixed;
+            top: 15%;
+            -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+        }
+
+            .icon-bar a {
+                display: block;
+                text-align: center;
+                padding: 16px;
+                transition: all 0.3s ease;
+                color: white;
+                font-size: 14px;
+            }
+
+                .icon-bar a:hover {
+                    background-color: #000;
+                }
+
+        .pln {
+            background: #3B5998;
+            color: white;
+        }
+
+        .cls {
+            background: #55ACEE;
+            color: white;
+        }
+
+
+        .content {
+            margin-left: 75px;
+            font-size: 30px;
+        }
+
+
+        .specialColor {
+            /* Whatever color  you want */
+            background-color: #2d4240;
+            color: white;
+        }
+
+
+        /*input[type="text"] {
+            font-size: 12px;
+            text-align-last:center;
+        }*/
+
+
+        /* Style The Dropdown Button */
+        .dropbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px;
+            font-size: 12px;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* The container <div> - needed to position the dropdown content */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Dropdown Content (Hidden by Default) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+            /* Links inside the dropdown */
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                /* Change color of dropdown links on hover */
+                .dropdown-content a:hover {
+                    background-color: #f1f1f1
+                }
+
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Change the background color of the dropdown button when the dropdown content is shown */
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+        }
+
+        .right {
+            position: absolute;
+            right: 0px;
+            padding: 10px;
+        }
+
+        .left {
+            position: absolute;
+            left: 0px;
+            padding: 10px;
+        }
+
+        .center {
+            position: absolute;
+            left: 50%;
+            right: 50%;
+            padding: 10px;
+        }
+
+
+        .dropbtnU {
+            background-color: white;
+            color: black;
+            padding: 0;
+            font-size: 12px;
+            border: thick;
+            border-radius: 3px;
+            border: outset;
+        }
+
+        .dropup {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropup-content {
+            display: none;
+            position: absolute;
+            background-color: darkslategray;
+            color: white;
+            min-width: 50px;
+            min-height: 50px;
+            bottom: 10px;
+            z-index: 1;
+            margin-top: 50px;
+            font-size: 12px;
+        }
+
+            .dropup-content a {
+                color: white;
+                text-decoration: none;
+                display: block;
+            }
+
+                .dropup-content a:hover {
+                    background-color: transparent;
+                    color: white;
+                }
+
+        .dropup:hover .dropup-content {
+            display: block;
+            font-size: 12px;
+        }
+
+        .dropup:hover .dropbtnU {
+            background-color: transparent;
+            color: white;
+            font-size: 12px;
+        }
+
+        div.editable {
+            width: 300px;
+            height: 200px;
+            border: 1px solid #ccc;
+            /*padding: 5px;*/
+        }
+
+
+
+
+
+        /*DropDown///////////////////////////////////////*/
+
+
+        /*Last Try Checkbox*/
+        /* Customize the label (the container) */
+        .container {
+            display: block;
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-size: 22px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+            /* Hide the browser's default checkbox */
+            .container input {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+            }
+
+        /* Create a custom checkbox */
+        .checkmark {
+            position: absolute;
+            top: 8px;
+            left: 50px;
+            height: 25px;
+            width: 25px;
+            background-color: white;
+            border: inset;
+        }
+
+        /* On mouse-over, add a grey background color */
+        .container:hover input ~ .checkmark {
+            background-color: #a2ae16;
+        }
+
+        /* When the checkbox is checked, add a blue background */
+        .container input:checked ~ .checkmark {
+            background-color: #a2ae16;
+        }
+
+        /* Create the checkmark/indicator (hidden when not checked) */
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        /* Show the checkmark when checked */
+        .container input:checked ~ .checkmark:after {
+            display: block;
+        }
+
+        /* Style the checkmark/indicator */
+        .container .checkmark:after {
+            left: 9px;
+            top: 5px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 3px 3px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+        /*last try checkbox*/
+
+
+        iframe.width-changed {
+            width: 100%;
+            display: block;
+            border: 0;
+            height: 0;
+            margin: 0;
+        }
+    </style>
+
+</head>
+<body>
+    <div style="display:block; width : auto; padding-left:4.5%">
+        <div id="topbar" ng-controller="IN2164controller">
+            <div class="topnav">
+                <a href="#/">Home</a>
+                <!--<a class="active" href="" onclick="this.href='#/LRSCorp'">Reports</a>-->
+                <a href="#/Support">Support</a>
+                <a href="../LPS-WebBased Production Order and Inspection Lot Entry Portal_1.pdf">Job-Aid</a>
+                <label style="padding-left:120px; background-color:transparent; color:#897334; font-size:x-large">LPS-WebBased PO and InspectionLOT Entry Portal</label>
+                <input id="LoggedIn" name="LoggedIn" ng-model="LoggedIn" onload="function_two('uname')" class="form-control" placeholder="Not Logged in!" style="width: 140px;height:30px;background-color:Highlight; font-size:medium; color:darkgreen" type="hidden" />
+
+            </div>
+
+        </div>
+
+        <div id="mySidenav" class="sidenav" ng-controller="IN2164controller" style="align-items:center">
+
+
+            <img src="../LeprinoLogo.png" style="width:76px;height:50px; background-color:white">
+            <div style="padding-top:30px; font-size:1.5vw; width:100%">
+
+                <button type="button" class="dropbtn" style="background-color:#91a920;color:white;transition: 0.3s;border:hidden; width:100%;border:0px solid #9c0461 outset;border-top-right-radius:0px;border-top-left-radius:5px; border-bottom-left-radius:10px;border-bottom-right-radius:0px " ng-click="openDIV('mysidenavRightSchedule');refresGridJSAll();">
+                    Schedule
+                </button>
+                <button type="button" class="dropbtn" style="background-color:#897334;color:white;transition: 0.3s;border:hidden; width:100%;border:0px solid #9d2020 outset;border-top-right-radius:0px;border-top-left-radius:5px; border-bottom-left-radius:10px;border-bottom-right-radius:0px " ng-click="openDIV('mysidenavRightMain');refresGridPOAll()">
+                    PO
+                </button>
+                <button type="button" class="dropbtn" style="background-color:white;color:brown;transition: 0.3s;border:hidden; width:100%;border:0px solid #03423c outset;border-top-right-radius:0px;border-top-left-radius:5px; border-bottom-left-radius:10px;border-bottom-right-radius:0px " ng-click="openDIV('mysidenavRightIN2165');refresGridInspAll()">
+                    Insp
+                </button>
+
+
+            </div>
+
+        </div>
+
+
+        <div id="mysidenavRightMain" ng-controller="IN2164controller" class="sidenavRight" style="background-color:#2a2c2c;overflow-y: auto">
+            <div id="1" class="dropup" style="background-color:transparent; color:white; float:left;margin-top:10px;width:100%;height:45%;border-radius:1px;border:1px solid #0fbef4;font-size:120%;">
+                <div style="background-color:#897334; color:white; width:100%;">
+                    <h9>
+                        <button type="button" class="dropbtnU" style="float:left; background-color:white; color:black; padding-left:10px;" ng-click="showInput('POInput','1')">&#9776; Edit &#9776;</button>
+                        <button type="button" class="dropbtnU" style="float:left; padding-left:10px; background-color:black; color:white; padding-left:10px;" ng-click="hideInput('POInput')">&#9776;Hide&#9776;</button>
+                        <button type="button" class="dropbtnU" style="float:left; padding-left:10px; background-color:#80771d; color:white" onclick="document.getElementById('mysidenavRightMain').style.width = '0';">&#9776;Close&#9776;</button>
+
+
+                        <!--<button type="button" class="dropbtnU" style="float:right; background-color:white; color:black" ng-click="maximize('1','grid','100%','50%');showInput('POInput','1');">MAX</button>
+                        <button type="button" class="dropbtnU" style="float:right;background-color:black; color:white" ng-click="restore('1','100%','50%');hideInput('POInput')">Restore</button>-->
+
+                        <div align="center">ProductionOrderTemplate</div>
+                    </h9>
+                </div>
+
+                <div style="height:20px; width:100%; ">
+                    <div id="grid" ui-grid="gridOptions" ui-grid-edit ui-grid-selection class="grid" style="display:block;color:black; width:100%; "></div>
+
+
+
+                    <div style="padding-left: 120px; padding-top: 400px;background-color:darkslategray; color:black" class="grid-msg-overlay" ng-hide="!loading">
+                        <div style="padding-left: 120px; background-color:darkslategray; color:white" class="msg">
+                            <span>Please wait while Loading Data...<br /><img class="img" src="../MESPortal.png" style="width:auto;height:auto; background-color:white" align="middle" id="logo"><br />Working on Retrieving info from plant...<i class="fa fa-spinner fa-spin"></i></span>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div id="POInput" style="background-color:transparent; color:white; float:left;margin-top:10px;padding-top:10px; width:100%;height:50%;border-radius:1px;border:1px solid white;font-size:120%;display:none; overflow: auto;">
+
+                <div align="center"> &nbsp;Edit Production Order.&nbsp;<button type="button" class="dropbtnU" style="float:right; background-color:black; color:white" ng-click="hideInput('POInput')">&#9776;Hide&#9776;</button> </div>
+                <div style="background-color:transparent; color:white; float:left;width:100%; font-size:120%;">
+
+
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left"> &nbsp;PONumber.</label><input id="ProductionOrderNumber" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black">
+
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left"> &nbsp;Version.</label><input id="Version" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left;background-color:white; color:black">
+
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left"> &nbsp;Material.</label><input id="MaterialNumber" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left"> &nbsp;POId.</label> <input id="ProductionOrder_Id" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:#444; color:floralwhite;" disabled="disabled">
+                </div>
+                <div style="background-color:transparent; color:white; float:left;width:100%; font-size:120%;">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left"> &nbsp;QTY.</label><input id="TotalQuantity" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left;background-color:white; color:black">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left; display:none"> &nbsp;StartTime.</label><input id="ScheduledStartTime" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left;background-color:white; color:black; display:none">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left"> &nbsp;NumVats.</label><input id="NumVats" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left"> &nbsp;StorageLoc.</label>
+                    <!--<input id="StorageLocationReceipt" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black">-->
+                    <select id="StorageLocationReceipt" style="border:1px solid #777777;width:15%;height:40px; float:left; background-color:white; color:black;font-size:medium;">
+                        <option value=''></option>
+                        <option value='1100'>1100</option>
+                        <option value='1100'>1101</option>
+                        <option value='1102'>1102</option>
+                        <option value='1103'>1103</option>
+                        <option value='1107'>1107</option>
+                        <option value='1108'>1108</option>
+                        <option value='1109'>1109</option>
+                        <option value='1110'>1110</option>
+                        <option value='1115'>1115</option>
+                        <option value='1200'>1200</option>
+                        <option value='9000'>9000</option>
+
+                    </select>
+                </div>
+                <div style="background-color:transparent; color:white; float:left;width:100%; font-size:120%;">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left"> &nbsp;FATProtRatio.</label><input id="FatProtRatio" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left"> &nbsp;MilkProtein.</label><input id="MilkProtein" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left"> &nbsp;MilkFat.</label><input id="MilkFat" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black">
+                </div>
+                <div style="background-color:transparent; color:white; float:left;width:100%; font-size:120%;">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left; display:none"> &nbsp;EndTime.</label><input id="ScheduledEndTime" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left;background-color:white; color:black; display:none">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left"> &nbsp;SetPH.</label><input id="SetPH" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left"> &nbsp;RetFactor.</label><input id="RetFactor" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left"> &nbsp;Moisture.</label><input id="Moisture" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black">
+                </div>
+                <div style="background-color:transparent; color:white; float:left;width:100%; font-size:120%;">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left"> &nbsp;Salt.</label><input id="Salt" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left"> &nbsp;Fat.</label><input id="Fat" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left"> &nbsp;pH.</label><input id="pH" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left;background-color:white; color:black">
+                </div>
+
+                <div style="background-color:transparent; color:white; float:left;width:90%;height:20%;padding-top:10px; font-size:120%;">
+
+                    <button class="dropbtnU" style="background-color:darkslateblue; color:white; height:100%; width:20%; vertical-align:top" ng-click="SaveAll()">Save</button>
+                    <button type="button" class="dropbtnU" style="float:left; background-color:firebrick; color:white;height:100%; width:20%" ng-click="NewtemplateClear()">&nbsp;New Template&nbsp;</button>
+                    <!--<button type="button" class="dropbtnU" style="float:left; background-color:darkslategray; color:white;height:100%; width:20%" ng-click="Newtemplate()">&nbsp;SaveTemplate&nbsp;</button>-->
+                    <button type="button" class="dropbtnU" style="float:left; background-color:white; color:black;height:100%; width:20%" ng-click="clearTB()">&diams;&nbsp; ClearAll &nbsp;&diams;</button>
+                    <button type="button" class="dropbtnU" style="float:left;background-color:orangered; color:white;height:100%; width:20%" ng-click="DeletePO()">&diams;&nbsp; Delete &nbsp;&diams;</button>
+
+                </div>
+
+
+            </div>
+            <div id="2" class="dropup" style="float:left;margin-top:10px;width:60%;height:auto;padding:10px;border-radius:1px;border:1px solid #e44923;font-size:120%;">
+                <div style="background-color:darkslategrey; color:white; width:100%;">
+                    <h9>
+                        <button type="button" class="dropbtnU" style="float:left; background-color:white; color:black; padding-left:10px;" ng-click="showInput('BOMPosInput','2')">&#9776;Edit&#9776;</button>
+                        <button type="button" class="dropbtnU" style="float:left; background-color:black; color:white; padding-left:10px;" ng-click="hideInput('BOMPosInput')">&#9776;Hide&#9776;</button>
+                        <button id="gridrefBOM" class="dropbtnU" style="float:left; background-color:black; color:white; padding-left:10px;" ng-click="refreshGridBOMItem()">&#9776;Refresh&#9776;</button>
+                        <!--<button id="gridMax" class="dropbtnU" style="float:left; background-color:black; color:white; padding-left:10px;" ng-click="wider('2','bomgridholder','gridBOMItem','100%','100%','100%','70%','100%','100%')">&#9776;Zoom&#9776;</button>-->
+                        <!--<a href="#/2BOMPosition">FullScreen</a>-->
+                        
+                        <!--<button type="button" class="dropbtnU" style="float:right; background-color:white; color:black" ng-click="maximize('2','gridBOMItem','100%','50%');showInput('BOMPosInput','2')">MAX</button>
+                        <button type="button" class="dropbtnU" style="float:right;background-color:black; color:white" ng-click="restore('2','50%','auto');hideInput('BOMPosInput')">Restore</button>-->
+                        <div align="center"> &nbsp;BOM Position.</div>
+                        <!--<input type="text" placeholder="BOM Position" style="padding-left:10px; background-color:brown; color:white; width:100%;height:auto;  font-size:medium; text-align: center;" ng-blur="blurT('ProcessTB2')" id="ProcessTB2" />-->
+                        <!--1d2a25-->
+                    </h9>
+                </div>
+                <div id="bomgridholder" style="height:100%; width:100%; overflow:hidden  ">
+                    <!--<button id="BOMDisplay" style="background-color:transparent;color:white;border-color:darkolivegreen" hidden="hidden" ng-click="skillsFunc()">Refresh</button>-->
+                    <div id="gridBOMItem" ui-grid="gridOptionsBOMItem" ui-grid-edit ui-grid-selection  class="grid" style="display:block;width : 100%; height:200px;overflow:hidden"></div><!--ng-style="getTableHeight()"-->
+
+                    <div style="background-color:darkslategray; color:black" class="grid-msg-overlay" ng-hide="!loading">
+                        <div style="padding-left: 120px; background-color:darkslategray; color:white" class="msg">
+                            <span>Please wait while Loading Data...<br /><img class="img" src="../MESPortal.png" style="width:auto;height:auto; background-color:white" align="middle" id="logo"><br />Working on Retrieving info from plant...<i class="fa fa-spinner fa-spin"></i></span>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div id="BOMPosInput" style="background-color:transparent; color:white; float:left;margin-top:10px;width:100%;height:60%;border-radius:1px;border:1px solid white;font-size:120%;display:none; ">
+                <div align="center"> &nbsp;Edit BOM Position.&nbsp;<button type="button" class="dropbtnU" style="float:right; background-color:black; color:white" ng-click="hideInput('BOMPosInput')">&#9776;Hide&#9776;</button></div>
+
+                <div style="background-color:transparent; color:white; float:left;width:100%; font-size:120%;top:5%">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">BOMPosition.</label>
+                    <!--<input id="BOMPosition" class="editable" contenteditable="true" style="border:1px solid #777777;width:20%; height:10%; float:left; background-color:white; color:black">-->
+                    <select id="BOMPosition" style="border:1px solid #777777;width:20%;height:40px; float:left; background-color:white; color:black;font-size:medium;">
+                        <option value=''></option>
+                        <option value='10'>10</option>
+                        <option value='20'>20</option>
+                        <option value='30'>30</option>
+                        <option value='40'>40</option>
+                        <option value='50'>50</option>
+                        <option value='60'>60</option>
+                        <option value='70'>70</option>
+                        <option value='80'>80</option>
+                        <option value='90'>90</option>
+                        <option value='100'>100</option>
+                        <option value='110'>110</option>
+                        <option value='120'>120</option>
+                        <option value='130'>130</option>
+                        <option value='140'>140</option>
+                        <option value='150'>150</option>
+                        <option value='160'>160</option>
+                        <option value='170'>170</option>
+                        <option value='180'>180</option>
+                        <option value='190'>190</option>
+                        <option value='200'>200</option>
+                        <option value='210'>210</option>
+                        <option value='220'>220</option>
+                        <option value='230'>230</option>
+                        <option value='240'>240</option>
+                        <option value='250'>250</option>
+                        <option value='260'>260</option>
+                        <option value='270'>270</option>
+                        <option value='280'>280</option>
+                        <option value='290'>290</option>
+                        <option value='300'>300</option>
+                        <option value='310'>310</option>
+                        <option value='320'>320</option>
+                        <option value='330'>330</option>
+                        <option value='340'>340</option>
+                        <option value='350'>350</option>
+                        <option value='360'>360</option>
+                        <option value='370'>370</option>
+                        <option value='380'>380</option>
+                        <option value='390'>390</option>
+                        <option value='400'>400</option>
+                        <option value='410'>410</option>
+                        <option value='420'>420</option>
+                        <option value='430'>430</option>
+                        <option value='440'>440</option>
+                        <option value='450'>450</option>
+                        <option value='460'>460</option>
+                        <option value='470'>470</option>
+                        <option value='480'>480</option>
+                        <option value='490'>490</option>
+                        <option value='500'>500</option>
+                        <option value='510'>510</option>
+                        <option value='520'>520</option>
+                        <option value='530'>530</option>
+                    </select>
+
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">CompMaterial.</label>
+                    <input id="ComponentMaterial" class="editable" contenteditable="true" style="border:1px solid #777777;width:20%; height:10%; float:left; background-color:white; color:black">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">ComponentQTY.</label>
+                    <input id="ComponentQuantity" class="editable" contenteditable="true" style="border:1px solid #777777;width:20%; height:10%; float:left; background-color:white; color:black">
+                </div>
+
+                <div style="background-color:transparent; color:white; float:left;width:100%; font-size:120%;">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">OpAssign</label>
+                    <!-- <input id="OperationAssignment" class="editable" contenteditable="true" style="border:1px solid #777777;width:20%; height:10%; float:left; background-color:white; color:black">-->
+                    <select id="OperationAssignment" style="border:1px solid #777777;width:20%;height:40px; float:left; background-color:white; color:black;font-size:medium;">
+                        <option value=''></option>
+                        <option value='0010'>0010-STRC</option>
+                        <option value='0020'>0020-VATL1</option>
+                        <option value='0030'>0030-MIXL1</option>
+                        <option value='0040'>0040-CFGPL1</option>
+                        <option value='0050'>0050-HSCML1</option>
+                        <option value='0060'>0060-HSCPL1</option>
+                        <option value='0070'>0070-PFGPL1</option>
+                        <option value='0150'>0150-REFINL1</option>
+                        <option value='0500'>0500-LIQPROL1</option>
+                        <option value='0510'>0510-PWDPROL1</option>
+
+                    </select>
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">StorageLocation.</label>
+                    <!--<input id="StorageLocation" class="editable" contenteditable="true" style="border:1px solid #777777;width:20%; height:10%; float:left; background-color:white; color:black">-->
+                    <select id="StorageLocation" style="border:1px solid #777777;width:20%;height:40px; float:left; background-color:white; color:black;font-size:medium;">
+                        <option value=''></option>
+                        <option value='1100'>1100</option>
+                        <option value='1102'>1102</option>
+                        <option value='1103'>1103</option>
+                        <option value='1107'>1107</option>
+                        <option value='1108'>1108</option>
+                        <option value='1109'>1109</option>
+                        <option value='1110'>1110</option>
+                        <option value='1115'>1115</option>
+                        <option value='1200'>1200</option>
+                        <option value='9000'>9000</option>
+                    </select>
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">StorLocDesc.</label>
+                    <!--<input id="StorageLocationDesc" class="editable" contenteditable="true" style="border:1px solid #777777;width:20%; height:10%; float:left; background-color:white; color:black">-->
+                    <select id="StorageLocationDesc" style="border:1px solid #777777;width:20%;height:40px; float:left; background-color:white; color:black;font-size:medium;">
+                        <option value=''></option>
+                        <option value='CM-ADDBACK'>CM-AddBack</option>
+                        <option value='CM-BLOCK'>CM-BLOCK</option>
+                        <option value='CM-CFGPL1'>CM-CFGPL1</option>
+                        <option value='CM-CFGPL2'>CM-CFGPL2</option>
+                        <option value='CM-CFGPL3'>CM-CFGPL3</option>
+                        <option value='CM-COLOR'>CM-Color</option>
+                        <option value='CM-DRYMIX'>CM-DryMix</option>
+                        <option value='CM-FLAVOR'>CM-Flavor</option>
+                        <option value='CM-GRD'>CM-GRD</option>
+                        <option value='CM-HSS'>CM-HSS</option>
+                        <option value='CM-POWDER'>CM-Powder</option>
+                        <option value='CM-POWDERS'>CM-PowderS</option>
+                        <option value='CM-SLURRY'>CM-Slurry</option>
+                        <option value='CM-SPRAY'>CM-SPRAY</option>
+                        <option value='CM-TOTESTK'>CM-ToteStk</option>
+                        <option value='CM-VAT'>CM-VAT</option>
+                        <option value='NF-CONDENS'>NF-Condens</option>
+                        <option value='NF-PACKAGE'>NF-Package</option>
+                        <option value='NF-XPROCESS'>NF-xProces</option>
+                        <option value='P-CELLULOS'>P-Cellulos</option>
+                        <option value='P-HSS'>P-HSS</option>
+                        <option value='P-LIQAPP'>p-LIQAPP</option>
+                        <option value='P-NATAMAX'>P-Natamax</option>
+                        <option value='P-PALLETIZ'>P-Palletiz</option>
+                        <option value='P-PFGPL1'>P-PFGPL1</option>
+                        <option value='P-PFGPL2'>P-PFGPL2</option>
+                        <option value='P-PFGPL3'>P-PFGPL3</option>
+                        <option value='P-PROPION8'>P-Propion8</option>
+                        <option value='REFIN'>REFIN</option>
+                        <option value='REPACK'>REPACK</option>
+                        <option value='S-STARTER'>S-Starter</option>
+                        <option value='W-HVPROTP'>W-HVProtP</option>
+                        <option value='W-HVPROTS'>W-HVProts</option>
+                        <option value='W-LACTOSE'>W-Lactose</option>
+                        <option value='W-LACTOSEP'>W-LactoseP</option>
+                        <option value='W-LIQPROT'>W-LiqProt</option>
+                        <option value='W-LIQPROTP'>W-LiqProtP</option>
+                        <option value='W-MWPC'>W-MWPC</option>
+                        <option value='W-PACKAGIN'>W-Packagin</option>
+                        <option value='W-PROCESSG'>W-Processg</option>
+                        <option value='W-PROTPOWD'>W-ProtPowd</option>
+                        <option value='W-PROTPOWP'>W-ProtPowP</option>
+                        <option value='RawMaterials'>RawMaterials</option>
+
+                    </select>
+                </div>
+                <div style="background-color:transparent; color:white; float:left;width:100%; font-size:120%;">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">RoutingOperation#.</label>
+                    <!--<input id="RoutingOperationNumber" class="editable" contenteditable="true" style="border:1px solid #777777;width:20%; height:10%; float:left; background-color:white; color:black">-->
+                    <select id="RoutingOperationNumber" style="border:1px solid #777777;width:20%;height:40px; float:left; background-color:white; color:black;font-size:medium;">
+                        <option value=''></option>
+                        <option value='0010'>0010-STRC</option>
+                        <option value='0020'>0020-VATL1</option>
+                        <option value='0030'>0030-MIXL1</option>
+                        <option value='0040'>0040-CFGPL1</option>
+                        <option value='0050'>0050-HSCML1</option>
+                        <option value='0060'>0060-HSCPL1</option>
+                        <option value='0070'>0070-PFGPL1</option>
+                        <option value='0150'>0150-REFINL1</option>
+                        <option value='0500'>0500-LIQPROL1</option>
+                        <option value='0510'>0510-PWDPROL1</option>
+
+                    </select>
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">WorkCenter</label>
+                    <!--<input id="OperationWorkCenter" class="editable" contenteditable="true" style="border:1px solid #777777;width:20%; height:10%; float:left; background-color:white; color:black">-->
+                    <select id="OperationWorkCenter" style="border:1px solid #777777;width:20%;height:40px; float:left; background-color:white; color:black;font-size:medium;">
+                        <option value=''></option>
+                        <option value='CFGPL1'>CFGPL1</option>
+                        <option value='CFGPL2'>CFGPL2</option>
+                        <option value='CFGPL3'>CFGPL3</option>
+                        <option value='HSCML1'>HSCML1</option>
+                        <option value='HSCML2'>HSCML2</option>
+                        <option value='HSCML3'>HSCML3</option>
+                        <option value='HSCPL1'>HSCPL1</option>
+                        <option value='HSCPL2'>HSCPL2</option>
+                        <option value='HSCPL3'>HSCPL3</option>
+                        <option value='LASFGL1'>LASFGL1</option>
+                        <option value='LASFGL2'>LASFGL2</option>
+                        <option value='LASFGL3'>LASFGL3</option>
+                        <option value='LIQPROL1'>LIQPROL1</option>
+                        <option value='MilkRec'>MilkRec</option>
+                        <option value='MilkSto'>MilkSto</option>
+                        <option value='MIXL1'>MIXL1</option>
+                        <option value='MIXL2'>MIXL2</option>
+                        <option value='MIXL3'>MIXL3</option>
+                        <option value='MIXL4'>MIXL4</option>
+                        <option value='MWPCL1'>MWPCL1</option>
+                        <option value='PFGPL1'>PFGPL1</option>
+                        <option value='PFGPL2'>PFGPL2</option>
+                        <option value='PFGPL3'>PFGPL3</option>
+                        <option value='PWDLACL1'>PWDLACL1</option>
+                        <option value='PWDPROL1'>PWDPROL1</option>
+                        <option value='REFINISHL1'>REFINISHL1</option>
+                        <option value='REFINL1'>REFINL1</option>
+                        <option value='REPACKL1'>REPACKL1</option>
+                        <option value='STPB'>STPB</option>
+                        <option value='STRC'>STRC</option>
+                        <option value='VATL1'>VATL1</option>
+                        <option value='VATL2'>VATL2</option>
+                        <option value='VATL3'>VATL3</option>
+                        <option value='VATL4'>VATL4</option>
+                    </select>
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">ShortText.</label>
+                    <input id="OperationShortText" class="editable" contenteditable="true" style="border:1px solid #777777;width:20%; height:10%; float:left; background-color:white; color:black">
+                </div>
+                <div style="background-color:transparent; color:white; float:left;width:100%; font-size:120%;">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">CoProductFlag.</label>
+                    <input id="CoProductFlag" class="editable" contenteditable="true" style="border:1px solid #777777;width:20%; height:10%; float:left; background-color:white; color:black">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">NumVessels.</label>
+                    <input id="NumVessels" class="editable" contenteditable="true" style="border:1px solid #777777;width:20%; height:10%; float:left; background-color:white; color:black">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">POId.</label>
+                    <input id="ProductionOrder_IdBOM" style="border:1px solid #777777;width:20%; height:10%; float:left; background-color:white; color:black" disabled="disabled">
+
+                </div>
+                <div style="background-color:transparent; color:white; float:left;width:100%; font-size:120%;">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;">Selected PO.</label>
+                    <input id="ProductionOrderBOM" style="border:1px solid #777777;width:20%;height:20%; float:left; background-color:forestgreen; color:white">
+                </div>
+
+                <div style="background-color:transparent; color:white; float:left;width:90%;height:20%;padding-top:10px; font-size:120%;">
+
+                    <button class="dropbtnU" style="background-color:darkslateblue; color:white; height:100%; width:20%; vertical-align:top" ng-click="SaveAllBOM()">Save</button>
+                    <button type="button" class="dropbtnU" style="float:left; background-color:firebrick; color:white;height:100%; width:20%" ng-click="clearTBBOM()">&nbsp;New BOM&nbsp;</button>
+                    <button type="button" class="dropbtnU" style="float:left; background-color:darkslategray; color:white;height:100%; width:20%" ng-click="assignToCurrent('ProductionOrder_IdBOM')">&nbsp;AssignToCurrent&nbsp;</button>
+                    <button type="button" class="dropbtnU" style="float:left; background-color:white; color:black;height:100%; width:20%" ng-click="clearTBBOM()">&diams;&nbsp; ClearAll &nbsp;&diams;</button>
+                    <button type="button" class="dropbtnU" style="float:left; background-color:orangered; color:white;height:100%; width:20%" ng-click="DeleteBOM()">&diams;&nbsp; Delete &nbsp;&diams;</button>
+                </div>
+
+
+
+            </div>
+            <div id="3" class="dropup" style="float:left; margin-top:10px;width:40%;height:auto;padding:10px;border-radius:1px;border:1px solid #817e74;font-size:120%;">
+
+
+
+                <div style="background-color:darkslategrey; color:white; width:100%;">
+                    <h8>
+                        <button type="button" class="dropbtnU" style="float:left; background-color:white; color:black; padding-left:10px;" ng-click="showInput('SpecInput','3')">&#9776;Edit&#9776;</button>
+                        <button type="button" class="dropbtnU" style="float:left; background-color:black; color:white; padding-left:10px;" ng-click="hideInput('SpecInput')">&#9776;Hide&#9776;</button>
+                        <button id="gridrefSpec" class="dropbtnU" style="float:left; background-color:black; color:white; padding-left:10px;" ng-click="refreshGridSpec()">&#9776;Refresh&#9776;</button>
+                        <!--<button type="button" class="dropbtnU" style="float:right;background-color:white; color:black" ng-click="maximize('3','gridSpec','100%','50%');showInput('SpecInput','3')">MAX</button>
+                        <button type="button" class="dropbtnU" style="float:right;background-color:black; color:white" ng-click="restore('3','50%','auto');hideInput('SpecInput')">Restore</button>-->
+                        <div align="center"> &nbsp;Specifications</div>
+                        <!--<input type="text" placeholder="Specification" style="padding-left:10px; background-color:#0d1b5a; color:white; width:100%;height:auto;  font-size:medium; text-align: center;" ng-blur="blurT('ProcessTB3')" id="ProcessTB3" />-->
+                        <!--<button id="SpecDisplay" style="background-color:transparent;color:white;border-color:#221b1b;float:left" hidden="hidden" ng-click="skillsFunc()">Skills</button>-->
+                    </h8>
+                </div>
+                <div style="height:100%; width:100%; overflow: hidden; ">
+
+                    <div id="gridSpec" ui-grid="gridOptionsSpec" ui-grid-edit ui-grid-selection class="grid" style="display:block;width : 100%; height:200px;overflow:hidden"></div><!--ng-style="getTableHeight()"-->
+                    <div style="background-color:darkslategray; color:black" class="grid-msg-overlay" ng-hide="!loading">
+                        <div style="background-color:darkslategray; color:white" class="msg">
+                            <span>Please wait while Loading Data...<br /><img class="img" src="../MESPortal.png" style="width:auto;height:auto; background-color:white" align="middle" id="logo"><br />Working on Retrieving info from plant...<i class="fa fa-spinner fa-spin"></i></span>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+            <div id="SpecInput" class="dropup" style="background-color:transparent; color:white; float:left;margin-top:10px;width:100%;height:50%;border-radius:1px;border:1px solid #0fbef4;font-size:120%;display:none">
+                <div align="center"> &nbsp;Edit Specification.&nbsp;<button type="button" class="dropbtnU" style="float:right; background-color:black; color:white" ng-click="hideInput('SpecInput')">&#9776;Hide&#9776;</button></div>
+
+                <div style="background-color:transparent; color:white; float:left;width:100%; font-size:120%;">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">	Name	</label>
+                    <input id="Name" class="editable" contenteditable="true" style="border:1px solid #777777;width:20%; height:10%; float:left; background-color:white; color:black">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">	Value	</label>
+                    <input id="Value" class="editable" contenteditable="true" style="border:1px solid #777777;width:20%; height:10%; float:left; background-color:white; color:black">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">	Lower	</label>
+                    <input id="Lower" class="editable" contenteditable="true" style="border:1px solid #777777;width:20%; height:10%; float:left; background-color:white; color:black">
+                </div>
+                <div style="background-color:transparent; color:white; float:left;width:100%; font-size:120%;">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">	Upper	</label>
+                    <input id="Upper" class="editable" contenteditable="true" style="border:1px solid #777777;width:20%; height:10%; float:left; background-color:white; color:black">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;">	DOPGroup	</label>
+                    <input id="DOPGroup" class="editable" contenteditable="true" style="border:1px solid #777777;width:20%; height:10%; float:left; background-color:white; color:black">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;">	Material	</label>
+                    <input id="Material" class="editable" contenteditable="true" style="border:1px solid #777777;width:20%; height:10%; float:left; background-color:white; color:black">
+                </div>
+                <div style="background-color:transparent; color:white; float:left;width:100%; font-size:120%;">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;">	Spec_ID	</label>
+                    <input id="Spec_ID" style="border:1px solid #777777;width:20%; height:10%; float:left; background-color:white; color:black" disabled="disabled">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;">	PO_ID	</label>
+                    <input id="POIDSpec_ID" style="border:1px solid #777777;width:20%; height:10%; float:left; background-color:white; color:black" disabled="disabled">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left"> &nbsp;Selected PO.</label>
+                    <input id="ProductionOrderSpec" style="border:1px solid #777777;width:20%;height:20%; float:left; background-color:forestgreen; color:white">
+                    <!--<div align="center">
+                        <button type="button"  class="dropbtnU" style=" background-color:firebrick; color:white;width:20%; height:10%;" ng-click="assignToCurrent('POIDSpec_ID')">&nbsp;Attach&nbsp;</button>
+                    </div>-->
+                </div>
+                <div style="background-color:transparent; color:white; float:left;width:100%;height:20%; padding-top:10px; font-size:120%;">
+
+                    <button class="dropbtnU" style="background-color:darkslateblue; color:white; height:100%; width:20%; vertical-align:top" ng-click="SaveAllSpec()">Save</button>
+                    <button type="button" class="dropbtnU" style="float:left; background-color:firebrick; color:white;height:100%; width:20%" ng-click="clearTBSpec()">&nbsp;New Spec&nbsp;</button>
+                    <button type="button" class="dropbtnU" style="float:left; background-color:darkslategray; color:white;height:100%; width:20%" ng-click="assignToCurrent('POIDSpec_ID')">&nbsp;AssignToCurrent&nbsp;</button>
+                    <button type="button" class="dropbtnU" style="float:left; background-color:white; color:black;height:100%; width:20%" ng-click="clearTBSpec()">&diams;&nbsp; ClearAll &nbsp;&diams;</button>
+                    <button type="button" class="dropbtnU" style="float:left;background-color:orangered; color:white;height:100%; width:20%" ng-click="DeleteSpec()">&diams;&nbsp; Delete &nbsp;&diams;</button>
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+        <div id="mysidenavRightIN2165" ng-controller="IN2164controller" class="sidenavRight" style="background-color:#2a2c2c;">
+
+
+            <div id="4" class="dropup" style="background-color:transparent; color:white; float:left;margin-top:10px;width:100%;height:50%;border-radius:1px;border:1px solid #0fbef4;font-size:120%;">
+
+
+
+                <div style="background-color:darkslategrey; color:white; width:100%;">
+                    <h9>
+                        <button type="button" class="dropbtnU" style="float:left; background-color:white; color:black; padding-left:10px; border:outset" ng-click="showInputInsp('InspInput','4')">&#9776;Edit&#9776;</button>
+                        <button type="button" class="dropbtnU" style="float:left; background-color:black; color:white; padding-left:10px;border:outset" ng-click="hideInputInsp('InspInput')">&#9776;Hide&#9776;</button>
+                        <button type="button" class="dropbtnU" style="float:left; background-color:black; color:white; padding-left:10px;border:outset" ng-click="refDIV()">&#9776;Refresh&#9776;</button>
+
+                        <!--<button type="button" class="dropbtnU" style="float:right; background-color:white; color:black" ng-click="maximize('1','grid','100%','50%');showInputInsp('InspInput','4');">MAX</button>
+                        <button type="button" class="dropbtnU" style="float:right;background-color:black; color:white" ng-click="restore('1','100%','50%');hideInputInsp('InspInput')">Restore</button>-->
+                        <button type="button" class="dropbtnU" style="float:left; background-color:#80771d; color:white;border:outset" onclick="document.getElementById('mysidenavRightIN2165').style.width = '0';">
+                            &#9776;Close &#9776;
+                        </button>
+
+                        <div align="center" style="background-color:white;color:black">
+                            InspectionLotTemplate
+
+                        </div>
+                    </h9>
+                </div>
+
+                <!--<div style="height:100%; width:100%; overflow:hidden ">
+                    <div id="gridInsp" ui-grid="gridOptionsInsp" ui-grid-edit ui-grid-selection class="grid" style="display:block;color:black; width:100%; height:300px"></div>
+                    <div style="padding-left: 120px; padding-top: 400px;background-color:darkslategray; color:black" class="grid-msg-overlay" ng-hide="!loading">
+                        <div style="padding-left: 120px; background-color:darkslategray; color:white" class="msg">
+                            <span>Please wait while Loading Data...<br /><img class="img" src="../MESPortal.png" style="width:auto;height:auto; background-color:white" align="middle" id="logo"><br />Working on Retrieving info from plant...<i class="fa fa-spinner fa-spin"></i></span>
+                        </div>
+                    </div>
+                </div>-->
+                <div style="height:100%; width:100%; overflow:hidden ">
+                    <div id="gridInsp" ui-grid="gridOptionsInsp" ui-grid-edit ui-grid-selection class="grid" style="display:block;color:black; width : 100%;overflow:hidden"></div>
+                    <div style="padding-left: 120px; padding-top: 400px;background-color:darkslategray; color:black" class="grid-msg-overlay" ng-hide="!loading">
+                        <div style="padding-left: 120px; background-color:darkslategray; color:white" class="msg">
+                            <span>Please wait while Loading Data...<br /><img class="img" src="../MESPortal.png" style="width:auto;height:auto; background-color:white" align="middle" id="logo"><br />Working on Retrieving info from plant...<i class="fa fa-spinner fa-spin"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+
+            <div id="InspInput" style="background-color:transparent; color:white; float:left;margin-top:10px;width:100%;height:50%;border-radius:1px;border:1px solid white;font-size:100%; display:none">
+
+                <div align="center"> &nbsp;Edit Inspection LOT.&nbsp;<button type="button" class="dropbtnU" style="float:right;border:outset; background-color:black; color:white" ng-click="hideInputInsp('InspInput')">&#9776;Hide&#9776;</button> </div>
+                <div style="background-color:transparent; color:white; float:left;width:100%; font-size:120%;">
+
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left"> &nbsp;InspectionLot</label>
+                    <!--<input id="InspectionLot" style="width:20%;height:20%; float:left; background-color:white; color:black" />-->
+                    <input id="InspectionLot" class="editable" contenteditable="true" style="border:1px solid #777777;width:20%;height:20%; float:left; background-color:white; color:black">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left"> &nbsp;Insp.Version</label><input id="SpecificationVersion" style="border:1px solid #777777;width:20%;height:20%; float:left; background-color:white; color:black" />
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left"> &nbsp;SpecificationDesc</label><input id="SpecificationDesc" style="border:1px solid #777777;width:20%;height:20%; float:left; background-color:white; color:black" />
+
+                </div>
+                <div style="background-color:transparent; color:white; float:left;width:100%; font-size:120%;">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left"> &nbsp;ProductionOrder</label>
+                    <input id="ProductionOrder" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black">
+                    <button style="background-color:brown; color:white; width:5%; height:40px; float:left; font-size:8px" ng-click="openDIVPopUp('mysidenavRightPOPopup');">Select</button>
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left"> &nbsp;SpecificationName</label>
+                    <input id="SpecificationName" style="border:1px solid #777777;width:20%;height:20%; float:left; background-color:white; color:black" />
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left"> &nbsp;Specification_ID</label>
+                    <input id="Specification_IDInsp" style="border:1px solid #777777;width:20%;height:20%; float:left; background-color:white; color:black" />
+                </div>
+                <div style="background-color:transparent; color:white; float:left;width:90%;height:20%;padding-top:10px; font-size:120%;">
+
+                    <button class="dropbtnU" style="background-color:darkslateblue; color:white; height:100%; width:20%; vertical-align:top" ng-click="SaveAllInsp()">Save</button>
+                    <button type="button" class="dropbtnU" style="float:left; background-color:firebrick; color:white;height:100%; width:20%" ng-click="NewtemplateClearInsp()">&nbsp;New Template&nbsp;</button>
+                    <!--<button type="button" class="dropbtnU" style="float:left; background-color:darkslategray; color:white;height:100%; width:20%" ng-click="NewtemplateInsp()">&nbsp;Save Template&nbsp;</button>-->
+                    <button type="button" class="dropbtnU" style="float:left; background-color:white; color:black;height:100%; width:20%" ng-click="clearTBInsp()">&diams;&nbsp; ClearAll &nbsp;&diams;</button>
+                    <button type="button" class="dropbtnU" style="float:left; background-color:orangered; color:white;height:100%; width:20%" ng-click="DeleteInsp()">&diams;&nbsp; Delete &nbsp;&diams;</button>
+
+                </div>
+
+
+            </div>
+
+            <div id="5" ng-controller="IN2164controller" class="dropup" style="float:left;margin-top:10px;width:60%;height:40%;padding:10px;border-radius:1px;border:1px solid #e44923;font-size:120%;">
+
+                <div style="background-color:darkslategrey; color:white; width:100%;">
+                    <h9>
+                        <button type="button" class="dropbtnU" style="float:left; background-color:white; color:black; padding-left:10px;" ng-click="showInputInsp('AttributeInput','5')">&#9776;Edit&#9776;</button>
+                        <button type="button" class="dropbtnU" style="float:left; background-color:black; color:white; padding-left:10px;" ng-click="hideInputInsp('AttributeInput')">&#9776;Hide&#9776;</button>
+
+                        <button id="refattrib" type="button" class="dropbtnU" style="float:left; background-color:white; color:black" ng-click="refreshGridAttribute();">Refresh</button>
+
+                        <!--<button type="button" class="dropbtnU" style="float:right; background-color:white; color:black" ng-click="maximize('1','grid','100%','50%');showInputInsp('AttributeInput','5');">MAX</button>
+                        <button type="button" class="dropbtnU" style="float:right;background-color:black; color:white" ng-click="restore('1','100%','50%');hideInputInsp('AttributeInput')">Restore</button>-->
+                        <div align="center">InspectionLot Attributes</div>
+                    </h9>
+                </div>
+
+                <div style="height:100%; width:100%; overflow:hidden ">
+                    <div id="gridAttribute" ui-grid="gridOptionsAttribute" ui-grid-edit ui-grid-selection class="grid" style="display:block;color:black; width : 100%; height:200px;overflow:hidden"></div>
+                    <div style="padding-left: 120px; padding-top: 400px;background-color:darkslategray; color:black" class="grid-msg-overlay" ng-hide="!loading">
+                        <div style="padding-left: 120px; background-color:darkslategray; color:white" class="msg">
+                            <span>Please wait while Loading Data...<br /><img class="img" src="../MESPortal.png" style="width:auto;height:auto; background-color:white" align="middle" id="logo"><br />Working on Retrieving info from plant...<i class="fa fa-spinner fa-spin"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div id="AttributeInput" style="background-color:transparent; color:white; float:left;margin-top:10px;width:100%;height:60%;border-radius:1px;border:1px solid white;font-size:120%;display:none; overflow: auto;">
+                <div align="center">Edit InspectionLot Attributes &nbsp;</div>
+                <div style="background-color:transparent; color:white; float:left;width:90%; font-size:120%;">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">&nbsp;AttributeName</label><input id="AttributeName" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black" />
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">&nbsp;AttributeTitle</label><input id="AttributeTitle" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black" />
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">&nbsp;AttributeGroup</label>
+                    <input id="AttributeGroup" class="editable" contenteditable="true" style="border:1px solid #777777;width:10%;height:20%; float:left; background-color:white; color:black" /><button style="background-color:brown; color:white; width:5%;height:40px; float:left; font-size:8px" ng-click="openDIVPopUp('mysidenavRightAGPopup');refreshGridAGPopup();">Select</button>
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">&nbsp;AttributeRank</label><input id="AttributeRank" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black" />
+                </div>
+                <div style="background-color:transparent; color:white; float:left;width:90%; font-size:120%;">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">&nbsp;EntryLabelGroup</label>
+                    <!--<input id="EntryLabelGroup" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black">-->
+                    <select id="EntryLabelGroup" style="border:1px solid #777777;width:15%;height:40px; float:left; background-color:white; color:black;font-size:medium;">
+                        <option value=''></option>
+                        <option value='None'>None</option>
+                        <option value='ACC/UNAC'>ACC/UNAC</option>
+                        <option value='Complete/NotComplete'>Complete/NotComplete</option>
+                        <option value='D-OK-NOK'>D-OK-NOK</option>
+                        <option value='Data Entry'>Data Entry</option>
+                        <option value='FOUND'>FOUND</option>
+                        <option value='OK/NotOK'>OK/NotOK</option>
+                        <option value='PassFail'>PassFail</option>
+                        <option value='POS/NEG'>POS/NEG</option>
+                        <option value='SEDIMENT'>SEDIMENT</option>
+                        <option value='UFSIDE'>UFSIDE</option>
+                        <option value='YG-SNSRK'>YG-SNSRK</option>
+                        <option value='ZRATIO'>ZRATIO</option>
+                        <option value='GRDUNIT'>GRDUNIT</option>
+                        <option value='MILKPS'>MILKPS</option>
+                        <option value='YES/NO'>YES/NO</option>
+
+
+
+                    </select>
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">&nbsp;AnalysisName</label><input id="AnalysisName" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black" />
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">&nbsp;TestRequired</label><input id="TestRequired" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black" />
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">&nbsp;LimitsUOM</label>
+                    <select id="LimitsUOM" style="border:1px solid #777777;width:15%;height:40px; float:left; background-color:white; color:black;font-size:medium;">
+                        <option value=''></option>
+                        <option value='%'>%</option>
+                        <option value='°C'>°C</option>
+                        <option value='°F'>°F</option>
+                        <option value='A'>A</option>
+                        <option value='Â°F'>Â°F</option>
+                        <option value='EA'>EA</option>
+                        <option value='each'>each</option>
+                        <option value='FOZ'>FOZ</option>
+                        <option value='FT'>FT</option>
+                        <option value='G'>G</option>
+                        <option value='GAL'>GAL</option>
+                        <option value='gallons'>gallons</option>
+                        <option value='gpm'>gpm</option>
+                        <option value='grams'>grams</option>
+                        <option value='hour'>hour</option>
+                        <option value='HR'>HR</option>
+                        <option value='IN'>IN</option>
+                        <option value='Index'>Index</option>
+                        <option value='KG'>KG</option>
+                        <option value='L'>L</option>
+                        <option value='LB'>LB</option>
+                        <option value='LBH'>LBH</option>
+                        <option value='lbs'>lbs</option>
+                        <option value='lbs per hour'>lbs per hour</option>
+                        <option value='MIN'>MIN</option>
+                        <option value='minute'>minute</option>
+                        <option value='ML'>ML</option>
+                        <option value='None'>None</option>
+                        <option value='oz'>oz</option>
+                        <option value='OZM'>OZM</option>
+                        <option value='Percent'>Percent</option>
+                        <option value='pH'>pH</option>
+                        <option value='PPB'>PPB</option>
+                        <option value='PPH'>PPH</option>
+                        <option value='PPM'>PPM</option>
+                        <option value='RAT'>RAT</option>
+                        <option value='RHO'>RHO</option>
+                        <option value='ROL'>ROL</option>
+                        <option value='second'>second</option>
+                        <option value='z01'>z01</option>
+                        <option value='ZM3'>ZM3</option>
+                        <option value='ZPI'>ZPI</option>
+                        <option value='ZRM'>ZRM</option>
+
+
+                    </select>
+                </div>
+                <div style="background-color:transparent; color:white; float:left;width:90%; font-size:120%;">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">&nbsp;USL</label><input id="USL" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black" />
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">&nbsp;Target</label><input id="Target" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black" />
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">&nbsp;LSL</label><input id="LSL" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black" />
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">&nbsp;Spare1</label><input id="Spare1" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black" />
+                </div>
+                <div style="background-color:transparent; color:white; float:left;width:90%; font-size:120%;">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">&nbsp;Spare2</label><input id="Spare2" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black" />
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">&nbsp;Spare3</label><input id="Spare3" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black" />
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">&nbsp;Spare4</label><input id="Spare4" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black" />
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">&nbsp;SaveReasonCodes	</label><input id="SaveReasonCodes" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black" />
+                </div>
+                <div style="background-color:transparent; color:white; float:left;width:90%; font-size:120%;">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">&nbsp;Operation	</label>
+                    <!--<input id="Operation" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black">-->
+                    <select id="Operation" style="border:1px solid #777777;width:15%;height:40px; float:left; background-color:white; color:black;font-size:medium;">
+                        <option value=''></option>
+                        <option value='Cheese FG Production'>Cheese FG Production</option>
+                        <option value='Cheese Packaging'>Cheese Packaging</option>
+                        <option value='DAIRY LIQ LOAD OUT'>DAIRY LIQ LOAD OUT</option>
+                        <option value='High Speed Scale Cheese Make'>High Speed Scale Cheese Make</option>
+                        <option value='High Speed Scale Cheese Processing'>High Speed Scale Cheese Processing</option>
+                        <option value='LAB RECEIPT OPERATION'>LAB RECEIPT OPERATION</option>
+                        <option value='Liquid Protein'>Liquid Protein</option>
+                        <option value='Mixer'>Mixer</option>
+                        <option value='Powder Lactose'>Powder Lactose</option>
+                        <option value='Powder Protein'>Powder Protein</option>
+                        <option value='PRESCREEN'>PRESCREEN</option>
+                        <option value='Processing Finish Good  Production'>Processing Finish Good  Production</option>
+                        <option value='Refinish'>Refinish</option>
+                        <option value='SILO OPERATION'>SILO OPERATION</option>
+                        <option value='Starter'>Starter</option>
+                        <option value='Vats'>Vats</option>
+                    </select>
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">&nbsp;WorkCenter	</label>
+                    <!--<input id="OperationWorkCenter" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black">-->
+                    <select id="WorkCenter" style="border:1px solid #777777;width:15%;height:40px; float:left; background-color:white; color:black;font-size:medium;">
+                        <option value=''></option>
+                        <option value='CFGPL1'>CFGPL1</option>
+                        <option value='CFGPL2'>CFGPL2</option>
+                        <option value='CFGPL3'>CFGPL3</option>
+                        <option value='HSCML1'>HSCML1</option>
+                        <option value='HSCML2'>HSCML2</option>
+                        <option value='HSCML3'>HSCML3</option>
+                        <option value='HSCPL1'>HSCPL1</option>
+                        <option value='HSCPL2'>HSCPL2</option>
+                        <option value='HSCPL3'>HSCPL3</option>
+                        <option value='LASFGL1'>LASFGL1</option>
+                        <option value='LASFGL2'>LASFGL2</option>
+                        <option value='LASFGL3'>LASFGL3</option>
+                        <option value='LIQPROL1'>LIQPROL1</option>
+                        <option value='MilkRec'>MilkRec</option>
+                        <option value='MilkSto'>MilkSto</option>
+                        <option value='MIXL1'>MIXL1</option>
+                        <option value='MIXL2'>MIXL2</option>
+                        <option value='MIXL3'>MIXL3</option>
+                        <option value='MIXL4'>MIXL4</option>
+                        <option value='MWPCL1'>MWPCL1</option>
+                        <option value='PFGPL1'>PFGPL1</option>
+                        <option value='PFGPL2'>PFGPL2</option>
+                        <option value='PFGPL3'>PFGPL3</option>
+                        <option value='PWDLACL1'>PWDLACL1</option>
+                        <option value='PWDPROL1'>PWDPROL1</option>
+                        <option value='REFINISHL1'>REFINISHL1</option>
+                        <option value='REFINL1'>REFINL1</option>
+                        <option value='REPACKL1'>REPACKL1</option>
+                        <option value='STPB'>STPB</option>
+                        <option value='STRC'>STRC</option>
+                        <option value='VATL1'>VATL1</option>
+                        <option value='VATL2'>VATL2</option>
+                        <option value='VATL3'>VATL3</option>
+                        <option value='VATL4'>VATL4</option>
+                    </select>
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">&nbsp;DisplayDigits	</label>
+                    <input id="DisplayDigits" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">&nbsp;Confirmation#</label>
+                    <input id="ConfirmationNumber" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black">
+                </div>
+                <div style="background-color:transparent; color:white; float:left;width:90%; font-size:120%;">
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">&nbsp;RecordingType	</label><input id="RecordingType" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black" />
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">&nbsp;AutoSave	</label><input id="AutoSave" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black" />
+                    <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">&nbsp;Specification_ID	</label><input id="Specification_IDAttribute" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black">
+                    <label style="background-color:transparent;color:white;width:100px; font-size:12px;float:left">SelectedInspLot</label><input id="InspectionLotAttr" style="border:1px solid #777777;width:15%;height:20%;float:left;  background-color:forestgreen; color:white" />
+                </div>
+                <div style="background-color:transparent; color:white; float:left;width:90%;height:20%;padding-top:10px; font-size:120%;">
+
+                    <button class="dropbtnU" style="background-color:darkslateblue; color:white; height:100%; width:20%; vertical-align:top" ng-click="SaveAllAttribute()">Save</button>
+                    <button type="button" class="dropbtnU" style="float:left; background-color:firebrick; color:white;height:100%; width:20%" ng-click="clearAttribute()">&nbsp;New Attribute&nbsp;</button>
+                    <button type="button" class="dropbtnU" style="float:left; background-color:darkslategray; color:white;height:100%; width:20%" ng-click="assignToCurrentInsp('Specification_IDAttribute')">&nbsp;AssignToCurrent&nbsp;</button>
+                    <button type="button" class="dropbtnU" style="float:left; background-color:white; color:black;height:100%; width:20%" ng-click="clearAttribute()">&diams;&nbsp; ClearAll &nbsp;&diams;</button>
+                    <button type="button" class="dropbtnU" style="float:left; background-color:orangered; color:white;height:100%; width:20%" ng-click="DeleteAttribute()">&diams;&nbsp; Delete &nbsp;&diams;</button>
+
+                </div>
+
+            </div>
+
+
+            <div id="6" class="dropup" style="float:left; margin-top:10px;width:40%;height:40%;padding:1px;border-radius:1px;border:1px solid #817e74;font-size:120%;">
+
+
+
+
+                <div style="background-color:darkslategrey; color:white; width:100%;">
+                    <h9>
+                        <button type="button" class="dropbtnU" style="float:left; background-color:white; color:black; padding-left:10px;" ng-click="showInputInsp('AttributeGroupInput','6')">&#9776;Edit&#9776;</button>
+                        <button type="button" class="dropbtnU" style="float:left; background-color:black; color:white; padding-left:10px;" ng-click="hideInputInsp('AttributeGroupInput')">&#9776;Hide&#9776;</button>
+
+
+
+                        <!--<button type="button" class="dropbtnU" style="float:right; background-color:white; color:black" ng-click="maximize('1','grid','100%','50%');showInputInsp('AttributeGroupInput','6');">MAX</button>
+                        <button type="button" class="dropbtnU" style="float:right;background-color:black; color:white" ng-click="restore('1','100%','50%');hideInputInsp('AttributeGroupInput')">Restore</button>-->
+                        <button id="refattribGR" type="button" class="dropbtnU" style="float:left; background-color:white; color:black" ng-click="refreshGridAttributeGroup();">Refresh</button>
+                        <div align="center">InspectionLot Attribute Group&nbsp;</div>
+                    </h9>
+                </div>
+
+                <div style="height:100%; width:100%; overflow:hidden ">
+                    <div id="gridAttributeGroup" ui-grid="gridOptionsAttributeGroup" ui-grid-edit ui-grid-selection class="grid" style="display:block;color:black; width : 100%; height:200px;overflow:hidden"></div>
+                    <div style="padding-left: 120px; padding-top: 400px;background-color:darkslategray; color:black" class="grid-msg-overlay" ng-hide="!loading">
+                        <div style="padding-left: 120px; background-color:darkslategray; color:white" class="msg">
+                            <span>Please wait while Loading Data...<br /><img class="img" src="../MESPortal.png" style="width:auto;height:auto; background-color:white" align="middle" id="logo"><br />Working on Retrieving info from plant...<i class="fa fa-spinner fa-spin"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="AttributeGroupInput" style="background-color:transparent; color:white; float:left;margin-top:10px;width:100%;height:50%;border-radius:1px;border:1px solid #0fbef4;font-size:120%;display:none">
+                <div style="height:100%; width:95%; float:left;">
+                    <div align="center"> &nbsp;Edit AttributeGroup.&nbsp;<button type="button" class="dropbtnU" style="float:right; background-color:black; color:white" ng-click="hideInputInsp('AttributeGroupInput')">&#9776;Hide&#9776;</button> </div>
+                    <div style="background-color:transparent; color:white; float:left;width:100%; font-size:120%;">
+                        <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left"> &nbsp;	AttributeGroupName	</label><input id="AttributeGroupName" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black" />
+                        <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left"> &nbsp;	AttributeGroupDescription	</label><input id="AttributeGroupDescription" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black" />
+                    </div>
+                    <div style="background-color:transparent; color:white; float:left;width:100%; font-size:120%;">
+                        <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left"> &nbsp;	AutoGenerateSampleID	</label><input id="AutoGenerateSampleID" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black" />
+                        <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left"> &nbsp;	Specification_Id</label><input id="Specification_IdAG" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left; background-color:white; color:black" />
+                    </div>
+                    <div style="background-color:transparent; color:white; float:left;width:100%; font-size:120%;">
+
+                        <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">  &nbsp; SelectedInspLot</label><input id="InspectionLotAttrGr" style="border:1px solid #777777;width:20%;height:20%; background-color:forestgreen; color:white" />
+                    </div>
+                </div>
+                <div style="background-color:transparent; color:white; float:left;width:100%;height:20%;padding-top:10px; font-size:120%;">
+
+                    <button class="dropbtnU" style="background-color:darkslateblue; color:white; height:100%; width:20%; vertical-align:top" ng-click="SaveAllAttributeGroup()">Save</button>
+                    <button type="button" class="dropbtnU" style="float:left; background-color:firebrick; color:white;height:100%; width:20%" ng-click="clearAttributeGroup()">&nbsp;New AttrGroup&nbsp;</button>
+                    <button type="button" class="dropbtnU" style="float:left; background-color:darkslategray; color:white;height:100%; width:20%" ng-click="assignToCurrentInsp('Specification_IdAG')">&nbsp;AssignToCurrent&nbsp;</button>
+                    <button type="button" class="dropbtnU" style="float:left; background-color:white; color:black;height:100%; width:20%" ng-click="clearAttributeGroup()">&diams;&nbsp; ClearAll &nbsp;&diams;</button>
+                    <button type="button" class="dropbtnU" style="float:left; background-color:orangered; color:white;height:100%; width:20%" ng-click="DeleteAttributeGroup()">&diams;&nbsp; Delete &nbsp;&diams;</button>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <div id="mysidenavRightPOPopup" ng-controller="IN2164controller" class="sidenavRight" style="background-color:darkslategray;overflow-y: auto;">
+            <div id="POPPO" class="dropup" style="background-color:#2a2c2c; color:white; float:left;margin-top:10px;width:100%;height:45%;border-radius:1px;border:1px solid #0fbef4;font-size:120%;">
+                <div style="background-color:#31342d; color:white; width:100%;">
+                    <h9>
+                        <button id="btnClosePOPopup" class="dropbtnU" type="button" style="background-color:transparent;color:white;transition: 0.3s;float:left" ng-click="openDIV('mysidenavRightIN2165');">
+                            &#9776;Close &#9776;
+                        </button>
+                        <button id="refPOPopup" type="button" class="dropbtnU" style="float:left; background-color:white; color:black" ng-click="refreshGridDropDown();">Refresh</button>
+                        <input type="text" id="POPOPUPSource" />
+                    </h9>
+                </div><br /><br />
+                <div style="background-color:#04994e; color:white; width:100%;">
+                    <h9>
+                        <div align="center" style="font-family:Calibri; font-size:xx-large;">Select a Production Order from the grid</div>
+                    </h9>
+                </div>
+                <br /><br />
+                <div style="height:20px; width:100%; ">
+                    <div id="gridPOPopup" ui-grid="gridOptionsDropDown" ui-grid-edit ui-grid-selection class="grid" style="display:block;color:black; width:100%; "></div>
+                    <div style="padding-left: 120px; padding-top: 400px;background-color:darkslategray; color:black" class="grid-msg-overlay" ng-hide="!loading">
+                        <div style="padding-left: 120px; background-color:darkslategray; color:white" class="msg">
+                            <span>
+                                Please wait while Loading Data...<br />
+                                <img class="img" src="../MESPortal.png" style="width:auto;height:auto; background-color:white" align="middle" id="logo">
+                                <br />
+                                Working on Retrieving info from plant...
+                                <i class="fa fa-spinner fa-spin">
+                                </i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div id="mysidenavRightAGPopup" ng-controller="IN2164controller" class="sidenavRight" style="background-color:#3a3535; display:none">
+
+
+            <button class="dropbtnU" type="button" style="background-color:transparent;color:white;transition: 0.3s;float:left" onclick="document.getElementById('mysidenavRightAGPopup').style.width = '0';document.getElementById('mysidenavRightAGPopup').style.display = 'none';">
+                &#9776;Close &#9776;
+            </button>
+            <button id="refattribPopup" type="button" class="dropbtnU" style="float:left; background-color:white; color:black" ng-click="refreshGridAGPopup();">Refresh</button>
+            <div align="center">AttributeGroups</div>
+
+            <div style="height:100%; width:100%; overflow: auto;border-radius:5px ">
+                <div align="center"><b style="background-color:white; color:black; border-radius:20px; border:outset">Select a Group</b></div>
+                <div id="gridAGPopup" ui-grid="gridOptionsAGPopup" ui-grid-edit ui-grid-selection class="grid" style="display:block;width:100%; height:20px; background-color:#3a3535"></div>
+                <div style="padding-left: 120px; padding-top: 400px;background-color:darkslategray; color:black" class="grid-msg-overlay" ng-hide="!loading">
+                    <div style="padding-left: 120px; background-color:darkslategray; color:white" class="msg">
+                        <span>Please wait while Loading Data...<br /><img class="img" src="../MESPortal.png" style="width:auto;height:auto; background-color:white" align="middle" id="logo"><br />Working on Retrieving info from plant...<i class="fa fa-spinner fa-spin"></i></span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="mysidenavRightSchedule" ng-controller="IN2164controller" class="sidenavRight" style="background-color:#672E3B;">
+
+
+            <button class="dropbtnU" type="button" style="background-color:#80771d;color:white;transition: 0.3s;float:left" onclick="document.getElementById('mysidenavRightSchedule').style.width = '0';">
+                &#9776;Close &#9776;
+            </button>
+
+            <div align="center">Schedule Production Orders and Inspection Lots</div>
+            <div style="height:30%; width:100%; overflow:hidden ">
+                <div style="height:40%; width:0%; overflow:hidden; float:left;background-color:black;color:white;border-top-right-radius:10px; border-top-left-radius:0px; border-bottom-left-radius:0px; border-bottom-right-radius:10PX; align-content:center;display:none ">
+                    <!--<div align="left" style="background-color:black; color:white; width:100%;height:30%; text-align:center">
+                        <div style="height:100%; width:50%; top:0; float:left">Recently Processed PO and InspectionLot</div>
+
+                    </div>-->
+                    <label style="background-color:black;color:white;width:20%;height:70%; float:left; font-size:80%;float:left; text-align:right"> &nbsp;Processed Production Order.</label><input id="POFinal" style="border:none;width:30%;height:70%; padding-left:5px; float:left; text-align:center; background-color:darkslategrey; color:white;font-size:large; border-radius:5px " disabled="disabled" />
+                    <label style="background-color:black;color:white;width:20%;height:70%;  float:right; font-size:80%;float:left; text-align:right"> &nbsp;Processed Inspection LOT.</label><input id="INSPFinal" style="border:none;width:30%;height:70%; padding-left:5px; float:left; text-align:center; background-color:limegreen;font-size:large; color:white;border-radius:5px" disabled="disabled" />
+
+
+
+
+
+                </div>
+                <div style="background-color:#443; color:white; height:40%; width:90%; overflow:hidden ; float:left;border-radius:5px ">
+                    <div align="center"><b style="background-color:white; color:black; border-radius:20px; border:outset">#3</b>&nbsp;Select &rArr; Date Ranges (mm/dd/yyyy)</div>
+
+                    <label style="background-color:transparent;color:white;width:10%; height:80%; font-size:16px;float:left; text-align:right"> &nbsp;Start.</label><input id="INStartDate" type="date" style="border:1px solid #777777;width:20%;height:65%; font-size:medium; float:left;background-color:white; color:black;" />
+                    <label style="background-color:transparent;color:white;width:10%; font-size:16px;float:left; text-align:right"> &nbsp;End.</label><input id="INEndDate" type="date" ng-change="getDTRange()" ng-model="value" style="border:1px solid #777777;font-size:medium;width:20%;height:65%; float:left;background-color:limegreen; color:white" />
+                    <label style="background-color:transparent;color:white;width:10%; font-size:12px;float:left; text-align:right; display:none"> &nbsp;#ofDays.</label><input id="INDateRange" type="text" style="width:8%;height:40%; float:left;background-color:transparent; color:white; font-size:large;text-align:right; display:none" disabled="disabled" />
+                    <button type="button" class="dropbtnU" style="border:outset; background-color:#101010; color:#92B558;height:65%; width:15%;float:left; font-size:16px; left:60%" ng-click="addINJobSchedule()">&#9776;Schedule&#9776;</button>
+
+                </div>
+                <div style="background-color:#483D8B; height:40%; width:10%; overflow:hidden ; float:left; align-content:center; border-radius:5px ">
+                    &nbsp;&nbsp;&Xi;  Internal2165i? &nbsp;&Xi;&nbsp;&nbsp;
+
+                    <label class="container">
+
+                        <input type="checkbox" id="IN2165iCheck" ng-click="CheckDLInternalPO()">
+                        <span class="checkmark"></span>
+                    </label>
+
+
+
+                </div>
+                <div id="scheduledPO" style="background-color:#444; height:60%; width:50%; overflow:hidden; float:left;padding-top:20px;text-align:center;border-radius:5px ">
+                    <div style="width:100%">
+                        <label style="background-color:transparent;color:#16c981;width:20%; font-size:12px;float:left; text-align:right"> &nbsp;POTemplate.</label><input id="POSchd" style="border:0px solid #777777;width:30%;height:40%; float:left; background-color:transparent; color:white; text-align:center; font-size:large" disabled="disabled" />
+                        <label style="background-color:transparent;color:#16c981;width:20%; font-size:12px;float:left; text-align:right"> &nbsp;Version.</label><input id="POVersionSchd" style="border:0px solid #777777;width:30%;height:40%; float:left;background-color:transparent; color:white;text-align:center;font-size:large" disabled="disabled">
+                    </div>
+                    <div style="width:100%">
+                        <label style="background-color:transparent;color:#16c981;width:40%; font-size:12px;float:left; text-align:right"> &nbsp;PO Material.</label><input id="MaterialSchd" style="border:0px solid #777777;width:60%;height:40%; float:left;background-color:transparent; color:white;text-align:center;font-size:large" disabled="disabled" />
+                        <label style="background-color:transparent;color:#16c981;width:0%; font-size:12px;float:left; text-align:right;display:none"> &nbsp;PO_ID.</label><input id="PO_IDSchd" style="border:0px solid #777777;width:0%;height:40%; float:left;background-color:transparent; color:white;display:none" />
+                    </div>
+                </div>
+                <div id="scheduledINSP" style="background-color:#345c33; height:60%; width:50%; overflow:hidden ; float:left;padding-top:20px;text-align:center;border-radius:5px ">
+                    <div style="width:100%">
+                        <label style="background-color:transparent;color:#16c981;width:20%; font-size:12px;float:left; text-align:right"> &nbsp;INSPLot.</label><input id="INSPSchd" style="border:0px solid #777777;width:30%;height:40%; float:left; background-color:transparent; color:white;text-align:center;font-size:large" disabled="disabled" />
+                        <label style="background-color:transparent;color:#16c981;width:20%; font-size:12px;float:left; text-align:right"> &nbsp;INSPVersion.</label><input id="INSPVersionSchd" style="border:0px solid #777777;width:30%;height:40%; float:left; background-color:transparent; color:white;text-align:center;font-size:large" disabled="disabled" />
+                    </div>
+                    <div style="width:100%">
+                        <label style="background-color:transparent;color:#16c981;width:40%; font-size:12px;float:left; text-align:right"> &nbsp;Insp Material.</label><input id="InspMatSchd" style="border:0px solid #777777;width:60%;height:40%; float:left;background-color:transparent; color:white;text-align:center;font-size:large" disabled="disabled" />
+                        <label style="background-color:transparent;color:#16c981;width:0%; font-size:12px;float:left; text-align:right;display:none"> &nbsp;Spec_ID.</label><input id="Specification_IDSchd" style="border:0px solid #777777;width:0%;height:40%; float:left; background-color:transparent; color:white; display:none" />
+                    </div>
+                    <input id="RowID" class="editable" contenteditable="true" style="border:1px solid #777777;width:15%;height:20%; float:left;background-color:white; color:black; display:none" />
+                </div>
+
+
+            </div>
+            <div style="height:40%; width:100%; overflow:hidden;border-radius:5px ">
+                <div style="height:100%; width:50%; overflow:hidden;float:left ">
+                    <div align="center"><b style="background-color:white; color:black; border-radius:20px; border:outset;display:none" ng-click="refreshGridSchedule()">#1</b><button id="1click" type="button" style="background-color:white; color:black; border-radius:20px; border:outset;" ng-click="refreshGridSchedule()">#1</button>&nbsp;Select &rArr; ProductionOrder</div>
+                    <div id="gridSchd" ui-grid="gridOptionsSchedule" ui-grid-edit ui-grid-selection ui-grid-resize-columns class="grid ui-corner-all ui-shadow" style="display:block;width : 100%; height:90%;overflow:hidden"></div>
+                    <div style="padding-left: 120px; padding-top: 400px;background-color:darkslategray; color:black" class="grid-msg-overlay" ng-hide="!loading">
+                        <div style="padding-left: 120px; background-color:darkslategray; color:white" class="msg">
+                            <span>Please wait while Loading Data...<br /><img class="img" src="../MESPortal.png" style="width:auto;height:auto; background-color:white" align="middle" id="logo"><br />Working on Retrieving info from plant...<i class="fa fa-spinner fa-spin"></i></span>
+
+                        </div>
+                    </div>
+                </div>
+                <div style="height:100%; width:50%; overflow:hidden;float:right;border-radius:5px ">
+                    <div align="center"><b style="background-color:white; color:black; border-radius:20px; border:outset;display:none" ng-click="refreshGridInspSchedule()">#2</b><button id="2click" style="background-color:white; color:black; border-radius:20px; border:outset;" ng-click="refreshGridInspSchedule()">#2</button>&nbsp;Select &rArr; InspectionLot</div>
+                    <div id="gridInspSchd" ui-grid="gridOptionsInspSchedule" ui-grid-edit ui-grid-selection class="grid" style="display:block;color:black; width : 100%; height:90%;overflow:hidden"></div>
+                    <div style="padding-left: 120px; padding-top: 400px;background-color:darkslategray; color:black" class="grid-msg-overlay" ng-hide="!loading">
+                        <div style="padding-left: 120px; background-color:darkslategray; color:white" class="msg">
+                            <span>Please wait while Loading Data...<br /><img class="img" src="../MESPortal.png" style="width:auto;height:auto; background-color:white" align="middle" id="logo"><br />Working on Retrieving info from plant...<i class="fa fa-spinner fa-spin"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div align="center" style="height:30%; width:100%; background-color:#282b3f; overflow:hidden;border-radius:5px">
+                <div align="center" style="background-color:#91a920">Schedule History</div>
+                <div id="gridJS" ui-grid="gridOptionsJS" ui-grid-edit ui-grid-selection class="grid" style="display:block; background-color:#292c26; color:#938438; width:100%; height:90%;overflow:hidden"></div>
+                <div style="padding-left: 120px; padding-top: 400px;background-color:darkslategray; color:black" class="grid-msg-overlay" ng-hide="!loading">
+                    <div style="padding-left: 120px; background-color:darkslategray; color:white" class="msg">
+                        <span>Please wait while Loading Data...<br /><img class="img" src="../MESPortal.png" style="width:auto;height:auto; background-color:white" align="middle" id="logo"><br />Working on Retrieving info from plant...<i class="fa fa-spinner fa-spin"></i></span>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+
+
+    </div>
+
+
+</body>
+</html>

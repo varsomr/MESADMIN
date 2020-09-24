@@ -1,0 +1,1525 @@
+﻿<html>
+<head>
+    <style>
+        @import url('//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css');
+
+        .p1 {
+            background: url(MESPortal.png) no-repeat right fixed;
+            background-size: 700px;
+            opacity: 2.2;
+            filter: alpha(opacity=220);
+        }
+
+        body {
+            /*padding-top: 50px;
+            padding-bottom: 20px;*/
+            padding-left: 0px;
+            background-color: darkslategray;
+            border-style: solid;
+            border-bottom-width: thick;
+            border-color: burlywood;
+            font-family: Arial, Helvetica, sans-serif;
+            background: url(MESPortal.png) no-repeat center fixed;
+        }
+
+
+
+        /* Set padding to keep content from hitting the edges */
+        .body-content {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 40%;
+        }
+
+
+
+        #sidepanel {
+            position: absolute;
+            min-width: 30px;
+            height: 60%;
+            top: 10%;
+            right: 0;
+        }
+
+        #bar {
+            display: table;
+            background-color: #2F404F;
+            color: white;
+            width: 30px;
+            height: 100%;
+            text-align: center;
+        }
+
+            #bar div {
+                display: table-cell;
+                vertical-align: top;
+                padding-top: 40px;
+            }
+
+        #panel {
+            display: none;
+            background-color: #2F404F;
+            color: orangered;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+
+            #panel div {
+                display: table-cell;
+                vertical-align: top;
+            }
+
+        #sidepanel:hover #bar {
+            display: none;
+        }
+
+        #sidepanel:hover #panel {
+            display: table;
+        }
+
+        /*.input-value {
+            transition: .7s;
+            width: 75px;
+        }
+
+        .input-expand {
+            transition: .7s;
+            width: 300px;
+        }*/
+
+        div {
+            resize: both;
+            overflow: auto;
+        }
+
+        divS {
+            resize: both;
+            overflow: scroll;
+        }
+
+        .imgcontainer {
+            text-align: center;
+            margin: 24px 0 12px 0;
+        }
+
+        img.avatar {
+            width: 20%;
+            border-radius: 50%;
+        }
+
+        .container {
+            padding: 16px;
+        }
+
+        /* Override the default bootstrap behavior where horizontal description lists
+           will truncate terms that are too long to fit in the left column
+        */
+        .dl-horizontal dt {
+            white-space: normal;
+        }
+
+
+        textarea {
+            max-width: 1350px;
+        }
+
+
+
+        #grid .ui-grid-cell-contents {
+            text-align: center;
+        }
+
+        #servicegrid .ui-grid-cell-contents {
+            text-align: center;
+        }
+
+        header {
+            background-color: orangered;
+            color: white;
+            display: block;
+        }
+
+        .grid {
+            width: 1400px;
+            height: 300px;
+            background-color: darkslategray !important;
+            bottom: 0;
+            color: white !important;
+            border-top-color: forestgreen;
+
+        }
+
+        .ui-grid-row-selected.ui-grid-row:nth-child(odd) .ui-grid-cell,
+        .ui-grid-row-selected.ui-grid-row:nth-child(even) .ui-grid-cell {
+            color: black;
+            background: lightgreen;
+            border-radius: 10px;
+            color: black;
+            overflow: hidden;
+        }
+
+            .ui-grid-row-selected.ui-grid-row:nth-child(odd) .ui-grid-cell.ui-grid-cell-focus,
+            .ui-grid-row-selected.ui-grid-row:nth-child(even) .ui-grid-cell.ui-grid-cell-focus {
+                outline: 0;
+                color: brown;
+                background-color: olivedrab;
+            }
+
+        .ui-grid-row-selected.ui-grid-row:nth-child(odd):hover .ui-grid-cell,
+        .ui-grid-row-selected.ui-grid-row:nth-child(even):hover .ui-grid-cell {
+            color: brown;
+            font-weight: bolder;
+            font-size: x-small;
+            background-color: Highlight;
+        }
+
+        .grey .ui-grid-cell-contents {
+            background-color: lightseagreen;
+            font-weight: bold;
+            color: brown;
+        }
+
+
+        label {
+            font-family: 'Open Sans';
+            font-weight: 800;
+            font-size: x-small;
+        }
+
+        .grid .ui-grid-cell-contents {
+            padding: 2px 2px;
+            background-color: darkslategray;
+            color: #ceccbd;
+        }
+
+        .grid .ui-grid-render-container-body .ui-grid-header-cell,
+        .grid .ui-grid-header-cell {
+            background-color: forestgreen;
+            color: white;
+        }
+
+
+
+        .grid .ui-grid-filter-container {
+            padding: 1px 3px;
+        }
+
+        .grid-msg-overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+            .grid-msg-overlay .msg {
+                opacity: 1;
+                position: absolute;
+                top: 0%;
+                left: 1%;
+                width: 100%;
+                height: 50%;
+                background-color: cyan;
+                border-radius: 1px;
+                border: 1px solid #556;
+                text-align: center;
+                font-size: 24px;
+                display: table;
+            }
+
+        grid[type="secondary"] {
+            background-color: #692218;
+            color: white;
+            scrollbar-base-color: forestgreen;
+        }
+
+        .grid-msg-overlay .msg span {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+
+        .your-hover-class {
+            color: red;
+        }
+
+        .md-button {
+            padding: 0 6px 0 6px;
+            margin: 6px 8px 6px 8px;
+            min-width: 88px;
+            border-radius: 3px;
+            font-size: 14px;
+            text-align: center;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: none;
+            outline: none;
+        }
+
+        .btn {
+            /*background-color: #692218;*/
+            background-color: #17561b;
+            color: white;
+            height: 35px;
+            width: 80px;
+            font-size: x-small;
+        }
+
+
+
+            .btn:hover {
+                /*background-color: #FFD740;*/
+                /*color: #1565C0;*/
+                background-color: white;
+                color: black;
+                border-color: white;
+                border: outset;
+                /*border-width:thick;*/
+            }
+
+            .btn:focus {
+                outline: 0 !important;
+            }
+
+            .btn:active {
+                outline: 0;
+                color: #fff;
+                background-color: #428bca;
+                /*border-color: #357ebd;*/
+            }
+
+
+        table, tr {
+            border: 1px groove;
+            width: 40%;
+            background-color: transparent;
+        }
+
+        div {
+            background-color: transparent;
+        }
+
+
+
+
+
+
+
+        input {
+            /*font-family: Arial;*/
+            font-family: 'Open Sans';
+            font-weight: 100;
+            font-size: x-small;
+            height: 18px;
+            /*color: white;*/
+        }
+
+            input[type="text"] {
+                background-color: lightyellow;
+                border: .5px solid #4D90FE !important;
+                /*-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;*/
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-family: 'Open Sans';
+                font-weight: 100;
+                font-size: small;
+                height: 20px;
+                color: black;
+            }
+
+            input[type="user"] {
+                background-color: white;
+                border: .5px solid #4D90FE !important;
+                -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-family: 'Open Sans';
+                font-weight: 100;
+                font-size: x-small;
+                height: 20px;
+                color: black;
+            }
+
+            input[type="summary"] {
+                background-color: lightyellow;
+                border: .5px solid #4D90FE !important;
+                /*-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;*/
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-family: 'Open Sans';
+                font-weight: 100;
+                font-size: medium;
+                height: 20px;
+                color: black;
+            }
+
+            input[type="text"]:focus {
+                background-color: lightblue;
+                border: .5px solid #4D90FE !important;
+                /*-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;*/
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-family: 'Open Sans';
+                font-weight: 100;
+                font-size: small;
+                color: black;
+            }
+
+            input[type="Date"] {
+                border: 1px solid #4D90FE !important;
+                -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                background-color: lightyellow;
+                font-family: 'Open Sans';
+                font-weight: bold;
+                font-size: xx-small;
+                height: 25PX;
+            }
+
+            input[type="password"]:focus {
+                background-color: #FFEC9C;
+                border: 1px solid #4D90FE !important;
+                -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-size: xx-small;
+            }
+
+            input[type="user"]:focus {
+                background-color: #FFEC9C;
+                border: 1px solid #4D90FE !important;
+                -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-size: xx-small;
+            }
+
+            input[Disabled] {
+                border: 1px solid #4D90FE !important;
+                color: black;
+                outline: none !important;
+                font-size: xx-small;
+            }
+
+        .advancedSearchTextbox {
+            width: 526px;
+            margin-right: -4px;
+        }
+
+        textarea:focus {
+            padding-top: 10px;
+            background-color: #FFEC9C;
+            min-width: 50%;
+            border: 1px solid #000;
+        }
+
+
+        textarea {
+            min-height: 4em;
+            height: auto;
+            width: 50%;
+            margin: 0 auto;
+            background-color: white;
+            vertical-align: middle;
+            font-size: xx-small;
+        }
+
+
+
+        select {
+            background-color: white;
+            color: black;
+            font-family: 'Open Sans';
+            font-weight: 100;
+            font-size: xx-small;
+            /*border: outset;*/
+        }
+
+
+
+        #myProgress {
+            width: 100%;
+            background-color: ghostwhite;
+        }
+
+        #myBar {
+            width: 1%;
+            height: 30px;
+            background-color: black;
+        }
+
+        .bg {
+            background-size: 100% auto;
+        }
+
+
+
+        .yellowCell {
+            background-color: forestgreen;
+        }
+
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: black;
+            color: white;
+            text-align: right;
+        }
+
+
+        .container {
+            position: relative;
+            max-width: 850px;
+            position: relative;
+            margin: auto;
+        }
+
+        /* Hide the images by default */
+        .mySlides {
+            display: none;
+        }
+
+        /* Add a pointer when hovering over the thumbnail images */
+        .cursor {
+            cursor: pointer;
+        }
+
+        /* Next & previous buttons */
+        .prev,
+        .next {
+            cursor: pointer;
+            position: absolute;
+            top: 40%;
+            width: auto;
+            padding: 16px;
+            margin-top: -50px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* Position the "next button" to the right */
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+            /* On hover, add a black background color with a little bit see-through */
+            .prev:hover,
+            .next:hover {
+                background-color: rgba(0, 0, 0, 0.8);
+            }
+
+        /* Number text (1/3 etc) */
+        .numbertext {
+            color: #f2f2f2;
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+        }
+
+        /* Container for image text */
+        .caption-container {
+            text-align: center;
+            background-color: #222;
+            padding: 2px 16px;
+            color: white;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Six columns side by side */
+        .column {
+            float: left;
+            width: 16.66%;
+        }
+
+        /* Add a transparency effect for thumnbail images */
+        .demo {
+            opacity: 0.6;
+        }
+
+            .active,
+            .demo:hover {
+                opacity: 1;
+            }
+
+
+        /* Add a black background color to the top navigation */
+        .topnav {
+            background-color: #333;
+            overflow: hidden;
+            /*padding-left: 1.5%;*/
+            position: fixed;
+            width: 100%;
+        }
+
+            /* Style the links inside the navigation bar */
+            .topnav a {
+                float: left;
+                color: #f2f2f2;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-size: 17px;
+            }
+
+                /* Change the color of links on hover */
+                .topnav a:hover {
+                    background-color: #ddd;
+                    color: black;
+                }
+
+                /* Add a color to the active/current link */
+                .topnav a.active {
+                    background-color: #4CAF50;
+                    color: white;
+                }
+
+
+
+        .sidenav {
+            height: 100%;
+            width: 9.5%;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #332;
+            overflow-x: hidden;
+            padding-top: 0px;
+        }
+
+            .sidenav a {
+                padding: 16px 16px 16px 42px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #818181;
+                display: block;
+            }
+
+                .sidenav a:hover {
+                    color: #f1f1f1;
+                }
+
+        #main {
+            transition: margin-left .5s;
+            padding: 12px;
+        }
+
+        .sidenavRight {
+            height: 91%;
+            width: 90.352%;
+            position: fixed;
+            z-index: 1;
+            top: 70px;
+            right: 0;
+            background-color: darkslategray;
+            overflow-y: scroll;
+            transition: 0.5s;
+            color: #FFEC9C;
+            /*padding-top: 60px;*/
+        }
+
+            .sidenavRight a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #818181;
+                display: block;
+                transition: 0.3s;
+            }
+
+                .sidenavRight a:hover {
+                    color: #f1f1f1;
+                }
+
+            .sidenavRight .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+
+
+
+        @media screen and (max-height: 450px) {
+            .sidenavRight {
+                padding-top: 15px;
+            }
+
+                .sidenavRight a {
+                    font-size: 18px;
+                }
+        }
+
+        .sidenavRightS {
+            height: 100%;
+            width: 90.352%;
+            position: page;
+            z-index: 1;
+            top: 20%;
+            right: 0;
+            background-color: darkslategray;
+            overflow: visible;
+            transition: 0.6s;
+            color: #FFEC9C;
+            /*padding-top: 60px;*/
+        }
+
+            .sidenavRightS a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #818181;
+                display: block;
+                transition: 0.6s;
+            }
+
+                .sidenavRightS a:hover {
+                    color: #f1f1f1;
+                }
+
+            .sidenavRightS .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+
+
+
+        @media screen and (max-height: 450px) {
+            .sidenavRightS {
+                padding-top: 15px;
+            }
+
+                .sidenavRightS a {
+                    font-size: 18px;
+                }
+        }
+
+
+        #canvas {
+            border-bottom: 1px solid rgba(0,0,0,0.3);
+            background-color: #FFF;
+            box-shadow: 0 9px 20px -5px rgba(0,0,0,0.8);
+        }
+
+        #d {
+            text-align: center;
+        }
+
+        h1 {
+            color: #444;
+            /*font-family: "Eau Naturelle", "Helvetica", "Arial", "Lucida Grande", "Gill Sans", "Verdana", sans-serif;*/
+            font-weight: 500;
+        }
+
+        a {
+            /*color: #4a9;
+            text-decoration: none;
+            font-style: italic;
+            font-weight: 800;*/
+        }
+
+
+
+        /*Click DropDown*/
+        .dropbtn {
+            background-color: #3498DB;
+            color: white;
+            padding: 12px;
+            font-size: 12px;
+            border: none;
+            cursor: pointer;
+        }
+
+        *.dropbtnB {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px;
+            font-size: 12px;
+            border: none;
+        }
+
+        .dropbtn:hover, .dropbtn:focus {
+            background-color: #2980B9;
+        }
+
+        .dropbtnB:hover, .dropbtn:focus {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /*.dropdown {
+            position: relative;
+            display: inline-block;
+        }*/
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            overflow: auto;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+        .dropdown a:hover {
+            background-color: #ddd
+        }
+
+        .show {
+            display: block;
+        }
+
+
+
+
+        /*body {
+                    margin: 0;
+
+                }*/
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        html, body {
+            -ms-overflow-style: none;
+            /*overflow: auto;*/
+        }
+
+        .icon-bar {
+            position: fixed;
+            top: 15%;
+            -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+        }
+
+            .icon-bar a {
+                display: block;
+                text-align: center;
+                padding: 16px;
+                transition: all 0.3s ease;
+                color: white;
+                font-size: 14px;
+            }
+
+                .icon-bar a:hover {
+                    background-color: #000;
+                }
+
+        .pln {
+            background: #3B5998;
+            color: white;
+        }
+
+        .cls {
+            background: #55ACEE;
+            color: white;
+        }
+
+
+        .content {
+            margin-left: 75px;
+            font-size: 30px;
+        }
+
+
+        .specialColor {
+            /* Whatever color  you want */
+            background-color: #2d4240;
+            color: white;
+        }
+
+
+        /*input[type="text"] {
+            font-size: 12px;
+            text-align-last:center;
+        }*/
+
+
+        /* Style The Dropdown Button */
+        .dropbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px;
+            font-size: 12px;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* The container <div> - needed to position the dropdown content */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Dropdown Content (Hidden by Default) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+            /* Links inside the dropdown */
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                /* Change color of dropdown links on hover */
+                .dropdown-content a:hover {
+                    background-color: #f1f1f1
+                }
+
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Change the background color of the dropdown button when the dropdown content is shown */
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+        }
+
+        .right {
+            position: absolute;
+            right: 0px;
+            padding: 10px;
+        }
+
+        .left {
+            position: absolute;
+            left: 0px;
+            padding: 10px;
+        }
+
+        .center {
+            position: absolute;
+            left: 50%;
+            right: 50%;
+            padding: 10px;
+        }
+
+
+        .dropbtnU {
+            background-color: white;
+            color: black;
+            padding: 0;
+            font-size: 12px;
+            border: thick;
+        }
+
+        .dropup {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropup-content {
+            display: none;
+            position: absolute;
+            background-color: darkslategray;
+            color: white;
+            min-width: 50px;
+            min-height: 50px;
+            bottom: 10px;
+            z-index: 1;
+            margin-top: 50px;
+            /*width: 360px;
+            height: 170px;*/
+            padding: 10px;
+            font-size: 12px;
+            /*border-radius: 10px;
+            border: 10px solid #EE872A;*/
+        }
+
+            .dropup-content a {
+                color: white;
+                /*padding: 12px 16px;*/
+                text-decoration: none;
+                display: block;
+            }
+
+                .dropup-content a:hover {
+                    background-color: transparent;
+                    color: white;
+                }
+
+        .dropup:hover .dropup-content {
+            display: block;
+            font-size: 12px;
+        }
+
+        .dropup:hover .dropbtnU {
+            background-color: transparent;
+            color: white;
+            font-size: 12px;
+        }
+
+        div.editable {
+            width: 300px;
+            height: 200px;
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
+        /*DropDown///////////////////////////////////////*/
+    </style>
+    <script>
+        function openNav(nav) {
+            document.getElementById(nav).style.width = "90.352%";
+            document.getElementById(nav).style.zIndex = "999";
+        }
+
+        function closeNav(nav) {
+            document.getElementById(nav).style.width = "0";
+        }
+
+
+
+    </script>
+</head>
+<body>
+    <!--<div id="grid" class="tab-pane fade in active">-->
+        <div style="display:block; width : auto; padding-left:145px">
+            <div ng-controller="processmappingcontroller">
+                <div class="topnav">
+                    <a href="#/">Home</a>
+                    <a class="active" href="" onclick="this.href='#/LRSCorp'">Reports</a>
+                    <a href="#/Support">Support</a>
+                    <label style="padding-left:120px; background-color:transparent; color:white; font-size:x-large">LPS Process Mapping and Spec Generation Dashboard</label>
+                    <input id="LoggedIn" name="LoggedIn" ng-model="LoggedIn" onload="function_two('uname')" class="form-control" placeholder="Not Logged in!" style="width: 140px;height:30px;background-color:Highlight; font-size:medium; color:darkgreen" type="hidden" />
+
+                </div>
+
+            </div>
+
+            <div id="mySidenav" class="sidenav" ng-controller="processmappingcontroller" >
+            <!--<div class="icon-bar">-->
+            <div align="left">
+                <img src="../LeprinoLogo.png" style="width:76px;height:50px; background-color:white">
+
+
+            </div>
+            <div align="center">
+
+
+                <!--<button class="dropbtn" type="button" style="background-color:transparent;color:white;transition: 0.3s;" ng-click="closeNav();">
+                &#9776;Close &#9776;</button>-->
+
+                <div>
+                    <!-- <p style="color:lightgoldenrodyellow; font-size:x-small; padding-top:20px">&asymp; &asymp; </p>-->
+                    <!--<select id="plant" name="plant" style="display:inline-block; width:120px;height:25px; font-size:medium; text-align-last:center;" class="specialColor">
+                        <option selected="selected">Select a Plant</option>
+                        <option value="LEM">LEM</option>
+                        <option value="FTM">FTM</option>
+                        <option value="ALN">ALN</option>
+                        <option value="LEW">LEW</option>
+                        <option value="REM">REM</option>
+                        <option value="ROS">ROS</option>
+                        <option value="TRA">TRA</option>
+                        <option value="WAV">WAV</option>
+                        <option value="GRE">GRE</option>
+                    </select>-->
+                    <button class="dropbtn" type="button" style="background-color:transparent;color:white;transition: 0.3s;" ng-click="openNav('mysidenavRightMain');">
+                        &#9776;MainPage &#9776;
+                    </button>
+                    <button class="dropbtn" type="button" style="background-color:transparent;color:white;transition: 0.3s;" ng-click="GridfromButton();refreshGrid();">
+                        &#9776;OpenGrid &#9776;
+                    </button>
+                    <!--<button class="dropbtn" type="button" style="background-color:transparent;color:white;transition: 0.3s;" ng-click="openNav('mysidenavRightImage')">
+                        &#9776;OpenImageDIV &#9776;
+                    </button>-->
+                    <br />
+                    <br />
+
+                    <!--<button style="padding-right:5px" class="dropbtn" ng-click="refreshGrid()">Refresh</button>
+                <button class="dropbtn" ng-click="clearFilters()">Reset</button>
+                <br /><br />-->
+
+
+                </div>
+
+
+                <!--<iframe id="Reports" name="Reports" onload="ajaxStop()" class="holds-the-iframe" src="" height="644" width="1500"></iframe>-->
+            </div>
+        </div>
+
+            <div id="mysidenavRightGrid" ng-controller="processmappingcontroller" class="sidenavRight" >
+             
+                
+                    <button class="dropbtn" type="button" style="background-color:#110d11;color:white;transition: 0.3s;float:right" onclick="document.getElementById('mysidenavRightGrid').style.width = '0';">
+                        &#9776;Close &#9776;
+                    </button> 
+                <button class="dropbtn" type="button" id="btnGrid" style="background-color:transparent;color:white;transition: 0.3s;" ng-click="refreshGrid();">
+                    &#9776;LoadData &#9776;
+                </button>
+                            <!--<canvas id="myCanvas" />
+                            <img id="preview" style="background-color:forestgreen; border:thick" src="" >-->
+                
+
+           
+                    <!--<div id="grid" ui-grid="gridOptions" ui-grid-edit ui-grid-selection class="grid" ui-grid-pagination style=" width:auto; height:auto;"></div>
+                    <div style="padding-left: 120px; padding-top: 400px;background-color:darkslategray; color:black" class="grid-msg-overlay" ng-hide="!loading">
+                        <div style="padding-left: 120px; background-color:darkslategray; color:white" class="msg">
+                            <span>Please wait while Loading Data...<br /><img class="img" src="../MESPortal.png" style="width:40%" align="middle" id="logo"><br />Working on Retrieving info ...<i class="fa fa-spinner fa-spin"></i></span>
+
+                        </div>
+                    </div>-->
+                <div id="grid" ui-grid="gridOptions" ui-grid-edit ui-grid-selection class="grid" ui-grid-pagination style="display:block; width : auto; height:75%"></div>
+                <div style="padding-left: 120px; padding-top: 400px;background-color:darkslategray; color:black" class="grid-msg-overlay" ng-hide="!loading">
+                    <div style="padding-left: 120px; background-color:darkslategray; color:white" class="msg">
+                        <span>Please wait while Loading Data...<br /><img class="img" src="../MESPortal.png" style="width:600px;height:450px; background-color:white" align="middle" id="logo"><br />Working on Retrieving info from plant...<i class="fa fa-spinner fa-spin"></i></span>
+
+                    </div>
+                </div>
+
+
+
+           
+
+
+
+            </div>
+            <div id="mysidenavRightImage" ng-controller="processmappingcontroller" class="sidenavRight" style="background-color:#2a2c2c;overflow-y: auto">
+                <button class="dropbtn" type="button" style="background-color:#110d11;color:white;transition: 0.3s;" onclick="document.getElementById('mysidenavRightImage').style.width = '0';">
+                    &#9776;Close &#9776;
+                </button>
+               
+                <!--<canvas id="canvas" src="../../LeprinoLogo.png" />-->
+                <!--<canvas id="canvas" style="border:2px solid black;" width="200" height="200"></canvas>-->
+
+
+
+                
+                
+                
+                <!--<img id="imgElem" src="" />-->
+                <img id="imgElem2econdary" src="" />
+
+               
+                <!--<div class="col-md-8">
+                    <img ng-src="data:image/png;base64,{{model.Logo}}" id="photo-id" />
+
+                    <input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this)" id="photo-upload" />
+                    
+                    <button type="button" class="dropbtnU" style="background-color:green; color:white" ng-click="getBase64Image()">GetImage</button>
+
+
+                </div>-->
+
+
+            </div>
+            
+            <div id="mysidenavRightMain" ng-controller="processmappingcontroller" class="sidenavRight" style="background-color:#2a2c2c;overflow-y: auto">
+
+
+                <div id="placeholder" width="100%" height="100%" align="right">
+
+
+                    <div id="top" width="100%" height="15%" style="float:left">
+                        Document Title<input id="Title" placeholder="Enter Document Title" align="right" style="width:80%;background-color:transparent;color:white; border-color:cornflowerblue; font-size:large; text-align:center" type="text" name="Title" />
+                        <button class="dropbtn" type="button" style="background-color:#110d11;color:white;transition: 0.3s;" onclick="document.getElementById('mysidenavRightMain').style.width = '0';">
+                            &#9776;Close &#9776;
+                        </button>
+                        <div id="ProcessType" class="dropup" style="float:left;">
+                                <div style="margin-top:10px;width:280px;height:125px;padding:10px;border-radius:10px;border:10px solid #EE872A;font-size:120%;">
+                                    <h8><label style="background-color:forestgreen;color:white; font-size:14px;"> &nbsp;</label>Document Type</h8>
+                                    <div>
+
+                                        <div class="dropup-content">
+                                            <button type="button" class="dropbtnU" ng-click="copy('POTE','FunctionalSpec')">FunctionalSpec</button><br />
+                                            <button type="button" class="dropbtnU" ng-click="copy('POQE','TechnicalSpec')">TechnicalSpec</button><br />
+                                            <button type="button" class="dropbtnU" ng-click="copy('POPE','ProcessMapping')">ProcessMapping</button><br />
+                                            <button type="button" class="dropbtnU" ng-click="copy('POLE','STScript')">STScript</button><br />
+                                            <button type="button" class="dropbtnU" ng-click="copy('POCE','FUTScript')">FUTScript</button><br />
+                                            <button type="button" class="dropbtnU" ng-click="copy('POCE','Training')">Training</button><br />
+                                            <button type="button" class="dropbtnU" ng-click="copy('POCE','GoLiveSteps')">GoLiveSteps</button><br />
+                                    
+                                    
+
+                                        </div>
+                                    </div>
+                                    <input type="text" style="padding-left:10px; width:120px;height:20px; color:white; background-color:darkslategray; font-size:medium;  text-align: center;" disabled="disabled" id="IssueAreaTB1" />
+                                    <input type="text" style="color:white;background-color:darkslategray" id="IATo1" hidden="hidden" />
+
+                                    <!--<label style="height:10px;color:#EE872A">
+                                        Defaine a Porcess
+                                    </label>-->
+                                </div>
+
+
+
+                        
+                            </div>
+
+                            <div id="IssueArea" class="dropup" style="float:left;">
+                                <div style="margin-top:10px;width:280px;height:125px;padding:10px;border-radius:10px;border:10px solid #EE872A;font-size:120%;">
+                                    <h8><label style="background-color:forestgreen;color:white; font-size:16px;"> &nbsp;</label>MFG Process</h8>
+                                    <div>
+                                        <div class="dropup-content">
+                                            <button type="button" class="dropbtnU" ng-click="copy2('POTE','MilkReceiving')">MilkReceiving</button><br />
+                                            <button type="button" class="dropbtnU" ng-click="copy2('POQE','CheeseMake')">CheeseMake</button><br />
+                                            <button type="button" class="dropbtnU" ng-click="copy2('POPE','CheeseFinish')">CheeseFinish</button><br />
+                                            <button type="button" class="dropbtnU" ng-click="copy2('POLE','Processing')">Processing</button><br />
+                                            <button type="button" class="dropbtnU" ng-click="copy2('POCE','GRD')">GRD</button><br />
+                                            <button type="button" class="dropbtnU" ng-click="copy2('POCE','Mixer')">Mixer</button><br />
+                                            <button type="button" class="dropbtnU" ng-click="copy2('POCE','GoLiveSteps')">GoLiveSteps</button><br />
+                                        </div>
+                                        <input type="text" style="padding-left:10px; width:120px;height:20px; color:white; background-color:darkslategray; font-size:medium;  text-align: center;" disabled="disabled" id="IssueAreaTB2" />
+                                        <input type="text" style="color:white;background-color:darkslategray" id="IATo1" hidden="hidden" />
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div id="StepsNum" class="dropup" style="float:left;">
+                                <div style="margin-top:10px;width:280px;height:125px;padding:10px;border-radius:10px;border:10px solid #EE872A;font-size:120%;">
+                                    <h8><label style="background-color:forestgreen;color:white; font-size:16px;"> &nbsp;</label>NumberOfSteps</h8>
+                                    <div>
+                                        <input type="text" style="padding-left:10px; width:120px;height:20px; color:white; background-color:darkslategray; font-size:medium;  text-align: center;" id="NumSteps" />
+                                        <!--<button class="dropbtn" style="background-color:#462e66; color:white;height:20px;" ng-click="copyToDIV()">Go!</button>-->
+                                        <input type="text" style="color:white;background-color:darkslategray" id="IATo1" hidden="hidden" />
+                                    </div>
+                                </div>
+                            </div>
+                        <div id="ButtonPlace" class="dropup" style="float:left;">
+                                <div style="margin-top:10px;width:280px;height:125px;padding:10px;border-radius:10px;border:10px solid #EE872A;font-size:120%;">
+                                    <!--<h8 style="float:left"><label style="background-color:forestgreen;color:white; font-size:16px; float:left"> &nbsp;</label>Click to Save</h8>-->
+                                    
+                                        <button type="button" class="dropbtnU" style="border:solid;border-color:fuchsia;background-color:forestgreen; color:white ; height:80%; width:40%; float:left" ng-click="addProcessDoc()">Click to Save</button>
+                                        <button type="button" class="dropbtnU" style="border:solid;border-color:fuchsia;background-color:darkred; color:white ; height:30px; width:20%; float:right" ng-click="clearTB()">Clear</button>
+                                    
+                                </div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+                <div id="content" align="right" width="100%" height="85%" style="float:left">
+                   
+
+                    <div id="1" class="dropup" style="float:left;display:none;margin-top:10px;width:360px;height:auto;padding:10px;border-radius:10px;border:10px solid #0fbef4;font-size:120%;">
+
+
+
+                        <h9>
+                            <button type="button" class="dropbtnU" style="background-color:green; color:white" ng-click="maximize('1')">MAX</button>
+                            <button type="button" class="dropbtnU" style="background-color:darkslateblue; color:white" ng-click="restore('1')">Restore</button>
+                            <label style="background-color:forestgreen;color:white; font-size:14px;float:left"> &nbsp;1.</label>
+                            <input type="text" placeholder="First Step? Name:" ng-blur="onBlur($UpdateonBlur)" style="padding-left:10px; background-color:#3B5998; color:white; width:100%;height:auto;  font-size:medium; text-align: center;" id="ProcessTB1" />
+
+
+                        </h9>
+                        
+                            
+                            
+                        <div id="my-div" class="editable" ng-blur="onBlur($UpdateonBlur)" contenteditable="true"
+                                style="border:1px solid #777777;width:100%;height:50%; background-color:black; color:white"
+                                onpaste="console.log('onpastefromhtml')">
+
+                        </div>
+                        <!--<div class="col-md-8">-->
+                            <img id="imgElem1" src="" />
+                            <img ng-src="data:image/png;base64,{{model.Logo}}" id="photo-id1" /><input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this,'#photo-id1','Base64Output1')" id="photo-upload" />
+                            <textarea id="Base64Output1" hidden="hidden" style="width:auto;height:auto; border-color:green; border-style:inset; background-color:forestgreen; color:white"></textarea>
+                       
+                        <!--</div>-->
+                            
+                        
+
+
+
+                                <input type="text" style="padding-left:10px; background-color:darkslategray; font-size:medium;  text-align: center; color:white; width:100%;height:auto;  float:right; " ng-blur="blurT('ProcessTBMSG1')" hidden="hidden" id="ProcessTBMSG1" />
+
+                    </div>
+
+                        <div id="2" class="dropup"  style="float:left;display:none;margin-top:10px;width:360px;height:auto;padding:10px;border-radius:10px;border:10px solid #0fbef4;font-size:120%;">
+                           
+
+                           
+
+                                <h8>
+                                    <button type="button" class="dropbtnU" style="background-color:green; color:white" ng-click="maximize('2')">MAX</button>
+                                    <button type="button" class="dropbtnU" style="background-color:darkslateblue; color:white" ng-click="restore('2')">Restore</button>
+                                    <label style="background-color:forestgreen;color:white; font-size:14px; float:left"> &nbsp;2.</label>
+                                    <input type="text" placeholder="Second Step? Name:" style="padding-left:10px; background-color:#19a758; color:white; width:100%;height:auto;  font-size:medium; text-align: center;" ng-blur="blurT('ProcessTB2')" id="ProcessTB2" />
+                                    <!--1d2a25-->
+                                </h8>
+
+
+
+                                <div id="my-div1" class="editable" ng-blur="onBlur($UpdateonBlur)" contenteditable="true"
+                                     style="border:1px solid #777777;width:100%;height:50%; background-color:white; color:black"
+                                     onpaste="console.log('onpastefromhtml')">
+                                </div>
+                                    <img id="imgElem2" src="" />
+                                    <img ng-src="data:image/png;base64,{{model.Logo}}" id="photo-id2" /><input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this,'#photo-id2','Base64Output2')" id="photo-upload" />
+                                    <textarea id="Base64Output2" hidden="hidden" style="width:auto;height:auto; border-color:green; border-style:inset; background-color:forestgreen; color:white"></textarea>
+
+                            <input type="text" style="padding-left:10px; background-color:#dd1e1e; font-size:medium;  text-align: center; color:white; width:100%;height:auto;float:right; " ng-blur="blurT('ProcessTBMSG2')" hidden="hidden" id="ProcessTBMSG2" />
+
+                        </div>
+                    <div id="3" class="dropup" style="float:left;display:none;margin-top:10px;width:360px;height:auto;padding:10px;border-radius:10px;border:10px solid #0fbef4;font-size:120%;">
+                        
+
+                        
+
+                            <h8>
+                                <button type="button" class="dropbtnU" style="background-color:green; color:white" ng-click="maximize('3')">MAX</button>
+                                <button type="button" class="dropbtnU" style="background-color:darkslateblue; color:white" ng-click="restore('3')">Restore</button>
+                                <label style="background-color:forestgreen;color:white; font-size:14px;float:left"> &nbsp;3.</label>
+                                <input type="text" placeholder="Third Step? Name:" style="padding-left:10px; background-color:#0d1b5a; color:white; width:100%;height:auto;  font-size:medium; text-align: center;" ng-blur="blurT('ProcessTB3')" id="ProcessTB3" />
+
+                            </h8>
+
+
+                            <div id="my-div2" class="editable" ng-blur="onBlur($UpdateonBlur)" contenteditable="true"
+                                 style="border:1px solid #777777;width:100%;height:50%; background-color:white; color:black"
+                                 onpaste="console.log('onpastefromhtml')">
+                            </div>
+                        <img id="imgElem3" src="" />
+                        <img ng-src="data:image/png;base64,{{model.Logo}}" id="photo-id3" /><input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this,'#photo-id3','Base64Output3')" id="photo-upload" />
+                        <textarea id="Base64Output3" hidden="hidden" style="width:auto;height:auto; border-color:green; border-style:inset; background-color:forestgreen; color:white"></textarea>
+
+
+                        <input type="text" style="padding-left:10px; background-color:darkslategray; font-size:medium;  text-align: center; color:white; width:100%;height:auto;  float:right; " ng-blur="blurT('ProcessTBMSG3')" hidden="hidden" id="ProcessTBMSG3" />
+
+                    </div>
+                    <div id="4" class="dropup" style="float:left;display:none;margin-top:10px;width:360px;height:auto;padding:10px;border-radius:10px;border:10px solid #0fbef4;font-size:120%;">
+
+                        <button type="button" class="dropbtnU" style="background-color:green; color:white" ng-click="maximize('4')">MAX</button>
+                        <button type="button" class="dropbtnU" style="background-color:darkslateblue; color:white" ng-click="restore('4')">Restore</button>
+                            <h8>
+                                <label style="background-color:forestgreen;color:white; font-size:14px;float:left"> &nbsp;4.</label>
+                               
+                                <input type="text" placeholder="Fourth Step? Name:" style="padding-left:10px; background-color:#3a5837; color:white;width:100%;height:auto;  font-size:medium; text-align: center;" ng-blur="blurT('ProcessTB')" id="ProcessTB4" />
+
+                            </h8>
+
+
+                            <!--<div class="editable"></div>-->
+                            <div id="my-div3"  class="editable" ng-blur="onBlur($UpdateonBlur)" contenteditable="true"
+                                 style="border:1px solid #777777;width:100%;height:50%; background-color:white; color:black"
+                                 onpaste="console.log('onpastefromhtml')">
+                            </div>
+                        <img id="imgElem4" src="" />
+                        <img ng-src="data:image/png;base64,{{model.Logo}}" id="photo-id4" /><input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this,'#photo-id4','Base64Output4')" id="photo-upload" />
+                        <textarea id="Base64Output4" hidden="hidden" style="width:auto;height:auto; border-color:green; border-style:inset; background-color:forestgreen; color:white"></textarea>
+
+
+                        <input type="text" style="padding-left:10px; background-color:darkslategray; font-size:medium;  text-align: center; color:white; width:100%;height:auto;  float:right; " ng-blur="blurT('ProcessTBMSG4')" hidden="hidden" id="ProcessTBMSG4" />
+
+                    </div>
+                    <div id="5" class="dropup" style="float:left;display:none;margin-top:10px;width:360px;height:auto;padding:10px;border-radius:10px;border:10px solid #0fbef4;font-size:120%;">
+                            <h8>
+                                <button type="button" class="dropbtnU" style="background-color:green; color:white" ng-click="maximize('5')">MAX</button>
+                                <button type="button" class="dropbtnU" style="background-color:darkslateblue; color:white" ng-click="restore('5')">Restore</button>
+                                <label style="background-color:forestgreen;color:white; font-size:14px;float:left"> &nbsp;5.</label>
+                                <input type="text" placeholder="Fifth Step? Name:" style="padding-left:10px; background-color:#361717; color:white; width:100%;height:auto;  font-size:medium; text-align: center;" ng-blur="blurT('ProcessTB5')" id="ProcessTB5" />
+
+                            </h8>
+
+
+                            <div id="my-div4" class="editable" ng-blur="onBlur($UpdateonBlur)" contenteditable="true"
+                                  style="border:1px solid #777777;width:100%;height:50%; background-color:white; color:black"
+                                 onpaste="console.log('onpastefromhtml')">
+                            </div>
+                        <img id="imgElem5" src="" />
+                        <img ng-src="data:image/png;base64,{{model.Logo}}" id="photo-id5" /><input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this,'#photo-id5','Base64Output5')" id="photo-upload" />
+                        <textarea id="Base64Output5" hidden="hidden" style="width:auto;height:auto; border-color:green; border-style:inset; background-color:forestgreen; color:white"></textarea>
+
+
+                        <input type="text" style="padding-left:10px; background-color:darkslategray; font-size:medium;  text-align: center; color:white; width:100%;height:auto;  float:right; " ng-blur="blurT('ProcessTBMSG5')" hidden="hidden" id="ProcessTBMSG5" />
+
+                    </div>
+                    <div id="6" class="dropup" style="float:left;display:none;margin-top:10px;width:360px;height:auto;padding:10px;border-radius:10px;border:10px solid #0fbef4;font-size:120%;">
+
+
+                        
+
+                        <h8>
+                            <button type="button" class="dropbtnU" style="background-color:green; color:white" ng-click="maximize('6')">MAX</button>
+                            <button type="button" class="dropbtnU" style="background-color:darkslateblue; color:white" ng-click="restore('6')">Restore</button>
+                            <label style="background-color:forestgreen;color:white; font-size:14px;float:left"> &nbsp;6.</label>
+                           
+                            <input type="text" placeholder="Sixth Step? Name:" style="padding-left:10px; background-color:#1a8f91; color:white; width:100%;height:auto;  font-size:medium; text-align: center;" ng-blur="blurT('ProcessTB6')" id="ProcessTB6" />
+
+                        </h8>
+
+
+                        <div id="my-div5" class="editable" ng-blur="onBlur($UpdateonBlur)" contenteditable="true"
+                              style="border:1px solid #777777;width:100%;height:50%; background-color:white; color:black"
+                             onpaste="console.log('onpastefromhtml')">
+                        </div>
+                        <img id="imgElem6" src="" />
+                        <img ng-src="data:image/png;base64,{{model.Logo}}" id="photo-id6" /><input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this,'#photo-id6','Base64Output6')" id="photo-upload" />
+                        <textarea id="Base64Output6" hidden="hidden" style="width:auto;height:auto; border-color:green; border-style:inset; background-color:forestgreen; color:white"></textarea>
+
+
+                        <input type="text" style="padding-left:10px; background-color:darkslategray; font-size:medium;  text-align: center; color:white; width:100%;height:auto;  float:right; " ng-blur="blurT('ProcessTBMSG6')" hidden="hidden" id="ProcessTBMSG6" />
+
+                    </div>
+                    <div id="7" class="dropup" style="float:left;display:none;margin-top:10px;width:360px;height:auto;padding:10px;border-radius:10px;border:10px solid #0fbef4;font-size:120%;">
+
+
+                        
+                        <h8>
+                            <label style="background-color:forestgreen;color:white; font-size:14px;float:left"> &nbsp;7.</label>
+                            <button type="button" class="dropbtnU" style="background-color:green; color:white" ng-click="maximize('7')">MAX</button>
+                            <button type="button" class="dropbtnU" style="background-color:darkslateblue; color:white" ng-click="restore('7')">Restore</button>
+
+                            <input type="text" placeholder="Seventh Step? Name:" style="padding-left:10px; background-color:#1d2a25; color:white; width:100%;height:auto;  font-size:medium; text-align: center;" ng-blur="blurT('ProcessTB7')" id="ProcessTB7" />
+
+                        </h8>
+
+
+                        <div id="my-div6" class="editable" ng-blur="onBlur($UpdateonBlur)" contenteditable="true"
+                              style="border:1px solid #777777;width:100%;height:50%; background-color:white; color:black"
+                             onpaste="console.log('onpastefromhtml')">
+                        </div>
+                        <img id="imgElem7" src="" />
+                        <img ng-src="data:image/png;base64,{{model.Logo}}" id="photo-id7" /><input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this,'#photo-id7','Base64Output7')" id="photo-upload" />
+                        <textarea id="Base64Output7" hidden="hidden" style="width:auto;height:auto; border-color:green; border-style:inset; background-color:forestgreen; color:white"></textarea>
+
+
+                        <input type="text" style="padding-left:10px; background-color:darkslategray; font-size:medium;  text-align: center; color:white; width:100%;height:auto;  float:right; " ng-blur="blurT('ProcessTBMSG7')" hidden="hidden" id="ProcessTBMSG7" />
+
+                    </div>
+                    <div id="8" class="dropup" style="float:left;display:none;margin-top:10px;width:360px;height:auto;padding:10px;border-radius:10px;border:10px solid #0fbef4;font-size:120%;">
+
+
+                        
+
+                        <h8>
+                            <button type="button" class="dropbtnU" style="background-color:green; color:white" ng-click="maximize('8')">MAX</button>
+                            <button type="button" class="dropbtnU" style="background-color:darkslateblue; color:white" ng-click="restore('8')">Restore</button>
+                            <label style="background-color:forestgreen;color:white; font-size:14px;float:left"> &nbsp;8.</label>
+                            <input type="text" placeholder="Eighth Step? Name:" style="padding-left:10px; background-color:#1d2a25; color:white; width:100%;height:auto;  font-size:medium; text-align: center;" ng-blur="blurT('ProcessTB8')" id="ProcessTB8" />
+
+                        </h8>
+
+
+                        <div id="my-div7" class="editable" ng-blur="onBlur($UpdateonBlur)" contenteditable="true"
+                              style="border:1px solid #777777;width:100%;height:50%; background-color:white; color:black"
+                             onpaste="console.log('onpastefromhtml')">
+                        </div>
+                        <img id="imgElem8" src="" />
+                        <img ng-src="data:image/png;base64,{{model.Logo}}" id="photo-id8" /><input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this,'#photo-id8','Base64Output8')" id="photo-upload" />
+                        <textarea id="Base64Output8" hidden="hidden" style="width:auto;height:auto; border-color:green; border-style:inset; background-color:forestgreen; color:white"></textarea>
+
+
+
+                        <input type="text" style="padding-left:10px; background-color:darkslategray; font-size:medium;  text-align: center; color:white; width:100%;height:auto;  float:right; " ng-blur="blurT('ProcessTBMSG8')" hidden="hidden" id="ProcessTBMSG8" />
+
+                    </div>
+                    <div id="9" class="dropup" style="float:left;display:none;margin-top:10px;width:360px;height:auto;padding:10px;border-radius:10px;border:10px solid #0fbef4;font-size:120%;">
+
+
+                       
+                        <h8>
+                            <button type="button" class="dropbtnU" style="background-color:green; color:white" ng-click="maximize('9')">MAX</button>
+                            <button type="button" class="dropbtnU" style="background-color:darkslateblue; color:white" ng-click="restore('9')">Restore</button>
+                            <label style="background-color:forestgreen;color:white; font-size:14px; float:left"> &nbsp;9.</label>
+                            
+                            <input type="text" placeholder="Ninth Step? Name:" style="padding-left:10px; background-color:#1d2a25; color:white; width:100%;height:auto;  font-size:medium; text-align: center;" ng-blur="blurT('ProcessTB9')" id="ProcessTB9" />
+
+                        </h8>
+
+
+                        <div id="my-div8" class="editable" ng-blur="onBlur($UpdateonBlur)" contenteditable="true"
+                              style="border:1px solid #777777;width:100%;height:50%; background-color:white; color:black"
+                             onpaste="console.log('onpastefromhtml')">
+                        </div>
+                        <img id="imgElem9" src="" />
+                        <img ng-src="data:image/png;base64,{{model.Logo}}" id="photo-id9" /><input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this,'#photo-id9','Base64Output9')" id="photo-upload" />
+                        <textarea id="Base64Output9" hidden="hidden" style="width:auto;height:auto; border-color:green; border-style:inset; background-color:forestgreen; color:white"></textarea>
+
+
+                        <input type="text" style="padding-left:10px; background-color:darkslategray; font-size:medium;  text-align: center; color:white; width:100%;height:auto;  float:right; " ng-blur="blurT('ProcessTBMSG9')" hidden="hidden" id="ProcessTBMSG9" />
+
+                    </div>
+                    <div id="10" class="dropup" style="float:left;display:none;margin-top:10px;width:360px;height:auto;padding:10px;border-radius:10px;border:10px solid #0fbef4;font-size:120%;">
+
+
+                        
+
+                        <h8>
+                            <button type="button" class="dropbtnU" style="background-color:green; color:white" ng-click="maximize('10')">MAX</button>
+                            <button type="button" class="dropbtnU" style="background-color:darkslateblue; color:white" ng-click="restore('10')">Restore</button>
+                            <label style="background-color:forestgreen;color:white; font-size:14px; float:left"> &nbsp;10.</label>
+                            
+                            <input type="text" placeholder="Tenth Step? Name:" style="padding-left:10px; background-color:#1d2a25; color:white; width:100%;height:auto;  font-size:medium; text-align: center;" ng-blur="blurT('ProcessTB10')" id="ProcessTB10" />
+
+                        </h8>
+
+
+                        <div id="my-div9" class="editable" ng-blur="onBlur($UpdateonBlur)" contenteditable="true"
+                              style="border:1px solid #777777;width:100%;height:50%; background-color:white; color:black"
+                             onpaste="console.log('onpastefromhtml')">
+                        </div>
+                        <img id="imgElem10" src="" />
+                        <img ng-src="data:image/png;base64,{{model.Logo}}" id="photo-id10" /><input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this,'#photo-id10','Base64Output10')" id="photo-upload" />
+                        <textarea id="Base64Output10" hidden="hidden" style="width:auto;height:auto; border-color:green; border-style:inset; background-color:forestgreen; color:white"></textarea>
+
+
+                        <input type="text" style="padding-left:10px; background-color:darkslategray; font-size:medium;  text-align: center; color:white; width:100%;height:auto;  float:right; " ng-blur="blurT('ProcessTBMSG10')" hidden="hidden" id="ProcessTBMSG10" />
+
+                    </div>
+                    
+
+                </div>
+    
+            </div>
+
+
+    </div>
+
+
+</body>
+</html>

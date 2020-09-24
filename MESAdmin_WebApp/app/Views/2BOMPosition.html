@@ -1,0 +1,267 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <div id="2" class="dropup" style="float:left;margin-top:10px;width:60%;height:auto;padding:10px;border-radius:1px;border:1px solid #e44923;font-size:120%;" ng-controller="IN2164controller" >
+        <div style="background-color:darkslategrey; color:white; width:100%;">
+            <h9>
+                <!--<button type="button" class="dropbtnU" style="float:left; background-color:white; color:black; padding-left:10px;" ng-click="showInput('BOMPosInput','2')">&#9776;Edit&#9776;</button>
+                <button type="button" class="dropbtnU" style="float:left; background-color:black; color:white; padding-left:10px;" ng-click="hideInput('BOMPosInput')">&#9776;Hide&#9776;</button>
+                <button id="gridrefSpec" class="dropbtnU" style="float:left; background-color:black; color:white; padding-left:10px;" ng-click="refreshGridBOMItem()">&#9776;Refresh&#9776;</button>
+                <button id="gridrefSpec" class="dropbtnU" style="float:right;right:5%; background-color:black; color:white; padding-left:10px;" ng-click="wider('2','gridBOMItem','100%','50%')">&#9776;Expand&#9776;</button>
+                <button id="gridrefSpec" class="dropbtnU" style="float:right;right:5%; background-color:black; color:white; padding-left:10px;" ng-click="wider('2','gridBOMItem','60%','15%')">&#9776;Collapse&#9776;</button>-->
+                <!--<button type="button" class="dropbtnU" style="float:right; background-color:white; color:black" ng-click="maximize('2','gridBOMItem','100%','50%');showInput('BOMPosInput','2')">MAX</button>
+                <button type="button" class="dropbtnU" style="float:right;background-color:black; color:white" ng-click="restore('2','50%','auto');hideInput('BOMPosInput')">Restore</button>-->
+                <div align="center"> &nbsp;BOM Position.</div>
+                <!--<input type="text" placeholder="BOM Position" style="padding-left:10px; background-color:brown; color:white; width:100%;height:auto;  font-size:medium; text-align: center;" ng-blur="blurT('ProcessTB2')" id="ProcessTB2" />-->
+                <!--1d2a25-->
+            </h9>
+        </div>
+        <div id="bomgridholder" style="height:100%; width:100%; overflow:hidden  ">
+            <!--<button id="BOMDisplay" style="background-color:transparent;color:white;border-color:darkolivegreen" hidden="hidden" ng-click="skillsFunc()">Refresh</button>-->
+            <div id="gridBOMItem" ui-grid="gridOptionsBOMItem" ui-grid-edit ui-grid-selection class="grid" style="display:block;width : 100%; height:200px;overflow:hidden"></div><!--ng-style="getTableHeight()"-->
+
+            <div style="background-color:darkslategray; color:black" class="grid-msg-overlay" ng-hide="!loading">
+                <div style="padding-left: 120px; background-color:darkslategray; color:white" class="msg">
+                    <span>Please wait while Loading Data...<br /><img class="img" src="../MESPortal.png" style="width:auto;height:auto; background-color:white" align="middle" id="logo"><br />Working on Retrieving info from plant...<i class="fa fa-spinner fa-spin"></i></span>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div id="BOMPosInput" style="background-color:transparent; color:white; float:left;margin-top:10px;width:100%;height:60%;border-radius:1px;border:1px solid white;font-size:120%; " ng-controller="IN2164controller" >
+        <!--<div align="center"> &nbsp;Edit BOM Position.&nbsp;<button type="button" class="dropbtnU" style="float:right; background-color:black; color:white" ng-click="hideInput('BOMPosInput')">&#9776;Hide&#9776;</button></div>-->
+
+        <div style="background-color:transparent; color:white; float:left;width:100%; font-size:120%;top:5%">
+            <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">BOMPosition.</label>
+            <!--<input id="BOMPosition" class="editable" contenteditable="true" style="border:1px solid #777777;width:20%; height:10%; float:left; background-color:white; color:black">-->
+            <select id="BOMPosition" style="border:1px solid #777777;width:20%;height:40px; float:left; background-color:white; color:black;font-size:medium;">
+                <option value=''></option>
+                <option value='10'>10</option>
+                <option value='20'>20</option>
+                <option value='30'>30</option>
+                <option value='40'>40</option>
+                <option value='50'>50</option>
+                <option value='60'>60</option>
+                <option value='70'>70</option>
+                <option value='80'>80</option>
+                <option value='90'>90</option>
+                <option value='100'>100</option>
+                <option value='110'>110</option>
+                <option value='120'>120</option>
+                <option value='130'>130</option>
+                <option value='140'>140</option>
+                <option value='150'>150</option>
+                <option value='160'>160</option>
+                <option value='170'>170</option>
+                <option value='180'>180</option>
+                <option value='190'>190</option>
+                <option value='200'>200</option>
+                <option value='210'>210</option>
+                <option value='220'>220</option>
+                <option value='230'>230</option>
+                <option value='240'>240</option>
+                <option value='250'>250</option>
+                <option value='260'>260</option>
+                <option value='270'>270</option>
+                <option value='280'>280</option>
+                <option value='290'>290</option>
+                <option value='300'>300</option>
+                <option value='310'>310</option>
+                <option value='320'>320</option>
+                <option value='330'>330</option>
+                <option value='340'>340</option>
+                <option value='350'>350</option>
+                <option value='360'>360</option>
+                <option value='370'>370</option>
+                <option value='380'>380</option>
+                <option value='390'>390</option>
+                <option value='400'>400</option>
+                <option value='410'>410</option>
+                <option value='420'>420</option>
+                <option value='430'>430</option>
+                <option value='440'>440</option>
+                <option value='450'>450</option>
+                <option value='460'>460</option>
+                <option value='470'>470</option>
+                <option value='480'>480</option>
+                <option value='490'>490</option>
+                <option value='500'>500</option>
+                <option value='510'>510</option>
+                <option value='520'>520</option>
+                <option value='530'>530</option>
+            </select>
+
+            <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">CompMaterial.</label>
+            <input id="ComponentMaterial" class="editable" contenteditable="true" style="border:1px solid #777777;width:20%; height:10%; float:left; background-color:white; color:black">
+            <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">ComponentQTY.</label>
+            <input id="ComponentQuantity" class="editable" contenteditable="true" style="border:1px solid #777777;width:20%; height:10%; float:left; background-color:white; color:black">
+        </div>
+
+        <div style="background-color:transparent; color:white; float:left;width:100%; font-size:120%;">
+            <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">OpAssign</label>
+            <!-- <input id="OperationAssignment" class="editable" contenteditable="true" style="border:1px solid #777777;width:20%; height:10%; float:left; background-color:white; color:black">-->
+            <select id="OperationAssignment" style="border:1px solid #777777;width:20%;height:40px; float:left; background-color:white; color:black;font-size:medium;">
+                <option value=''></option>
+                <option value='0010'>0010-STRC</option>
+                <option value='0020'>0020-VATL1</option>
+                <option value='0030'>0030-MIXL1</option>
+                <option value='0040'>0040-CFGPL1</option>
+                <option value='0150'>0150-REFINL1</option>
+                <option value='0500'>0500-LIQPROL1</option>
+                <option value='0510'>0510-PWDPROL1</option>
+
+            </select>
+            <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">StorageLocation.</label>
+            <!--<input id="StorageLocation" class="editable" contenteditable="true" style="border:1px solid #777777;width:20%; height:10%; float:left; background-color:white; color:black">-->
+            <select id="StorageLocation" style="border:1px solid #777777;width:20%;height:40px; float:left; background-color:white; color:black;font-size:medium;">
+                <option value=''></option>
+                <option value='1100'>1100</option>
+                <option value='1102'>1102</option>
+                <option value='1103'>1103</option>
+                <option value='1107'>1107</option>
+                <option value='1108'>1108</option>
+                <option value='1109'>1109</option>
+                <option value='1110'>1110</option>
+                <option value='1115'>1115</option>
+                <option value='1200'>1200</option>
+
+            </select>
+            <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">StorLocDesc.</label>
+            <!--<input id="StorageLocationDesc" class="editable" contenteditable="true" style="border:1px solid #777777;width:20%; height:10%; float:left; background-color:white; color:black">-->
+            <select id="StorageLocationDesc" style="border:1px solid #777777;width:20%;height:40px; float:left; background-color:white; color:black;font-size:medium;">
+                <option value=''></option>
+                <option value='CM-ADDBACK'>CM-AddBack</option>
+                <option value='CM-BLOCK'>CM-BLOCK</option>
+                <option value='CM-CFGPL1'>CM-CFGPL1</option>
+                <option value='CM-CFGPL2'>CM-CFGPL2</option>
+                <option value='CM-CFGPL3'>CM-CFGPL3</option>
+                <option value='CM-COLOR'>CM-Color</option>
+                <option value='CM-DRYMIX'>CM-DryMix</option>
+                <option value='CM-FLAVOR'>CM-Flavor</option>
+                <option value='CM-GRD'>CM-GRD</option>
+                <option value='CM-HSS'>CM-HSS</option>
+                <option value='CM-POWDER'>CM-Powder</option>
+                <option value='CM-POWDERS'>CM-PowderS</option>
+                <option value='CM-SLURRY'>CM-Slurry</option>
+                <option value='CM-SPRAY'>CM-SPRAY</option>
+                <option value='CM-TOTESTK'>CM-ToteStk</option>
+                <option value='CM-VAT'>CM-VAT</option>
+                <option value='NF-CONDENS'>NF-Condens</option>
+                <option value='NF-PACKAGE'>NF-Package</option>
+                <option value='NF-XPROCESS'>NF-xProces</option>
+                <option value='P-CELLULOS'>P-Cellulos</option>
+                <option value='P-HSS'>P-HSS</option>
+                <option value='P-LIQAPP'>p-LIQAPP</option>
+                <option value='P-NATAMAX'>P-Natamax</option>
+                <option value='P-PALLETIZ'>P-Palletiz</option>
+                <option value='P-PFGPL1'>P-PFGPL1</option>
+                <option value='P-PFGPL2'>P-PFGPL2</option>
+                <option value='P-PFGPL3'>P-PFGPL3</option>
+                <option value='P-PROPION8'>P-Propion8</option>
+                <option value='REFIN'>REFIN</option>
+                <option value='REPACK'>REPACK</option>
+                <option value='S-STARTER'>S-Starter</option>
+                <option value='W-HVPROTP'>W-HVProtP</option>
+                <option value='W-HVPROTS'>W-HVProts</option>
+                <option value='W-LACTOSE'>W-Lactose</option>
+                <option value='W-LACTOSEP'>W-LactoseP</option>
+                <option value='W-LIQPROT'>W-LiqProt</option>
+                <option value='W-LIQPROTP'>W-LiqProtP</option>
+                <option value='W-MWPC'>W-MWPC</option>
+                <option value='W-PACKAGIN'>W-Packagin</option>
+                <option value='W-PROCESSG'>W-Processg</option>
+                <option value='W-PROTPOWD'>W-ProtPowd</option>
+                <option value='W-PROTPOWP'>W-ProtPowP</option>
+
+            </select>
+        </div>
+        <div style="background-color:transparent; color:white; float:left;width:100%; font-size:120%;">
+            <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">RoutingOperation#.</label>
+            <!--<input id="RoutingOperationNumber" class="editable" contenteditable="true" style="border:1px solid #777777;width:20%; height:10%; float:left; background-color:white; color:black">-->
+            <select id="RoutingOperationNumber" style="border:1px solid #777777;width:20%;height:40px; float:left; background-color:white; color:black;font-size:medium;">
+                <option value=''></option>
+                <option value='0010'>0010-STRC</option>
+                <option value='0020'>0020-VATL1</option>
+                <option value='0030'>0030-MIXL1</option>
+                <option value='0040'>0040-CFGPL1</option>
+                <option value='0150'>0150-REFINL1</option>
+                <option value='0500'>0500-LIQPROL1</option>
+                <option value='0510'>0510-PWDPROL1</option>
+
+            </select>
+            <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">WorkCenter</label>
+            <!--<input id="OperationWorkCenter" class="editable" contenteditable="true" style="border:1px solid #777777;width:20%; height:10%; float:left; background-color:white; color:black">-->
+            <select id="OperationWorkCenter" style="border:1px solid #777777;width:20%;height:40px; float:left; background-color:white; color:black;font-size:medium;">
+                <option value=''></option>
+                <option value='CFGPL1'>CFGPL1</option>
+                <option value='CFGPL2'>CFGPL2</option>
+                <option value='CFGPL3'>CFGPL3</option>
+                <option value='HSCML1'>HSCML1</option>
+                <option value='HSCML2'>HSCML2</option>
+                <option value='HSCML3'>HSCML3</option>
+                <option value='HSCPL1'>HSCPL1</option>
+                <option value='HSCPL2'>HSCPL2</option>
+                <option value='HSCPL3'>HSCPL3</option>
+                <option value='LASFGL1'>LASFGL1</option>
+                <option value='LASFGL2'>LASFGL2</option>
+                <option value='LASFGL3'>LASFGL3</option>
+                <option value='LIQPROL1'>LIQPROL1</option>
+                <option value='MilkRec'>MilkRec</option>
+                <option value='MilkSto'>MilkSto</option>
+                <option value='MIXL1'>MIXL1</option>
+                <option value='MIXL2'>MIXL2</option>
+                <option value='MIXL3'>MIXL3</option>
+                <option value='MIXL4'>MIXL4</option>
+                <option value='MWPCL1'>MWPCL1</option>
+                <option value='PFGPL1'>PFGPL1</option>
+                <option value='PFGPL2'>PFGPL2</option>
+                <option value='PFGPL3'>PFGPL3</option>
+                <option value='PWDLACL1'>PWDLACL1</option>
+                <option value='PWDPROL1'>PWDPROL1</option>
+                <option value='REFINISHL1'>REFINISHL1</option>
+                <option value='REFINL1'>REFINL1</option>
+                <option value='REPACKL1'>REPACKL1</option>
+                <option value='STPB'>STPB</option>
+                <option value='STRC'>STRC</option>
+                <option value='VATL1'>VATL1</option>
+                <option value='VATL2'>VATL2</option>
+                <option value='VATL3'>VATL3</option>
+                <option value='VATL4'>VATL4</option>
+            </select>
+            <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">ShortText.</label>
+            <input id="OperationShortText" class="editable" contenteditable="true" style="border:1px solid #777777;width:20%; height:10%; float:left; background-color:white; color:black">
+        </div>
+        <div style="background-color:transparent; color:white; float:left;width:100%; font-size:120%;">
+            <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">CoProductFlag.</label>
+            <input id="CoProductFlag" class="editable" contenteditable="true" style="border:1px solid #777777;width:20%; height:10%; float:left; background-color:white; color:black">
+            <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">NumVessels.</label>
+            <input id="NumVessels" class="editable" contenteditable="true" style="border:1px solid #777777;width:20%; height:10%; float:left; background-color:white; color:black">
+            <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;float:left">POId.</label>
+            <input id="ProductionOrder_IdBOM" style="border:1px solid #777777;width:20%; height:10%; float:left; background-color:white; color:black" disabled="disabled">
+
+        </div>
+        <div style="background-color:transparent; color:white; float:left;width:100%; font-size:120%;">
+            <label style="background-color:transparent;color:white;width:100px; float:left; font-size:12px;">Selected PO.</label>
+            <input id="ProductionOrderBOM" style="border:1px solid #777777;width:20%;height:20%; float:left; background-color:forestgreen; color:white">
+        </div>
+
+        <div style="background-color:transparent; color:white; float:left;width:90%;height:20%;padding-top:10px; font-size:120%;">
+
+            <button class="dropbtnU" style="background-color:darkslateblue; color:white; height:100%; width:20%; vertical-align:top" ng-click="SaveAllBOM()">Save</button>
+            <button type="button" class="dropbtnU" style="float:left; background-color:firebrick; color:white;height:100%; width:20%" ng-click="clearTBBOM()">&nbsp;New BOM&nbsp;</button>
+            <button type="button" class="dropbtnU" style="float:left; background-color:darkslategray; color:white;height:100%; width:20%" ng-click="assignToCurrent('ProductionOrder_IdBOM')">&nbsp;AssignToCurrent&nbsp;</button>
+            <button type="button" class="dropbtnU" style="float:left; background-color:white; color:black;height:100%; width:20%" ng-click="clearTBBOM()">&diams;&nbsp; ClearAll &nbsp;&diams;</button>
+            <button type="button" class="dropbtnU" style="float:left; background-color:orangered; color:white;height:100%; width:20%" ng-click="DeleteBOM()">&diams;&nbsp; Delete &nbsp;&diams;</button>
+        </div>
+
+
+
+    </div>
+</body>
+</html>

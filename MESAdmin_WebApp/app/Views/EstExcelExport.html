@@ -1,0 +1,56 @@
+﻿<!doctype html>
+<html ng-app="myApp">
+
+
+<head>
+
+</head>
+<body>
+    <style>
+        .greenBackground {
+            background-color: #008000;
+            color: #e0ffc1;
+        }
+
+        .blueBackground {
+            background-color: #00008B;
+            color: white;
+        }
+    </style>
+    <div ng-controller="EstExcelExportcontroller">
+        
+        <!--<div ui-grid="gridOptions" ui-grid-selection ui-grid-exporter ui-grid-pagination ui-grid-move-columns class="grid"></div>-->
+        <div id="grid" ui-grid="gridOptions" ui-grid-exporter ui-grid-selection class="grid" ui-grid-pagination style="width:1400px; height:300px"></div>
+        <button ng-click="exportCSV()">Export CSV</button>
+        <div class="grid-msg-overlay" ng-hide="!loading">
+            <div class="msg">
+                <span>Loading Data...<i class="fa fa-spinner fa-spin"></i></span>
+            </div>
+        </div>
+
+        ng-controller="myCtrl">
+        <button ng-click="exportData()">Export</button>
+        <br />
+        <div id="exportable">
+            <table >
+                <thead>
+                    <tr>
+                        <th>Area</th>
+                        <th>UI</th>
+                        <th><!--DoB--></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-model="col" ng-options="i for i  in AreaList">
+                        <td>{AreaList.Area}</td>
+                        <td>{AreaList.UIName}</td>
+                        <!--<td>{{item.dob | date:'MM/dd/yy'}}</td>-->
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    <script src="EstExcelExportcontroller.js"></script>
+</body>
+</html>

@@ -1,0 +1,286 @@
+<HTML>
+<head>
+    <meta name="viewport" content="width=590">
+    <style>
+        html {
+            background: url(MESPortal.png) no-repeat right fixed;
+            background-size: 700px;
+            opacity: 2.2;
+            filter: alpha(opacity=220); /* For IE8 and earlier */
+        }
+
+        body {
+            color: transparent;
+            font-family: "Lato", sans-serif;
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 30%;
+            position: fixed;
+            z-index: 1;
+            top: 60px;
+            left: 0;
+            background-color: white;
+            overflow-x: hidden;
+            padding-top: 0px;
+            color:brown;
+        }
+
+            .sidenav a {
+                /*padding: 16px 16px 16px 42px;*/
+                text-decoration: none;
+                font-size: 25px;
+                color: #818181;
+                display: block;
+            }
+
+                .sidenav a:hover {
+                    color: #f1f1f1;
+                }
+
+        .main {
+            margin-left: 200px; /* Same as the width of the sidenav */
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+
+                .sidenav a {
+                    font-size: 18px;
+                }
+        }
+
+        .sidenavRight {
+            height: 100%;
+            width: 70%;
+            position: fixed;
+            z-index: 1;
+            top: 60px;
+            right: 0;
+            overflow-x: hidden;
+            padding-top: 0px;
+            background-color: white;
+            color:brown;
+        }
+
+            .sidenavRight a {
+                /*padding: 16px 16px 16px 42px;*/
+                text-decoration: none;
+                font-size: 25px;
+                display: block;
+            }
+
+                .sidenavRight a:hover {
+                    color: #f1f1f1;
+                }
+
+        .main {
+            margin-left: 200px; /* Same as the width of the sidenavRight */
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidenavRight {
+                padding-top: 0;
+            }
+
+                .sidenavRight a {
+                    font-size: 18px;
+                }
+        }
+
+        label {
+            font-family: "Times New Roman", Times, serif;
+            font-size: 120%;
+        }
+
+        .dropbtn {
+            background-color: #3498DB;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border: outset;
+            font-size: 120%;
+            width: 60%;
+        }
+
+        .dropbtnB {
+            background-color: white;
+            color: brown;
+            border: outset;
+            font-size: 120%;
+            width: 500PX;
+            cursor: pointer;
+        }
+
+        .dropbtn:hover, .dropbtn:focus {
+            background-color: #2980B9;
+        }
+
+        .dropbtnB:hover, .dropbtn:focus {
+            background-color: #7e2222;
+            color: lightgreen;
+            cursor: pointer;
+        }
+
+        /* Style The Dropdown Button */
+        .dropbtnLeftBar {
+            background-color: black;
+            border-color: #201e1e;
+            color: black;
+            border: none;
+            font-size: large;
+            font-weight: bold;
+            cursor: pointer;
+            height: 35px;
+            width: 80%;
+            padding-top: 5%;
+            padding-bottom: 5%;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+
+        #LoggedIn {
+            border: 0;
+            -webkit-appearance: none;
+        }
+
+
+        input[type=text]:disabled {
+            background-color: transparent;
+            color: lawngreen;
+            border: hidden;
+        }
+        .bigbtn {
+            background-color: white;
+            box-shadow: 3px 5px 5px gray;
+            border-radius: 3px;
+            transition: all .1s ease;
+            transform: scale(1);
+            color: #380f0f;
+            border: solid 1px;
+            font-size: x-large;
+            font-stretch: expanded;
+            font-weight: bold;
+            top: 0;
+            /*border-radius: 24px;*/
+            width: 100%;
+            height:60px;
+            text-align: center;
+        }
+
+            .bigbtn:hover {
+                /*  background-color: #450e0e;
+                color: lightgoldenrodyellow;
+                 Making button bigger on hover  */
+                transform: scale(1.1) perspective(1px);
+                background-color: #413b45;
+                color: white;
+            }
+    </style>
+</head>
+<body>
+    <div class="topnav" style="background-color:black" ng-controller="MESMenucontroller">
+    <a href="#/">Home</a>
+
+    <a class="active" href="" onclick="this.href='#/MESMenu?uname='+document.getElementById('LoggedIn').value+'&dom=DEN'">MES Menu</a>
+    <a href="" onclick="this.href='#/Estimator?uname='+document.getElementById('LoggedIn').value+'&dom=DEN'">Estimator</a>
+    <a href="" onclick="this.href='#/Project?uname='+document.getElementById('LoggedIn').value+'&dom=DEN'">Projects</a>
+    <a href="" onclick="this.href='#/Defect?uname='+document.getElementById('LoggedIn').value+'&dom=DEN'">Tasks</a>
+    <a href="" onclick="this.href='#/ChangeMgmt?uname='+document.getElementById('LoggedIn').value+'&dom=DEN'">Releases</a>
+    <a href="#/Support">Support</a>
+    <a href="#/MES">LogOut</a>
+        <label style="padding-left:200px; background-color:transparent; color:white; font-size:x-large">MES Portal Main Menu</label>
+    
+    <img src="../LeprinoLogo.png" style="width:76px;height:50px; background-color:white" align="right">
+</div>
+    <div ng-controller="MESMenucontroller">
+       
+        
+        <div style="text-align-last: right">
+
+            <p>Hello {{title}}</p>
+            <p id="uid"  style="border:hidden" name="uid">{{function_one()}} </p>
+        </div>
+
+        <div id="mySidenav" style="padding:2%;  background-color:transparent; height:87%; " class="sidenav" >
+
+            <div style="background-color:white; height:87%;border:solid 1px #e2f6dd; ">
+
+                <label style="color:lightgoldenrodyellow;font-style:italic;font-size:20px;float:left;padding-left:30%;text-align:center"></label>
+
+
+
+
+                <label style="font-size: large;background-color:darkslateblue; color: lightgoldenrodyellow; transition: 0.3s;text-align:center; width:100%;border:outset 1px darkslateblue">Ideation Phase </label>
+                <button class="bigbtn" type="button" onclick="redirectUID( '#/Estimator?uname=')">
+                    MES Project Estimator
+                </button>
+                <!--<button class="dropbtnLeftBar" type="button" style="background-color:transparent;color:lightgoldenrodyellow;transition: 0.3s; border:outset;border-color:darkslategray; border-top-left-radius:1px; border-bottom-left-radius:8px;" ng-click="openDIVReport('mysidenavRightREPORT');">
+        Reports
+    </button>-->
+                <label style="font-size: large; text-align:center;background-color:darkslateblue; color: lightgoldenrodyellow; transition: 0.3s; width:100%;border:outset 1px darkslateblue"> Project Approval </label>
+                <button class="bigbtn" type="button" onclick="redirectUID( '#/Project?uname=')">
+                    Project Activation & Dashboard
+                </button>
+
+
+                <label style="font-size:large;background-color:darkslateblue; color: lightgoldenrodyellow;transition: 0.3s;text-align:center; width:100%;border:outset 1px darkslateblue"> Design, Development, Users Testing and Deployment </label>
+                <button class="bigbtn" type="button" onclick="redirectUID( '#/Defect?uname=')">
+                    <!--<label style="font-family:sans-serif;font-size: 20px;color: white;display: block;transition: 0.3s;"></label>-->
+                    Leprino Task Management System
+                </button><br /><br />
+
+                <!--<button style="width:320px;background-color:darkslategray" class="dropbtnB" onclick="redirectUID( '#/processmapping?uname=')">
+        &#9776;Leprino Spec Management System
+    </button>-->
+                <!--<button class="dropbtnLeftBar" type="button" style="background-color:transparent;text-align:center; color:lightgoldenrodyellow;transition: 0.3s; border:outset;border-color:darkslategray; border-top-left-radius:1px; border-bottom-left-radius:8px;" onclick="redirectUID( '#/ProjectList?uname=')">
+        &#9776;MESApps Time Entry
+    </button>-->
+
+
+
+
+
+                <button class="bigbtn" type="button" onclick="redirectUID( '#/ChangeMgmt?uname=')">
+
+                    Leprino Release Management System
+                </button>
+
+
+
+                <br /><br />
+                <label style="font-size:large;background-color:darkslateblue; color: lightgoldenrodyellow; transition: 0.3s;text-align:center; width:80%; width:100%; border:outset 1px darkslateblue"> Knowledge Base </label>
+
+                <button class="bigbtn" type="button" onclick="location.href='https://leprinofoods.sharepoint.com/sites/productionsystems/MESKnowledgebase/Forms/AllItems.aspx?ExplorerWindowUrl=%2Fsites%2Fproductionsystems%2FMESKnowledgebase#InplviewHasha7cd73f0-c421-462c-9088-1e3f8983dd57='">
+
+                   Knowledge Base
+                </button>
+                <input id="LoggedIn" name="LoggedIn" onload="function_two('uname')" placeholder="Not Logged in!" style="width:15%;height:20px;background-color:transparent; color:white; font-size:x-small; font-style:italic; border:0; float:left;text-align:center;" disabled />
+            </div>
+
+        </div>
+
+        <div id="mySidenavRight" class="sidenavRight" style="height:87%;background-image:url(PMMethod.PNG);  background-repeat: no-repeat; background-size: 100% 85%; ">
+            
+                    <div  style="width:100%; background-color:black;color:white; border:ridge; bottom:0">
+                        <label align="center" style="color:white;font-size:20px;position: absolute;bottom:0">LPS Software Development Lifecycle (SDLC)</label> 
+                    </div>
+                   
+
+
+        </div>
+
+        <div>
+            <button id="rowfilter" class="dropbtn" hidden="hidden" ng-click="function_one()" on-load-clicker style="height:2.5em;align-content:center">Filter</button>
+
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><label typeof="LabelBox"> MES Applications Team- Contact via email at <a href="mailto:mesappsdev@leprinofoods.com?Subject=MES%20Request" target="_top">mesappsdev@leprinofoods.com</a></label> <label typeof="LabelBox" style="padding-left:20px"> or Dial the Extension</label> <b>5374</b> or <b>303-264-5374</b></p>
+    </div>
+</body>
+</HTML>

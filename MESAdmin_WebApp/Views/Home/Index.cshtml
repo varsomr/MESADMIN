@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<!DOCTYPE html>
+<html ng-app="myApp" >
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>LIT</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/site.css" rel="stylesheet" />
+    <link href="~/Content/ui-grid.css" rel="stylesheet" />
+    @*<base href="/">*@
+</head>
+<body>
+
+    <div id="wrapper">
+        <div ng-if="showMenu" ng-include src="navigationTemplate"></div>
+        <div ng-view>
+        </div>
+    </div>
+
+
+
+
+
+</body>
+@Scripts.Render("~/bundles/angular")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/app")
+</html>
+

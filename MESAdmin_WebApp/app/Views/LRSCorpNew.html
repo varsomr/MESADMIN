@@ -1,0 +1,257 @@
+﻿<!DOCTYPE html>
+<head>
+
+    <style>
+        /*.p1 {
+            background: url(MESPortal.png) no-repeat right fixed;
+            background-size: 700px;
+            opacity: 2.2;
+            filter: alpha(opacity=220);
+        }*/
+
+        body {
+            background: url('MESPortal.png') no-repeat right fixed;
+            background-size: 50%;
+            opacity: 2.2;
+            filter: alpha(opacity=220);
+            background-color:black;
+            color:white;
+        }
+
+        main {
+            margin-bottom: 200%;
+        }
+
+        .floating-menu {
+            animation: 2s ease-out 0s 1 slideInFromLeft;
+            font-family: sans-serif;
+            top: 6.5%;
+            left: 0;
+            background: #161414;
+            padding: 5%;
+            width: 30%;
+            z-index: 100;
+            position: fixed;
+        }
+
+            .floating-menu a,
+            .floating-menu h3 {
+                font-size: 0.9em;
+                display: block;
+                margin: 0 0.5em;
+                color: white;
+            }
+
+        @keyframes slideInFromLeft {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+
+        @keyframes slideInFromRight {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-5%);
+            }
+        }
+
+        /* Add a black background color to the top navigation */
+        .topnav {
+            animation: 1s ease-out 0s 1 slideInFromLeft;
+            background-color: black;
+            overflow: hidden;
+            /*padding-left: 1.5%;*/
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+        }
+
+            /* Style the links inside the navigation bar */
+            .topnav a {
+                float: left;
+                color: #f2f2f2;
+                text-align: center;
+                /*padding: 14px 16px;*/
+                text-decoration: none;
+                font-size: 15px;
+            }
+
+                /* Change the color of links on hover */
+                .topnav a:hover {
+                    background-color: #3f3e3e;
+                    color: lightgreen;
+                }
+
+                /* Add a color to the active/current link */
+                .topnav a.active {
+                    background-color: #4CAF50;
+                    color: white;
+                }
+
+
+        .floating-menuTop {
+            animation: 3s ease-out 0s 1 slideInFromLeft;
+            font-family: sans-serif;
+            padding-left: 5%;
+            top: 6.5%;
+            left: 0;
+            background: #161414;
+            color: yellowgreen;
+            width: 30%;
+            z-index: 100;
+            position: fixed;
+        }
+
+            .floating-menuTop a,
+            .floating-menuTop h3 {
+                font-size: 0.9em;
+                display: block;
+                margin: 0 0.5em;
+                color: white;
+            }
+
+        .navButton {
+            font-family: Oswald;
+            background-color: #161414;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0;
+            font-size: xx-large;
+            font-weight: bold;
+            line-height: 1.428571429;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            -o-user-select: none;
+            user-select: none;
+        }
+
+        a.navButton:hover {
+            border: outset;
+            border-color: orange;
+            color: yellowgreen;
+        }
+
+
+        .floating-menuRight {
+            /*animation: 2s ease-out 0s 1 slideInFromLeft;*/
+            font-family: sans-serif;
+            padding-left: 5%;
+            top: 6.5%;
+            right: 0;
+            background: #161414;
+            color: yellowgreen;
+            width: 70%;
+            height: 93.5%;
+            z-index: 100;
+            position: fixed;
+        }
+
+            .floating-menuRight a,
+            .floating-menuRight h3 {
+                font-size: 0.9em;
+                display: block;
+                margin: 0 0.5em;
+                color: white;
+            }
+    </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+    <!--<div class="topnav">
+        <a class="active" href="" onclick="this.href='#/LRSCorp'">Corporate Reports</a>
+        <a href="#/Support">Support</a>
+        <a href="../LPS-UtilityMeteringJobAid.pdf">Job-Aid</a>
+
+
+    </div>-->
+    <div class="floating-menuRight" style="width:70%;height:100%">
+        <label style="padding-left:120px; background-color:transparent; color:lightgoldenrodyellow; font-size:x-large">LEPRINO REPORTING SYSTEMS (LRS)- CORPORATE PORTAL</label>
+        <img src="../../LGR.png" style="
+                                padding:5%;
+                                width: 100%;
+                                opacity: 2.2;
+                                filter: alpha(opacity=220);
+                                /*background-color:#1f1c1c*/
+                                background-color:black
+                                " />
+
+
+
+    </div>
+
+    <nav class="floating-menu" style="height:100%;overflow:scroll" ng-controller="LRSCorpcontroller"  >
+        <div class="dropdown" style="background-color:transparent;color:white;transition: 0.3s; width:100%; border-bottom-right-radius:16px; border-top-right-radius:16px;">
+            <a class="navButton" id="lewbtn" style="font-size:12px;background-color:black;color:white" onclick="Expand1T9('LEWHolder','lewbtn');">Lemoore West<img style="width:25px;height:25px" src="RIGHT.png" /></a>
+
+        </div><!--<button href="#/UtilityMetering?plant=LEW">Lemoore West&nbsp;<img style="width:25px;height:25px" src="RIGHT.png" /></button>-->
+        <div id="LEWHolder" style="height:0;visibility:collapse">
+            <a class="navButton" onclick="document.getElementById('demo').innerHTML = 'Lemoore West';maximize()" style="font-size:12px;background-color:#3c1313;color:white">
+                All Areas
+            </a>
+            <a class="navButton" style="font-size:12px;background-color:#3c1313;color:white" onclick="document.getElementById('Reports').src = 'http://lewc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f3_Cheese&ViewMode=List'; ajaxStart()"> Cheese</a>
+            <a class="navButton" style="font-size:12px;background-color:#3c1313;color:white" onclick="document.getElementById('Reports').src = 'http://lewc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f4_Processing&ViewMode=List'; ajaxStart()"> Processing</a>
+            <a class="navButton" style="font-size:12px;background-color:#3c1313;color:white" onclick="document.getElementById('Reports').src = 'http://lewc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f5_Whey&ViewMode=List'; ajaxStart()"> Whey</a>
+            <a class="navButton" style="font-size:12px;background-color:#3c1313;color:white" onclick="document.getElementById('Reports').src = 'http://lewc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f2_Dairy_Liquids&ViewMode=List'; ajaxStart()"> DairyLiquids</a>
+            <a class="navButton" style="font-size:12px;background-color:#3c1313;color:white" onclick="document.getElementById('Reports').src = 'http://lewc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f1_Plant_General&ViewMode=List'; ajaxStart()"> PlantGeneral</a>
+        </div>
+        <a class="navButton" href="#/UtilityMetering?plant=GRE">Greeley&nbsp;<img style="width:25px;height:25px" src="RIGHT.png" /></a>
+        <br />
+        <a class="navButton" href="#/UtilityMetering?plant=ROS">Roswell&nbsp;<img style="width:25px;height:25px" src="RIGHT.png" /></a>
+        <br />
+        <a class="navButton" href="#/UtilityMetering?plant=FTM">Fort Morgan&nbsp;<img style="width:25px;height:25px" src="RIGHT.png" /></a>
+        <br />
+        <a class="navButton" href="#/UtilityMetering?plant=TRA">Tracy&nbsp;<img style="width:25px;height:25px" src="RIGHT.png" /></a>
+        <br />
+        <a class="navButton" href="#/UtilityMetering?plant=LEM">Lemoore East&nbsp;<img style="width:25px;height:25px" src="RIGHT.png" /></a>
+        <br />
+        <a class="navButton" href="#/UtilityMetering?plant=ALN">Allendale&nbsp;<img style="width:25px;height:25px" src="RIGHT.png" /></a>
+        <br />
+
+        <a class="navButton" href="#/UtilityMetering?plant=REM">Remus&nbsp;<img style="width:25px;height:25px" src="RIGHT.png" /></a>
+        <br />
+        <a class="navButton" href="#/UtilityMetering?plant=WAV">Waverly&nbsp;<img style="width:25px;height:25px" src="RIGHT.png" /></a>
+        <br />
+
+        <a class="navButton" href="#/UtilityMetering?plant=DEN">DEN&nbsp;<img style="width:25px;height:25px" src="RIGHT.png" /></a>
+        <br />
+
+    </nav>
+
+    <nav class="floating-menuTop">
+        <img src="../../LeprinoLogo.png" style="width:45px;height:30px" />&nbsp&nbsp&nbsp&nbsp<label style="font-size:x-large; font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">SELECT A PLANT</label>
+        <br />
+    </nav>
+
+
+</body>
+

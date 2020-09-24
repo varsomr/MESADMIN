@@ -1,0 +1,1517 @@
+﻿<html>
+<head>
+    <meta name="viewport" content="width=590">
+    <!--<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0" />-->
+
+
+    <style>
+        @import url("../../Content/GridFormat.css");
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            padding-left: 0px;
+            background-color: black;
+            border-style: solid;
+            border-bottom-width: thick;
+            border-color: black;
+            /*font-family: "Times New Roman", Times, serif;*/
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+            body > div {
+                width: 90%;
+                height: 90%;
+                /*background: green;*/
+            }
+
+                body > div > div {
+                    width: 100%;
+                    /*background: red;*/
+                }
+
+                    body > div > div > div {
+                        width: 100%;
+                        /*background: red;*/
+                    }
+
+                        body > div > div > div > div {
+                            width: 100%;
+                            /*background: red;*/
+                        }
+
+        /* Set padding to keep content from hitting the edges */
+        .body-content {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 40%;
+        }
+
+        label[type="labelBox"] {
+            /*background-color: #f7c50d;#f7620d*/
+            background-color: transparent;
+            /*font-size: 10px;*/
+            /*font-family: 'Open Sans';*/
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: 200;
+            font-size: small;
+        }
+
+        #sidepanel {
+            background-color: black;
+            border-bottom-left-radius: 8px;
+            border-top-left-radius: 8px;
+            border-right-style: hidden;
+            border-color: deepskyblue;
+            position: absolute;
+            min-width: 10px;
+            height: 10%;
+            top: 0.45%;
+            right: 0;
+        }
+
+        #bar {
+            display: table;
+            background-color: black;
+            color: lightgoldenrodyellow;
+            width: 10px;
+            height: 30%;
+            text-align: center;
+            border-bottom-left-radius: 8px;
+            border-top-left-radius: 8px;
+            border-color: darkslategray;
+        }
+
+            #bar div {
+                display: table-cell;
+                vertical-align: top;
+                padding-top: 0;
+            }
+
+        #panel {
+            display: none;
+            background-color: #2F404F;
+            color: orangered;
+            width: 300px;
+            height: 100%;
+            text-align: center;
+        }
+
+            #panel div {
+                display: table-cell;
+                vertical-align: top;
+            }
+
+        #sidepanel:hover #bar {
+            display: none;
+        }
+
+        #sidepanel:hover #panel {
+            display: table;
+        }
+
+        .input {
+            border: 1px solid #777777;
+            width: 30%;
+            height: 10%;
+            float: left;
+            font-size: large;
+            background-color: white;
+            color: black;
+        }
+
+        .input-value {
+            transition: .7s;
+            width: 75px;
+        }
+
+        .input-expand {
+            transition: .7s;
+            width: 300px;
+        }
+
+
+
+        .grid {
+            width: 1200px;
+            height: 300px;
+            /*background-color: #2E4A62 !important;*/
+            background-color: black !important;
+            bottom: 0;
+            color: lightgoldenrodyellow !important;
+            grid-gap: 5px;
+            font-size: medium;
+            text-align: center;
+        }
+
+        .ui-grid-row:nth-child(odd) .ui-grid-cell {
+            background-color: black;
+            border: none;
+            color: white;
+        }
+
+        .ui-grid-row:nth-child(even) .ui-grid-cell {
+            background-color: black;
+            color: white;
+            border: none;
+        }
+
+
+
+        .ui-grid-cell-focus {
+            outline: 0;
+            background-color: #ada624;
+            border: outset;
+        }
+
+
+        .ui-grid-row-selected.ui-grid-row:nth-child(odd) .ui-grid-cell,
+        .ui-grid-row-selected.ui-grid-row:nth-child(even) .ui-grid-cell {
+            background-color: white;
+            border: outset;
+            color: darkslategrey;
+            font-weight: bold;
+        }
+
+            .ui-grid-row-selected.ui-grid-row:nth-child(odd) .ui-grid-cell.ui-grid-cell-focus,
+            .ui-grid-row-selected.ui-grid-row:nth-child(even) .ui-grid-cell.ui-grid-cell-focus {
+                outline: 0;
+                background-color: white;
+                font-weight: bold;
+            }
+
+        .ui-grid-row-selected.ui-grid-row:nth-child(odd):hover .ui-grid-cell,
+        .ui-grid-row-selected.ui-grid-row:nth-child(even):hover .ui-grid-cell {
+            color: darkslategrey;
+            background-color: white;
+            font-weight: bold;
+        }
+
+        .grid .ui-grid-render-container-body .ui-grid-header-cell,
+        .grid .ui-grid-header-cell {
+            background-color: black;
+            color: white;
+            font-size: 10px;
+        }
+
+        .grid .ui-grid-render-container-body .ui-grid-cell-contents-break,
+        .grid .ui-grid-cell-contents-break {
+            padding: 5px;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            overflow: hidden;
+            height: 100%;
+            word-break: break-all;
+            text-align: center;
+        }
+
+
+
+
+        .grid .ui-grid-filter-container {
+            padding: 1px 1px;
+        }
+
+        .grid-msg-overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 90%;
+        }
+
+            .grid-msg-overlay .msg {
+                opacity: 1;
+                position: absolute;
+                top: 5%;
+                left: 1%;
+                width: 90%;
+                height: 60%;
+                background-color: black;
+                /*border: 1px solid #556;*/
+                text-align: center;
+                font-size: 24px;
+                display: table;
+                color: white;
+            }
+
+
+                .grid-msg-overlay .msg span {
+                    display: table-cell;
+                    vertical-align: middle;
+                }
+
+
+        #grid .ui-grid-cell-contents {
+            text-align: center;
+            -ms-text-overflow: clip;
+            -o-text-overflow: clip;
+            text-overflow: clip;
+            align-content: stretch;
+            word-wrap: break-word;
+        }
+
+
+        /*#grid .ui-grid-cell {
+            font-size: 12px;
+            font-weight: 500;
+        }*/
+
+
+        .grey .ui-grid-cell-contents {
+            /*background-color: #006E6D;
+            font-weight: bold;*/
+            background-color: darkgreen;
+            color: white;
+        }
+
+
+        .green {
+            background-color: darkgreen;
+            color: white;
+            /*font-weight: bold;*/
+        }
+
+        .blue {
+            background-color: #1fe0f0;
+            color: #153ff0;
+        }
+
+        label {
+            /*font-family: 'Open Sans';*/
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: 400;
+            font-size: x-small;
+        }
+
+        input:focus {
+            background-color: black;
+            color: white;
+        }
+
+
+
+
+        .dropbtnU {
+            background-color: darkslategray;
+            color: lightgoldenrodyellow;
+            padding: 0;
+            font-size: 12px;
+            border: outset;
+            border-radius: 0;
+        }
+
+            .dropbtnU:hover, .dropbtnU:focus {
+                background-color: #2980B9;
+            }
+
+
+        .topButton {
+            background-color: black;
+            color: lightgoldenrodyellow;
+            padding: 0;
+            font-size: 7px;
+            border: hidden;
+        }
+
+            .topButton:hover, .dropbtnU:focus {
+                background-color: midnightblue;
+                color: white;
+            }
+
+
+        .topnav {
+            background-color: black;
+            overflow: hidden;
+            /*padding-left: 1.5%;*/
+            position: fixed;
+            width: 100%;
+            height: 5%;
+            top: 0;
+            left: 0;
+        }
+
+            /* Style the links inside the navigation bar */
+            .topnav a {
+                float: left;
+                color: #f2f2f2;
+                text-align: center;
+                /*padding: 14px 16px;*/
+                text-decoration: none;
+                font-size: 15px;
+            }
+
+                /* Change the color of links on hover */
+                .topnav a:hover {
+                    background-color: navajowhite;
+                    color: black;
+                }
+
+                /* Add a color to the active/current link */
+                .topnav a.active {
+                    background-color: #4CAF50;
+                    color: white;
+                }
+
+        .sidenav {
+            height: 95%;
+            width: 40%;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            background-color: black;
+            /*overflow: hidden;*/
+            top: 5%;
+            align-content: center;
+            border: none;
+            border-color: black;
+        }
+
+            .sidenav a {
+                /*padding: 5px 5px 5px 42px;*/
+                text-decoration: none;
+                font-size: 16px;
+                color: #818181;
+                display: block;
+                border: none;
+            }
+
+                .sidenav a:hover {
+                    color: #f1f1f1;
+                    border: none;
+                }
+
+        #main {
+            transition: margin-left .5s;
+        }
+
+        .sidenavRight {
+            height: 95%;
+            /*width: 90.352%;*/
+            width: 100%;
+            position: fixed;
+            z-index: 1;
+            top: 5%;
+            right: 0;
+            background-color: white;
+            /*overflow-y: scroll;*/
+            transition: 0.7s;
+            color: #FFEC9C;
+            overflow: hidden;
+        }
+
+            .sidenavRight a {
+                text-decoration: none;
+                font-size: 25px;
+                color: #168817;
+                display: block;
+                transition: 0.4s;
+            }
+
+                .sidenavRight a:hover {
+                    color: #f1f1f1;
+                }
+
+            .sidenavRight .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+        @media screen and (max-height: 450px) {
+            .sidenavRight {
+                padding-top: 0;
+            }
+
+                .sidenavRight a {
+                    font-size: 18px;
+                }
+        }
+
+        .sidenavRightMain {
+            height: 95%;
+            /*width: 90.352%;*/
+            width: 100%;
+            position: fixed;
+            z-index: 1;
+            top: 10%;
+            right: 0;
+            background-color: white;
+            /*overflow-y: scroll;*/
+            transition: 0.7s;
+            color: #FFEC9C;
+            /*padding-top: 60px;*/
+        }
+
+            .sidenavRightMain a {
+                /*padding: 8px 8px 8px 32px;*/
+                text-decoration: none;
+                font-size: 25px;
+                color: #168817;
+                display: block;
+                transition: 0.4s;
+            }
+
+                .sidenavRightMain a:hover {
+                    color: #f1f1f1;
+                }
+
+            .sidenavRightMain .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+
+
+        @media screen and (max-height: 450px) {
+            .sidenavRightMain {
+                padding-top: 0;
+            }
+
+                .sidenavRightMain a {
+                    font-size: 18px;
+                }
+        }
+
+
+
+        .sidenavRightS {
+            height: 100%;
+            width: 100%;
+            position: page;
+            z-index: 1;
+            top: 20%;
+            right: 0;
+            background-color: #33a03f;
+            /*overflow:no-display;*/
+            transition: 0.6s;
+            color: #FFEC9C;
+            /*padding-top: 60px;*/
+        }
+
+            .sidenavRightS a {
+                /*padding: 8px 8px 8px 32px;*/
+                text-decoration: none;
+                font-size: 25px;
+                color: #818181;
+                display: block;
+                transition: 0.6s;
+            }
+
+                .sidenavRightS a:hover {
+                    color: #f1f1f1;
+                }
+
+            .sidenavRightS .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+
+
+
+        @media screen and (max-height: 450px) {
+            .sidenavRightS {
+                padding-top: 0;
+            }
+
+                .sidenavRightS a {
+                    font-size: 18px;
+                }
+        }
+
+        .force-overflow {
+            min-height: 450px;
+        }
+
+
+        /*#grid::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            border-radius: 10px;
+            background-color: #F5F5F5;
+        }
+
+        #grid::-webkit-scrollbar {
+            width: 12px;
+            background-color: #F5F5F5;
+        }
+
+        #grid::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+            background-color: #D62929;
+        }*/
+
+        /*********************Grid Webkits to Customize Scroll Bars************************************/
+        /* Let's get this party started */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            /*background: rgba(255,0,0,0.8);*/
+            background: lightgreen;
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+        }
+
+            ::-webkit-scrollbar-thumb:window-inactive {
+                background: rgba(255,0,0,0.4);
+            }
+
+
+        #Comment {
+            width: 100%;
+            height: 200px;
+            border: 1px solid red;
+        }
+
+
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            -webkit-animation-name: fadeIn; /* Fade in the background */
+            -webkit-animation-duration: 0.4s;
+            animation-name: fadeIn;
+            animation-duration: 0.4s;
+            border: outset;
+            border-color: brown;
+        }
+
+        /* Modal Content */
+        .modal-content {
+            position: fixed;
+            bottom: 0;
+            background-color: black;
+            color: white;
+            width: 70%;
+            height: 70%;
+            border: outset;
+            border-color: brown;
+            -webkit-animation-name: slideIn;
+            -webkit-animation-duration: 0.4s;
+            animation-name: slideIn;
+            animation-duration: 0.4s
+        }
+
+        /* The Close Button */
+        .close {
+            color: white;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+        .modal-header {
+            padding: 2px 8px;
+            background-color: darkslategrey;
+            color: lightgoldenrodyellow;
+        }
+
+        .modal-body {
+            padding: 2px 8px;
+        }
+
+        .modal-footer {
+            padding: 2px 8px;
+            background-color: black;
+            color: white;
+        }
+
+        /* Add Animation */
+        @-webkit-keyframes slideIn {
+            from {
+                bottom: -300px;
+                opacity: 0
+            }
+
+            to {
+                bottom: 0;
+                opacity: 1
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                bottom: -300px;
+                opacity: 0
+            }
+
+            to {
+                bottom: 0;
+                opacity: 1
+            }
+        }
+
+        @-webkit-keyframes fadeIn {
+            from {
+                opacity: 0
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+
+
+
+        .dropbtnR {
+            background-color: black;
+            color: lightgoldenrodyellow;
+            padding: 0;
+            font-size: 12px;
+            border: outset;
+            border-radius: 8px;
+            border-color: darkslategray;
+            width: 12.5%;
+            height: 80%;
+        }
+
+        .dropbtnU:hover, .dropbtnU:focus {
+            background-color: #2980B9;
+        }
+
+
+        input[Disabled] {
+            border: hidden;
+            background-color: black;
+            color: white;
+            /*outline: none !important;*/
+            font-size: xx-small;
+        }
+        /*div#MainCtrls {
+            position: relative;
+            height: auto !important;
+            min-height: 100%;
+        }*/
+
+
+
+        /*.checkbox input[type=checkbox] {
+            display: none;
+        }
+
+            .checkbox input[type=checkbox]:not(:checked) + label:before {
+                content: "";
+                border: 2px solid #000;
+                height: 10px;
+                width: 10px;
+                display: inline-block;
+            }
+
+            .checkbox input[type=checkbox]:checked + label:before {
+                content: "";
+                border: 2px solid #000;
+                height: 10px;
+                width: 10px;
+                background: #000;
+                display: inline-block;
+            }*/
+
+        .ui-grid-filter-container .ui-grid-filter-button {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+        }
+
+            .ui-grid-filter-container .ui-grid-filter-button [class^="ui-grid-icon"] {
+                position: absolute;
+                top: 50%;
+                line-height: 32px;
+                margin-top: -16px;
+                right: 10px;
+                opacity: 0.66;
+                background-color: black;
+                color: green;
+            }
+
+                .ui-grid-filter-container .ui-grid-filter-button [class^="ui-grid-icon"]:hover {
+                    opacity: 1;
+                }
+
+        .ui-grid-filter-container .ui-grid-filter-button-select {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+        }
+
+            .ui-grid-filter-container .ui-grid-filter-button-select [class^="ui-grid-icon"] {
+                position: absolute;
+                top: 50%;
+                line-height: 32px;
+                margin-top: -16px;
+                right: 0px;
+                opacity: 0.66;
+            }
+
+                .ui-grid-filter-container .ui-grid-filter-button-select [class^="ui-grid-icon"]:hover {
+                    opacity: 1;
+                }
+
+
+
+
+        input[type="text"].ui-grid-filter-input {
+            padding: 0;
+            margin: 0;
+            border: 0;
+            width: 100%;
+            border: 2px solid lightgreen;
+            background-color: black;
+            color: white;
+            font-size: medium;
+            text-align: center;
+            -webkit-border-top-right-radius: 0px;
+            -webkit-border-bottom-right-radius: 0;
+            -webkit-border-bottom-left-radius: 0;
+            -webkit-border-top-left-radius: 0;
+            -moz-border-radius-topright: 0px;
+            -moz-border-radius-bottomright: 0;
+            -moz-border-radius-bottomleft: 0;
+            -moz-border-radius-topleft: 0;
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+            border-top-left-radius: 0;
+            -moz-background-clip: padding-box;
+            -webkit-background-clip: padding-box;
+            background-clip: padding-box;
+        }
+
+            input[type="text"].ui-grid-filter-input:focus {
+                border: 1px solid #d4d4d4;
+                background-color: brown;
+                color: white;
+            }
+
+            input[type="text"].ui-grid-filter-input:hover {
+                border: 1px solid #d4d4d4;
+                background-color: darkslategray;
+                color: white;
+            }
+
+
+        /* Modal Content */
+        .modal-content {
+            position: fixed;
+            bottom: 0;
+            background-color: white;
+            color: darkslategray;
+            width: 100%;
+            height: 100%;
+            border: outset;
+            border-color: brown;
+            -webkit-animation-name: slideIn;
+            -webkit-animation-duration: 0.4s;
+            animation-name: slideIn;
+            animation-duration: 0.4s
+        }
+
+        /* The Close Button */
+        .close {
+            color: black;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            background-color: white;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: white;
+                background-color: darkgoldenrod;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+        .modal-header {
+            padding: 2px 8px;
+            background-color: darkslategrey;
+            color: lightgoldenrodyellow;
+        }
+
+        .modal-body {
+            padding: 2px 8px;
+        }
+
+        .modal-footer {
+            padding: 2px 8px;
+            background-color: black;
+            color: white;
+        }
+
+        /* Add Animation */
+        @-webkit-keyframes slideIn {
+            from {
+                bottom: -300px;
+                opacity: 0
+            }
+
+            to {
+                bottom: 0;
+                opacity: 1
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                bottom: -300px;
+                opacity: 0
+            }
+
+            to {
+                bottom: 0;
+                opacity: 1
+            }
+        }
+
+        @-webkit-keyframes fadeIn {
+            from {
+                opacity: 0
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        .holds-the-login {
+            background: url(../MSS.PNG) bottom left no-repeat;
+            opacity: 0.4;
+        }
+
+        .holds-the-iframe {
+            background: url(../LRS.png) bottom center no-repeat;
+        }
+
+        .bigbtn {
+            background-color: transparent;
+            box-shadow: 3px 5px 5px gray;
+            border-radius: 3px;
+            transition: all .1s ease;
+            transform: scale(1);
+            color: lightgoldenrodyellow;
+            border: outset 1px;
+            font-size: x-small;
+            /*font-stretch: expanded;*/
+            font-weight: bold;
+            top: 0;
+            text-align: start;
+        }
+
+            .bigbtn:hover {
+                /*  background-color: #450e0e;
+                color: lightgoldenrodyellow;
+                 Making button bigger on hover  */
+                transform: scale(1.3) perspective(1px);
+                background-color: mediumslateblue;
+                color: white;
+            }
+    </style>
+</head>
+<body>
+    <div class="topnav" style="width:100%;height:5%;float:left" ng-controller="ChangeMgmtcontroller">
+        <img src="../LeprinoLogo.png" style="width:50px;height:30px; background-color:white" align="left">
+        <a class="topButton" href="#/">Home</a>
+        <a class="topButton" href="" onclick="this.href='#/MESMenu?uname='+document.getElementById('LoggedIn').value+'&dom=DEN'">MES Menu</a>
+        <a class="topButton" href="" onclick="this.href='#/Estimator?uname='+document.getElementById('LoggedIn').value+'&dom=DEN'">Estimator</a>
+        <a class="topButton" href="" onclick="this.href='#/Project?uname='+document.getElementById('LoggedIn').value+'&dom=DEN'">Projects</a>
+        <a class="topButton" href="" onclick="this.href='#/Defect?uname='+document.getElementById('LoggedIn').value+'&dom=DEN'">Tasks</a>
+        <a class="active" href="" onclick="this.href='#/ChangeMgmt?uname='+document.getElementById('LoggedIn').value+'&dom=DEN'">Releases</a>
+        <a class="topButton" href="#/Support">Support</a>
+        <a class="topButton" href="#/MES">LogOut</a>
+
+        <input type="checkbox" id="checkComment" style="float:right;font-size:xx-large; width:25px; height:25px; color:white;background-color:black;display:none" ng-click="showComments()" /><label style="float:right;font-size:medium;color:white;display:none">Detail:</label>
+        <input type="checkbox" id="ckLock" style="background-color:black;color:lightgoldenrodyellow;float:right;width:5%;height:60%" ng-model="checkedLock">
+        <label style="padding-left:200px; background-color:transparent; color:white; font-size:x-large;float:right">
+            Lock
+        </label>
+        <label style=" background-color:transparent; color:darkseagreen; font-size:small">MES Release Management Portal</label>
+        <input id="LoggedIn" style="background-color:black; color:white;font-size:small; height:30%; text-align:center;float:right " disabled />
+
+    </div>
+
+
+
+
+    <div name="MainCtrls" id="MainCtrls" style="width:100%;height:95%; border:outset;float:left" ng-controller="ChangeMgmtcontroller">
+
+        <div id="sideGrid" class="sidenavRight" style="width:100%; height:100%;float:left;background-color:black;color:white">
+            <div id="additionalSpecBtn" style="width:100%; height:5%; background-color:black;float:left" name="additionalSpecBtn">
+
+                <button class="bigbtn" id="refr" type="button" style="transition: 1s;background-color:transparent; border:hidden; color:white;float:left; " ng-click="refreshGrid();">
+                    <img src="REFRESH.png" title="refresh" style="width:30px;height:30px; border:outset 2px darkslategrey; border-radius:24px" />
+                </button>
+                <button class="bigbtn" id="EDnEW" type="button" style="transition: 1s;background-color:transparent; border:hidden; color:white;float:left; " ng-click="Undo();openModal('tableDIV');">
+                    <img src="EDIT.png" title="Edit/New" style="width:30px;height:30px; border:outset 2px darkslategrey; border-radius:24px">
+                </button>
+                <button class="bigbtn" style="width:30px;height:30px; border:outset 2px darkslategrey;background-color:black;color:white; border-radius:24px;float:left" ng-click="clearFilters()">Clear</button>
+
+            </div>
+            <div id="gridholder" style="width:100%; height:95%;background-color:black;color:white;float:left">
+
+                <div id="grid" ui-grid="gridOptions" ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="grid" style="width:1200px; height: 80vh;border:outset;border-color:brown;border-radius:4px;font-size:medium;background-color:black;color:white"></div>
+                <div style="width:100%; padding-top: 0;background-color:darkslategray; color:black" class="grid-msg-overlay" ng-hide="!loading">
+                    <div style="padding-left: 120px; background-color:darkslategray; color:white" class="msg">
+                        <span>Please wait while Loading Data...<br /><img class="img" src="../MESPortal.png" style="width:auto;height:auto; background-color:white" align="middle" id="logo"><br />Working on Retrieving info from plant...<i class="fa fa-spinner fa-spin"></i></span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="tableDIV" class="modal" style="width:100%; height:90%; align-content:center;text-align:center; float:left;background-color:black;color:lightgoldenrodyellow;">
+            <!-- Modal content -->
+            <div class="modal-content"
+                 style="height:100%;  background-color:black;color:white">
+
+                <div class="modal-body" style="height:100%;  background-color:black;color:white">
+
+
+                    <div id="tableholder" style="width:100%;height:100%; align-content:center;text-align:center; border-radius:10px " ng-controller="ChangeMgmtcontroller">
+
+                        <div id='topBlock' style="border:outset;width:100%; height:5%;float:left;">
+                            <label type="labelBox" style="width: auto;float:left; font-size:medium; color:white">Overall Release Status for #</label>
+                            <button class="bigbtn" style="width:35px;height:30px; left:20px; background-color:saddlebrown;color:white; font-size:small; border-radius:24px;border-bottom-right-radius:0px; border-top-right-radius:0px; float:left" ng-click="goPrevious()">Prev</button>
+                            <!--<input id="row_id" style="width:90px;height:45px;text-align:center; float:left;color:white;background-color:transparent; border:solid 2px darkslategrey;font-size:x-large" name="row_id" disabled="disabled">-->
+                            <input id="row_id" style="background-color:black; color:lightgoldenrodyellow; text-align:center; border:solid 2px darkslategrey;font-size:large;float:left;width:50px;height:30px" name="row_id" disabled="disabled" />
+                            <button class="bigbtn" style="width:35px;height:30px; left:20px; background-color:#c8a30f;color:white; font-size:small; border-radius:24px;float:left;border-bottom-left-radius:0px; border-top-left-radius:0px" ng-click="goNext()">Next</button>
+
+                            <input id="ReleaseName" ng-model="ReleaseName" style="width:70%; height:100%; font-size:x-large; float:left; background-color:white;color:black; border-color:mediumslateblue; border:thick; text-align:center" placeholder="Release Name" type="text" name="ReleaseName" onblur="SetScreen()" />
+                            <!--<button class="dropbtn" id="closeiNPUT" type="button" style="transition: 1s;background-color:transparent; color:white;float:right;border-radius:24px; width:30px;height:30px;font-size:medium;border:outset;text-align:center" ng-click="cancelModal('tableDIV');refreshPostChange();">x</button>-->
+                            <button id="CloseModal" type="button" ng-click="cancelModal('tableDIV');refreshPostChange();" style="transition: 1s;background:fixed 2px black; color:white;float:right;border-radius:24px;width:30px;height:30px; font-size:large;">X</button>
+                        </div>
+
+
+                        <div id="ReleaseNameGroup" name="ReleaseNameGroup" class="ReleaseNameGroup" style="background-color:black; color:white; width:100%;height:10%;float:left">
+                            <div style="width:100%;height:40%">
+                                <input id="Status" style="width:40%;height:50%; font-size:x-small; color:forestgreen;text-align:center" name="Status" type="hidden" />
+                                <select id="StatusDropdown" onchange="ChooseStatus(this)" style="padding-left: 0px;float:left; color:white; font-size:medium; background-color: black;width:40%;height:100%;text-align:center" disabled="disabled">
+                                    <option value='NOTStarted' style="background-color:white;color:black"> NOTStarted</option>
+                                    <option value='Pending' style="background-color:yellow;color:brown"> Pending</option>
+                                    <option value='ApprovedForRollout' style="background-color:green;color:white"> ApprovedForRollout</option>
+                                    <option value='Rejected' style="background-color:red;color:white"> Rejected</option>
+                                </select>
+
+                                <select id="AssignedTo" style="border:1px solid #777777;width:20%; height:100%; float:right; font-size:large;background-color:black; color:white">
+                                    <option value=''>--</option>
+                                    <option value='givensc'>Chad Givens</option>
+                                    <option value='sherbahnm'>Matt Sherbahn</option>
+                                    <option value='hasanif'>Iftekhar Hasan</option>
+                                    <option value='haywood'>Michael Haywood</option>
+                                    <option value='somuriva'>Varun Somuri</option>
+                                    <option value='neeliva'>Vamshi Neeli</option>
+                                    <option value='shinse'>Seonyong Shin</option>
+                                    <option value='gudmunma'>Matthew Gudmundson</option>
+                                    <option value='pmarathe'>PriyaRanjan Marathe</option>
+                                </select>
+                                <label type="labelBox" style="width: auto;float:right; font-size:medium; color:white">AssignedTo:</label>
+                            </div>
+                            <div style="width:100%;height:60%">
+                                <!--<div style="background-color:#034F84"><input id="Description" align="right" ng-model="Description" style="right:0;width:100%;height:auto; background-color:white; border:inset; color:saddlebrown; font-size:10px; text-align:center" placeholder="Release Description" type="text" name="Description"> </input></div>-->
+                                <input id="Description" type="text" style="border:1px solid #777777;width:100%; height:40px; float:left; font-size:medium; background-color:white;color:brown" placeholder="Release Description" />
+
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div id="BA" name="BA" style="border: outset; width:100%; height:11%; background-color:black; color:white; font-weight:bolder; font-size:small;float:left">
+
+
+                            <!--<div style="width:100%; height:30%; float:left; ">-->
+                            <label style="float:left;font-size:small;font-weight:bold;width:20%;text-align:left">
+                                Business Approval Stage
+                            </label>
+
+                            <input id="FS" name="FS" type="hidden" />
+                            <select id="FSDropdown" disabled="disabled" style="color:white;font-size:small; background-color: darkslategrey;width:10%;height:25%; float:left;text-align:center" onchange="ChooseFS(this)">
+                                <option value='FSStatus' style="background-color:white;color:black">NOTStarted</option>
+                                <option value='Pending' style="background-color:yellow;color:brown">Pending</option>
+                                <option value='Approved' style="background-color:green;color:white">Approved</option>
+                                <option value='Rejected' style="background-color:red;color:white">Rejected</option>
+                                <option value='other' style="background-color:lightblue;color:black">other</option>
+                            </select>
+
+                            <label style="float:left; font-size:x-small;width:10%;height:25%;text-align:right">Spec Location:</label>
+                            <input id="FSLocation" placeholder="Enter FSpec Location" type="text" style="width:50%;float:left;height:25px" name="FSLocation" />
+
+                            <button class="dropbtnR" style="width:3.5%;height:25%; border:outset;border-bottom-left-radius:0;border-top-left-radius:0; border-color:darkslategrey; font-family:'Times New Roman'; font-size:xx-small;float:left;height:25px" onClick="convertFSToURL(this)">review</button>
+
+                            <!--</div>
+                            <div style="width:100%; height:30%; float:left">-->
+                            <br /><br />
+                            <label style="font-size:x-small;width:3%;float:left;height:25%;text-align:right ">
+                                LEAD:
+                            </label>
+
+                            <input id="BusinessLead" type="hidden" name="BusinessLead" />
+                            <select id="BusinessLeadDropdown" onchange="ChooseBusinessLead(this)" style="float:left;width:10%;font-size:x-small;height:25%;background-color:white;color:black">
+                                <option value='Other'>SelectBusinessLead</option>
+                                <option value='givensc'>Chad Givens</option>
+                                <option value='sherbahnm'>Matt Sherbahn</option>
+                                <option value='hasanif'>Iftekhar Hasan</option>
+                                <option value='haywood'>Michael Haywood</option>
+                            </select>
+                            <input type="checkbox" id="ckBL" name="ckBL" style="background-color:black;color:lightgoldenrodyellow;float:left;width:5%;height:25px;top:0" ng-model="checked" ng-click="ESignBL()">
+                            <input id="BLSign" disabled="disabled" style="width:30%;font-size:xx-small ;float:left;height:25px" placeholder="Check Box to ESign" name="BLSign" />
+                            <!--</div>
+                            <div style="width:100%; height:30%; float:left">-->
+
+
+
+
+
+                            <input id="BusinessApprover" type="hidden" style="float:right" name="BusinessApprover" />
+
+                            <input id="BApproverSign" disabled="disabled" style="width:30%;float:right;font-size:xx-small;height:25px" placeholder="Check Box to ESign" name="BApproverSign" />
+                            <input type="checkbox" id="ckBA" name="ckBA" ng-model="checked1" style="float:right;width:5%;height:25px;top:0" onchange="ESignBA()">
+                            <select id="BusinessApproverDropdown" style="float:right;width:10%;font-size:x-small;height:25%;background-color:white;color:black" onchange="ChooseBusinessApprover(this)">
+                                <option value='Other'>APPROVER</option>
+                                <option value='haywood'>Michael Haywood</option>
+                            </select>
+
+                            <label style="float:left; font-size:x-small;width:5.5%;float:right">
+                                Approver.
+                            </label>
+
+                            <!--</div>-->
+
+                        </div>
+
+
+
+                        <div id="Development" name="Development" style="border: outset; width:100%; height:15%; background-color:white; font-weight:bolder; font-size:small;float:left">
+                            <!--<div style="width:100%; height:30%; float:left">-->
+                            <input id="DEVandTS" style="width:100px;height:20px; font-size:x-small;  background-color:lightyellow;color:black;padding-left:5px" type="hidden" name="DEVandTS" />
+
+                            <label style="float:left;font-size:small;font-weight:bold;width:20%">   Development Stage</label>
+
+                            <input id="ST" style="width:100px;height:20px; font-size:x-small; background-color:white;color:black;padding-left:5px" type="hidden" name="ST" />
+
+                            <select id="STDropdown" onchange="ChooseST(this)" style="padding-left: 0px; color:white;float:left; font-size:small; background-color: forestgreen;width:10%" disabled="disabled">
+                                <option value='NOTStarted' style="background-color:white;color:black">NOTStarted</option>
+                                <option value='Pending' style="background-color:yellow;color:brown">Pending</option>
+                                <option value='Approved' style="background-color:green;color:white">Approved</option>
+                                <option value='Rejected' style="background-color:red;color:white">Rejected</option>
+                                <option value='other' style="background-color:lightblue;color:white">other</option>
+                            </select>
+
+                            <label style="float:left; font-size:x-small;width:10%">
+                                Tech Spec Location:
+                            </label>
+                            <input id="TechSpecLocation" style="width:50%;float:left;height:25px" type="text" name="TechSpecLocation" />
+
+                            <button class="dropbtnR" style="width:3.5%; height:20px;border:outset;border-bottom-left-radius:0;border-top-left-radius:0; border-color:darkslategrey; font-family:'Times New Roman'; font-size:xx-small;float:left;height:25px" onClick="convertTSToURL(this)">review</button>
+                            <br /><br />
+                            <label style="font-size:x-small;width:6%;float:left">Developer:</label>
+                            <input id="Developer" style="width:100px;height:20px; font-size:x-small;  background-color:lightyellow;color:black;float:left" type="hidden" name="Developer" />
+                            <select id="DeveloperDropdown" style="color:midnightblue;float:left;font-size:x-small;width:10%;height:25px" onchange="ChooseDeveloper(this)">
+                                <option value='Other'>SelectDeveloper</option>
+                                <option value='somuriva'>Varun Somuri</option>
+                                <option value='neeliva'>Vamshi Neeli</option>
+                                <option value='shinse'>Seonyong Shin</option>
+                                <option value='gudmunma'>Matthew Gudmundson</option>
+                                <option value='pmarathe'>Ranjan</option>
+                                <option value='hasanif'>Iftekhar Hasan</option>
+                            </select>
+
+                            <input type="checkbox" id="ckDV" name="ckDV" style="width:5%;height:25px;float:left;font-size:xx-small;top:0" ng-model="checked2" onchange="ESignDV()">
+                            <input id="DEVSign" disabled="disabled" style="width:30%;float:left;font-size:xx-small;height:25px" placeholder="Check Box to ESign" name="DEVSign" />
+                            <label style="font-size:x-small;width:3%;float:left">
+                                Tech Lead:
+                            </label>
+                            <input id="TechLead" type="hidden" name="TechLead" />
+                            <select id="TechLeadDropdown" onchange="ChooseTechLead(this)" style="color:midnightblue;float:left;font-size:x-small;width:10%;height:25px">
+                                <option value='Other'>SelectTL</option>
+                                <option value='somuriva'>Varun Somuri</option>
+                                <option value='hasanif'>Iftekhar Hasan</option>
+                                <option value='neeliva'>Vamshi Neeli</option>
+                                <option value='gudmunma'>Matthew Gudmundson</option>
+                                <option value='pmarathe'>Ranjan</option>
+                                <option value='shinse'>Seonyong Shin</option>
+                            </select>
+                            <input type="checkbox" id="ckTL" name="ckTL" ng-model="checked3" style="width:5%;height:25px;float:left;font-size:xx-small" onchange="ESignTL()">
+                            <input id="TLSign" disabled="disabled" style="width:30%;float:left;font-size:xx-small;height:25px" placeholder="Check Box to ESign" name="TLSign" />
+
+                            <br /><br />
+                            <label style="font-size:x-small;width:3%;float:left">
+                                Apps Appr.
+                            </label>
+
+                            <input id="AppsApprover" type="hidden" name="AppsApprover" />
+                            <select id="AppsApproverDropdown" onchange="ChooseAppsApprover(this)" style="color:midnightblue;float:left;font-size:x-small;float:left;width:10%;height:25px">
+                                <option value='Other'>SelectAppsApprover</option>
+                                <option value='hasanif'>Iftekhar Hasan</option>
+                            </select>
+
+                            <input type="checkbox" id="ckAA" name="ckAA" style="width:5%;height:25px;float:left;font-size:xx-small" ng-model="checked4" onchange="ESignAA()">
+                            <input id="AppsApproverSign" disabled="disabled" placeholder="Check Box to ESign" style="width:50%;float:left;font-size:xx-small;height:25px" name="AppsApproverSign" />
+                            <!--</div>-->
+                        </div>
+
+                        <div id="UT" name="UT" style="border: outset; width:100%; height:11%; background-color:white; font-weight:bolder; font-size:small;float:left">
+
+
+                            <label style="float:left;font-size:small;font-weight:bold;width:20%">
+                                Users Testing Stage
+                            </label>
+                            <input id="FUT" style="width:100px;height:20px; font-size:x-small; background-color:white;color:black;padding-left:5px" type="hidden" name="FUT" />
+                            <select id="FUTDropdown" onchange="ChooseFUT(this)" style="float:left; color:white; font-size:small; background-color: forestgreen" disabled="disabled">
+                                <option value='NOTStarted' style="background-color:white;color:black">NOTStarted</option>
+                                <option value='Pending' style="background-color:yellow;color:brown">Pending</option>
+                                <option value='Approved' style="background-color:green;color:white">Approved</option>
+                                <option value='Rejected' style="background-color:red;color:white">Rejected</option>
+                                <option value='other' style="background-color:lightblue;color:white">other</option>
+                            </select>
+
+                            <label style="float:left; font-size:x-small;width:10%">
+                                Test Script Loc:
+                            </label>
+                            <input id="TestScriptLocation" type="text" style="width:50%;float:left;height:25%" name="TestScriptLocation" />
+                            <button class="dropbtnR" style="width:3.5%; height:20px;border:outset;border-bottom-left-radius:0;border-top-left-radius:0; border-color:darkslategrey; font-family:'Times New Roman'; font-size:xx-small;float:left;height:25px" onClick="convertTScriptToURL(this)">review</button>
+                            <br /><br />
+                            <label style="float:left; font-size:x-small;width:5%">
+                                Developer:
+                            </label>
+
+                            <input type="checkbox" id="ckDV2" style="width:5%;height:25px;float:left;font-size:xx-small;top:0" name="ckDV2" ng-model="checked5" onchange="ESignDV2()">
+                            <input id="DEVSign2" disabled="disabled" placeholder="Check Box to ESign" style="background-color:black;color:lightgoldenrodyellow;float:left;width:20%" name="DEVSign2" />
+                            <label style="float:left; font-size:x-small;width:5%">
+                                Tech Lead:
+                            </label>
+                            <input type="checkbox" id="ckTL2" style="width:5%;height:25px;float:left;font-size:xx-small;top:0" name="ckTL2" ng-model="checked6" onchange="ESignTL2()">
+                            <input id="TLSign2" disabled="disabled" placeholder="Check Box to ESign" style="background-color:black;color:lightgoldenrodyellow;float:left;width:20%" name="TLSign2" />
+                            <label style="float:left; font-size:x-small;width:5%">
+                                Business Lead:
+                            </label>
+                            <input type="checkbox" id="ckBL2" style="width:5%;height:25px;float:left;font-size:xx-small;top:0" name="ckBL2" ng-model="checked7" onchange="ESignBL2()">
+                            <input id="BLSign2" disabled="disabled" placeholder="Check Box to ESign" style="background-color:black;color:lightgoldenrodyellow;float:left;width:20%" name="BLSign2" />
+
+
+                        </div>
+
+                        <div id="FA" name="FA" style="border: outset; width:100%; height:11%; background-color:white; font-weight:bolder; font-size:small;float:left">
+
+
+                            <label style="float:left;font-size:small;font-weight:bold;width:20%">
+                                Final Approval Stage:
+                            </label>
+                            <label style="float:left; font-size:x-small;width:10%;">
+                                PackageLocation:
+                            </label>
+                            <input id="PackageLocation" type="text" style="width:25%;float:left" name="PackageLocation" />
+                            <button class="dropbtnR" style="width:3.5%; height:20px;border:outset;border-bottom-left-radius:0;border-top-left-radius:0; border-color:darkslategrey; font-family:'Times New Roman'; font-size:xx-small;float:left;height:25px" onClick="convertPKGToURL(this)">review</button>
+
+                            <label style="float:left; font-size:x-small;width:10%;">
+                                Test Script with Screeshots:
+                            </label>
+                            <input id="ScreenShotLocation" type="text" style="width:25%;float:left" name="ScreenShotLocation" />
+                            <button class="dropbtnR" style="width:3.5%; height:20px;border:outset;border-bottom-left-radius:0;border-top-left-radius:0; border-color:darkslategrey; font-family:'Times New Roman'; font-size:xx-small;float:left;height:25px" onClick="convertSSToURL(this)">review</button>
+
+                            <br /><br />
+                            <div style=" width:100%; border:outset; border-color:darkgreen;border-radius:4px;float:left">
+                                <label style="float:left; font-size:x-small;width:20%;">
+                                    Final Approver's Authorization:
+                                </label>
+                                <input type="checkbox" id="ckAA2" name="ckAA2" style="background-color:black;color:lightgoldenrodyellow;float:left;width:5%;height:25px" ng-model="checked8" onchange="ESignAA2()">
+                                <input id="AppsApproverSign2" disabled="disabled" style="width:25%;font-size:xx-small ;float:left" placeholder="Check Box to ESign" name="AppsApproverSign2" />
+                                <label style="float:left; font-size:small;width:20%;">Locked DateTime:</label>
+                                <!--<input type="checkbox" id="ckLK" name="ckLK" ng-model="checked9" onchange="ESignLK()">-->
+                                <input id="LockedDateTime" style="width:20%;font-size:xx-small ;float:left" name="LockedDateTime" disabled="disabled" />
+                            </div>
+
+                        </div>
+
+                        <div id="3" style="border: outset; width:100%; height:14%; background-color:black; font-weight:bolder; font-size:small;float:left">
+
+
+                            <label style="float:left;font-size:small;font-weight:bolder;width:15%">
+                                Deployment Coordination:
+                            </label>
+                            <label style="background-color:black;color:white;width:15%; font-size:12px;float:left">COMMITTED DATE:</label>
+                            <input id="PRODDeployDate" style="width:20%;float:left;font-size:large; background-color:darkgoldenrod;color:white" type="date" name="PRODDeployDate" />
+                            <label style="font-size:small;width:10%;float:left; ">
+                                Plant:
+                            </label>
+                            <input id="DeployPlants" type="hidden" name="DeployPlants" />
+                            <select id="DeployPlantsDropdown" onchange="ChoosePlant(this)" style="float:left; color:white; font-size:small; background-color: forestgreen">
+                                <option value=''>SelectPlant</option>
+                                <option value='LemooreEast'>LemooreEast</option>
+                                <option value='LemooreWest'>LemooreWest</option>
+                                <option value='Tracy'>Tracy</option>
+                                <option value='Roswell'>Roswell</option>
+                                <option value='Waverly'>Waverly</option>
+                                <option value='Remus'>Remus</option>
+                                <option value='Allendale'>Allendale</option>
+                                <option value='FortMorgan'>FortMorgan</option>
+                                <option value='Greeley'>Greeley</option>
+                                <option value='PilotPlant'>PilotPlant</option>
+
+                            </select>
+                            <label style="font-size:x-small;width:10%;float:left;text-align:right ">
+                                Entered <br /> By
+                            </label>
+                            <input id="EnteredBy" name="EnteredBy" style="background-color:black; color:white;font-size:large; width:15%; border:hidden; border-radius:8px;text-align:center;float:left;border:hidden" disabled="disabled" />
+                            <br /><br />
+
+
+                            <label style="font-size:small;width:10%;float:left; ">
+                                Training Date
+                            </label>
+
+                            <input id="TestCycle" type="date" name="TestCycle" style="color:white;font-size:x-small; background-color: darkslategrey;width:10%;float:left" />
+
+                            <label style="font-size:small;width:10%;float:left; ">
+                                Job-Aid Location
+                            </label>
+                            <input id="TrainerName" style="color:white;font-size:small; background-color: darkslategrey;width:25%;float:left" type="text" name="TrainerName" />
+                            <label style="font-size:small;width:10%;float:left; ">
+                                PlantContact:
+                            </label>
+                            <input id="PlantContact" type="hidden" name="PlantContact" />
+                            <select id="PlantContactDropdown" onchange="ChoosePC(this)" style="color:black; font-size:x-small;height:25px; background-color: lightcyan;float:left">
+                                <option value='MESApps@leprinofoods.com'>SelectPlantContact</option>
+                                <option value='amcgee@leprinofoods.com'>LEM - Angela McGee</option>
+                                <option value='alevario@leprinofoods.com'>LEM - Anthony Levario</option>
+                                <option value='sgobby@leprinofoods.com'>LEM - Steve Gobby</option>
+                                <option value='cmoxon@leprinofoods.com'>LEW - Crystal Moxon</option>
+                                <option value='jmiranda@leprinofoods.com'>LEW - Jennifer Miranda</option>
+                                <option value='kdutra@leprinofoods.com'>LEW - Kristin Dutra</option>
+                                <option value='sviera@leprinofoods.com'>LEW - Stephanie Viera</option>
+                                <option value='sgomez@leprinofoods.com'>LEW - Steven Gomez</option>
+                                <option value='tchism@leprinofoods.com'>LEW - Thomas Chism</option>
+                                <option value='zhall@leprinofoods.com'>LEW - Zach Hall</option>
+                                <option value='dgravelyn@leprinofoods.com'>REM - Dawn Gravelyn</option>
+                                <option value='jthum@leprinofoods.com'>REM - JONATHAN THUM</option>
+                                <option value='mcardinalli@leprinofoods.com'>REM - Michael Cardinalli</option>
+                                <option value='mmoore@leprinofoods.com'>REM - Michelle Moore</option>
+                                <option value='mditulio@leprinofoods.com'>REM - Mike Ditulio</option>
+                                <option value='rwaite@leprinofoods.com'>REM - Roger Waite</option>
+                                <option value='ttheisen@leprinofoods.com'>REM - Tim Theisen</option>
+                                <option value='wflowers@leprinofoods.com'>REM - WILLARD FLOWERS</option>
+                                <option value='cposey@leprinofoods.com'>ROS - Cindy Posey</option>
+                                <option value='eesparza@leprinofoods.com'>ROS - Edgar Esparza</option>
+                                <option value='gegray@leprinofoods.com'>ROS - George Gray</option>
+                                <option value='melizondo@leprinofoods.com'>ROS - Mike Elizondo</option>
+                                <option value='vanapur@leprinofoods.com'>ROS - Veronica Anapur</option>
+                                <option value='emcDaniel@leprinofoods.com'>TRA - Erin McDaniel</option>
+                                <option value='sledford@leprinofoods.com'>TRA - Sonya Ledford</option>
+                                <option value='jbabcock@leprinofoods.com'>WAV - Jeff Babcock</option>
+                                <option value='jciavardini@leprinofoods.com'>WAV - John Ciavardini</option>
+                                <option value='nrowe@leprinofoods.com'>WAV - Nate Rowe</option>
+                                <option value='sboor@leprinofoods.com'>WAV - Sherry Boor</option>
+                                <option value='cgivens@leprinofoods.com'>DEN - Chad Givens</option>
+                                <option value='msherbahn@leprinofoods.com'>DEN -Matt Sherbahn</option>
+                                <option value='hasanif@leprinofoods.com'>DEN - Iftekhar Hasan</option>
+                                <option value='lesnerst@leprinofoods.com'>DEN - Steve Lesner</option>
+                                <option value='vsomuri@leprinofoods.com'>DEN - Varun Somuri</option>
+                                <option value='mhaywood@leprinofoods.com'>DEN - Mike Haywood</option>
+                                <option value='mgudmundson@leprinofoods.com'>DEN - Matthew Gudmundson</option>
+                                <option value='pmarathe@leprinofoods.com'>DEN - Ranjan</option>
+                                <option value='vneeli@leprinofoods.com'>DEN - Vamshi Neeli</option>
+                                <option value='shinse@leprinofoods.com'>DEN - Seonyong Shin</option>
+                            </select>
+
+
+                        </div>
+
+                        <div id="2" style="border: outset; width:100%; height:5%; background-color:black; font-weight:bolder; font-size:small;float:left">
+
+                            <!--   PROD Deploy Status:-->
+
+                            <label style="float:left;font-size:small;font-weight:bolder;width:20%">PROD Deployment Status:</label>
+                            <input id="DeployStatus" style="background-color:black;color:white;float:left" type="hidden" name="DeployStatus" />
+                            <select id="DeployStatusDropdown" style="padding-left: 0px; color:white;float:left; font-size:small; background-color: black;width:10%" onchange="ChooseDPLY(this)">
+                                <option value='' style="background-color:forestgreen;color:white">Select</option>
+                                <option value='InProcess' style="background-color:blue;color:white">In Process</option>
+                                <option value='Complete' style="background-color:green;color:white">Complete</option>
+                                <option value='Cancelled' style="background-color:red;color:white">Cancelled</option>
+                                <option value='OnHold' style="background-color:lightgoldenrodyellow;color:black">On Hold</option>
+                            </select>
+
+                            <!--    PROD Deployment Date:-->
+
+
+
+
+                            <label style="background-color:black;color:white;width:5%; float:left; font-size:12px">Analyst:</label>
+                            <input id="ControlsAnalystRep" type="hidden" name="ControlsAnalystRep" disabled="disabled" />
+                            <select id="ControlsAnalystDropdown" onchange="ChooseCTRL(this)" style="width:10%; color:black; font-size:small; background-color: black;color:lightgoldenrodyellow;float:left">
+                                <option value=''>Select</option>
+                                <option value='pvighne@leprinofoods.com'>Prasanna Vighne</option>
+                                <option value='vsomuri@leprinofoods.com'>Varun Somuri</option>
+                                <option value='vneeli@leprinofoods.com'>Vamshi Neeli</option>
+                                <option value='shinse@leprinofoods.com'>Seonyong Shin</option>
+                                <option value='mgudmundson@leprinofoods.com'>Matthew Gudmundson</option>
+                                <option value='pmarathe@leprinofoods.com'>Ranjan</option>
+                                <option value='hasanif@leprinofoods.com'>Iftekhar Hasan</option>
+                            </select>
+                            <input type="checkbox" id="ckDPLY" name="ckDPLY" style="background-color:cornflowerblue; font-size:12px;width:5%;height:25px;float:left" ng-model="checked10" onchange="ESignDEPLOYComplete()">
+                            <input id="ControlsAnalyst" type="text" style="width: 40%;font-size:small; float:left" placeholder="Final Deployment Date with Signature" name="ControlsAnalyst" disabled="disabled" />
+
+
+                        </div>
+
+
+                        <div id="1" class="dropup" style="width:100%;height:10%;float:left; margin-top:5px; overflow:auto; border-radius:3px;border:3px solid #0fbef4;font-size:120%;background-color:black;float:left">
+                            Click EXPAND to VIEW Comment
+
+                            <!--<button id="btnOpenImage" type="button" class="dropbtnU" style="background-color:darkslateblue; color:white" ng-click="swipe();">OpenImageinNewWindow</button>-->
+                            <button type="button" class="dropbtnU" style="background-color:black; border-style:outset; border-top-right-radius:8px; border-color:white; border-top-left-radius:0; border-bottom-left-radius:0; border-bottom-right-radius:8px; color:white;float:right;font-size:small;height:20px" ng-click="restore('1')">COLLAPSE</button>
+                            <button type="button" class="dropbtnU" style="background-color:black; border-color:white; border-style:outset; border-top-left-radius:8px; border-bottom-left-radius:8px; border-top-right-radius:0; border-bottom-right-radius:0; color:white;float:right;font-size:small;height:20px" ng-click="maximize('1')">EXPAND</button>
+                            <label style="background-color:transparent;color:white;width:20%; text-align:right; float:left; font-size:small">Comment:</label>
+                            <!--<textarea id="Comment" style="height:100px;width:80%;background-color:white;color:black" name="Comment" placeholder="Enter Comment" onfocus="InsertEmptylineinComment()"></textarea>-->
+                            <div id="Comment" class="editable" ng-blur="onBlur($UpdateonBlur)" contenteditable="true" name="Comment"
+                                 style="border:1px solid #777777;width:100%;height:70%; background-color:white; color:black;overflow:auto;resize: both;"
+                                 onpaste="console.log('onpastefromhtml')">
+
+                            </div>
+                            <img id="imgElem1" src="" />
+
+                            <img ng-src="data:image/png;base64,{{model.Logo}}" id="photo-id1" ng-click="swipe();" />
+
+                            <div style="width:100%">
+                                <button id="jUnderline" style="background-color:black;color:white;float:right; border-top-right-radius:8px; border-bottom-right-radius:8px"><u>u</u></button>
+                                <button id="jItalic" style="background-color:black;color:white;float:right"><i>I</i></button>
+                                <button id="jBold" style="background-color:black;color:white;float:right; border-top-left-radius:8px; border-bottom-left-radius:8px"><b>B</b></button>
+                                <input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this,'#photo-id1','Base64Output1')" id="photo-upload" style="background-color:darkslategrey;color:yellowgreen;border-style:outset;height:30px; width:70%;float:left;font-size:120%" />
+                                <button type="button" class="dropbtnU" align="center" style="background-color:brown; color:white;width:30%;height:30px;float:left;display:none" onclick="document.getElementById('photo-id1').src = '';document.getElementById('Base64Output1').value=''">ClearImage</button>
+                                <textarea id="Base64Output1" hidden="hidden" style="width:auto;height:auto; border-color:green; border-style:inset; background-color:forestgreen; color:white"></textarea>
+                            </div>
+
+                        </div>
+                        <div id="OperationBtn" name="OperationBtn" align="center" style=" width:100%;height:7%;background-color:black;color:lightgoldenrodyellow;padding-left:10%;padding-right:10%;float:left ">
+
+                            <button class="dropbtnR" style="align-content:center; float:left;font-size:large;border-color:white;width:20%" ng-click="addChangeMgmt();cancelModal('tableDIV');">Save</button>
+                            <button class="dropbtnR" ng-click="openModal('sidepanel')" style="align-content:center;float:right;border-radius:16px">Events</button>
+                            <!--<button class="dropbtnR" ng-click="Undo()" style="align-content:center;float:right;border-radius:16px">Clear</button>-->
+                            <button class="bigbtn" id="btnundo" type="button" style="transition: 1s;background-color:transparent; border:none; color:white;float:right;" ng-click="Undo()">
+                                <img src="EDIT.png" title="Edit/New" style="width:80px;height:60px; border:outset; border-radius:16px">
+                            </button>
+                            <button class="dropbtnR" ng-click="SaveCMForm()" style="align-content:center; background-color:darkred;float:right;border-radius:16px">Delete</button>
+                            <!--<button id="rowfilter" class="dropbtnU" ng-click="skillsFunc()" hidden="hidden" on-load-clicker style="height:40%;width:20%;align-content:center;float:left;">Filter</button>-->
+                            <input type="text" id="row_idD" hidden="hidden" />
+                            <input type="text" id="ProjectNameC" hidden="hidden" />
+                        </div>
+
+                    </div>
+
+                    <div>
+                        &nbsp; &nbsp;<button id="rowfilter" class="dropbtn" hidden="hidden" ng-click="skillsFunc()" on-load-clicker style="height:2.5em;align-content:center">Filter</button>
+
+                    </div>
+
+
+                    <!-- The Modal -->
+                    <div id='sidepanel' style="border:outset" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-body" style="height:100%;">
+
+                                <button id="CloseModal" type="button" ng-click="cancelModal('sidepanel');" style="transition: 1s;background:fixed 2px black; color:white;float:right;border-radius:24px;width:30px;height:30px; font-size:large;">X</button>
+                                <div id='panel' style="width:100%;height:95%">
+                                    <div style="width:100%;height:100%">
+                                        <div style="background-color:#2F404F;color:white">
+                                            <!--<label typeof="LabelBox">Hello {{title}}</label>-->
+                                            <!--<label typeof="LabelBox" id="uid" name="uid">{{function_one()}} </label>-->
+                                        </div>
+                                        <textarea placeholder="Screen Actions" disabled="disabled" id="Updates" style="border: inset; width:100%;height:100%" name="Updates"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="myModal" class="modal">
+
+                        <!-- Modal content -->
+                        <div class="modal-content">
+                            <!--<div class="modal-header">
+                                <h4>Please Log In!</h4>
+                            </div>-->
+                            <div class="modal-body" style="height:100%;">
+                                <h2>Please Log In!</h2>
+                                <input type="text" id="userN" style="background-color:black; color:white;font-size:large; height:15%; border:outset; border-color:brown; border-radius:8px;text-align:center" placeholder="User Name" ng-blur="toLower('userN')" autofocus />
+                                <input type="password" id="pass" style="background-color:black; color:white;font-size:large; height:15%; border:outset; border-color:brown; border-radius:8px;text-align:center" placeholder="password" />
+                                <button class="close" style="background-color:saddlebrown; color:white; font-size:large; border:outset;height:15%; width:20%; border-color:white; border-radius:8px;text-align:center" ng-click="LoginFromModal();" ng-focus="LoginFromModal();">Login!</button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

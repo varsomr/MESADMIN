@@ -1,0 +1,1735 @@
+﻿<html>
+<head>
+    <style>
+        .p1 {
+            background: url(KEYWORDS.png) no-repeat right fixed;
+            background-size: 700px;
+            opacity: 2.2;
+            filter: alpha(opacity=220);
+        }
+
+        body {
+            padding-left: 0px;
+            background-color: darkslategray;
+            border-style: solid;
+            border-bottom-width: thick;
+            border-color: burlywood;
+            font-family: Arial, Helvetica, sans-serif;
+            background: url(MESPortal.png) no-repeat center fixed;
+        }
+
+
+
+        .body-content {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 40%;
+        }
+
+
+
+        #sidepanel {
+            position: absolute;
+            min-width: 30px;
+            height: 60%;
+            top: 10%;
+            right: 0;
+        }
+
+        #bar {
+            display: table;
+            background-color: #2F404F;
+            color: white;
+            width: 30px;
+            height: 100%;
+            text-align: center;
+        }
+
+            #bar div {
+                display: table-cell;
+                vertical-align: top;
+                padding-top: 40px;
+            }
+
+        #panel {
+            display: none;
+            background-color: #2F404F;
+            color: orangered;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+
+            #panel div {
+                display: table-cell;
+                vertical-align: top;
+            }
+
+        #sidepanel:hover #bar {
+            display: none;
+        }
+
+        #sidepanel:hover #panel {
+            display: table;
+        }
+
+
+
+        div {
+            /*resize: both;*/
+            overflow: auto;
+        }
+
+        divS {
+            resize: both;
+            overflow: scroll;
+        }
+
+        .imgcontainer {
+            text-align: center;
+            margin: 24px 0 12px 0;
+        }
+
+        img.avatar {
+            width: 20%;
+            border-radius: 50%;
+        }
+
+        .container {
+            padding: 16px;
+        }
+
+
+        .dl-horizontal dt {
+            white-space: normal;
+        }
+
+
+        textarea {
+            max-width: 1350px;
+        }
+
+        header {
+            background-color: orangered;
+            color: white;
+            display: block;
+        }
+
+
+
+        #grid .ui-grid-cell-contents {
+            text-align: center;
+        }
+
+        #servicegrid .ui-grid-cell-contents {
+            text-align: center;
+        }
+
+
+        .grid {
+            width: 1400px;
+            height: 300px;
+            background-color: darkslategray !important;
+            bottom: 0;
+            color: white !important;
+            border-top-color: forestgreen;
+        }
+
+        .ui-grid-row-selected.ui-grid-row:nth-child(odd) .ui-grid-cell,
+        .ui-grid-row-selected.ui-grid-row:nth-child(even) .ui-grid-cell {
+            color: black;
+            background: lightgreen;
+            border-radius: 10px;
+            color: black;
+            overflow: hidden;
+        }
+
+            .ui-grid-row-selected.ui-grid-row:nth-child(odd) .ui-grid-cell.ui-grid-cell-focus,
+            .ui-grid-row-selected.ui-grid-row:nth-child(even) .ui-grid-cell.ui-grid-cell-focus {
+                outline: 0;
+                color: brown;
+                background-color: olivedrab;
+            }
+
+        .ui-grid-row-selected.ui-grid-row:nth-child(odd):hover .ui-grid-cell,
+        .ui-grid-row-selected.ui-grid-row:nth-child(even):hover .ui-grid-cell {
+            color: brown;
+            font-weight: bolder;
+            font-size: x-small;
+            background-color: Highlight;
+        }
+
+
+        .grid .ui-grid-cell-contents {
+            padding: 2px 2px;
+            background-color: darkslategray;
+            color: #ceccbd;
+        }
+
+        .grid .ui-grid-render-container-body .ui-grid-header-cell,
+        .grid .ui-grid-header-cell {
+            background-color: forestgreen;
+            color: white;
+            float: left;
+        }
+
+
+
+        .grid .ui-grid-filter-container {
+            padding: 1px 3px;
+        }
+
+        .grid-msg-overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+            .grid-msg-overlay .msg {
+                opacity: 1;
+                position: absolute;
+                top: 0%;
+                left: 1%;
+                width: 100%;
+                height: 50%;
+                background-color: cyan;
+                border-radius: 1px;
+                border: 1px solid #556;
+                text-align: center;
+                font-size: 24px;
+                display: table;
+            }
+
+        grid[type="secondary"] {
+            background-color: #692218;
+            color: white;
+            scrollbar-base-color: forestgreen;
+        }
+
+        .grid-msg-overlay .msg span {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+
+        .your-hover-class {
+            color: red;
+        }
+
+        .grey .ui-grid-cell-contents {
+            background-color: lightseagreen;
+            font-weight: bold;
+            color: brown;
+        }
+
+
+        label {
+            font-family: 'Open Sans';
+            font-weight: 800;
+            font-size: x-small;
+        }
+
+        .md-button {
+            padding: 0 6px 0 6px;
+            margin: 6px 8px 6px 8px;
+            min-width: 88px;
+            border-radius: 3px;
+            font-size: 14px;
+            text-align: center;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: none;
+            outline: none;
+        }
+
+        .btn {
+            background-color: #17561b;
+            color: white;
+            height: 35px;
+            width: 80px;
+            font-size: x-small;
+        }
+
+
+
+            .btn:hover {
+                background-color: white;
+                color: black;
+                border-color: white;
+                border: outset;
+            }
+
+            .btn:focus {
+                outline: 0 !important;
+            }
+
+            .btn:active {
+                outline: 0;
+                color: #fff;
+                background-color: #428bca;
+            }
+
+
+        table, tr {
+            border: 1px groove;
+            width: 40%;
+            background-color: transparent;
+        }
+
+        div {
+            background-color: transparent;
+        }
+
+
+
+        label[] {
+            background-color: transparent;
+            color: black;
+            font-family: 'Open Sans';
+            font-weight: 200;
+            font-size: small;
+        }
+
+
+        label[type="progressBar"] {
+            background-color: black;
+            color: black;
+            font-family: 'Open Sans';
+            font-weight: 100;
+            font-size: xx-small;
+        }
+
+        input {
+            font-family: 'Open Sans';
+            font-weight: 100;
+            font-size: x-small;
+            height: 18px;
+        }
+
+            input[type="text"] {
+                background-color: lightyellow;
+                border: .5px solid #4D90FE !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-family: 'Open Sans';
+                font-weight: 100;
+                font-size: small;
+                height: 20px;
+                color: black;
+            }
+
+            input[type="user"] {
+                background-color: white;
+                border: .5px solid #4D90FE !important;
+                -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-family: 'Open Sans';
+                font-weight: 100;
+                font-size: x-small;
+                height: 20px;
+                color: black;
+            }
+
+            input[type="summary"] {
+                background-color: lightyellow;
+                border: .5px solid #4D90FE !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-family: 'Open Sans';
+                font-weight: 100;
+                font-size: medium;
+                height: 20px;
+                color: black;
+            }
+
+            input[type="text"]:focus {
+                background-color: lightblue;
+                border: .5px solid #4D90FE !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-family: 'Open Sans';
+                font-weight: 100;
+                font-size: small;
+                color: black;
+            }
+
+            input[type="Date"] {
+                border: 1px solid #4D90FE !important;
+                -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                background-color: lightyellow;
+                font-family: 'Open Sans';
+                font-weight: bold;
+                font-size: xx-small;
+                height: 25PX;
+            }
+
+            input[type="password"]:focus {
+                background-color: #FFEC9C;
+                border: 1px solid #4D90FE !important;
+                -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-size: xx-small;
+            }
+
+            input[type="user"]:focus {
+                background-color: #FFEC9C;
+                border: 1px solid #4D90FE !important;
+                -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-size: xx-small;
+            }
+
+            input[Disabled] {
+                border: 1px solid #4D90FE !important;
+                color: black;
+                outline: none !important;
+                font-size: xx-small;
+            }
+
+        .advancedSearchTextbox {
+            width: 526px;
+            margin-right: -4px;
+            color: black;
+        }
+
+        textarea:focus {
+            padding-top: 10px;
+            background-color: #FFEC9C;
+            min-width: 50%;
+            border: 1px solid #000;
+        }
+
+
+        textarea {
+            min-height: 4em;
+            height: auto;
+            width: 50%;
+            margin: 0 auto;
+            background-color: white;
+            vertical-align: middle;
+            font-size: xx-small;
+        }
+
+
+
+        select {
+            background-color: white;
+            color: black;
+            font-family: 'Open Sans';
+            font-weight: 100;
+            font-size: xx-small;
+        }
+
+
+
+        #myProgress {
+            width: 100%;
+            background-color: ghostwhite;
+        }
+
+        #myBar {
+            width: 1%;
+            height: 30px;
+            background-color: black;
+        }
+
+        .bg {
+            background-size: 100% auto;
+        }
+
+
+
+        .yellowCell {
+            background-color: forestgreen;
+        }
+
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: black;
+            color: white;
+            text-align: right;
+        }
+
+
+        .container {
+            position: relative;
+            max-width: 850px;
+            position: relative;
+            margin: auto;
+        }
+
+
+        .mySlides {
+            display: none;
+        }
+
+
+        .cursor {
+            cursor: pointer;
+        }
+
+
+        .prev,
+        .next {
+            cursor: pointer;
+            position: absolute;
+            top: 40%;
+            width: auto;
+            padding: 16px;
+            margin-top: -50px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+
+            .prev:hover,
+            .next:hover {
+                background-color: rgba(0, 0, 0, 0.8);
+            }
+
+
+        .numbertext {
+            color: #f2f2f2;
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+        }
+
+
+        .caption-container {
+            text-align: center;
+            background-color: #222;
+            padding: 2px 16px;
+            color: white;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+
+        .column {
+            float: left;
+            width: 16.66%;
+        }
+
+
+        .demo {
+            opacity: 0.6;
+        }
+
+            .active,
+            .demo:hover {
+                opacity: 1;
+            }
+
+
+
+        .topnav {
+            background-color: #333;
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+        }
+
+
+            .topnav a {
+                float: left;
+                color: #f2f2f2;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-size: 17px;
+            }
+
+
+                .topnav a:hover {
+                    background-color: #ddd;
+                    color: black;
+                }
+
+
+                .topnav a.active {
+                    background-color: #4CAF50;
+                    color: white;
+                }
+
+
+
+        .sidenav {
+            height: 100%;
+            width: 10%;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #332;
+            overflow-x: hidden;
+            padding-top: 0px;
+        }
+
+            .sidenav a {
+                padding: 16px 16px 16px 42px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #818181;
+                display: block;
+            }
+
+                .sidenav a:hover {
+                    color: #f1f1f1;
+                }
+
+        #main {
+            transition: margin-left .5s;
+            padding: 12px;
+        }
+
+        .sidenavRight {
+            height: 100%;
+            width: 90.352%;
+            position: fixed;
+            z-index: 1;
+            top: 70px;
+            right: 0;
+            background-color: darkslategray;
+            overflow-x: hidden;
+            transition: 0.5s;
+            color: #FFEC9C;
+        }
+
+            .sidenavRight a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #818181;
+                display: block;
+                transition: 0.3s;
+            }
+
+                .sidenavRight a:hover {
+                    color: #f1f1f1;
+                }
+
+            .sidenavRight .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+
+
+
+        @media screen and (max-height: 450px) {
+            .sidenavRight {
+                padding-top: 15px;
+            }
+
+                .sidenavRight a {
+                    font-size: 18px;
+                }
+        }
+
+        .sidenavRightS {
+            height: 100%;
+            width: 90.352%;
+            position: page;
+            z-index: 1;
+            top: 20%;
+            right: 0;
+            background-color: darkslategray;
+            overflow: visible;
+            transition: 0.6s;
+            color: #FFEC9C;
+        }
+
+            .sidenavRightS a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #818181;
+                display: block;
+                transition: 0.6s;
+            }
+
+                .sidenavRightS a:hover {
+                    color: #f1f1f1;
+                }
+
+            .sidenavRightS .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+
+
+
+        @media screen and (max-height: 450px) {
+            .sidenavRightS {
+                padding-top: 15px;
+            }
+
+                .sidenavRightS a {
+                    font-size: 18px;
+                }
+        }
+
+
+        #canvas {
+            border-bottom: 1px solid rgba(0,0,0,0.3);
+            background-color: #FFF;
+            box-shadow: 0 9px 20px -5px rgba(0,0,0,0.8);
+        }
+
+        #d {
+            text-align: center;
+        }
+
+        h1 {
+            color: #444;
+            font-weight: 500;
+        }
+
+        a {
+        }
+
+
+
+
+        .dropbtn {
+            background-color: #3498DB;
+            color: white;
+            padding: 12px;
+            font-size: 12px;
+            border: none;
+            cursor: pointer;
+        }
+
+        *.dropbtnB {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px;
+            font-size: 12px;
+            border: none;
+        }
+
+        .dropbtn:hover, .dropbtn:focus {
+            background-color: #2980B9;
+        }
+
+        .dropbtnB:hover, .dropbtn:focus {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            overflow: auto;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+        .dropdown a:hover {
+            background-color: #ddd
+        }
+
+        .show {
+            display: block;
+        }
+
+
+        body::-webkit-scrollbar {
+            display: normal;
+        }
+
+        html, body {
+            -ms-overflow-style: none;
+            overflow: auto;
+        }
+
+        .icon-bar {
+            position: fixed;
+            top: 15%;
+            -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+        }
+
+            .icon-bar a {
+                display: block;
+                text-align: center;
+                padding: 16px;
+                transition: all 0.3s ease;
+                color: white;
+                font-size: 14px;
+            }
+
+                .icon-bar a:hover {
+                    background-color: #000;
+                }
+
+        .pln {
+            background: #3B5998;
+            color: white;
+        }
+
+        .cls {
+            background: #55ACEE;
+            color: white;
+        }
+
+
+        .content {
+            margin-left: 75px;
+            font-size: 30px;
+        }
+
+
+        .specialColor {
+            background-color: #2d4240;
+            color: white;
+        }
+
+
+
+        .dropbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px;
+            font-size: 12px;
+            border: none;
+            cursor: pointer;
+        }
+
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+
+                .dropdown-content a:hover {
+                    background-color: #f1f1f1
+                }
+
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+        }
+
+        .right {
+            position: absolute;
+            right: 0px;
+            padding: 10px;
+        }
+
+        .left {
+            position: absolute;
+            left: 0px;
+            padding: 10px;
+        }
+
+        .center {
+            position: absolute;
+            left: 50%;
+            right: 50%;
+            padding: 10px;
+        }
+
+
+        .dropbtnU {
+            background-color: white;
+            color: black;
+            padding: 0;
+            font-size: 12px;
+            border: thick;
+        }
+
+        .dropup {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropup-content {
+            display: none;
+            position: absolute;
+            background-color: darkslategray;
+            color: white;
+            min-width: 50px;
+            min-height: 50px;
+            bottom: 10px;
+            z-index: 1;
+            margin-top: 50px;
+            padding: 10px;
+            font-size: 12px;
+        }
+
+            .dropup-content a {
+                color: white;
+                text-decoration: none;
+                display: block;
+            }
+
+                .dropup-content a:hover {
+                    background-color: transparent;
+                    color: white;
+                }
+
+        .dropup:hover .dropup-content {
+            display: block;
+            font-size: 12px;
+        }
+
+        .dropup:hover .dropbtnU {
+            background-color: transparent;
+            color: white;
+            font-size: 12px;
+        }
+    </style>
+    <script>
+        function openNav(nav) {
+            document.getElementById(nav).style.width = "90.352%";
+            document.getElementById(nav).style.zIndex = "999";
+        }
+
+        function closeNav(nav) {
+            document.getElementById(nav).style.width = "0";
+        }
+
+
+    </script>
+</head>
+<body>
+    <div id="grid" class="tab-pane fade in active">
+        <div style="display:block; width : auto; padding-left:145px">
+            <div ng-controller="OneStopGuidedSupportcontroller">
+                <div class="topnav" style="left:10%;">
+                    <a href="#/">Home</a>
+                    <a class="active" href="" onclick="this.href='#/LRSCorp'">Reports</a>
+                    <a href="#/Support">Support</a>
+                    <a class="button" id="mainpage" style="background-color:black;color:white; width:200px;height:30%; border:outset; border-color:darkslategrey;border-top-left-radius:0; align-content:center" href="../Support_Cherwell.pdf">Training-Aid</a>
+                    <label style="padding-left:120px; background-color:transparent; color:white; font-size:x-large">LPS DASHBOARD FOR SERVICE DESK</label>
+                    <input id="LoggedIn" name="LoggedIn" ng-model="LoggedIn" onload="function_two('uname')" class="form-control" placeholder="Not Logged in!" style="width: 140px;height:30px;background-color:Highlight; font-size:medium; color:darkgreen" type="hidden" />
+                    <input id="VATPlantOff" placeholder="No Plant Selected" align="right" style="width:auto;background-color:transparent;color:white; font-size:large; text-align:center" type="text" disabled="disabled" name="VATPlantOff">
+
+                </div>
+                <div id="mySidenav" class="sidenav">
+                    <!--<div class="icon-bar">-->
+                    <div align="left">
+                        <img src="../LeprinoLogo.png" style="width:76px;height:50px; background-color:white">
+
+
+                    </div>
+                    <div align="center">
+
+                        <div>
+                            <!--<button class="dropbtn" type="button" style="background-color:transparent;color:white;transition: 0.3s;" ng-click="closeNav();">
+                                &#9776;Close &#9776;</button>-->
+                            <select id="plant" name="plant" style="display:inline-block; width:120px;height:25px; font-size:medium; text-align-last:center;" class="specialColor">
+                                <!--ng-click="closeAll()">-->
+                                <option selected="selected">Select a Plant</option>
+                                <option value="LEM">LEM</option>
+                                <option value="FTM">FTM</option>
+                                <option value="ALN">ALN</option>
+                                <option value="LEW">LEW</option>
+                                <option value="REM">REM</option>
+                                <option value="ROS">ROS</option>
+                                <option value="TRA">TRA</option>
+                                <option value="WAV">WAV</option>
+                                <option value="GRE">GRE</option>
+                            </select>
+                        </div>
+                        <br />
+                        <br />
+                        <button class="dropbtn" type="button" style="background-color:black;color:white; border:outset;transition: 0.3s;" ng-click="openNav('mysidenavRightMain');">
+                            &#9776;MainPage &#9776;
+                        </button>
+                        <div>
+                            <!-- <p style="color:lightgoldenrodyellow; font-size:x-small; padding-top:20px">&asymp; &asymp; </p>-->
+
+                            <button class="dropbtn" type="button" id="MilkReceiving" style="background-color:transparent;color:white;transition: 0.3s;" ng-click="openDIV('mysidenavRightTruck');">
+                                &#9776;Milk Receiving &#9776;
+                            </button>
+
+                            <button class="dropbtn" type="button" id="Production" style="background-color:transparent;color:white;transition: 0.3s;" ng-click="openDIV('mysidenavRightProd');">
+                                &#9776;Production &#9776;
+                            </button>
+                            <button class="dropbtn" type="button" id="Consumption" style="background-color:transparent;color:white;transition: 0.3s;" ng-click="openDIV('mysidenavRightCons');">
+                                &#9776;Consumption &#9776;
+                            </button>
+
+                            <button class="dropbtn" type="button" id="QualitySamples" style="background-color:transparent;color:white;transition: 0.3s;" ng-click="openDIV('mysidenavRightQuality');">
+                                &#9776;  Quality &#9776;
+                            </button>
+
+                            <button class="dropbtn" type="button" id="Labels" style="background-color:transparent;color:white;transition: 0.3s;" ng-click="openDIV('mysidenavRightLabel');">
+                                &#9776;  Labels &#9776;
+                            </button>
+                            <button class="dropbtn" type="button" id="DailySiloINV" style="background-color:transparent;color:white;transition: 0.3s;" ng-click="openDIV('mysidenavRightINV');">
+                                &#9776;DailySiloINV &#9776;
+                            </button>
+                            <button class="dropbtn" type="button" id="Summary" style="background-color:transparent;color:white;transition: 0.3s;" ng-click="openDIV('mysidenavRightSummary');">
+                                &#9776;  Summary &#9776;
+                            </button>
+                            <!--<button class="dropbtn" type="button" id="Tickets" style="background-color:transparent;color:white;transition: 0.3s;" ng-click="openDIV('mysidenavRightTicket');">
+                                &#9776;Tickets &#9776;
+                            </button>-->
+                            <button class="dropbtn" type="button" id="Tickets" style="background-color:transparent;color:white;transition: 0.3s;" onclick="window.open('https://leprinofoods.sharepoint.com/:u:/t/teamsites/controls/EWvZvoHPj6tHug6V6y3WP6YBuZYtZRoPsbK8sBDf58qzsQ?e=6rgyBY','_blank','resizable=yes')">
+                                &#9776;Controls <br />Escalation Guide&#9776;
+                            </button>
+                            <button class="dropbtn" type="button" id="Log" style="background-color:transparent;color:white;transition: 0.3s;" onclick="window.open('http://denc2012pltlit/Reports/Pages/Report.aspx?ItemPath=%2fLRS%2fService+Desk%2fService+Desk+Ticket+Entry','_blank','resizable=yes')">
+                                &#9776;   Log   &#9776;
+                            </button>
+                            <button class="dropbtn" type="button" id="KW" style="background-color:transparent;color:white;transition: 0.3s;" onclick="window.open('../KEYWORDS.PNG','_blank','resizable=yes')">
+                                &#9776;   KEYWORDS   &#9776;
+                            </button>
+                            <br />
+
+                            <!--<button style="padding-right:5px" class="dropbtn" ng-click="refreshGrid()">Refresh</button>
+                            <button class="dropbtn" ng-click="clearFilters()">Reset</button>
+                            <br /><br />-->
+
+
+                        </div>
+
+
+                        <!--<iframe id="Reports" name="Reports" onload="ajaxStop()" class="holds-the-iframe" src="" height="644" width="1500"></iframe>-->
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="mysidenavRightTicket" class="sidenavRight" ng-controller="RetriveTicketcontroller">
+                <label style="background-color:transparent;color:white; font-size:medium">CherwellTicket</label>
+                <label typeof="labelBox" hidden="hidden">
+                    Enter Ticket#:
+                    <input id="POTK" type="date" style="background-color:darkgreen;color:white" placeholder="Ticket#">
+                </label>
+
+                <div id="ticketstats">
+                    <label style="background-color:transparent;color:white; font-size:medium">
+                        Total#of<br />Application Tickets
+                        <input id="TotalApps" ng-model="TotalApps" class="form-control" style="width:120px; height:60px; background-color:limegreen; color:black; font-size:large" type="text" disabled="disabled">
+                    </label>
+                    <label style="background-color:transparent;color:white; font-size:medium" ">
+                        Total#of<br />Report Tickets
+                        <input id="TotalReports" ng-model="TotalReports" class="form-control" style="width:120px; height:60px; background-color:#EE872A; color:white; font-size:large" type="text" disabled="disabled">
+                    </label>
+                    <label style="background-color:transparent;color:white; font-size:medium">
+                        Total#of<br />Incidents
+                        <input id="TotalIncidents" ng-model="TotalIncidents" class="form-control" style="width:120px; height:60px; background-color:brown; color:white; font-size:large" type="text" disabled="disabled">
+                    </label>
+                    <label style="background-color:transparent;color:white; font-size:medium">
+                        Total#of<br />Service Requests
+                        <input id="TotalSRVRequests" ng-model="TotalSRVRequests" class="form-control" style="width:120px; height:60px; background-color:#FFEC9C; color:black; font-size:large" type="text" disabled="disabled">
+                    </label>
+
+                    <button class="dropbtn" id="POTKbtn" type="button" style="transition: 0.3s;" ng-click="GridfromButton();">
+                        &#9776;Execute &#9776;
+                    </button>
+
+                    <button class="dropbtn" type="button" style="background-color:#110d11;color:white;transition: 0.3s;" onclick="document.getElementById('mysidenavRightTicket').style.width = '0';">
+                        &#9776;Close &#9776;
+
+                    </button>
+                    <button class="dropbtn" type="button" style="background-color:#110d11;color:white;transition: 0.3s;" ng-click="openDIV('mysidenavRightMain');">
+                        &lt; &lt;Back &lt;&lt;
+
+                    </button>
+                    <button class="dropbtn" style="width:120px;padding-top:15px;padding-bottom:15px; background-color:darkolivegreen " ng-click="exportDriver()">Download</button>
+                    <iframe id="Chart" src="" height="130" width="350"></iframe>
+                </div>
+                <div id="gridholderTK">
+                    <div id="grid" ui-grid="gridOptions" ui-grid-edit ui-grid-selection class="grid" ui-grid-pagination style=" width:auto; height:auto; color:white"></div>
+                    <div style="padding-left: 120px; padding-top: 400px;background-color:darkslategray; color:black" class="grid-msg-overlay" ng-hide="!loading">
+                        <div style="padding-left: 120px; background-color:darkslategray; color:white" class="msg">
+                            <span>Please wait while Loading Data...<br /><img class="img" src="../MESPortal.png" style="width:40%" align="middle" id="logo"><br />Working on Retrieving info ...<i class="fa fa-spinner fa-spin"></i></span>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="mysidenavRightINV" class="sidenavRight" ng-controller="RetriveINVcontroller">
+                <label style="background-color:transparent;color:white; font-size:medium">DailySiloInventory</label>
+                <label typeof="labelBox">
+                    Enter INV Date:
+                    <input id="POIE" type="date" style="background-color:darkgreen;color:white" placeholder="INVDate">
+                </label>
+                <button class="dropbtn" id="POIEbtn" type="button" style="transition: 0.3s;" ng-click="GridfromButton();">
+                    &#9776;Execute &#9776;
+                </button>
+
+                <button class="dropbtn" type="button" style="background-color:#110d11;color:white;transition: 0.3s;" onclick="document.getElementById('mysidenavRightINV').style.width = '0';">
+                    &#9776;Close &#9776;
+
+                </button>
+                <button class="dropbtn" type="button" style="background-color:#110d11;color:white;transition: 0.3s;" ng-click="openDIV('mysidenavRightMain');">
+                    &lt; &lt;Back &lt;&lt;
+
+                </button>
+                <button class="dropbtn" style="width:120px;padding-top:15px;padding-bottom:15px; background-color:darkolivegreen " ng-click="exportDriver()">Download</button>
+                <div id="gridholderI">
+                    <div id="grid" ui-grid="gridOptions" ui-grid-edit ui-grid-selection class="grid" ui-grid-pagination style=" width:auto; height:auto; color:white"></div>
+                    <div style="padding-left: 120px; padding-top: 400px;background-color:darkslategray; color:black" class="grid-msg-overlay" ng-hide="!loading">
+                        <div style="padding-left: 120px; background-color:darkslategray; color:white" class="msg">
+                            <span>Please wait while Loading Data...<br /><img class="img" src="../MESPortal.png" style="width:40%" align="middle" id="logo"><br />Working on Retrieving info from plant...<i class="fa fa-spinner fa-spin"></i></span>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="mysidenavRightTruck" class="sidenavRight" ng-controller="RetriveTruckcontroller">
+                <label style="background-color:transparent;font-size:medium">MRTruckData</label>
+                <label typeof="labelBox">
+                    Enter TruckID or Item#:
+                    <input type="text" id="POTE" class="advancedSearchTextbox" placeholder="TruckID or Material">
+                </label>
+                <button class="dropbtn" id="POTEbtn" type="button" style="transition: 0.3s;" ng-click="GridfromButton();">
+                    &#9776;Execute &#9776;
+                </button>
+
+                <button class="dropbtn" type="button" style="background-color:#110d11;color:white;transition: 0.3s;" onclick="document.getElementById('mysidenavRightTruck').style.width = '0';">
+                    &#9776;Close &#9776;
+
+                </button>
+                <button class="dropbtn" type="button" style="background-color:#110d11;color:white;transition: 0.3s;" ng-click="openDIV('mysidenavRightMain');">
+                    &lt; &lt;Back &lt;&lt;
+
+                </button>
+                <button class="dropbtn" style="width:120px;padding-top:15px;padding-bottom:15px; background-color:darkolivegreen " ng-click="exportDriver()">Download</button>
+                <div id="gridholderP">
+                    <div id="grid" ui-grid="gridOptions" ui-grid-edit ui-grid-selection class="grid" ui-grid-pagination style=" width:auto; height:auto; color:white"></div>
+                    <div style="padding-left: 120px; padding-top: 400px;background-color:darkslategray; color:black" class="grid-msg-overlay" ng-hide="!loading">
+                        <div style="padding-left: 120px; background-color:darkslategray; color:white" class="msg">
+                            <span>Please wait while Loading Data...<br /><img class="img" src="../MESPortal.png" style="width:40%" align="middle" id="logo"><br />Working on Retrieving info from plant...<i class="fa fa-spinner fa-spin"></i></span>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="mysidenavRightLabel" class="sidenavRight" ng-controller="RetriveLabelcontroller">
+
+                <label style="background-color:transparent;font-size:medium">ProductionLabels</label>
+                <label typeof="labelBox">
+                    Enter PO or BottomPallet#:
+                    <input id="POLE" type="text" class="advancedSearchTextbox" placeholder="PO or Pallet#Bottom">
+                </label>
+                <button class="dropbtn" id="POLEbtn" type="button" style="transition: 0.5s;" ng-click="GridfromButton();">
+                    &#9776;Execute &#9776;
+                </button>
+
+
+                <button class="dropbtn" type="button" style="background-color:#110d11;color:white;transition: 0.3s;" onclick="document.getElementById('mysidenavRightLabel').style.width = '0';">
+                    &#9776;Close &#9776;
+                </button>
+                <button class="dropbtn" type="button" style="background-color:#110d11;color:white;transition: 0.3s;" ng-click="openDIV('mysidenavRightMain');">
+                    &lt; &lt;Back &lt;&lt;
+
+                </button>
+
+                <button class="dropbtn" style="width:120px;padding-top:15px;padding-bottom:15px; background-color:darkolivegreen " ng-click="exportDriver()">Download</button>
+
+                <div id="gridholderP">
+                    <div id="grid" ui-grid="gridOptions" ui-grid-edit ui-grid-selection class="grid" ui-grid-pagination style=" width:auto; height:auto; color:white"></div>
+                    <div style="padding-left: 120px; padding-top: 400px;background-color:darkslategray; color:black" class="grid-msg-overlay" ng-hide="!loading">
+                        <div style="padding-left: 120px; background-color:darkslategray; color:white" class="msg">
+                            <span>
+                                Please wait while Loading Data...<br /><img class="img" src="../MESPortal.png" style="width:600px;height:450px; background-color:white" align="middle" id="logo">
+                                <br />Working on Retrieving info from plant...<i class="fa fa-spinner fa-spin"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="mysidenavRightQuality" class="sidenavRight" ng-controller="RetriveQualitycontroller">
+                <label style="background-color:transparent;font-size:medium">Quality</label>
+                <label typeof="labelBox">
+                    Enter PO or SampleSN:
+                    <input id="POQE" type="text" class="advancedSearchTextbox" style="color:black" placeholder="PO or SampleSN">
+                </label>
+                <button class="dropbtnB" id="POQEbtn" type="button" style="transition: 0.5s;" ng-click="GridfromButton();">
+                    &#9776;Execute &#9776;
+                </button>
+
+                <button class="dropbtn" type="button" style="background-color:#110d11;color:white;transition: 0.3s;" onclick="document.getElementById('mysidenavRightQuality').style.width = '0';">
+                    &#9776;Close &#9776;
+
+                </button>
+                <button class="dropbtn" type="button" style="background-color:#110d11;color:white;transition: 0.3s;" ng-click="openDIV('mysidenavRightMain');">
+                    &lt; &lt;Back &lt;&lt;
+
+                </button>
+                <button class="dropbtn" style="width:120px;padding-top:15px;padding-bottom:15px; background-color:darkolivegreen " ng-click="exportDriver()">Download</button>
+                <div id="gridholderP">
+                    <div id="grid" ui-grid="gridOptions" ui-grid-edit ui-grid-selection class="grid" ui-grid-pagination style=" width:auto; height:auto; color:white"></div>
+                    <div style="padding-left: 120px; padding-top: 400px;background-color:darkslategray; color:black" class="grid-msg-overlay" ng-hide="!loading">
+                        <div style="padding-left: 120px; background-color:darkslategray; color:white" class="msg">
+                            <span>Please wait while Loading Data...<br /><img class="img" src="../MESPortal.png" style="width:600px;height:450px; background-color:white" align="middle" id="logo"><br />Working on Retrieving info from plant...<i class="fa fa-spinner fa-spin"></i></span>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="mysidenavRightCons" class="sidenavRight" ng-controller="RetriveConscontroller">
+                <label style="background-color:transparent;font-size:medium">Consumption</label>
+                <label typeof="labelBox">
+                    Enter PO or Batch#:
+                    <input id="POCE" type="text" class="advancedSearchTextbox" placeholder="PO or Batch#">
+                </label>
+                <button class="dropbtn" id="POCEbtn" type="button" style="transition: 0.3s;" ng-click="GridfromButton();">
+                    &#9776;Execute &#9776;
+                </button>
+
+                <button class="dropbtn" type="button" style="background-color:#110d11;color:white;transition: 0.3s;" onclick="document.getElementById('mysidenavRightCons').style.width = '0';">
+                    &#9776;Close &#9776;
+
+                </button>
+                <button class="dropbtn" type="button" style="background-color:#110d11;color:white;transition: 0.3s;" ng-click="openDIV('mysidenavRightMain');">
+                    &lt; &lt;Back &lt;&lt;
+
+                </button>
+                <button class="dropbtn" style="width:120px;padding-top:15px;padding-bottom:15px; background-color:darkolivegreen " ng-click="exportDriver()">Download</button>
+                <div id="gridholderP">
+                    <div id="grid" ui-grid="gridOptions" ui-grid-edit ui-grid-selection class="grid" ui-grid-pagination style=" width:auto; height:auto; color:white"></div>
+                    <div style="padding-left: 120px; padding-top: 400px;background-color:darkslategray; color:black" class="grid-msg-overlay" ng-hide="!loading">
+                        <div style="padding-left: 120px; background-color:darkslategray; color:white" class="msg">
+                            <span>Please wait while Loading Data...<br /><img class="img" src="../MESPortal.png" style="width:600px;height:450px; background-color:white" align="middle" id="logo"><br />Working on Retrieving info from plant...<i class="fa fa-spinner fa-spin"></i></span>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="mysidenavRightProd" class="sidenavRight" ng-controller="RetriveProdcontroller">
+
+                <label style="background-color:transparent; font-size:medium">Production</label>
+                <label typeof="labelBox">
+                    Enter PO or Batch#:
+                    <input id="POPE" type="text" class="advancedSearchTextbox" placeholder="PO or Batch#">
+                </label>
+
+                <button class="dropbtn" type="button" id="POPEbtn" style="transition: 0.3s;" ng-click="GridfromButton();">
+                    &#9776;Execute &#9776;
+                </button>
+
+                <button class="dropbtn" type="button" style="vertical-align:central; background-color:#110d11;color:white;transition: 0.3s;" onclick="document.getElementById('mysidenavRightProd').style.width = '0';">
+                    &#9776;Close &#9776;
+
+                </button>
+                <button class="dropbtn" type="button" style="background-color:#110d11;color:white;transition: 0.3s;" ng-click="openDIV('mysidenavRightMain');">
+                    &lt; &lt;Back &lt;&lt;
+
+                </button>
+                <button class="dropbtn" style="width:120px;padding-top:15px;padding-bottom:15px; background-color:darkolivegreen " ng-click="exportDriver()">Download</button>
+
+                <div id="gridholderP" style="color:white">
+                    <div id="grid" ui-grid="gridOptions" ui-grid-edit ui-grid-selection class="grid" ui-grid-pagination style=" width:auto; height:auto; "></div>
+                    <div style="padding-left: 120px; padding-top: 400px;background-color:darkslategray; color:white" class="grid-msg-overlay" ng-hide="!loading">
+                        <div style="padding-left: 120px; background-color:darkslategray; color:white" class="msg">
+                            <span>Please wait while Loading Data...<br /><img class="img" src="../MESPortal.png" style="width:600px;height:450px; background-color:white" align="middle" id="logo"><br />Working on Retrieving info from plant...<i class="fa fa-spinner fa-spin"></i></span>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="mysidenavRightSummary" class="sidenavRightS" style="padding-top:5%; ">
+                <div>
+
+                    <div style="padding-left:30%; color:white">
+                        Please populate boxes using information from each sections to display Data....
+                        <button class="dropbtn" type="button" style="background-color:black;color:white;transition: 0.3s;" onclick="document.getElementById('mysidenavRightSummary').style.width = '0';">
+                            &#9776;Close &#9776;
+
+                        </button>
+                        <button class="dropbtn" type="button" style="background-color:#110d11;color:white;transition: 0.3s;" ng-click="openDIV('mysidenavRightMain');">
+                            &lt; &lt;Back &lt;&lt;
+
+                        </button>
+                    </div>
+
+                    <div id="sumI" name="sumI" style="border: outset; border-color:midnightblue; padding-left: 0px;font-size:small; background-color:white;color:darkslategray; padding-bottom: 2px; padding-right: 0px;">
+                        <p>
+                            <label style="background-color:transparent;color:black; font-size:small"> DailySiloINV:</label>
+                            <LABEL> 	Production_Date	</LABEL>	  <input id="Production_Date" class="summary" type="text" />
+                            <LABEL> 	Material_Number	</LABEL>	  <input id="Material_Number" class="summary" type="text" />
+                            <LABEL> 	Material_Description	</LABEL>	  <input id="Material_Description" class="summary" type="text" />
+                            <LABEL> 	Silo_ID	</LABEL>	  <input id="Silo_ID" class="summary" type="text" />
+                            <LABEL> 	Silo_Level	</LABEL>	  <input id="Silo_Level" class="summary" type="text" />
+                            <LABEL> 	Silo_RTD	</LABEL>	  <input id="Silo_RTD" class="summary" type="text" />
+                            <LABEL> 	Chem_Sample_ID	</LABEL>	  <input id="Chem_Sample_ID" class="summary" type="text" />
+                            <LABEL> 	Chem_Sample_Time	</LABEL>	  <input id="Chem_Sample_Time" class="summary" type="text" />
+                            <LABEL> 	Fat	</LABEL>	  <input id="Fat" class="summary" type="text" />
+                            <LABEL> 	Protein	</LABEL>	  <input id="Protein" class="summary" type="text" />
+                            <LABEL> 	Solids	</LABEL>	  <input id="Solids" class="summary" type="text" />
+                            <LABEL> 	SNF	</LABEL>	  <input id="SNF" class="summary" type="text" />
+                            <LABEL> 	TotalSolids	</LABEL>	  <input id="TotalSolids" class="summary" type="text" />
+                            <LABEL> 	Babcock	</LABEL>	  <input id="Babcock" class="summary" type="text" />
+                            <LABEL> 	TA	</LABEL>	  <input id="TA" class="summary" type="text" />
+                            <LABEL> 	pH	</LABEL>	  <input id="pH" class="summary" type="text" />
+                            <LABEL> 	Micro_Sample_ID	</LABEL>	  <input id="Micro_Sample_ID" class="summary" type="text" />
+                            <LABEL> 	Micro_Sample_Time	</LABEL>	  <input id="Micro_Sample_Time" class="summary" type="text" />
+                            <LABEL> 	Sort_Order	</LABEL>	  <input id="Sort_Order" class="summary" type="text" />
+
+
+                        </p>
+
+                    </div>
+
+                    <div id="sumT" name="sumT" style="border: outset; border-color:midnightblue; padding-left: 0px;font-size:small; background-color:darkslategray;color:white; padding-bottom: 2px; padding-right: 0px;">
+                        <p>
+                            <label style="background-color:transparent;color:white; font-size:small"> MRTruckData:</label>
+                            <LABEL>	TruckId	</LABEL>	 <input id="TruckId" class="summary" type="text" />
+                            <LABEL>	ReceiptDate	</LABEL>	 <input id="ReceiptDate" class="summary" type="text" />
+                            <LABEL>	ItemType	</LABEL>	 <input id="ItemType" class="summary" type="text" />
+                            <LABEL>	Item	</LABEL>	 <input id="Item" class="summary" type="text" />
+                            <LABEL>	Status	</LABEL>	 <input id="Status" class="summary" type="text" />
+                            <LABEL>	SentTOSAP	</LABEL>	 <input id="SentTOSAPT" class="summary" type="text" />
+                            <LABEL>	LoadType	</LABEL>	 <input id="LoadType" class="summary" type="text" />
+                            <LABEL>	LoadNumber	</LABEL>	 <input id="LoadNumber" class="summary" type="text" />
+                            <LABEL>	ScaleDown	</LABEL>	 <input id="ScaleDown" class="summary" type="text" />
+                            <LABEL>	Tank1TruckId	</LABEL>	 <input id="Tank1TruckId" class="summary" type="text" />
+                            <LABEL>	Tank2TruckId	</LABEL>	 <input id="Tank2TruckId" class="summary" type="text" />
+                            <LABEL>	Route1	</LABEL>	 <input id="Route1" class="summary" type="text" />
+                            <LABEL>	Route2	</LABEL>	 <input id="Route2" class="summary" type="text" />
+                            <LABEL>	ScaleInTime	</LABEL>	 <input id="ScaleInTime" class="summary" type="text" />
+                            <LABEL>	ScaleOutTime	</LABEL>	 <input id="ScaleOutTime" class="summary" type="text" />
+                            <LABEL>	ActualGross	</LABEL>	 <input id="ActualGross" class="summary" type="text" />
+                            <LABEL>	ActualTare	</LABEL>	 <input id="ActualTare" class="summary" type="text" />
+                            <LABEL>	ActualNet	</LABEL>	 <input id="ActualNet" class="summary" type="text" />
+                            <LABEL>	HaulerId	</LABEL>	 <input id="HaulerId" class="summary" type="text" />
+                            <LABEL>	Trailer1Id	</LABEL>	 <input id="Trailer1Id" class="summary" type="text" />
+                            <LABEL>	Trailer2Id	</LABEL>	 <input id="Trailer2Id" class="summary" type="text" />
+                            <LABEL>	TrailerLicense1	</LABEL>	 <input id="TrailerLicense1" class="summary" type="text" />
+                            <LABEL>	TrailerLicense2	</LABEL>	 <input id="TrailerLicense2" class="summary" type="text" />
+                            <LABEL>	Btu1	</LABEL>	 <input id="Btu1" class="summary" type="text" />
+                            <LABEL>	Btu2	</LABEL>	 <input id="Btu2" class="summary" type="text" />
+                            <LABEL>	Fips1	</LABEL>	 <input id="Fips1" class="summary" type="text" />
+                            <LABEL>	Fips2	</LABEL>	 <input id="Fips2" class="summary" type="text" />
+                            <LABEL>	OperatorInitials	</LABEL>	 <input id="OperatorInitials" class="summary" type="text" />
+                            <LABEL>	Comments	</LABEL>	 <input id="Comments" class="summary" type="text" />
+                            <LABEL>	Bay	</LABEL>	 <input id="Bay" class="summary" type="text" />
+                            <LABEL>	BayInTime	</LABEL>	 <input id="BayInTime" class="summary" type="text" />
+                            <LABEL>	Silo1	</LABEL>	 <input id="Silo1" class="summary" type="text" />
+                            <LABEL>	Silo2	</LABEL>	 <input id="Silo2" class="summary" type="text" />
+                            <LABEL>	Silo3	</LABEL>	 <input id="Silo3" class="summary" type="text" />
+                            <LABEL>	Silo4	</LABEL>	 <input id="Silo4" class="summary" type="text" />
+                            <LABEL>	ScanCard	</LABEL>	 <input id="ScanCard" class="summary" type="text" />
+                            <LABEL>	Supervisor	</LABEL>	 <input id="Supervisor" class="summary" type="text" />
+                            <LABEL>	ManufactureDate	</LABEL>	 <input id="ManufactureDate" class="summary" type="text" />
+                            <LABEL>	TruckInBayTime	</LABEL>	 <input id="TruckInBayTime" class="summary" type="text" />
+                            <LABEL>	RowId	</LABEL>	 <input id="RowId" class="summary" type="text" />
+
+                        </p>
+
+                    </div>
+
+                    <div id="sumP" name="sumP" style="border: outset; border-color:midnightblue; padding-left: 0px;font-size:medium; background-color:white;color:black; padding-bottom: 2px; padding-right: 0px;">
+                        <p>
+                            <label style="background-color:transparent;color:black; font-size:small"> Production:</label>
+                            <LABEL>
+                                ProductionOrder<input id="POP" class="summary" type="text" />
+                            </LABEL>
+                            <LABEL>
+                                Item<input id="itemP" class="summary" type="text" />
+                            </LABEL>
+                            <LABEL>
+                                Batch"<input id="BatchP" class="summary" type="text" />
+                            </LABEL>
+                            <LABEL>
+                                Operation"<input id="OperationP" class="summary" type="text" />
+                            </LABEL>
+                            <LABEL>
+                                ReasonCode <input id="ReasonCode" class="summary" type="text" />
+                            </LABEL>
+                            <LABEL>
+                                WorkCenter<input id="WorkCenter" class="summary" type="text" />
+                            </LABEL>
+                            <LABEL>
+                                JobStatus<input id="JobStatus" class="summary" type="text" />
+                            </LABEL>
+
+                            <label>ENT_ID<input id="ent_id" class="summary" type="text" /></label>
+                            <label>TO_ENT_ID<input id="to_ent_id" class="summary" type="text" /></label>
+                            <LABEL>
+                                qty<input id="qty" class="summary" type="text" />
+                            </LABEL>
+                            <label>
+                                SAP Confirmation?<input id="SentToSAP" class="summary" type="text" />
+                            </label>
+                            <label>comment</label><input id="comments" type="text" class="summary" />
+                            <label>spare1</label><input id="spare1" type="text" class="summary" />
+                            <label>spare2</label><input id="spare2" type="text" class="summary" />
+                            <label>spare3</label><input id="spare3" type="text" class="summary" />
+                            <label>spare4</label><input id="spare4" type="text" class="summary" />
+                            <label>last Edited By</label><input id="last_edit_by" type="text" class="summary" />
+                            <label>last Edited Date</label><input id="last_edit_at" type="text" class="summary" />
+                            <label>created UTC</label><input id="created_at_utc" type="text" class="summary" />
+                            <label>created Local</label><input id="created_at_local" type="text" class="summary" />
+                        </p>
+
+                    </div>
+
+                    <div id="sumC" name="sumC" style="border: outset; border-color:midnightblue; padding-left: 0px;font-size:small; background-color:#655e5a;color:white; padding-bottom: 2px; padding-right: 0px;">
+                        <p>
+                            <label style="background-color:transparent;color:white; font-size:small"> Consumption:</label>
+                            <LABEL>	PO	</LABEL>	 <input id="POC" class="summary" type="text" />
+                            <LABEL>	itemC	</LABEL>	                        <input id="itemC" class="summary" type="text" />
+                            <LABEL>	BatchC	</LABEL>	                        <input id="BatchC" type="text" />
+                            <LABEL>	OperationC	</LABEL>	                        <input id="OperationC" class="summary" type="text" />
+                            <LABEL>	sublot_noC	</LABEL>	                        <input id="sublot_noC" class="summary" type="text" />
+                            <LABEL>	ReasonCodeC	</LABEL>	                        <input id="ReasonCodeC" class="summary" type="text" />
+                            <LABEL>	WorkCenterC	</LABEL>	                        <input id="WorkCenterC" class="summary" type="text" />
+                            <LABEL>	JobStatusC	</LABEL>	                        <input id="JobStatusC" class="summary" type="text" />
+                            <LABEL>	ent_idC	</LABEL>	                        <label>ENT_ID<input id="ent_idC" class="summary" type="text" /></label>
+                            <LABEL>	to_ent_idC	</LABEL>	                        <label>TO_ENT_ID<input id="to_ent_idC" class="summary" type="text" /></label>
+                            <LABEL>	qtyC	</LABEL>	                        <input id="qtyC" class="summary" type="text" />
+                            <LABEL>	SAP Confirmation?	</LABEL>	             <input id="SentToSAPC" class="summary" type="text" />
+                            <LABEL>	commentsC	</LABEL>	                        <input id="commentsC" class="summary" type="text" />
+                            <LABEL>	spare1C	</LABEL>	                        <input id="spare1C" class="summary" type="text" />
+                            <LABEL>	spare2C	</LABEL>	                        <input id="spare2C" class="summary" type="text" />
+                            <LABEL>	spare3C	</LABEL>	                        <input id="spare3C" class="summary" type="text" />
+                            <LABEL>	spare4C	</LABEL>	                        <input id="spare4C" class="summary" type="text" />
+                            <LABEL>	last_edit_byC	</LABEL>	                        <input id="last_edit_byC" class="summary" type="text" />
+                            <LABEL>	last_edit_atC	</LABEL>	                        <input id="last_edit_atC" class="summary" type="text" />
+                            <LABEL>	created_at_utcC	</LABEL>	                        <input id="created_at_utcC" class="summary" type="text" />
+                            <LABEL>	created_at_localC	</LABEL>	                        <input id="created_at_localC" class="summary" type="text" />
+
+                        </p>
+
+                    </div>
+
+
+
+                    <div id="sumQ" name="sumQ" style="border: outset; border-color:midnightblue; padding-left: 0px;font-size:small; background-color:floralwhite;color:black; padding-bottom: 2px; padding-right: 0px;">
+                        <p>
+                            <label style="background-color:ghostwhite;color:black; font-size:small"> SamplesTable:</label>
+                            <LABEL>	SerialNumber	</LABEL>	 <input id="SerialNumber" class="summary" type="text" />
+                            <LABEL>	ProductionOrder	</LABEL>	                        <input id="ProductionOrder" class="summary" type="text" />
+                            <LABEL>	LotID 	</LABEL>	                        <input id="LotIDQ" class="summary" type="text" />
+                            <LABEL>	Name	</LABEL>	                        <input id="Name" class="summary" type="text" />
+                            <LABEL>	SavedSampleTime	</LABEL>	                        <input id="SavedSampleTime" class="summary" type="text" />
+                            <LABEL>	SampleTime	</LABEL>	                        <input id="SampleTime" class="summary" type="text" />
+                            <LABEL>	Value	</LABEL>	                        <input id="ValueQ" class="summary" type="text" />
+                            <LABEL>	USL	</LABEL>	                        <input id="USL" class="summary" type="text" />
+                            <LABEL>	Target	</LABEL>	                        <label>ENT_ID<input id="Target" class="summary" type="text" /></label>
+                            <LABEL>	LSL	</LABEL>	                        <label>TO_ENT_ID<input id="LSL" class="summary" type="text" /></label>
+                            <LABEL>	Alarms	</LABEL>	                        <input id="Alarms" class="summary" type="text" />
+                            <LABEL>	Label	</LABEL>	                         <input id="Label" class="summary" type="text" />
+                            <LABEL>	Flag	</LABEL>	                        <input id="Flag" class="summary" type="text" />
+                            <LABEL>	Comment	</LABEL>	                        <input id="Comment" class="summary" type="text" />
+                            <LABEL>	Cp	</LABEL>	                        <input id="Cp" class="summary" type="text" />
+                            <LABEL>	Cpk	</LABEL>	                        <input id="Cpk" class="summary" type="text" />
+                            <LABEL>	IgnoreSample	</LABEL>	                        <input id="IgnoreSample" class="summary" type="text" />
+                            <LABEL>	Status	</LABEL>	                        <input id="Status" class="summary" type="text" />
+                            <LABEL>	Spare1	</LABEL>	                        <input id="Spare1Q" class="summary" type="text" />
+                            <LABEL>	Spare2	</LABEL>	                        <input id="Spare2Q" class="summary" type="text" />
+                            <LABEL>	Spare3	</LABEL>	                        <input id="Spare3Q" class="summary" type="text" />
+                            <LABEL>	Spare4	</LABEL>	                        <input id="Spare4Q" class="summary" type="text" />
+                            <LABEL>	Spare5	</LABEL>	                        <input id="Spare5Q" class="summary" type="text" />
+                            <LABEL>	SampleID	</LABEL>	                        <input id="SampleID" class="summary" type="text" />
+
+
+                        </p>
+
+                    </div>
+
+                    <div id="sumL" name="sumL" style="border: outset; border-color:midnightblue; padding-left: 0px;font-size:small; background-color:#655e5a;color:white; padding-bottom: 2px; padding-right: 0px;">
+                        <p>
+                            <label style="background-color:transparent;color:white; font-size:small"> ProductionLabel:</label>
+                            <LABEL>	Type	<input id="Type" class="summary" type="text" /> </LABEL>
+                            <LABEL>	PalletNumberBottom	<input id="PalletNumberBottom" class="summary" type="text" /> </LABEL>
+                            <LABEL>	PalletNumberTop	<input id="PalletNumberTop" class="summary" type="text" /> </LABEL>
+                            <LABEL>	ProductionOrder	<input id="ProductionOrderL" class="summary" type="text" /> </LABEL>
+                            <LABEL>	Item	<input id="ItemL" class="summary" type="text" /> </LABEL>
+                            <LABEL>	CheeseName	<input id="CheeseName" class="summary" type="text" /> </LABEL>
+                            <LABEL>	PrintArea	<input id="PrintArea" class="summary" type="text" /> </LABEL>
+                            <LABEL>	NetWeightBottom	<input id="NetWeightBottom" class="summary" type="text" /> </LABEL>
+                            <LABEL>	NetWeightTop	<input id="NetWeightTop" class="summary" type="text" /> </LABEL>
+                            <LABEL>	ProductionDate	<input id="ProductionDate" class="summary" type="text" /> </LABEL>
+                            <LABEL>	PrintedDate	<input id="PrintedDate" class="summary" type="text" /> </LABEL>
+                            <LABEL>	Sku	<input id="Sku" class="summary" type="text" /> </LABEL>
+                            <LABEL>	LfcProductCode	<input id="LfcProductCode" class="summary" type="text" /> </LABEL>
+                            <LABEL>	PrintType	<input id="PrintType" class="summary" type="text" /> </LABEL>
+                            <LABEL>	CommentTop	<input id="CommentTop" class="summary" type="text" /> </LABEL>
+                            <LABEL>	CommentBottom	<input id="CommentBottom" class="summary" type="text" /> </LABEL>
+                            <LABEL>	SentToSAP	<input id="SentToSAPL" class="summary" type="text" /> </LABEL>
+                            <LABEL>	LicensePlate	<input id="LicensePlate" class="summary" type="text" /> </LABEL>
+                            <LABEL>	Plackard	<input id="Plackard" class="summary" type="text" /> </LABEL>
+                            <LABEL>	Variables	<input id="Variables" class="summary" type="text" /> </LABEL>
+
+                        </p>
+
+                    </div>
+
+                </div>
+            </div>
+            <div id="mysidenavRightMain" ng-controller="OneStopGuidedSupportcontroller" class="sidenavRight" style="background-color:#2a2c2c">
+                <!--<div id='sidepanel'>
+                    <div id='bar'>
+                        <div>
+                            E<br>V<br>E<br>N<br>T<br>S<br>
+
+                        </div>
+                    </div>
+                    <div id='panel'>
+
+                    </div>
+                </div>-->
+
+                <div align="right">
+                    <!--<div id="gridholderSDE">
+                        <div id="grid" ui-grid="gridOptions" ui-grid-edit ui-grid-selection class="grid" ui-grid-pagination style=" width:auto; height:auto; color:white"></div>
+                        <div style="padding-left: 120px; padding-top: 400px;background-color:darkslategray; color:black" class="grid-msg-overlay" ng-hide="!loading">
+                            <div style="padding-left: 120px; background-color:darkslategray; color:white" class="msg">
+                                <span>Please wait while Loading Data...<br /><img class="img" src="../MESPortal.png" style="width:40%" align="middle" id="logo"><br />Working on Retrieving info ...<i class="fa fa-spinner fa-spin"></i></span>
+
+                            </div>
+                        </div>
+                    </div>-->
+                    <button class="dropbtn" type="button" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('mysidenavRightMain').style.width = '0';">
+                        &#9776;Close &#9776;
+
+                    </button>
+                    <div id="IssueArea" class="dropup" style="float:left;">
+                        <div style="margin-top:10px;width:360px;height:200px;padding:10px;border-radius:10px;border:10px solid #EE872A;font-size:120%;">
+                            <h4><label style="background-color:forestgreen;color:white; font-size:16px;"> &nbsp;1.</label> What production process is impacted?</h4>
+                            <div>
+
+                                <div class="dropup-content">
+                                    <button type="button" class="dropbtnU" ng-click="copy('POTE','MilkReceiving')">MilkReceiving</button><br />
+                                    <button type="button" class="dropbtnU" ng-click="copy('POQE','QualitySamples')">QualitySamples</button><br />
+                                    <button type="button" class="dropbtnU" ng-click="copy('POPE','Production')">Production</button><br />
+                                    <button type="button" class="dropbtnU" ng-click="copy('POCE','Consumption')">Consumption</button><br />
+                                    <button type="button" class="dropbtnU" ng-click="copy('POLE','Labels')">PrintingLabels</button><br />
+                                    <button type="button" class="dropbtnU" ng-click="copy('POIE','DailyInventory')">DailyInventory</button><br />
+
+                                </div>
+                            </div>
+
+                            <label style="height:10px;color:#EE872A">
+                                Sample Issues:
+                                - Not seeing Production, Consumption or BATCH in MES Reports or in SAP<br />
+                                - Not seeing any SAMPLES in SAP or Reports<br />
+                                - Trouble with Milk Receiving<br />
+                                - Issues with DailyInventory <br />
+                                - Issues with Label Printing
+                            </label>
+                        </div>
+
+
+
+                        <input type="text" style="padding-left:10px; width:260px;height:30px; color:white; background-color:darkslategray; font-size:medium;  text-align: center;" disabled="disabled" id="IssueAreaTB1" />
+                        <input type="text" style="color:white;background-color:darkslategray" id="IATo1" hidden="hidden" />
+
+                    </div>
+                    <div id="Process" class="dropup" style="float:left">
+                        <div style="margin-top:10px;width:360px;height:200px;padding:10px;border-radius:10px;border:10px solid #f1f1f1;font-size:120%;">
+
+
+                            <h4>
+                                <label style="background-color:forestgreen;color:white; font-size:16px;"> &nbsp;2.</label>
+                                Is this an Application Issue? Do you know the following?
+
+                                <button type="button" class="dropbtnU" style="background-color:green; color:white" ng-click="assignT('ProcessTBMSG','Step2-Please assign the ticket to the CONTROLS Team.')" onclick="document.getElementById('ProcessTB').value = ''; document.getElementById('ProcessTB').style.backgroundColor = 'lightgreen';document.getElementById('ProcessTB').focus()">YES</button>
+                                <button type="button" class="dropbtnU" style="background-color:red; color:white" ng-click="assignT('ProcessTBMSG','Proceed to #3.')">NO</button>
+                            </h4>
+
+
+                            <label style="height:10px;color:#EE872A">
+                                - PONumber (for Production, Consumption, Quality, Label Issues), <br />
+                                - MaterialNumber:(for Milk Receiving Issues)<br />
+                                - BatchNumber:(for Production, Consumption, Labels Issues) <br />
+                                - SampleNumber:(for Quality Issues) <br />
+                                - TruckID: (for Milk Receiving Issues) <br />
+                                - PalletNumber: (Label Issues)
+                            </label>
+                        </div>
+                        <input type="text" style="padding-left:10px; background-color:#1d2a25; color:black; width:260px;height:30px;  font-size:medium; text-align: center;" ng-blur="blurT('ProcessTB')" id="ProcessTB" />
+                        <button class="dropbtn" style="background-color:#462e66; color:white;" ng-click="copyToDIV()">Go!</button>
+                        <input type="text" style="padding-left:10px; background-color:darkslategray; font-size:medium;  text-align: center; color:white; width:320px;height:30px;  float:right; " ng-blur="blurT('ProcessTBMSG')" hidden="hidden" id="ProcessTBMSG" />
+
+                    </div>
+                    <div id="Reporting" class="dropup" style="float:left">
+                        <div style="margin-top:10px;width:360px;height:200px;padding:10px;border-radius:10px;border:10px solid #908e7f;font-size:120%;">
+                            <h4>
+                                <label style="background-color:forestgreen;color:white; font-size:16px;"> &nbsp;3.</label> Is this a Reporting Issue?<br />
+                                <button type="button" class="dropbtnU" style="background-color:green; color:white" ng-click="assignT('ProcessTBR','Step3-Please assign the ticket to the CONTROLS Team.')">YES</button>
+                                <button type="button" class="dropbtnU" style="background-color:red; color:white" ng-click="assignT('ProcessTBMSG','Proceed to #4.')">NO</button>
+
+
+                            </h4>
+                            <label style="height:10px;color:#EE872A">
+                                Data not showing up in the report
+                                Calculations are incorrect
+                            </label>
+                        </div>
+
+
+
+
+
+                        <input type="text" disabled="disabled" style="padding-left:10px; width:280px;height:30px; color:white; background-color:darkslategray; font-size:medium; text-align: center;" hidden="hidden" id="ProcessTBR" />
+
+                    </div>
+
+                </div>
+                <div align="right">
+                    <div id="LIT" class="dropup" style="float:left;">
+                        <div style="margin-top:10px;width:360px;height:170px;padding:10px;border-radius:10px;border:10px solid #e1b979;font-size:120%;">
+                            <h4>
+                                <label style="background-color:forestgreen;color:white; font-size:16px;"> &nbsp;4.</label> Messages Not going to SAP? <br />
+                                Or Issues with Dropping the Production Orders, Materials etc.<br />
+                                <button type="button" class="dropbtnU" style="background-color:forestgreen; color:white" ng-click="assignT('IssueAreaTBS','Step4-Please Assign the Ticket to the CONTROLS Team')">YES</button>
+                                <button type="button" class="dropbtnU" style="background-color:red; color:white" ng-click="assignT('IssueAreaTBS','Proceed to #5.')">NO</button>
+
+                            </h4>
+                            <label style="height:10px;color:#EE872A">
+                                Note:
+                                - Will be covered in Next Phase
+                                - May be a LIT Issue.
+                            </label>
+                        </div>
+                        <button class="dropbtnU" hidden="hidden">Dropup</button>
+
+                        <input type="text" style="padding-left:10px; width:320px;height:30px; color:white; background-color:darkslategray; font-size:medium" ng-blur="blurT('IssueAreaTBS')" hidden="hidden" id="IssueAreaTBS" />
+                        <input type="text" style="color:white;background-color:darkslategray" id="IATo1" hidden="hidden" />
+                    </div>
+                    <div id="Controls" class="dropup" style="float:left">
+                        <div style="margin-top:10px;width:360px;height:170px;padding:10px;border-radius:10px;border:10px solid #128236 ;font-size:120%;">
+                            <h4>
+                                <label style="background-color:forestgreen;color:white; font-size:16px;"> &nbsp;5.</label> Issues with Label Printers, HMI <br /> and/or TAG data including Active Factory/Vigilistics?<br />
+                                <button type="button" class="dropbtnU" style="background-color:forestgreen; color:white" ng-click="assignT('ProcessTBC','Please refer to Controls Escalation Guide'); openGuide('https://leprinofoods.sharepoint.com/:u:/t/teamsites/controls/EWvZvoHPj6tHug6V6y3WP6YBuZYtZRoPsbK8sBDf58qzsQ?e=6rgyBY')">YES</button>
+                                <button type="button" class="dropbtnU" style="background-color:red; color:white" ng-click="assignT('ProcessTBMSG','Proceed to the #6.')">NO</button>
+                            </h4>
+                            <label style="height:10px;color:#EE872A">
+                                - REFER TO CONTROLS ESCALATION GUIDE
+                            </label>
+                        </div>
+                        <!--<button class="dropbtnU">Dropup</button>-->
+
+
+                        <input type="text" style="padding-left:10px; width:260px;height:30px; color:white; background-color:darkslategray; font-size:medium;  text-align: center;" disabled="disabled" ng-blur="blurT('ProcessTBC')" hidden="hidden" id="ProcessTBC" />
+
+                    </div>
+                    <div id="Other" class="dropup" style="float:left">
+                        <div style="margin-top:10px;width:360px;height:170px;padding:10px;border-radius:10px;border:10px solid #4D90FE;font-size:120%;">
+                            <h4><label style="background-color:forestgreen;color:white; font-size:16px;"> &nbsp;6.</label> All Other Issues?</h4>
+                            <H5 style="height:10px;color:white">
+                                Please assign the ticket to the CONTROLS Team.
+                            </H5>
+                        </div>
+                    </div>
+                    <div id="Message" class="dropup" style="float:left">
+                        <div style="margin-top:10px;width:720px;height:170px;padding:10px;border-radius:10px;border:10px solid green;font-size:120%;">
+                            <h4><label id="" style="background-color:black;color:white; font-size:16px;"> &nbsp;</label> Bulletin Board</h4>
+                            <input type="text" disabled="disabled" style="padding-left:10px; background-color:black; color:white;  text-align:center; width:680px;height:80px; font-size:x-large;  align-self:flex-start" ng-blur="blurT('MsgBox')" id="MsgBox" />
+                        </div>
+                    </div>
+                    <div id="Submit" class="dropup" style="float:left">
+                        <div style="margin-top:10px;width:360px;height:170px;padding:10px;border-radius:10px;border:10px solid #4D90FE;font-size:120%;">
+                            <div>
+                                <label style="height:15px;color:#EE872A">
+                                    Analyst Name:<br />
+                                </label>
+                                <input type="text" style="padding-left:10px; background-color:#1d2a25; color:white; width:200px;height:30px; font-size:medium;  align-self:flex-start" ng-blur="blurT('IssueAreaTBU')" id="ProcessTBU" />
+                                <br />
+                                <label style="height:15px;color:#EE872A">
+                                    Ticket Number:<br />
+                                </label><input type="text" style="padding-left:10px; background-color:#1d2a25; color:white; width:200px;height:30px; font-size:medium;  align-self:flex-start" ng-blur="blurT('ProcessINC')" id="ProcessINC" />
+                                <br /> <button type="button" class="dropbtnU" style="border:outset;background-color:darkgreen; color:white ; height:40px; width:100px" ng-click="addServDeskEntry()">Save</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
+
+        </div>
+
+    </div>
+
+
+</body>
+</html>

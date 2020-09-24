@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html ng-app="plunker">
+
+<head>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.css" />
+  <script src="//code.angularjs.org/1.3.0/angular.js"></script>
+  <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.min.js"></script>
+
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/flexslider/2.2.2/flexslider.css">
+  <script src="//cdn.jsdelivr.net/flexslider/2.2.2/jquery.flexslider-min.js"></script>
+  <script src="//cdn.jsdelivr.net/flexslider/2.2.2/jquery.flexslider.js"></script>
+
+  <!--<link rel="stylesheet" href="\MESAdmAPP\Content\site.css" />-->
+  <style>
+
+#carousel img {
+display: block;
+opacity: .5;
+cursor: pointer;
+}
+
+#carousel .flex-active-slide img {
+opacity: 1;
+cursor: default;
+}
+</style>
+ <!-- <script src="WBScript.js"></script>
+  <script>var app = angular.module('plunker', ['angular-flexslider']);
+
+app.controller('MainCtrl', function($scope) {
+  $scope.prod = {imagePaths: []};
+	$scope.prod.imagePaths = [
+      	{ custom: 'FIN.JPG', thumbnail: 'FIN.JPG' },
+      	{ custom: 'OVR.JPG', thumbnail: 'OVR.JPG' },
+      	{ custom: 'TST.JPG', thumbnail: 'TST.JPG' },
+      	{ custom: 'BA.JPG', thumbnail: 'BA.JPG' },
+      
+      ];
+});
+</script>
+  
+  <script src="angular-flexslider.js"></script>-->
+</head>
+
+<body>
+  <div id="container" ng-controller="WBIndexcontroller">
+
+    <div class="col-sm-12">
+
+      <flex-slider slider-id="slider" flex-slide="image in prod.imagePaths track by $index" animation="fade" animation-loop="false" sync="#carousel" slideshow="false" control-nav="false" init-delay="100">
+
+        <li>
+          <img ng-src="{{image.custom}}">
+        </li>
+
+      </flex-slider>
+    </div>
+    <div class="col-sm-12">
+
+      <flex-slider slider-id="carousel" flex-slide="image in prod.imagePaths track by $index" animation="slide" animation-loop="false" item-width="210" item-margin="5" as-nav-for="#slider" slideshow="false" control-nav="false">
+        <li>
+          <img ng-src="{{image.thumbnail}}">
+        </li>
+      </flex-slider>
+    </div>
+
+
+  </div>
+</body>
+
+</html>

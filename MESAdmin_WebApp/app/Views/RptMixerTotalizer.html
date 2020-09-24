@@ -1,0 +1,60 @@
+﻿<!--<div class="container">-->
+    <div style="padding-bottom:0px;">
+        <img src="../LeprinoLogo.png" style="width:50px;height:33px;" align="right">
+        <header> <h3 align="center">Mixer Totalizer Report</h3> </header>
+
+    </div>
+    <ul class="nav nav-tabs" data-tabs="tabs" id="myTabs">
+        <li class="active"><a data-toggle="tab" data-target="#grid">Mixer Totalizer Report</a></li>
+        
+    </ul>
+
+  <!--  <div class="tab-content">-->
+
+        <div id="grid" class="tab-pane fade in active">
+            <div ng-controller="RptMixerTotalizercontroller" style="display:block; width : 1440px">
+                <!--Login name: <input type="text" name="FirstName" value="Mickey"><br>-->
+                <div style="display:inline-block;padding-bottom:0px; padding-left:0px;">
+                   
+                    <form action="/RptMixerTotalizer.html" method="get" id="form1">
+                        ProductionOrder: <input id="ProductionOrder" type="text" name="ProductionOrder">  Line(1,2,3): <input id="Line" type="text" name="Line"> ProductCode:<input id="ProductCode" type="text" name="ProductCode">
+
+                        Start Date: <input id="SDate" type="date" name="SDate"> End Date: <input id="EDate" type="date" name="EDate">
+
+
+                        <select id="plant" name="plant">
+                            <option selected="selected">Select Plant</option>
+                            <option value="LEM">LEM</option>
+                            <option value="FTM">FTM</option>
+                            <option value="ALN">ALN</option>
+                            <option value="LEW">LEW</option>
+                            <option value="REM">REM</option>
+                            <option value="ROS">ROS</option>
+                            <option value="TRA">TRA</option>
+                            <option value="WAV">WAV</option>
+                            <option value="GRE">GRE</option>
+                        </select>
+
+
+
+                        <button ng-click="refreshGrid()">Refresh</button>
+                        <button ng-click="clearFilters()">Reset</button>
+                    </form>
+                </div>
+                <!--
+                    <strong>Data Length:</strong> {{ gridOptions.data.length | number }}
+                <strong>Last Cell Edited:</strong> {{lastCellEdited}}
+                <br>
+                    -->
+                <div id="grid" ui-grid="gridOptions" ui-grid-edit ui-grid-selection class="grid" ui-grid-pagination style="width:1440PX"></div>
+                <div class="grid-msg-overlay" ng-hide="!loading" >
+                    <div class="msg">
+                        <span >Loading Data...<i class="fa fa-spinner fa-spin"></i></span>
+                    </div>
+                </div>
+                </div>
+        </div>
+
+<!--     </div>
+</div>-->
+

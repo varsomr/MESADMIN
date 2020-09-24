@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <!--#################################################### DOPRetentate  ######################################################-->
+    <div id="mysidenavRightRetentateDOP" ng-controller="LRWcontroller" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content" style="height:100%;  background-color:#005a9e;color:white">
+            <div class="modal-body" style="height:100%;  background-color:#005a9e;color:white">
+
+
+                <div id="mysidenavRightCalendarFull" class="sidenavRight" style="background-color:black; color:white; width:100%; height:100%;display:none">
+
+                    <div style="padding-left:23%;padding-top:10%; padding-right:23%;background-color:black;color:white">
+                        <div style="width:100%; float:left; border:none;background-color:black;color:white">
+                            <pre style="width:40%; text-align:center;background-color:black;color:white;border:none; float:left"><b id="SelectedDateFull" style="font-size:xx-large; background-color:black;color:white">{{dt | date : "MM/dd/y" }}</b></pre>
+                            <button type="button" class="btn btn-sm btn-info" ng-click="seldate();" style="background-color:transparent;color:white; border-color:white; width:55px; height:55px; border-radius:24px; float:left;font-size:small;float:left">Select</button>
+                            <!--<h4>Inline</h4>-->
+                            <button type="button" class="btn btn-sm btn-info" ng-click="today()" style="width:5%; float:left; height:30px;display:none">Today</button>
+                            <button type="button" class="btn btn-sm btn-danger" ng-click="clear()" style="width:5%; float:left; height:30px;display:none">Clear</button>
+                            <input id="initformFull" style="background-color:lightgrey;display:none" />
+                            <!--</div>
+                            <div style="width:100%; float:left">-->
+                            <div id="dtkeyboardFull" style="display:inline-block;background-color:black; color:white; min-height:290px;width:100%; float:left">
+                                <div uib-datepicker ng-model="dt" class="well well-sm" datepicker-options="options" style="width:100%; height:100%;background-color:black; color:white;border:none"></div>
+                            </div>
+                            <hr style="border:none" />
+
+                        </div>
+                    </div>
+                </div>
+
+                <div id="mysidenavRightDOPRetentateRptDashboard" class="sidenavRight" style="background-color:#550909; border:none">
+                    <button id="closeSaveMessage" type="button" ng-click="cancelModal()" style="transition: 1s;background:fixed 2px black; color:white;float:left;border-radius:24px;width:80px;height:80px; font-size:medium;float:right">CANCEL</button>
+                    <button class="dropbtn" id="getLQLDashboard" type="button" style="transition: 1s;background-color:transparent; border:none; color:white;float:left; " ng-click="GridfromButtonRetentateDOPRpt();">
+                        <img src="REFRESH.png" title="refresh" style="width:25px;height:25px; border:outset; border-radius:16px" />
+                    </button>
+                    <!--<div style="width:10%;float:left">
+                        <label style="background-color:transparent;font-size:large;float:left; width:50%;text-align:right">LRS Web Report </label>
+                    </div>-->
+                    <div style="width:100%; height:20%; text-align:center;float:left;">
+                        <label id="modalMessage" style="font-size:medium;font-weight:bold;background-color:brown;color:white;width:100%">DOP Retentate</label>
+
+                        <div style="width:15%;height:100%;float:left">
+                            <label style="float:left;color:white">From Date</label>
+                            <input id="RtimestampidF" style="width:100px;height:20px;background-color:black; font-size:x-small; font-style:italic; color:lightgoldenrodyellow; float:left; border:solid 2px; border-color:darkkhaki; text-align:center" ng-click="OpenCalendar('#RtimestampidF')">
+                            <!--<label style="background-color:transparent;color:white;width:100%; float:left; text-align:center; font-size:12px; ">From Date</label>
+                            <button type="button" class="dropbtn" style="transition: 1s;background-color:transparent; border:none; color:white;float:right" ng-click="OpenCalendar('#timestampid')">
+                                <img src="Calendar.png" title="Select Date" style="width:25px;height:30px;border:outset;border-color:darkslategray " />
+                            </button>
+                            <input id="timestampid" contenteditable="true" style="width:140px;height:40px;background-color:black; font-size:small; font-style:italic; color:lightgoldenrodyellow;border:outset; border-color:darkslategray; float:right;text-align:center" disabled="disabled" ng-click="OpenCalendar('#timestampid')">-->
+
+                        </div>
+                        <div style="width:15%;height:100%;float:left">
+                            <label style="float:left;color:white">To Date</label>
+                            <input id="RtimestampidT" style="width:100px;height:20px;background-color:black; font-size:x-small; font-style:italic; color:lightgoldenrodyellow; float:left; border:solid 2px; border-color:darkkhaki; text-align:center;" ng-click="OpenCalendar('#RtimestampidT')">
+                        </div>
+                        <div style="width:15%;height:100%;float:left">
+                            <label style="float:left;color:white">Line Number</label>
+                            <select id="SULine" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;background-color:darkslategrey;color:lightgoldenrodyellow ">
+                                <option value="" selected> </option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </div>
+                        <div style="width:15%;height:100%;float:left">
+                            <label style="background-color:transparent;color:white;width:100%; float:left; text-align:center; font-size:12px; ">Production Order</label>
+
+                        </div>
+                        <div style="width:15%;height:100%;float:left">
+                            <label style="background-color:transparent;color:white;width:100%; float:left; text-align:center; font-size:12px; ">Material</label>
+
+                        </div>
+
+                    </div>
+                    <div id="gridOptionsRetentateDOPRpt" class="gridRetentateDOPRpt" ui-grid="gridOptionsRetentateDOPRpt" ui-grid-grouping ui-grid-selection ui-grid-expandable style="float:left;width:99vw;height:80vh"></div>
+                    <div style="padding-left: 120px; padding-top: 400px;background-color:black; color:lightblue" class="grid-msg-overlay" ng-hide="!loading">
+                        <div style="background-color:transparent; color:white;" class="msg">
+                            <span>Please wait while Loading Data...<br /><!----><br />Working on Retrieving info ...<i class="fa fa-spinner fa-spin"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--#################################################### DOPRetentate Section ######################################################-->
+</body>
+</html>
+
+
+
+
+<button id="Str" class="mainBtn" ng-click="openModal('mysidenavRightRetentateDOP')" style="width:7%; height:40px; border:solid 1px darkslategrey; background-color:transparent;color:white; float:left;font-size:small;border-bottom:hidden">
+    DOP Retentate<span class="tooltiptext" id="myTooltipvRetDOP"></span>
+</button>
+
+
+
+        .gridRetentateDOPRpt {
+            width: 99vw;
+            height: 80vh;
+            background-color: white !important;
+            color: black !important;
+            /*grid-template-columns: repeat(auto-fit, minmax(min-content, 400px));*/
+            text-align: center;
+        }

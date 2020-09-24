@@ -1,0 +1,37 @@
+﻿<div class="container">
+    <div style="padding-bottom:20px;">
+        <img src="../LeprinoLogo.png" style="width:100px;height:66px;" align="right">
+        <header> <h3 align="center">MES Project List</h3> </header>
+    </div>
+    <ul class="nav nav-tabs" data-tabs="tabs" id="myTabs">
+        <li class="active"><a data-toggle="tab" data-target="#grid">Project List</a></li>
+        
+    </ul>
+
+    <div class="tab-content">
+
+        <div id="grid" class="tab-pane fade in active">
+            <div ng-controller="ProjectListcontroller" style="display:block; width : 1140px">
+                <!--Login name: <input type="text" name="FirstName" value="Mickey"><br>-->
+                <div style="display:inline-block;padding-bottom:15px; padding-left:10px;">
+                    <button ng-click="refreshGrid()">Refresh</button>
+                    <button ng-click="clearFilters()">Reset</button>
+                </div>
+                <!--
+                    <strong>Data Length:</strong> {{ gridOptions.data.length | number }}
+                <strong>Last Cell Edited:</strong> {{lastCellEdited}}
+                <br>
+                    -->
+                <div id="grid" ui-grid="gridOptions" ui-grid-edit ui-grid-selection class="grid" ui-grid-pagination style="width:1140PX"></div>
+                <div class="grid-msg-overlay" ng-hide="!loading" >
+                    <div class="msg">
+                        <span >Loading Data...<i class="fa fa-spinner fa-spin"></i></span>
+                    </div>
+                </div>
+                </div>
+        </div>
+
+ 
+    </div>
+</div>
+

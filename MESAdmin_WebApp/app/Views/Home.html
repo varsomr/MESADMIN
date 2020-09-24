@@ -1,0 +1,126 @@
+<HTML>
+<head>
+    <meta name="viewport" content="width=590">
+    <style>
+        html {
+            /*background: url(MESPortal.png) no-repeat right fixed;*/
+            /*background-size: 700px;*/
+            opacity: 2.2;
+            filter: alpha(opacity=220);
+        }
+
+        body {
+            background-image: url("lpsWEB.PNG");
+            background-color: #cccccc;
+            border:hidden       
+
+        }
+
+    .sidenav { height: 100%; width: 720px; position: fixed; z-index: 1; top: 60px; left: 0; background-image: url("Lepr.png"); 
+               background-color: #333; /*rgba(0, 0, 0, 0.04);*/ overflow-x: hidden; padding-top: 0px; }
+
+            .sidenav a {
+                padding: 16px 16px 16px 42px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #818181;
+                display: block;
+            }
+
+                .sidenav a:hover {
+                    color: #f1f1f1;
+                }
+
+        .middlenav {
+background-color:#311616
+
+        }
+
+
+        .main {
+            margin-left: 200px; /* Same as the width of the sidenav */
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+
+                .sidenav a {
+                    font-size: 18px;
+                }
+        }
+    </style>
+
+</head>
+<BODY>
+    <div class="topnav" style="padding:1%;" >
+        <a class="active" href="#/">Home</a>
+        <a href="#/MES">MES Login</a>
+        <a href="#/Support">Support</a>
+        <label style="padding-left:375px; background-color:transparent; color:white; font-size:x-large">MES Home</label>
+        <input id="LoggedIn" name="LoggedIn" ng-model="LoggedIn" onload="function_two('uname')" class="form-control" placeholder="Not Logged in!" style="width: 140px;height:30px;background-color:Highlight; font-size:medium; color:darkgreen" type="hidden" />
+        <img src="Lepr.png" style="width:100px;height:55px; background-color:white;float:right;top:0">
+    </div>
+
+    <div id="mySidenav" style="width:70%; float:right; padding-top:50px">
+        
+        <div class="middlenav" style="width:50%;height:50%;padding:10%">
+
+            <div class="dropdown">
+                <!--<label style="font-family:sans-serif;font-size: 20px;color: white;display: block;transition: 0.3s;">&diams; Ideation Phase &diams; </label>-->
+                <button style="width:320px;border:outset" class="dropbtnB" onclick="location.href='#/LPS'">
+                    &#9776;LPS
+                </button>
+            </div>
+            <br /><br />
+            <div class="dropdown">
+                <!--<label style="font-family:sans-serif;font-size: 20px;color: white;display: block;transition: 0.3s;">&diams; Ideation Phase &diams; </label>-->
+                <button style="width:320px;border:outset" class="dropbtn" onclick="location.href='#/Reports'">
+                    &#9776;LRS-Leprino Reporting System
+                </button>
+            </div>
+            <br /><br />
+            <div class="dropdown">
+                <button style="width:320px;border:outset" class="dropbtnB" onclick="location.href='#/LITLocations'">
+                    <!--<label style="font-family:sans-serif;font-size: 20px;color: black;display: block;transition: 0.3s;"></label>-->
+                    &#9776;LITServer Locations
+                </button>
+
+            </div>
+            <br /><br />
+            <div class="dropdown">
+                <!--<label style="font-family:sans-serif;font-size: 20px;color: white;display: block;transition: 0.3s;">&clubs; Development Phase &clubs;</label>-->
+                <button style="width:320px;border:outset" class="dropbtn" onclick="location.href='#/Support'">
+                    <!--<label style="font-family:sans-serif;font-size: 20px;color: white;display: block;transition: 0.3s;"></label>-->
+                    &#9776;MES Support
+                </button>
+
+            </div>
+            <br /><br />
+            <div class="dropdown">
+                <button style="width:320px;border:outset" class="dropbtnB" onclick="location.href='#/SAPTCodes'">
+                    <!--<label style="font-family:sans-serif;font-size: 20px;color: white;display: block;transition: 0.3s;"></label>-->
+                    &#9776;SAP T-Codes
+                </button>
+
+            </div>
+
+            <br /><br />
+            <div class="dropdown">
+                <label style="font-family:sans-serif;font-size: 20px;color: white;display: block;transition: 0.3s;">&copy;  MES Team Members ONLY &copy;</label>
+                <button style="width:320px;border:outset" class="dropbtn" onclick="location.href='#/MES'">
+                    &#9776;MES Team Portal LogIn
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+
+   
+    <div class="footer">
+        <p><label typeof="LabelBox"> MES Applications Team- Contact via email at <a href="mailto:mesappsdev@leprinofoods.com?Subject=MES%20Request" target="_top">mesappsdev@leprinofoods.com</a></label> <label typeof="LabelBox" style="padding-left:20px"> or Dial the Extension</label> <b>5374</b> or <b>303-264-5374</b></p>
+    </div>
+</BODY>
+</HTML>

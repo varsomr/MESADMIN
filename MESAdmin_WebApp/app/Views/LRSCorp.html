@@ -1,0 +1,1347 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            /*padding-top: 50px;
+            padding-bottom: 20px;*/
+            padding-left: 0px;
+            background-color: black;
+            border-style: solid;
+            border-bottom-width: thick;
+            /*border-color: burlywood;*/
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+
+
+        /* Set padding to keep content from hitting the edges */
+        .body-content {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+
+        .imgcontainer {
+            text-align: center;
+            margin: 24px 0 12px 0;
+        }
+
+        img.avatar {
+            width: 20%;
+            border-radius: 50%;
+        }
+
+        .container {
+            padding: 16px;
+            /*-ms-overflow-style: none;
+            overflow: auto;*/
+        }
+
+        /* Override the default bootstrap behavior where horizontal description lists
+           will truncate terms that are too long to fit in the left column
+        */
+        .dl-horizontal dt {
+            white-space: normal;
+        }
+
+
+        textarea {
+            max-width: 1350px;
+        }
+
+
+
+        #grid .ui-grid-cell-contents {
+            text-align: center;
+        }
+
+        #servicegrid .ui-grid-cell-contents {
+            text-align: center;
+        }
+
+        header {
+            background-color: orangered;
+            color: white;
+            display: block;
+        }
+
+        .grid {
+            width: 1400px;
+            height: 300px;
+            /*background-color: white !important;*/
+            bottom: 0;
+            color: black !important;
+            /*border-top-color: forestgreen;*/
+            /*position: absolute;
+            top: 0;*/
+        }
+
+        .ui-grid-row-selected.ui-grid-row:nth-child(odd) .ui-grid-cell,
+        .ui-grid-row-selected.ui-grid-row:nth-child(even) .ui-grid-cell {
+            color: black;
+            /*background-color: Highlight;*/
+            background: lightgreen;
+            border-radius: 10px;
+            color: black;
+            overflow: hidden;
+        }
+
+            .ui-grid-row-selected.ui-grid-row:nth-child(odd) .ui-grid-cell.ui-grid-cell-focus,
+            .ui-grid-row-selected.ui-grid-row:nth-child(even) .ui-grid-cell.ui-grid-cell-focus {
+                outline: 0;
+                color: brown;
+                background-color: olivedrab;
+            }
+
+        .ui-grid-row-selected.ui-grid-row:nth-child(odd):hover .ui-grid-cell,
+        .ui-grid-row-selected.ui-grid-row:nth-child(even):hover .ui-grid-cell {
+            color: brown;
+            font-weight: bolder;
+            font-size: x-small;
+            background-color: Highlight;
+        }
+
+        .grey .ui-grid-cell-contents {
+            background-color: lightseagreen;
+            font-weight: bold;
+            color: brown;
+        }
+
+
+        label {
+            font-family: 'Open Sans';
+            font-weight: 800;
+            font-size: x-small;
+        }
+
+        .grid .ui-grid-cell-contents {
+            padding: 2px 2px;
+        }
+
+        .grid .ui-grid-render-container-body .ui-grid-header-cell,
+        .grid .ui-grid-header-cell {
+            background-color: forestgreen;
+            color: white;
+        }
+
+
+
+        .grid .ui-grid-filter-container {
+            padding: 1px 3px;
+        }
+
+        .grid-msg-overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+            .grid-msg-overlay .msg {
+                opacity: 1;
+                position: absolute;
+                top: 0%;
+                left: 1%;
+                width: 100%;
+                height: 50%;
+                background-color: cyan;
+                border-radius: 1px;
+                border: 1px solid #556;
+                text-align: center;
+                font-size: 24px;
+                display: table;
+            }
+
+        grid[type="secondary"] {
+            background-color: #692218;
+            color: white;
+            scrollbar-base-color: forestgreen;
+        }
+
+        .grid-msg-overlay .msg span {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+
+        .your-hover-class {
+            color: red;
+        }
+
+        .md-button {
+            padding: 0 6px 0 6px;
+            margin: 6px 8px 6px 8px;
+            min-width: 88px;
+            border-radius: 3px;
+            font-size: 14px;
+            text-align: center;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: none;
+            outline: none;
+        }
+
+        .btn {
+            /*background-color: #692218;*/
+            background-color: #17561b;
+            color: white;
+            height: 35px;
+            width: 80px;
+            font-size: x-small;
+        }
+
+
+
+            .btn:hover {
+                /*background-color: #FFD740;*/
+                /*color: #1565C0;*/
+                background-color: white;
+                color: black;
+                border-color: white;
+                border: outset;
+                /*border-width:thick;*/
+            }
+
+            .btn:focus {
+                outline: 0 !important;
+            }
+
+            .btn:active {
+                outline: 0;
+                color: #fff;
+                background-color: #428bca;
+                /*border-color: #357ebd;*/
+            }
+
+
+        table, tr {
+            border: 1px groove;
+            width: 40%;
+            background-color: transparent;
+        }
+
+        div {
+            background-color: transparent;
+        }
+
+
+
+        label[type="labelBox"] {
+            /*background-color: #f7c50d;#f7620d*/
+            background-color: transparent;
+            /*font-size: 10px;*/
+            color: black;
+            font-family: 'Open Sans';
+            font-weight: 200;
+            font-size: small;
+        }
+
+
+        label[type="progressBar"] {
+            /*background-color: #f7c50d;#f7620d*/
+            background-color: black;
+            /*font-size: 10px;*/
+            color: black;
+            font-family: 'Open Sans';
+            font-weight: 100;
+            font-size: xx-small;
+        }
+
+        input {
+            /*font-family: Arial;*/
+            font-family: 'Open Sans';
+            font-weight: 100;
+            font-size: x-small;
+            height: 18px;
+            /*color: white;*/
+        }
+
+            input[type="text"] {
+                background-color: lightyellow;
+                border: .5px solid #4D90FE !important;
+                -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-family: 'Open Sans';
+                font-weight: 100;
+                font-size: x-small;
+                height: 20px;
+                color: black;
+            }
+
+            input[type="user"] {
+                background-color: white;
+                border: .5px solid #4D90FE !important;
+                -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-family: 'Open Sans';
+                font-weight: 100;
+                font-size: x-small;
+                height: 20px;
+                color: black;
+            }
+
+            input[type="text"]:focus {
+                background-color: #fff;
+                border: .5px solid #4D90FE !important;
+                -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-family: 'Open Sans';
+                font-weight: 100;
+                font-size: x-small;
+                color: black;
+            }
+
+            input[type="Date"] {
+                border: 1px solid #4D90FE !important;
+                -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                background-color: lightyellow;
+                font-family: 'Open Sans';
+                font-weight: bold;
+                font-size: xx-small;
+                height: 25PX;
+            }
+
+            input[type="password"]:focus {
+                background-color: #FFEC9C;
+                border: 1px solid #4D90FE !important;
+                -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-size: xx-small;
+            }
+
+            input[type="user"]:focus {
+                background-color: #FFEC9C;
+                border: 1px solid #4D90FE !important;
+                -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) inset !important;
+                outline: none !important;
+                font-size: xx-small;
+            }
+
+            input[Disabled] {
+                border: 1px solid #4D90FE !important;
+                color: black;
+                outline: none !important;
+                font-size: xx-small;
+            }
+
+        textarea:focus {
+            padding-top: 10px;
+            background-color: #FFEC9C;
+            min-width: 50%;
+            border: 1px solid #000;
+        }
+
+
+        textarea {
+            min-height: 4em;
+            height: auto;
+            width: 50%;
+            margin: 0 auto;
+            background-color: white;
+            vertical-align: middle;
+            font-size: xx-small;
+        }
+
+
+
+        select {
+            background-color: white;
+            color: black;
+            font-family: 'Open Sans';
+            font-weight: 100;
+            font-size: xx-small;
+            /*border: outset;*/
+        }
+
+
+
+        #myProgress {
+            width: 100%;
+            background-color: ghostwhite;
+        }
+
+        #myBar {
+            width: 1%;
+            height: 30px;
+            background-color: black;
+        }
+
+        .bg {
+            background-size: 100% auto;
+        }
+
+
+
+        .yellowCell {
+            background-color: forestgreen;
+        }
+
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: black;
+            color: white;
+            text-align: right;
+        }
+
+
+        /* Position the image container (needed to position the left and right arrows) */
+        .container {
+            position: relative;
+            max-width: 850px;
+            position: relative;
+            margin: auto;
+        }
+
+        /* Hide the images by default */
+        .mySlides {
+            display: none;
+        }
+
+        /* Add a pointer when hovering over the thumbnail images */
+        .cursor {
+            cursor: pointer;
+        }
+
+        /* Next & previous buttons */
+        .prev,
+        .next {
+            cursor: pointer;
+            position: absolute;
+            top: 40%;
+            width: auto;
+            padding: 16px;
+            margin-top: -50px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* Position the "next button" to the right */
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+            /* On hover, add a black background color with a little bit see-through */
+            .prev:hover,
+            .next:hover {
+                background-color: rgba(0, 0, 0, 0.8);
+            }
+
+        /* Number text (1/3 etc) */
+        .numbertext {
+            color: #f2f2f2;
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+        }
+
+        /* Container for image text */
+        .caption-container {
+            text-align: center;
+            background-color: #222;
+            padding: 2px 16px;
+            color: white;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Six columns side by side */
+        .column {
+            float: left;
+            width: 16.66%;
+        }
+
+        /* Add a transparency effect for thumnbail images */
+        .demo {
+            opacity: 0.6;
+        }
+
+            .active,
+            .demo:hover {
+                opacity: 1;
+            }
+
+
+        /* Add a black background color to the top navigation */
+        .topnav {
+            background-color: black;
+            overflow: hidden;
+            height: 5%;
+            color:white;
+                padding-left:15%;
+        }
+
+            /* Style the links inside the navigation bar */
+            .topnav a {
+                float: left;
+                color: #4CAF50;
+                text-align: center;
+                /*padding: 14px 16px;*/
+                text-decoration: none;
+                font-size: 17px;
+            }
+
+                /* Change the color of links on hover */
+                .topnav a:hover {
+                    background-color: #ddd;
+                    color: black;
+                }
+
+                /* Add a color to the active/current link */
+                .topnav a.active {
+                    background-color: #4CAF50;
+                    color: white;
+                }
+
+
+
+
+        .sidenav {
+            height: 100%;
+            width: 15%;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: black;
+            overflow-x: hidden;
+            padding-top: 40px;
+            color:white;
+        }
+
+            .sidenav a {
+                padding: 16px 16px 16px 42px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #818181;
+                display: block;
+            }
+
+                .sidenav a:hover {
+                    color: #f1f1f1;
+                }
+
+        #main {
+            transition: margin-left .5s;
+            padding: 12px;
+        }
+
+        @media screen and (max-height: 350px) {
+            .sidenav {
+                padding-top: 0px;
+            }
+
+                .sidenav a {
+                    font-size: 18px;
+                }
+        }
+
+
+
+        .holds-the-iframe {
+            background: url(../LRSSmall.png) top right no-repeat;
+            background-size:80vh;
+            background-color:black;
+            border:outset darkslategrey;
+            overflow: hidden;
+            width:40%;
+            height:40%;
+            float:left;
+        }
+
+        #canvas {
+            border-bottom: 1px solid rgba(0,0,0,0.3);
+            background-color: #FFF;
+            box-shadow: 0 9px 20px -5px rgba(0,0,0,0.8);
+        }
+
+        #d {
+            text-align: center;
+        }
+
+        h1 {
+            color: #444;
+            font-weight: 500;
+        }
+
+        a {
+            /*color: #4a9;
+            text-decoration: none;
+            font-style: italic;
+            font-weight: 800;*/
+        }
+
+
+
+        /*Click DropDown*/
+        .dropbtn {
+            background-color: #450909;
+            color: lightgoldenrodyellow;
+            padding: 0;
+            font-size: 14px;
+            border: outset;
+            border-radius: 0;
+            cursor: pointer;
+        }
+
+        *.dropbtnB {
+            background-color: brown;
+            color: white;
+            padding: 12px;
+            font-size: 12px;
+            border: none;
+        }
+
+        *.dropbtnSmall {
+            background-color: transparent;
+            color: white;
+            padding: 0;
+            font-size: 10px;
+            border: thin;
+        }
+
+        .dropbtn:hover, .dropbtn:focus {
+            background-color: black;
+        }
+
+
+
+        .dropbtnU {
+            background-color: darkslategray;
+            color: lightgoldenrodyellow;
+            padding: 0;
+            font-size: 12px;
+            /*border: solid 1px lightblue;*/
+            border:hidden;
+            border-radius:24px;
+            border-radius: 0;
+
+        }
+
+            .dropbtnU:hover, .dropbtnU:focus {
+                background-color: black;
+            }
+
+
+        .dropbtnB:hover, .dropbtn:focus {
+            background-color: black;
+        }
+
+        .dropdown {
+            position: relative;
+            display:  normal;
+        }
+
+        .dropdown-content {
+            float: right;
+            display: none;
+            position: absolute;
+            background-color: black;
+            
+            width:100%;
+            overflow: auto;
+            box-shadow: 2px 8px 16px 5px rgba(0,0,0,0.2);
+            z-index: 2;
+            color:lightgoldenrodyellow;
+            opacity:1.2;
+        }
+
+            .dropdown-content a {
+                color: white;
+                padding: 2px 6px;
+                text-decoration: none;
+                display: block;
+                float: right;
+            }
+
+            .dropdown-content hover {
+                color: white;
+                background-color: black;
+            }
+
+        .dropdown a:hover {
+            background-color: black;
+        }
+
+        .show {
+            display: block;
+        }
+
+
+
+
+
+        /*body {
+                    margin: 0;
+
+                }*/
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        html, body {
+            -ms-overflow-style: none;
+            overflow: auto;
+        }
+
+        .icon-bar {
+            position: fixed;
+            top: 15%;
+            -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+        }
+
+            .icon-bar a {
+                display: block;
+                text-align: center;
+                padding: 16px;
+                transition: all 0.3s ease;
+                color: white;
+                font-size: 14px;
+            }
+
+                .icon-bar a:hover {
+                    background-color: #000;
+                }
+
+        .pln {
+            background: #3B5998;
+            color: white;
+        }
+
+        .cls {
+            background: #55ACEE;
+            color: white;
+        }
+
+
+        .content {
+            margin-left: 75px;
+            font-size: 30px;
+        }
+
+
+
+        .fullScreen {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #slideout {
+            /* position: absolute; */
+            position: fixed;
+            /*top: 50%;
+            left: 0;
+            width: 35px;*/
+            height: 100%;
+            width: 120px;
+            z-index: 1;
+            top: 60px;
+            left: 30px;
+            /*background-color: #332;*/
+            background-color: #1f2221;
+            color: white;
+            overflow-x: hidden;
+            padding-top: 40px;
+            -webkit-transition-duration: 0.3s;
+            -moz-transition-duration: 0.3s;
+            -o-transition-duration: 0.3s;
+            transition-duration: 0.3s;
+        }
+
+        #slideout_tab {
+            position: relative;
+            top: 0;
+            right: 0;
+            padding: 120px 6px 12px 12px;
+            text-align: center;
+            background: #86B135;
+            color: #fff;
+            cursor: pointer;
+            -webkit-border-radius: 15px 0 0 15px;
+            -moz-border-radius: 15px 0 0 15px;
+            border-radius: 0 15px 15px 0;
+            /*position: relative;
+            top: 0;
+            left: 0;
+            padding: 12px 6px 12px 12px;
+            text-align: center;
+            background: #86B135;
+            color: #fff;
+            cursor: pointer;
+            -webkit-border-radius: 15px 0 0 15px;
+            -moz-border-radius: 15px 0 0 15px;
+            border-radius: 15px 0 0 15px;*/
+        }
+
+        #slideout_inner {
+            position: absolute;
+            top: -50px;
+            left: 35px;
+            background: black;
+            width: 1000px;
+            padding: 15px;
+            height: 400px;
+            cursor: auto;
+            -webkit-border-radius: 5px 0 0 5px;
+            -moz-border-radius: 5px 0 0 5px;
+            border-radius: 5px 0 0 5px;
+        }
+
+        #showblock:checked + #slideout {
+            right: 1200px;
+        }
+
+        #showblock {
+            display: none;
+        }
+
+        divFloat {
+            float: left;
+        }
+
+        .wrap {
+            width: 100%;
+            height: 600px;
+            padding: 0;
+            overflow: hidden;
+            background-color: white;
+        }
+
+        .frame {
+            width: 100%;
+            height: 600px;
+            border: 0;
+            -ms-transform: scale(0.25);
+            -moz-transform: scale(0.25);
+            -o-transform: scale(0.25);
+            -webkit-transform: scale(0.25);
+            transform: scale(0.25);
+            -ms-transform-origin: 0 0;
+            -moz-transform-origin: 0 0;
+            -o-transform-origin: 0 0;
+            -webkit-transform-origin: 0 0;
+            transform-origin: 0 0;
+        }
+
+
+
+    </style>
+
+    <!--<script>
+
+        $('body').on('click', '#zoom', function () {
+            var url = document.getElementById('Reports').src;
+            var tabOrWindow = window.open(url, '_blank');
+            tabOrWindow.focus();
+        });
+    </script>-->
+
+    <script>
+        /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                } else {
+                    dropdownContent.style.display = "block";
+                }
+            });
+        }
+
+
+    </script>
+</head>
+<body style="font-family:Lato, sans-serif;transition:.5s;" onload="OnPageLoad()">
+
+    <div class="topnav">
+        
+        <!--<a href="#/">Home</a>
+         <a class="active" href="" onclick="this.href='#/LRS'">Reports</a>
+         <a href="/#/Support">Support</a>-->
+        <label style="padding-left:200px; background-color:transparent; color:white; font-size:x-large">LPS-Leprino Reporting System(LRS)- Corporate MES Reports</label>
+        <label id="demo" style=" padding-left:20px;padding-right:20px; background-color:#043706;color:#FFEC9C; font-size:medium" align="left"></label>
+        <!--<input id="LoggedIn" name="LoggedIn" ng-model="LoggedIn" onload="function_two('uname')" class="form-control" placeholder="Not Logged in!" style="width: 140px;height:30px;background-color:Highlight; font-size:medium; color:darkgreen" type="hidden" />
+        <img src="../LeprinoLogo.png" style="width:76px;height:50px; background-color:white" align="right">-->
+        <button id="zoom" class="dropbtn" align="right" style="background-color:#10459c;color:white;transition: 0.3s;width:105px; display:none" disabled="disabled" onclick="maximize()">&#9776; Maximize&#9776;</button>
+        <!--<button id="zoomN" class="dropbtn" align="right" style="background-color:orangered;color:white;transition: 0.3s;width:105px" onclick="fullScreen();collapse()">&#9776; Fullscreen&#9776;</button>-->
+    </div>
+
+
+
+    <div id="mySidenav" class="sidenav" style="border:outset; border-color:darkslategray; border-bottom-right-radius:16px; border-top-right-radius:16px">
+        <div style="position:absolute; opacity:.4; float:right; padding-right:20%"><img src="../Lepr.png" style="width:53px;height:8px;top:0; background-color:white" onclick="location.reload();"></div>
+        <div id="linkContainer" align="left">
+            <div class="dropdown" id="lew" style="background-color:transparent;color:white;transition: 0.3s; width:100%; border-bottom-right-radius:16px; border-top-right-radius:16px;" onclick="document.getElementById('demo').innerHTML = 'Lemoore West';maximize()">
+                <button class="dropbtn" onclick="document.getElementById('Reports').src = 'http://lewc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS&ViewMode=List'; ajaxStart()" style="border:outset; border-color:darkslategrey;color:lightgoldenrodyellow;width:100%">
+                    &#9776;Lemoore West
+                </button>
+
+
+                <div class="dropdown-content">
+                    <button class="dropbtnU" style="background-color:black;color:white;transition: 0.3s;border-radius:16px; border-bottom-right-radius:16px; border-top-right-radius:16px" onclick="document.getElementById('Reports').src = 'http://lewc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f3_Cheese&ViewMode=List'; ajaxStart()"> Cheese</button>
+                    <button class="dropbtnU" style="background-color:black;color:white;transition: 0.3s;border-radius:16px; border-bottom-right-radius:16px; border-top-right-radius:16px" onclick="document.getElementById('Reports').src = 'http://lewc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f4_Processing&ViewMode=List'; ajaxStart()"> Processing</button>
+                    <button class="dropbtnU" style="background-color:black;color:white;transition: 0.3s;border-radius:16px; border-bottom-right-radius:16px; border-top-right-radius:16px" onclick="document.getElementById('Reports').src = 'http://lewc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f5_Whey&ViewMode=List'; ajaxStart()"> Whey</button>
+                    <button class="dropbtnU" style="background-color:black;color:white;transition: 0.3s;border-radius:16px; border-bottom-right-radius:16px; border-top-right-radius:16px" onclick="document.getElementById('Reports').src = 'http://lewc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f2_Dairy_Liquids&ViewMode=List'; ajaxStart()"> DairyLiquids</button>
+                    <button class="dropbtnU" style="background-color:black;color:white;transition: 0.3s;border-radius:16px; border-bottom-right-radius:16px; border-top-right-radius:16px" onclick="document.getElementById('Reports').src = 'http://lewc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f1_Plant_General&ViewMode=List'; ajaxStart()"> PlantGeneral</button>
+                </div>
+            </div>
+
+
+
+            <div class="dropdown" id="gre" style="background-color:transparent;color:white;transition: 0.3s; width:100%; border-bottom-right-radius:16px; border-top-right-radius:16px;" onclick="document.getElementById('demo').innerHTML='Greeley';maximize()">
+                <button class="dropbtn" onclick="document.getElementById('Reports').src = 'http://grec2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS&ViewMode=List'; ajaxStart()" style="border:outset; border-color:darkslategrey;color:lightgoldenrodyellow;width:100%">
+                    <!--<label style="font-family:sans-serif;font-size: 20px;color: black;display: block;transition: 0.3s;"></label>-->
+                    &#9776;Greeley
+                </button>
+                <div class="dropdown-content">
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px; border-bottom-right-radius:16px; border-top-right-radius:16px" onclick="document.getElementById('Reports').src = 'http://grec2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f3_Cheese&ViewMode=List'; ajaxStart()"> Cheese</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px; border-bottom-right-radius:16px; border-top-right-radius:16px" onclick="document.getElementById('Reports').src = 'http://grec2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f4_Whey&ViewMode=List'; ajaxStart()"> Whey</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px; border-bottom-right-radius:16px; border-top-right-radius:16px" onclick="document.getElementById('Reports').src = 'http://grec2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f5_NFDM&ViewMode=List'; ajaxStart()"> NFDM</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px; border-bottom-right-radius:16px; border-top-right-radius:16px" onclick="document.getElementById('Reports').src = 'http://grec2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f2_Dairy_Liquids&ViewMode=List'; ajaxStart()"> DairyLiquids</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px; border-bottom-right-radius:16px; border-top-right-radius:16px" onclick="document.getElementById('Reports').src = 'http://grec2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f1_Plant_General&ViewMode=List'; ajaxStart()"> PlantGeneral</button>
+                </div>
+            </div>
+
+
+
+            <div class="dropdown" id="ros" style="background-color:transparent;color:white;transition: 0.3s; width:100%; border-bottom-right-radius:16px; border-top-right-radius:16px;" onclick="document.getElementById('demo').innerHTML='Roswell';maximize()">
+                <button class="dropbtn" onclick="document.getElementById('Reports').src = 'http://rosc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS&ViewMode=List'; ajaxStart()" style="border:outset; border-color:darkslategrey;color:lightgoldenrodyellow;width:100%">
+                    <!--<label style="font-family:sans-serif;font-size: 20px;color: white;display: block;transition: 0.3s;"></label>-->
+                    &#9776;Roswell
+                </button>
+                <div class="dropdown-content">
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px; border-bottom-right-radius:16px; border-top-right-radius:16px" onclick="document.getElementById('Reports').src = 'http://rosc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f3_Cheese&ViewMode=List'; ajaxStart()"> Cheese</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px; border-bottom-right-radius:16px; border-top-right-radius:16px" onclick="document.getElementById('Reports').src = 'http://rosc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f4_Processing&ViewMode=List'; ajaxStart()"> Processing</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px; border-bottom-right-radius:16px; border-top-right-radius:16px" onclick="document.getElementById('Reports').src = 'http://rosc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f5_Whey&ViewMode=List'; ajaxStart()"> Whey</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px; border-bottom-right-radius:16px; border-top-right-radius:16px" onclick="document.getElementById('Reports').src = 'http://rosc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f2_Dairy_Liquids&ViewMode=List'; ajaxStart()"> DairyLiquids</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px; border-bottom-right-radius:16px; border-top-right-radius:16px" onclick="document.getElementById('Reports').src = 'http://rosc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f1_Plant_General&ViewMode=List'; ajaxStart()"> PlantGeneral</button>
+
+                </div>
+            </div>
+
+
+
+            <div class="dropdown" id="aln" style="background-color:transparent;color:white;transition: 0.3s; width:100%; border-bottom-right-radius:16px; border-top-right-radius:16px;" onclick="document.getElementById('demo').innerHTML='Allendale';maximize()">
+                <button class="dropbtn" onclick="document.getElementById('Reports').src = 'http://alnc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS&ViewMode=List'; ajaxStart()" style="border:outset; border-color:darkslategrey;color:lightgoldenrodyellow;width:100%">
+                    &#9776;Allendale
+                </button>
+                <div class="dropdown-content">
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px; border-bottom-right-radius:16px; border-top-right-radius:16px" onclick="document.getElementById('Reports').src = 'http://alnc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f3_Cheese&ViewMode=List'; ajaxStart()"> Cheese</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px; border-bottom-right-radius:16px; border-top-right-radius:16px" onclick="document.getElementById('Reports').src = 'http://alnc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f4_Processing&ViewMode=List'; ajaxStart()"> Processing</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px; border-bottom-right-radius:16px; border-top-right-radius:16px" onclick="document.getElementById('Reports').src = 'http://alnc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f5_Whey&ViewMode=List'; ajaxStart()"> Whey</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px; border-bottom-right-radius:16px; border-top-right-radius:16px" onclick="document.getElementById('Reports').src = 'http://alnc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f2_Dairy_Liquids&ViewMode=List'; ajaxStart()"> DairyLiquids</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px; border-bottom-right-radius:16px; border-top-right-radius:16px" onclick="document.getElementById('Reports').src = 'http://alnc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f1_Plant_General&ViewMode=List'; ajaxStart()"> PlantGeneral</button>
+                </div>
+            </div>
+
+
+
+            <div class="dropdown" id="ftm" style="background-color:transparent;color:white;transition: 0.3s; width:100%; border-bottom-right-radius:16px; border-top-right-radius:16px;" onclick="document.getElementById('demo').innerHTML='Ft. Morgan';maximize()">
+                <button class="dropbtn" onclick="document.getElementById('Reports').src = 'http://ftmc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS&ViewMode=List'; ajaxStart()" style="border:outset; border-color:darkslategrey;color:lightgoldenrodyellow;width:100%">
+                    <!--<label style="font-family:sans-serif;font-size: 20px;color: white;display: block;transition: 0.3s;"></label>-->
+                    &#9776;FTMorgan
+                </button>
+                <div class="dropdown-content">
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px; border-bottom-right-radius:16px; border-top-right-radius:16px" onclick="document.getElementById('Reports').src = 'http://ftmc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f3_Cheese&ViewMode=List'; ajaxStart()"> Cheese</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px; border-bottom-right-radius:16px; border-top-right-radius:16px" onclick="document.getElementById('Reports').src = 'http://ftmc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f4_Processing&ViewMode=List'; ajaxStart()"> Processing</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px; border-bottom-right-radius:16px; border-top-right-radius:16px" onclick="document.getElementById('Reports').src = 'http://ftmc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f5_Whey&ViewMode=List'; ajaxStart()"> Whey</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px; border-bottom-right-radius:16px; border-top-right-radius:16px" onclick="document.getElementById('Reports').src = 'http://ftmc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f2_Dairy_Liquids&ViewMode=List'; ajaxStart()"> DairyLiquids</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px; border-bottom-right-radius:16px; border-top-right-radius:16px" onclick="document.getElementById('Reports').src = 'http://ftmc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f1_Plant_General&ViewMode=List'; ajaxStart()"> PlantGeneral</button>
+                </div>
+            </div>
+
+
+
+            <div class="dropdown" id="rem" style="background-color:transparent;color:white;transition: 0.3s; width:100%; border-bottom-right-radius:16px; border-top-right-radius:16px;" onclick="document.getElementById('demo').innerHTML='Remus';maximize()">
+                <button class="dropbtn" onclick="document.getElementById('Reports').src = 'http://remc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS&ViewMode=List'; ajaxStart()" style="border:outset; border-color:darkslategrey;color:lightgoldenrodyellow;width:100%">
+                    <!--<label style="font-family:sans-serif;font-size: 20px;color: white;display: block;transition: 0.3s;"></label>-->
+                    &#9776;Remus
+                </button>
+                <div class="dropdown-content" style="border-bottom-right-radius:16px; border-top-right-radius:16px">
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px" onclick="document.getElementById('Reports').src = 'http://remc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f1_Plant_General&ViewMode=List'; ajaxStart()"> PlantGeneral</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px" onclick="document.getElementById('Reports').src = 'http://remc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f5_Whey&ViewMode=List'; ajaxStart()"> Whey</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px" onclick="document.getElementById('Reports').src = 'http://remc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f3_Cheese&ViewMode=List'; ajaxStart()"> Cheese</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px" onclick="document.getElementById('Reports').src = 'http://remc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f4_Packaging&ViewMode=List'; ajaxStart()"> Packaging</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px" onclick="document.getElementById('Reports').src = 'http://remc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f2_Dairy_Liquids&ViewMode=List'; ajaxStart()"> DairyLiquids</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px" onclick="document.getElementById('Reports').src = 'http://remc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f6_DOP&ViewMode=List'; ajaxStart()"> DOP</button>
+
+                </div>
+            </div>
+
+
+
+            <div class="dropdown" id="tra" style="background-color:transparent;color:white;transition: 0.3s; width:100%; border-bottom-right-radius:16px; border-top-right-radius:16px;" onclick="document.getElementById('demo').innerHTML='Tracy';maximize()">
+
+                <button class="dropbtn" onclick="document.getElementById('Reports').src = 'http://trac2012lit/Reports/Pages/FolderCorp.aspx?ItemPath=%2fLRS&ViewMode=List'; ajaxStart()" style="border:outset; border-color:darkslategrey;color:lightgoldenrodyellow;width:100%">
+                    <!--<label style="font-family:sans-serif;font-size: 20px;color: white;display: block;transition: 0.3s;"></label>-->
+                    &#9776;Tracy
+                </button>
+                <div class="dropdown-content">
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px" onclick="document.getElementById('Reports').src = 'http://trac2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f3_Cheese&ViewMode=List'; ajaxStart()"> Cheese</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px" onclick="document.getElementById('Reports').src = 'http://trac2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f4_Processing&ViewMode=List'; ajaxStart()"> Processing</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px" onclick="document.getElementById('Reports').src = 'http://trac2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f5_Whey&ViewMode=List'; ajaxStart()"> Whey</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px" onclick="document.getElementById('Reports').src = 'http://trac2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f2_Dairy_Liquids&ViewMode=List'; ajaxStart()"> DairyLiquids</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px" onclick="document.getElementById('Reports').src = 'http://trac2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f1_Plant_General&ViewMode=List'; ajaxStart()"> PlantGeneral</button>
+                </div>
+            </div>
+
+
+
+            <div class="dropdown" id="lem" style="background-color:transparent;color:white;transition: 0.3s; width:100%; border-bottom-right-radius:16px; border-top-right-radius:16px;" onclick="document.getElementById('demo').innerHTML='Lemoore East';maximize()">
+                <button class="dropbtn" onclick="document.getElementById('Reports').src = 'http://lemc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS&ViewMode=List'; ajaxStart()" style="border:outset; border-color:darkslategrey;color:lightgoldenrodyellow;width:100%">
+                    <!--<label style="font-family:sans-serif;font-size: 20px;color: white;display: block;transition: 0.3s;"></label>-->
+                    &#9776;Lemoore East
+                </button>
+                <div class="dropdown-content">
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px" onclick="document.getElementById('Reports').src = 'http://lemc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f3_Cheese&ViewMode=List'; ajaxStart()">Cheese</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px" onclick="document.getElementById('Reports').src = 'http://lemc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f4_Processing&ViewMode=List'; ajaxStart()">Processing</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px" onclick="document.getElementById('Reports').src = 'http://lemc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f5_Whey&ViewMode=List'; ajaxStart()">Whey</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px" onclick="document.getElementById('Reports').src = 'http://lemc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f2_Dairy_Liquids&ViewMode=List'; ajaxStart()">DairyLiquids</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px" onclick="document.getElementById('Reports').src = 'http://lemc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f1_Plant_General&ViewMode=List'; ajaxStart()">PlantGeneral</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px" onclick="document.getElementById('Reports').src = 'http://lemc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2fCIP&ViewMode=List'; ajaxStart()">CIP</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px" onclick="document.getElementById('Reports').src = 'http://lemc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f6_HVP&ViewMode=List'; ajaxStart()">HVP</button>
+                </div>
+            </div>
+
+
+
+            <div class="dropdown" id="wav" style="background-color:transparent;color:white;transition: 0.3s; width:100%; border-bottom-right-radius:16px; border-top-right-radius:16px;" onclick="document.getElementById('demo').innerHTML='Waverly';maximize()">
+                <button class="dropbtn" onclick="document.getElementById('Reports').src = 'http://wavc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS&ViewMode=List'; ajaxStart()" style="border:outset; border-color:darkslategrey;color:lightgoldenrodyellow;width:100%">
+                    &#9776;Waverly
+                </button>
+                <div class="dropdown-content">
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px" onclick="document.getElementById('Reports').src = 'http://wavc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f3_Cheese&ViewMode=List'; ajaxStart()">Cheese</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px" onclick="document.getElementById('Reports').src = 'http://wavc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f4_Whey&ViewMode=List'; ajaxStart()">Whey</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px" onclick="document.getElementById('Reports').src = 'http://wavc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f2_Dairy_Liquids&ViewMode=List'; ajaxStart()">DairyLiquids</button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px" onclick="document.getElementById('Reports').src = 'http://wavc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f1_Plant_General&ViewMode=List'; ajaxStart()"> PlantGeneral</button>
+                </div>
+            </div>
+
+
+
+            <div class="dropdown" id="pp" style="background-color:transparent;color:white;transition: 0.3s; width:100%; border-bottom-right-radius:16px; border-top-right-radius:16px" onclick="document.getElementById('demo').innerHTML='PilotPlant';maximize()">
+                <button class="dropbtn" onclick="document.getElementById('Reports').src = 'http://denc2012pltlit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS&ViewMode=List'; ajaxStart()" style="border:outset; border-color:darkslategrey;color:lightgoldenrodyellow;width:100%">
+                    &#9776;Pilot Plant <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px" onclick="document.getElementById('Reports').src = 'http://denc2012pltlit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f03_Cheese&ViewMode=List'; ajaxStart()">
+                        Cheese
+                    </button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px" onclick="document.getElementById('Reports').src = 'http://denc2012pltlit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f04_Processing&ViewMode=List'; ajaxStart()">
+                        Processing
+                    </button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px" onclick="document.getElementById('Reports').src = 'http://denc2012pltlit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f05_Whey&ViewMode=List'; ajaxStart()">
+                        Whey
+                    </button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px" onclick="document.getElementById('Reports').src = 'http://denc2012pltlit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f02_Dairy+Liquids&ViewMode=List'; ajaxStart()">
+                        DairyLiquids
+                    </button>
+                    <button class="dropbtnU" style="background-color:transparent;color:white;transition: 0.3s;border-radius:16px" onclick="document.getElementById('Reports').src = 'http://denc2012pltlit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f01_Plant+General&ViewMode=List'; ajaxStart()">
+                        PlantGeneral
+                    </button>
+                </div>
+
+            </div>
+
+
+
+
+            <div class="dropdown" id="UMM" style="background-color:#1e1e1e;color:white;transition: 0.3s; border:thick; width:100%; height:25px " onclick="document.getElementById('Reports').src = '#/MainUM';maximize()">
+                <button class="dropbtn" onclick="document.getElementById('Reports').src = '#/MainUM'; ajaxStart()" style="border:outset; border-color:#0d9a2f;background-color:black;color:lightgoldenrodyellow;width:100%">
+                    Utility Metering <i class="fa fa-caret-down"></i><img src="RIGHT.PNG" style="width:20px; height:20px" />
+                </button>
+
+            </div>
+            
+
+
+            <!--<div class="dropdown" id="CIP" style="background-color:#1e1e1e;color:white;transition: 0.3s; border:thick; width:100px; height:25px" onclick="document.getElementById('Reports').src = '#/MainCIP';maximize()">
+        <button class="dropbtnSmall" onclick="document.getElementById('Reports').src = '#/MainCIP'; ajaxStart()">
+            CIP Verification <i class="fa fa-caret-down"></i><img src="RIGHT.PNG" style="width:20px; height:20px" />
+        </button>
+
+    </div>-->
+            <!--<div id="loading" style="display:none;">
+        Connecting to the Remote Site.. Please Wait....
+        <img src="..\ajax-loader.gif" alt="Loading" />
+    </div>-->
+            <!--<iframe id="Reports" name="Reports" onload="ajaxStop()" class="holds-the-iframe" src="" height="644" width="1500"></iframe>-->
+        </div>
+        <div id="linkContainerSmall" align="left" hidden="hidden">
+            <label id="expandDiv" style="color:white;font-size:x-large; align-items:baseline" onclick="Expand()">&raquo;</label>
+            <div class="dropdown" id="lew" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('demo').innerHTML = 'Lemoore West';">
+                <button class="dropbtnSmall" onclick="document.getElementById('Reports').src = 'http://lewc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS&ViewMode=List'; ajaxStart()">
+                    LEW
+                </button>
+
+
+                <div class="dropdown-content">
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://lewc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f3_Cheese&ViewMode=List'; ajaxStart()"> Cheese</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://lewc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f4_Processing&ViewMode=List'; ajaxStart()"> Processing</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://lewc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f5_Whey&ViewMode=List'; ajaxStart()"> Whey</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://lewc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f2_Dairy_Liquids&ViewMode=List'; ajaxStart()"> DLiquids</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://lewc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f1_Plant_General&ViewMode=List'; ajaxStart()"> PlGeneral</button>
+                </div>
+            </div>
+            
+            
+
+            <div class="dropdown" id="gre" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('demo').innerHTML='Greeley'">
+                <button class="dropbtnSmall" onclick="document.getElementById('Reports').src = 'http://grec2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS&ViewMode=List'; ajaxStart()">
+                    <!--<label style="font-family:sans-serif;font-size: 20px;color: black;display: block;transition: 0.3s;"></label>-->
+                    GRE
+                </button>
+                <div class="dropdown-content">
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://grec2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f3_Cheese&ViewMode=List'; ajaxStart()"> Cheese</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://grec2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f4_Whey&ViewMode=List'; ajaxStart()"> Whey</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://grec2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f5_NFDM&ViewMode=List'; ajaxStart()"> NFDM</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://grec2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f2_Dairy_Liquids&ViewMode=List'; ajaxStart()"> DLiquids</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://grec2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f1_Plant_General&ViewMode=List'; ajaxStart()"> PlGeneral</button>
+                </div>
+            </div>
+            
+            
+
+            <div class="dropdown" id="ros" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('demo').innerHTML='Roswell'">
+                <button class="dropbtnSmall" onclick="document.getElementById('Reports').src = 'http://rosc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS&ViewMode=List'; ajaxStart()">
+                    <!--<label style="font-family:sans-serif;font-size: 20px;color: white;display: block;transition: 0.3s;"></label>-->
+                    ROS
+                </button>
+                <div class="dropdown-content">
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://rosc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f3_Cheese&ViewMode=List'; ajaxStart()"> Cheese</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://rosc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f4_Processing&ViewMode=List'; ajaxStart()"> Processing</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://rosc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f5_Whey&ViewMode=List'; ajaxStart()"> Whey</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://rosc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f2_Dairy_Liquids&ViewMode=List'; ajaxStart()"> DLiquids</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://rosc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f1_Plant_General&ViewMode=List'; ajaxStart()"> PlGeneral</button>
+
+                </div>
+            </div>
+            
+            
+
+            <div class="dropdown" id="aln" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('demo').innerHTML='Allendale'">
+                <button class="dropbtnSmall" onclick="document.getElementById('Reports').src = 'http://alnc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS&ViewMode=List'; ajaxStart()">
+                    ALN
+                </button>
+                <div class="dropdown-content">
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://alnc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f3_Cheese&ViewMode=List'; ajaxStart()"> Cheese</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://alnc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f4_Processing&ViewMode=List'; ajaxStart()"> Processing</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://alnc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f5_Whey&ViewMode=List'; ajaxStart()"> Whey</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://alnc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f2_Dairy_Liquids&ViewMode=List'; ajaxStart()"> DLiquids</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://alnc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f1_Plant_General&ViewMode=List'; ajaxStart()"> PlGeneral</button>
+                </div>
+            </div>
+            
+            
+
+            <div class="dropdown" id="ftm" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('demo').innerHTML='Ft. Morgan'">
+                <button class="dropbtnSmall" onclick="document.getElementById('Reports').src = 'http://ftmc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS&ViewMode=List'; ajaxStart()">
+                    <!--<label style="font-family:sans-serif;font-size: 20px;color: white;display: block;transition: 0.3s;"></label>-->
+                    FTM
+                </button>
+                <div class="dropdown-content">
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://ftmc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f3_Cheese&ViewMode=List'; ajaxStart()"> Cheese</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://ftmc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f4_Processing&ViewMode=List'; ajaxStart()"> Processing</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://ftmc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f5_Whey&ViewMode=List'; ajaxStart()"> Whey</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://ftmc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f2_Dairy_Liquids&ViewMode=List'; ajaxStart()"> DLiquids</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://ftmc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f1_Plant_General&ViewMode=List'; ajaxStart()"> PlGeneral</button>
+                </div>
+            </div>
+            
+            
+
+            <div class="dropdown" id="rem" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('demo').innerHTML='Remus'">
+                <button class="dropbtnSmall" onclick="document.getElementById('Reports').src = 'http://remc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS&ViewMode=List'; ajaxStart()">
+                    <!--<label style="font-family:sans-serif;font-size: 20px;color: white;display: block;transition: 0.3s;"></label>-->
+                    REM
+                </button>
+                <div class="dropdown-content">
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://remc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f1_Plant_General&ViewMode=List'; ajaxStart()"> PlGeneral</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://remc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f5_Whey&ViewMode=List'; ajaxStart()"> Whey</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://remc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f3_Cheese&ViewMode=List'; ajaxStart()"> Cheese</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://remc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f4_Packaging&ViewMode=List'; ajaxStart()"> Packaging</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://remc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f2_Dairy_Liquids&ViewMode=List'; ajaxStart()"> DLiquids</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://remc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f6_DOP&ViewMode=List'; ajaxStart()"> DOP</button>
+
+                </div>
+            </div>
+            
+            
+
+            <div class="dropdown" id="tra" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('demo').innerHTML='Tracy'">
+
+                <button class="dropbtnSmall" onclick="document.getElementById('Reports').src = 'http://trac2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS&ViewMode=List'; ajaxStart()">
+                    <!--<label style="font-family:sans-serif;font-size: 20px;color: white;display: block;transition: 0.3s;"></label>-->
+                    TRA
+                </button>
+                <div class="dropdown-content">
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://trac2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f3_Cheese&ViewMode=List'; ajaxStart()"> Cheese</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://trac2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f4_Processing&ViewMode=List'; ajaxStart()"> Processing</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://trac2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f5_Whey&ViewMode=List'; ajaxStart()"> Whey</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://trac2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f2_Dairy_Liquids&ViewMode=List'; ajaxStart()"> DLiquids</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://trac2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f1_Plant_General&ViewMode=List'; ajaxStart()"> PlGeneral</button>
+                </div>
+            </div>
+            
+            
+
+            <div class="dropdown" id="lem" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('demo').innerHTML='Lemoore East'">
+                <button class="dropbtnSmall" onclick="document.getElementById('Reports').src = 'http://lemc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS&ViewMode=List'; ajaxStart()">
+                    <!--<label style="font-family:sans-serif;font-size: 20px;color: white;display: block;transition: 0.3s;"></label>-->
+                    LEM
+                </button>
+                <div class="dropdown-content">
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://lemc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f3_Cheese&ViewMode=List'; ajaxStart()">Cheese</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://lemc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f4_Processing&ViewMode=List'; ajaxStart()">Processing</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://lemc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f5_Whey&ViewMode=List'; ajaxStart()">Whey</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://lemc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f2_Dairy_Liquids&ViewMode=List'; ajaxStart()">DLiquids</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://lemc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f1_Plant_General&ViewMode=List'; ajaxStart()">PlGeneral</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://lemc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2fCIP&ViewMode=List'; ajaxStart()">CIP</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://lemc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f6_HVP&ViewMode=List'; ajaxStart()">HVP</button>
+                </div>
+            </div>
+            
+            
+
+            <div class="dropdown" id="wav" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('demo').innerHTML='Waverly'">
+                <button class="dropbtnSmall" onclick="document.getElementById('Reports').src = 'http://wavc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS&ViewMode=List'; ajaxStart()">
+                    WAV
+                </button>
+                <div class="dropdown-content">
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://wavc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f3_Cheese&ViewMode=List'; ajaxStart()">Cheese</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://wavc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f4_Whey&ViewMode=List'; ajaxStart()">Whey</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://wavc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f2_Dairy_Liquids&ViewMode=List'; ajaxStart()">DLiquids</button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://wavc2012lit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f1_Plant_General&ViewMode=List'; ajaxStart()"> PlGeneral</button>
+                </div>
+            </div>
+            
+            
+
+            <div class="dropdown" id="pp" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('demo').innerHTML='PilotPlant'">
+                <button class="dropbtnSmall" onclick="document.getElementById('Reports').src = 'http://denc2012pltlit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS&ViewMode=List'; ajaxStart()">
+                    PPL <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://denc2012pltlit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f03_Cheese&ViewMode=List'; ajaxStart()">
+                        Cheese
+                    </button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://denc2012pltlit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f04_Processing&ViewMode=List'; ajaxStart()">
+                        Processing
+                    </button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://denc2012pltlit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f05_Whey&ViewMode=List'; ajaxStart()">
+                        Whey
+                    </button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://denc2012pltlit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f02_Dairy+Liquids&ViewMode=List'; ajaxStart()">
+                        DLiquids
+                    </button>
+                    <button class="dropbtnSmall" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('Reports').src = 'http://denc2012pltlit/Reports/Pages/Folder.aspx?ItemPath=%2fLRS%2f01_Plant+General&ViewMode=List'; ajaxStart()">
+                        PlGeneral
+                    </button>
+                </div>
+
+
+            </div>
+            <!--<div class="dropdown" id="cip" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('demo').innerHTML='CIP'">
+            <button class="dropbtnSmall" onclick="document.getElementById('Reports').src = 'http://localhost:94/#/MainCIP'; ajaxStart()">
+                CIP <i class="fa fa-caret-down"></i>
+            </button>
+        </div>-->
+
+            
+
+            <!--<div class="dropdown" id="UM" style="background-color:transparent;color:white;transition: 0.3s;" onclick="document.getElementById('demo').innerHTML='UtilityMetering'">
+            <button class="dropbtnSmall" onclick="document.getElementById('Reports').src = 'http://denm2008mesadm:94/#/MainUM'; ajaxStart()">
+                UM <i class="fa fa-caret-down"></i>
+            </button>
+
+
+        </div>-->
+
+
+
+            <label id="expandDiv" style="color:white;font-size:x-large; align-items:baseline" onclick="Expand()">&raquo;</label>
+            
+            
+
+        </div>
+
+
+
+
+    </div>
+
+    <div id="main">
+
+        <!--<p align="center" id="headermsg">Drilldown to View "Report Menu"</p>-->
+        <!--<span style="font-size:20px; padding-left:120px; cursor:pointer">MES Reports </span>-->
+    </div>
+    <div id="loading" style="display:none;padding-left:120px">
+        Connecting to the Report Server.. Please Wait....
+        <img src="..\ajax-loader.gif" alt="Loading" />
+    </div>
+    <div id="rptholder" style="padding-left:10%;top:0px; border:none">
+
+        <iframe id="Reports" name="Reports" onload="ajaxStop()" class="holds-the-iframe" src="" style="height:100vh; width:1200px; border:none"></iframe>
+
+
+        <!--<div class="wrap">
+
+            <iframe id="Reports" name="Reports" onload="ajaxStop()" class="frame" src="LRS.PNG"></iframe>
+        </div>-->
+
+
+
+    </div>
+
+
+
+
+
+
+
+</body>
+
+
+</html>

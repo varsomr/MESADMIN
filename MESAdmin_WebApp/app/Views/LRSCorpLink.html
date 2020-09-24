@@ -1,0 +1,30 @@
+﻿<html>
+<head>
+    <title>Start Screen</title>
+    <HTA:APPLICATION ID="startscreen"
+                     APPLICATIONNAME="startscreen"
+                     BORDER="thin"
+                     BORDERSTYLE="normal"
+                     CAPTION="yes"
+                     ICON="ss.ico"
+                     MAXIMIZEBUTTON="no"
+                     MINIMIZEBUTTON="yes"
+                     SCROLL="no"
+                     SHOWINTASKBAR="yes"
+                     SINGLEINSTANCE="yes"
+                     SYSMENU="yes"
+                     VERSION="1.0"
+                     Navigable="yes"
+                     WINDOWSTATE="normal"
+                     contextmenu="no" />
+    <script type="text/javascript" language="javascript">
+        function RunFile() {
+            WshShell = new ActiveXObject("WScript.Shell");
+            WshShell.Run("c:/windows/system32/notepad.exe", 1, false);
+        }
+    </script>
+</head>
+<body>
+    <input type="button" value="Run Notepad" onclick="RunFile();" />
+</body>
+</html>

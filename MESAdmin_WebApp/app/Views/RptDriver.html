@@ -1,0 +1,564 @@
+﻿<html>
+<head>
+
+
+    <style>
+        @import url("../../Content/GridFormat.css");
+
+        body {
+            /*font-family: "Lato", sans-serif;
+            padding-left: 0px;
+            border-style: solid;
+            border-bottom-width: thick;
+            border-color: burlywood;
+            font-family: Arial, Helvetica, sans-serif;*/
+            padding-left: 0px;
+            background-color: black;
+            border-style: solid;
+            border-bottom-width: thick;
+            border-color: black;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* Set padding to keep content from hitting the edges */
+        .body-content {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 40%;
+        }
+
+        label[type="labelBox"] {
+            /*background-color: #f7c50d;#f7620d*/
+            background-color: transparent;
+            /*font-size: 10px;*/
+            font-family: 'Open Sans';
+            font-weight: 200;
+            font-size: small;
+        }
+
+        #sidepanel {
+            position: absolute;
+            min-width: 30px;
+            height: 60%;
+            top: 10%;
+            right: 0;
+        }
+
+        #bar {
+            display: table;
+            background-color: #2F404F;
+            color: white;
+            width: 30px;
+            height: 100%;
+            text-align: center;
+        }
+
+            #bar div {
+                display: table-cell;
+                vertical-align: top;
+                padding-top: 40px;
+            }
+
+        #panel {
+            display: none;
+            background-color: #2F404F;
+            color: orangered;
+            width: 300px;
+            height: 100%;
+            text-align: center;
+        }
+
+            #panel div {
+                display: table-cell;
+                vertical-align: top;
+            }
+
+        #sidepanel:hover #bar {
+            display: none;
+        }
+
+        #sidepanel:hover #panel {
+            display: table;
+        }
+
+        .input-value {
+            transition: .7s;
+            width: 75px;
+        }
+
+        .input-expand {
+            transition: .7s;
+            width: 300px;
+        }
+
+        .grid {
+            width: 1200px;
+            height: 300px;
+            background-color: #2E4A62 !important;
+            bottom: 0;
+            color: lightgoldenrodyellow !important;
+            grid-gap: 5px;
+        }
+
+
+
+
+
+        .ui-grid-row:nth-child(odd) .ui-grid-cell {
+            background-color: black;
+            border: none;
+            color: white;
+        }
+
+        .ui-grid-row:nth-child(even) .ui-grid-cell {
+            background-color: black;
+            color: white;
+            border: none;
+        }
+
+
+
+        .ui-grid-cell-focus {
+            outline: 0;
+            background-color: #ada624;
+            border: none;
+        }
+
+
+        .ui-grid-row-selected.ui-grid-row:nth-child(odd) .ui-grid-cell,
+        .ui-grid-row-selected.ui-grid-row:nth-child(even) .ui-grid-cell {
+            background-color: white;
+            border: outset;
+            color: darkslategrey;
+            font-weight: bold;
+        }
+
+            .ui-grid-row-selected.ui-grid-row:nth-child(odd) .ui-grid-cell.ui-grid-cell-focus,
+            .ui-grid-row-selected.ui-grid-row:nth-child(even) .ui-grid-cell.ui-grid-cell-focus {
+                outline: 0;
+                background-color: white;
+                font-weight: bold;
+            }
+
+        .ui-grid-row-selected.ui-grid-row:nth-child(odd):hover .ui-grid-cell,
+        .ui-grid-row-selected.ui-grid-row:nth-child(even):hover .ui-grid-cell {
+            color: darkslategrey;
+            background-color: white;
+            font-weight: bold;
+        }
+
+        .grid .ui-grid-render-container-body .ui-grid-header-cell,
+        .grid .ui-grid-header-cell {
+            background-color: Background;
+            color: white;
+        }
+
+
+
+
+        .grid .ui-grid-filter-container {
+            padding: 1px 1px;
+        }
+
+        .grid-msg-overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+
+            .grid-msg-overlay .msg {
+                opacity: 1;
+                position: absolute;
+                top: 10%;
+                left: 1%;
+                width: 100%;
+                height: 82%;
+                background-color: transparent;
+                /*border: 1px solid #556;*/
+                text-align: center;
+                color: white;
+                font-size: 24px;
+                display: table;
+            }
+
+
+                .grid-msg-overlay .msg span {
+                    display: table-cell;
+                    vertical-align: middle;
+                }
+
+
+        #grid .ui-grid-cell-contents {
+            text-align: center;
+            -ms-text-overflow: clip;
+            -o-text-overflow: clip;
+            text-overflow: clip;
+            align-content: stretch;
+            word-wrap: break-word;
+        }
+
+
+        #grid .ui-grid-cell {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        #grid .ui-grid-header-cell {
+            background-color: black;
+            color: white;
+        }
+
+
+        .grey .ui-grid-cell-contents {
+            /*background-color: #006E6D;
+            font-weight: bold;*/
+            background-color: darkgreen;
+            color: white;
+        }
+
+
+        .green {
+            background-color: darkgreen;
+            color: white;
+            /*font-weight: bold;*/
+        }
+
+        .blue {
+            background-color: #1fe0f0;
+            color: #153ff0;
+        }
+
+        label {
+            font-family: 'Open Sans';
+            font-weight: 800;
+            font-size: x-small;
+        }
+
+
+
+
+
+
+        .dropbtnU {
+            background-color: darkslategray;
+            color: lightgoldenrodyellow;
+            padding: 0;
+            font-size: 12px;
+            border: thick;
+            border-radius: 3px;
+            border: outset;
+        }
+
+            .dropbtnU:hover, .dropbtnU:focus {
+                background-color: #2980B9;
+            }
+
+
+
+        .sidenav {
+            height: 90%;
+            width: 40%;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            background-color: black;
+            /*overflow: hidden;*/
+            top: 10%;
+            align-content: center;
+            border: none;
+            border-color: black;
+        }
+
+            .sidenav a {
+                /*padding: 5px 5px 5px 42px;*/
+                text-decoration: none;
+                font-size: 16px;
+                color: #818181;
+                display: block;
+                border: none;
+            }
+
+                .sidenav a:hover {
+                    color: #f1f1f1;
+                    border: none;
+                }
+
+        #main {
+            transition: margin-left .5s;
+            padding: 12px;
+        }
+
+        .sidenavRight {
+            height: 90%;
+            /*width: 90.352%;*/
+            width: 100%;
+            position: fixed;
+            z-index: 1;
+            top: 10%;
+            right: 0;
+            background-color: white;
+            /*overflow-y: scroll;*/
+            transition: 0.7s;
+            color: #FFEC9C;
+            /*padding-top: 60px;*/
+        }
+
+            .sidenavRight a {
+                /*padding: 8px 8px 8px 32px;*/
+                text-decoration: none;
+                font-size: 25px;
+                color: #168817;
+                display: block;
+                transition: 0.4s;
+            }
+
+                .sidenavRight a:hover {
+                    color: #f1f1f1;
+                }
+
+            .sidenavRight .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+        @media screen and (max-height: 450px) {
+            .sidenavRight {
+                padding-top: 15px;
+            }
+
+                .sidenavRight a {
+                    font-size: 18px;
+                }
+        }
+
+        .sidenavRightMain {
+            height: 95%;
+            /*width: 90.352%;*/
+            width: 100%;
+            position: fixed;
+            z-index: 1;
+            top: 10%;
+            right: 0;
+            background-color: white;
+            /*overflow-y: scroll;*/
+            transition: 0.7s;
+            color: #FFEC9C;
+            /*padding-top: 60px;*/
+        }
+
+            .sidenavRightMain a {
+                /*padding: 8px 8px 8px 32px;*/
+                text-decoration: none;
+                font-size: 25px;
+                color: #168817;
+                display: block;
+                transition: 0.4s;
+            }
+
+                .sidenavRightMain a:hover {
+                    color: #f1f1f1;
+                }
+
+            .sidenavRightMain .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+
+
+        @media screen and (max-height: 450px) {
+            .sidenavRightMain {
+                padding-top: 15px;
+            }
+
+                .sidenavRightMain a {
+                    font-size: 18px;
+                }
+        }
+
+
+
+        .sidenavRightS {
+            height: 100%;
+            width: 95%;
+            position: page;
+            z-index: 1;
+            top: 20%;
+            right: 0;
+            background-color: #33a03f;
+            /*overflow:no-display;*/
+            transition: 0.6s;
+            color: #FFEC9C;
+            /*padding-top: 60px;*/
+        }
+
+            .sidenavRightS a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #818181;
+                display: block;
+                transition: 0.6s;
+            }
+
+                .sidenavRightS a:hover {
+                    color: #f1f1f1;
+                }
+
+            .sidenavRightS .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+
+
+
+        @media screen and (max-height: 450px) {
+            .sidenavRightS {
+                padding-top: 15px;
+            }
+
+                .sidenavRightS a {
+                    font-size: 18px;
+                }
+        }
+
+        .force-overflow {
+            min-height: 450px;
+        }
+
+
+        /*#grid::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            border-radius: 10px;
+            background-color: #F5F5F5;
+        }
+
+        #grid::-webkit-scrollbar {
+            width: 12px;
+            background-color: #F5F5F5;
+        }
+
+        #grid::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+            background-color: #D62929;
+        }*/
+
+        /*********************Grid Webkits to Customize Scroll Bars************************************/
+        /* Let's get this party started */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            /*background: rgba(255,0,0,0.8);*/
+            background: lightgreen;
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+        }
+
+            ::-webkit-scrollbar-thumb:window-inactive {
+                background: rgba(255,0,0,0.4);
+            }
+    </style>
+
+
+
+
+</head>
+<body>
+
+
+    <div class="topnav" style="display:block; width : 100%; height:10%">
+        <a href="#/">Home</a>
+        <a class="active" href="" onclick="this.href='#/LRSCorp?uname='+document.getElementById('LoggedIn').value+'&dom=DEN'">Reports</a>
+        <a href="#/Support">Support</a>
+        <label style="padding-left:200px; background-color:transparent; color:white; font-size:x-large">Report Driver Config</label><label style="background-color:transparent; color:white; font-size:medium"> - Production Reports (Corporate Edition)</label>
+        <input id="LoggedIn" name="LoggedIn" ng-model="LoggedIn" onload="function_two('uname')" class="form-control" placeholder="Not Logged in!" style="width: 140px;height:30px;background-color:Highlight; font-size:medium; color:darkgreen" type="hidden" />
+        <img src="../LeprinoLogo.png" style="width:76px;height:50px; background-color:white" align="right">
+
+    </div>
+
+
+    <div ng-controller="RptDrivercontroller" class="sidenavRight" style="display:block; width : 100%; height:90%; background-color:black; color:white">
+        <!--Login name: <input type="text" name="FirstName" value="Mickey"><br>-->
+        <div style="width:100%;height:10%;">
+
+            <div style="width:50%;height:100%;float:left">
+
+                <!--<button ng-click="refreshGrid()">Refresh</button>
+                <button ng-click="clearFilters()">Reset</button>-->
+
+                <button class="btn btn-success btn-add" style="background-color:white;color:brown" ng-click="refreshGrid()">Refresh</button>
+                <button class="btn btn-success btn-add" style="background-color:darkslateblue;color:white" ng-click="clearFilters()">Reset</button>
+                <button class="btn btn-success btn-add" style="background-color:darkslategray;color:white" ng-click="exportDriver()">Export</button>
+
+                <label type="labelBox">
+                    Select a Plant from the List to display data:
+                </label>
+                <select id="plant" name="plant" style="display:inline-block; width:200px;height:25px; background-color:white;color:black; padding-bottom:0px; font-size:medium;">
+                    <option selected="selected">Select a Plant to Execute</option>
+                    <option value="LEM">LEM</option>
+                    <option value="FTM">FTM</option>
+                    <option value="ALN">ALN</option>
+                    <option value="LEW">LEW</option>
+                    <option value="REM">REM</option>
+                    <option value="ROS">ROS</option>
+                    <option value="TRA">TRA</option>
+                    <option value="WAV">WAV</option>
+                    <option value="GRE">GRE</option>
+                </select>
+
+
+            </div>
+            <div style="width:50%;height:100%;float:right">
+
+
+                <label type="labelBox">
+                    Turn Off Missing Logical VAT Auto-Generated Emails for:
+                </label>
+                <input id="VATPlantOff" style="width:70px;height:35px; background-color:transparent;color:white;padding-left:5px; font-size:medium" type="text" disabled="disabled" name="VATPlantOff">
+                <button style="font-size:small; background-color:transparent;color:white;display:inline-block;padding-bottom:0px; padding-left:0px;" ng-click="VatMsgOff()">Turn Off Missing Vat Emails</button>
+            </div>
+
+        </div>
+        <div id="gridHolder" style="width:100%; height:85%; border:hidden">
+            <div id="grid" ui-grid="gridOptions" ui-grid-edit=ui-grid-edit ui-grid-selection=ui-grid-selection class="grid" style="width:100%; height:100%; border:hidden"></div>
+
+            <div class="grid-msg-overlay" ng-hide="!loading">
+                <div class="msg">
+                    <span>Loading Data...<i class="fa fa-spinner fa-spin"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
