@@ -30,7 +30,7 @@
         }
     }
 
-    controller.$inject = ['$scope', '$timeout', 'uiGridConstants', 'uiGridGroupingConstants', 'LRWService'];
+    controller.$inject = ['$scope', '$rootScope','$timeout', 'uiGridConstants', 'uiGridGroupingConstants', 'LRWService'];
 
     app.config(function ($httpProvider) {
 
@@ -38,7 +38,7 @@
 
 
 
-    function controller($scope, $timeout, uiGridConstants, uiGridGroupingConstants, LRWService) {
+    function controller($scope, $rootScope, $timeout, uiGridConstants, uiGridGroupingConstants, LRWService) {
         $scope.chart = dataJson;
 
 
@@ -171,11 +171,12 @@
         //###############################################  VatMakeRpt SCREEN ############################################//
 
         $scope.gridOptionsVatMakeRpt = {
+            headerTemplate: 'app/Views/header.html',
             enableFullRowSelection: false,
             enableRowHeaderSelection: false,
             paginationPageSizes: [20, 40, 60],
             paginationPageSize: 40,
-            rowHeight: 53,
+            rowHeight: 30,
             enableFiltering: true,
             enableCellEdit: false,
             enableGridMenu: false,
@@ -206,7 +207,31 @@
             //    , { field: 'MIC', width: '10%', visible: true }]
         };
         
+        $scope.headerGridOptions = {
+            enableFullRowSelection: false,
+            enableRowHeaderSelection: false,
+            paginationPageSizes: [20, 40, 60],
+            paginationPageSize: 40,
+            rowHeight: 30,
+            enableFiltering: true,
+            enableCellEdit: false,
+            enableGridMenu: false,
+            enablePinning: true,
 
+            rowTemplate:
+                '<div ng-class="{ \'grey\':grid.appScope.rowFormatter( row ) }">' +
+                '  <div ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ng-class="{ \'ui-grid-row-header-cell\': col.isRowHeader }"  ui-grid-cell></div>' +
+                '</div>',
+            customScroller: function myScrolling(uiGridViewport, scrollHandler) {
+                uiGridViewport.on('scrolled', function myScrollingOverride(event) {
+                    $scope.$on('scrolled', function (event, args) {
+                        debugger;
+                        console.log('was jjjjjj scrolled');
+                    });
+                    scrollHandler(event);
+                });
+            },
+        };
 
         $scope.GridfromButtonVatMakeRpt = function () {
 
@@ -215,22 +240,35 @@
         };
 
         $scope.showExtraColumns = function () {
-            $scope.gridOptionsVatMakeRpt.columnDefs[2].visible = true;
-            $scope.gridOptionsVatMakeRpt.columnDefs[3].visible = true;
-            $scope.gridOptionsVatMakeRpt.columnDefs[4].visible = true;
-            $scope.gridOptionsVatMakeRpt.columnDefs[5].visible = true;
-            $scope.gridOptionsVatMakeRpt.columnDefs[6].visible = true;
-            $scope.gridOptionsVatMakeRpt.columnDefs[7].visible = true;
+            //$scope.gridOptionsVatMakeRpt.columnDefs[2].visible = true;
+            //$scope.gridOptionsVatMakeRpt.columnDefs[3].visible = true;
+            //$scope.gridOptionsVatMakeRpt.columnDefs[4].visible = true;
+            //$scope.gridOptionsVatMakeRpt.columnDefs[5].visible = true;
+            //$scope.gridOptionsVatMakeRpt.columnDefs[6].visible = true;// 
+            var hdsumV = $scope.gridOptionsVatMakeRpt.columnDefs.filter(a => a.name.includes('SumV') || a.name.includes('SDev') || a.name.includes('AvgV') || a.name.includes('Source') || a.name.includes('MIC') || a.name.includes('Position') || a.name.includes('Source'))
+            var headsumV = $scope.headerGridOptions.columnDefs.filter(a => a.name.includes('SumV') || a.name.includes('SDev') || a.name.includes('AvgV'))
+            hdsumV.push(...headsumV)
+
+            for (var a = 0; a < hdsumV.length; a++) {
+                hdsumV[a].visible = true;
+            }
             $scope.gridApi.grid.refresh();
         }
 
         $scope.hideExtraColumns = function () {
-            $scope.gridOptionsVatMakeRpt.columnDefs[2].visible = false;
-            $scope.gridOptionsVatMakeRpt.columnDefs[3].visible = false;
-            $scope.gridOptionsVatMakeRpt.columnDefs[4].visible = false;
-            $scope.gridOptionsVatMakeRpt.columnDefs[5].visible = false;
-            $scope.gridOptionsVatMakeRpt.columnDefs[6].visible = false;
-            $scope.gridOptionsVatMakeRpt.columnDefs[7].visible = false;
+            //$scope.gridOptionsVatMakeRpt.columnDefs[2].visible = false;
+            //$scope.gridOptionsVatMakeRpt.columnDefs[3].visible = false;
+            //$scope.gridOptionsVatMakeRpt.columnDefs[4].visible = false;
+            //$scope.gridOptionsVatMakeRpt.columnDefs[5].visible = false;
+            //$scope.gridOptionsVatMakeRpt.columnDefs[6].visible = false;
+            //$scope.gridOptionsVatMakeRpt.columnDefs[7].visible = false;
+            var hdsumV = $scope.gridOptionsVatMakeRpt.columnDefs.filter(a => a.name.includes('SumV') || a.name.includes('SDev') || a.name.includes('AvgV') || a.name.includes('KPI') || a.name.includes('MIC') || a.name.includes('Position') || a.name.includes('Source'))
+            var headsumV = $scope.headerGridOptions.columnDefs.filter(a => a.name.includes('SumV') || a.name.includes('SDev') || a.name.includes('AvgV'))
+            hdsumV.push(...headsumV)
+            for (var a = 0; a < hdsumV.length; a++) {
+                hdsumV[a].visible = false;
+            }
+
             $scope.gridApi.grid.refresh();
         }
 
@@ -265,7 +303,7 @@
             console.log('loading grid');
 
 
-                LRWService.getVatMakeRpt('1', '1221209', '100000028', '2020-05-08', '2020-05-08').success(function (data) {
+                LRWService.getVatMakeRpt('1', 'ALL', 'ALL', '2020-05-08', '2020-05-08').success(function (data) {
                 if (data === null || data.VatMakeRptList === null || data.VatMakeRptList.length === 0) {
 
                     $scope.error = true;
@@ -282,8 +320,34 @@
                     //console.log(keysArray);
                     var sortedKeysArray = keysArray.sort().reverse();
                     //var statusTemplate = '<div ng-click = alert("hi")></div>';
-                    
+                    var order = sortedKeysArray.filter(a => a.includes('SumV'))
+                    var orderedProductionOders = []
+                    for (var s = 0; s < order.length; s++) {
+                        var split = order[s].split('-')
+                        orderedProductionOders.push({ po: split.sort(function (a, b) { return b.length - a.length; })[0], seqNumber: split[split.length - 1] });
+                    }
+                    //orderedProductionOders = orderedProductionOders.sort(function (a, b) { return b.seqNumber - a.seqNumber });
 
+                    for (var o = 0; o < orderedProductionOders.length; o++) {
+                        var po = orderedProductionOders.find(a => a.seqNumber == o + 1).po;
+                        var keys = sortedKeysArray.filter(a => a.includes(po) && !a.includes('Tgt') && !a.includes('LW') && !a.includes('Hi'))
+                        var nKeys = []
+                        var keysToPush = []
+                        for (var a = 0; a < keys.length; a++) {
+                            nKeys.push(keys[a].split('-')[0])
+                        }
+                        nKeys = nKeys.sort((a, b) => b - a);
+                        for (var n = 0; n < nKeys.length; n++) {
+                            keys.forEach(a => {
+                                if (a.split('-')[0] == nKeys[n]) {
+                                    keysToPush.push(a)
+                                }
+                            });
+                        }
+                        sortedKeysArray = sortedKeysArray.filter(a => !a.includes(po))
+                        sortedKeysArray.push(...keysToPush)
+                    }
+                    //debugger
                     $scope.gridOptionsVatMakeRpt.columnDefs.push({ name: 'LineNumber', field: 'LineNumber', width: '5%', visible: true, pinnedLeft: true });
                     $scope.gridOptionsVatMakeRpt.columnDefs.push(
                          {
@@ -315,7 +379,8 @@
                      if (!(sortedKeysArray[i] == "LineNumber" || sortedKeysArray[i] == "AttributeName" || sortedKeysArray[i] == "source" || sortedKeysArray[i] == "MIC" || sortedKeysArray[i].includes("Tgt-") == true || sortedKeysArray[i].includes("LW-") == true || sortedKeysArray[i].includes("Hi-") == true))
                   
                             $scope.gridOptionsVatMakeRpt.columnDefs.push({
-                                name: sortedKeysArray[i], field: sortedKeysArray[i], width: '10%', visible: true, cellTooltip: function (row) {
+                                name: sortedKeysArray[i], displayName: sortedKeysArray[i].includes('-') ? sortedKeysArray[i].split('-')[0] + '-' + sortedKeysArray[i].split('-').sort(function (a, b) { return b.length - a.length; })[0] : sortedKeysArray[i]
+                                , field: sortedKeysArray[i], width: '10%', visible: true, cellTooltip: function (row) {
                                     var Hghkey = 'Hi-' + colmn;
                                     var Tgtkey = 'Tgt-' + colmn;
                                     var LWkey = 'LW-' + colmn;
@@ -336,9 +401,16 @@
 
                     
                     $scope.gridOptionsVatMakeRpt.data = VatMakeRptList;
+                    $scope.headerGridOptions.columnDefs = $scope.gridOptionsVatMakeRpt.columnDefs;
+                    for (var a = 0; a < 5; a++) {
+                        $scope.headerGridOptions.data.push(VatMakeRptList[a]);
+                        //$scope.gridOptionsVatMakeRpt.data.splice(0, 1);
+                    }
+                    $scope.gridOptionsVatMakeRpt.data.splice(0, 5);
+                    $scope.headerGridOptions.enableHorizontalScrollbar = 0;
                     //$scope.renderfields();
                     $scope.hideExtraColumns();
-                    console.log(VatMakeRptList);
+                    //console.log(VatMakeRptList);
                     $scope.error = false;
                 }
 
@@ -371,7 +443,7 @@
             }
             $scope.loading = true;
 
-            console.log('loading KPIMultiDtList');
+            //console.log('loading KPIMultiDtList');
 
             LRWService.getKPIMultiDt('KPI Chart - Fat to Protein Ratio', '2020-05-08', '2020-05-09', '1', 'NULL', 'NULL', 'NULL').success(function (data) {
                            var KPIMultiDtList = data.KPIMultiDtList;
@@ -422,7 +494,7 @@
                     dataJson.data.rows = rows;
                     $scope.openModal('chartModal');
                 }
-                console.log(KPIMultiDtList);
+                //console.log(KPIMultiDtList);
                 $scope.error = false;
             }
             ).finally(function () { $scope.loading = false; });
@@ -436,7 +508,7 @@
             if (reportName == undefined || reportName == null) {
                 reportName = 'KPI Chart - Mill pH'
             }
-            console.log('loading KPISingleDt');
+            //console.log('loading KPISingleDt');
 
             LRWService.getKPISingleDt('KPI Chart - Mill pH', '2020-05-08', '2020-05-09', '1', 'NULL', 'NULL', 'NULL').success(function (data) {
 
@@ -475,7 +547,7 @@
                     dataJson.data.rows = rows;
                     $scope.openModal('chartModal');
                 }
-                console.log(KPISingleDtList);
+                //console.log(KPISingleDtList);
                 $scope.error = false;
             }
             ).finally(function () { $scope.loading = false; });
@@ -512,17 +584,28 @@
             }
         };
 
+        $scope.$on('scrolled', function (event, args) {
+            document.getElementById('gridH').getElementsByClassName('ui-grid-viewport')[1].scrollLeft = document.getElementById('gridW').getElementsByClassName('ui-grid-viewport')[1].scrollLeft
+            $scope.gridApi.grid.isScrollingHorizontally = false;
+            //console.log("called");
+        });
 
+     
         $scope.gridOptionsVatMakeRpt.onRegisterApi = function (gridApi) {
             $scope.gridApi = gridApi;
+            $scope.$watch('gridApi.grid.isScrollingHorizontally', watchFunc);
+            function watchFunc(newData) {               
+                $rootScope.$broadcast('scrolled');
 
+
+            }
             //    $scope.selectRow = function () {
             $scope.mySelectedRows = $scope.gridApi.selection.getSelectedRows();
             //  console.log($scope.mySelectedRows)
 
             var objarray = [];
             gridApi.selection.on.rowSelectionChanged($scope, function (row) {
-                console.log('row selected ' + row.entity.row_id);
+                //console.log('row selected ' + row.entity.row_id);
 
 
                 if (row.isSelected) {

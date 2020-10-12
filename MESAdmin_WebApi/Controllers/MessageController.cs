@@ -49,6 +49,17 @@ namespace Leprino_Integration_Tool.Controllers
             VatMakeRptGenerator vm = new VatMakeRptGenerator();
             return vm.GetVatMakeRptCollection(LineNumber, ProductionOrder, ProductCode, StartDate, EndDate);
         }
+
+
+        [Route("api/Message/getVatMakeParam/{StartDate}/{EndDate}")]
+        public VatMakeRptParamCollection getVatMakeParam(string StartDate, string EndDate)
+        {
+
+            VatMakeParamGenerator vm = new VatMakeParamGenerator();
+            return vm.GetVatMakeRptCollection(StartDate, EndDate);
+        }
+
+
         [Route("api/Message/getVatMakeRptComments/{StartDate}/{EndDate}/{ProductCode}/{LineNumber}")]
         public VatMakeRptCommentsCollection getVatMakeRptComments(string StartDate, string EndDate, string ProductCode, string LineNumber)
         {

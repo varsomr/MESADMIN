@@ -22,6 +22,13 @@ namespace BLL.Interfaces
 
     }
 
+    interface IVatMakeRptParam
+    {
+        //Selection
+        VatMakeRptParamCollection GetVatMakeRptCollection(string StartDate, string EndDate);
+
+    }
+
     interface IKPIMultiDt
     {
         //Selection

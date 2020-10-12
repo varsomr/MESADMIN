@@ -2290,6 +2290,34 @@ namespace BLL
         }
 
     }
+
+    public class VatMakeParamGenerator : IVatMakeRptParam
+    {
+        public VatMakeRptParamCollection GetVatMakeRptCollection(string StartDate, string EndDate)
+        {
+            VatMakeRptParamCollection dc = new VatMakeRptParamCollection();
+            DataSet dsDefect = DBConnection.DBConnectVatMakeParam("_usp_Get_Vat_Make_LinePOProduct_List", StartDate, EndDate);
+
+            foreach (DataRow dr in dsDefect.Tables[0].Rows)
+            {
+                //Create message object
+                //VatMakeRpt defect = new VatMakeRpt();
+                Dictionary<string, string> defectdictionary = new Dictionary<string, string>();
+                for (int index = 0; index < dsDefect.Tables[0].Columns.Count; index++)
+                {
+
+                    defectdictionary[dsDefect.Tables[0].Columns[index].ToString()] = dr[index].ToString();
+
+                }
+
+                dc.VatMakeParamList.Add(defectdictionary);
+
+            }
+
+            return dc;
+        }
+    }
+
     public class VatMakeRptGenerator : IVatMakeRpt
     {
         public VatMakeRptCollection GetVatMakeRptCollection(string LineNumber, string ProductionOrder, string ProductCode, string StartDate, string EndDate)
@@ -2310,23 +2338,26 @@ namespace BLL
                 }
 
                 dc.VatMakeRptList.Add(defectdictionary);
-
+              
             }
 
             return dc;
         }
 
-    //}
-
-  
-    //    }
 
 
 
+            //}
+
+
+            //    }
 
 
 
-    public string GetXMLContent(string objectID)
+
+
+
+            public string GetXMLContent(string objectID)
         {
 
             StringBuilder sb = new StringBuilder();

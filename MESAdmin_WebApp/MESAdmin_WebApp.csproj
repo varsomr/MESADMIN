@@ -308,6 +308,7 @@
     <Content Include="app\Views\CustomGroupHeader.html" />
     <Content Include="app\Views\DefectFS.html" />
     <Content Include="app\Views\calendar.html" />
+    <Content Include="app\Views\header.html" />
     <Content Include="app\Views\LRSWeb.html" />
     <Content Include="app\Views\PhageME.html" />
     <Content Include="app\Views\MainCIP.html" />

@@ -1126,13 +1126,21 @@ namespace BO.Models
         //public List<VatMakeRpt> VatMakeRptList;
 
         public List<IDictionary<string, string>> VatMakeRptList = new List<IDictionary<string, string>>();
-
+       
         //public VatMakeRptCollection ()
         //{
         //    //VatMakeRptList = new List<VatMakeRpt>();
         //    VatMakeRptList = new List<IDictionary<string, string>>();
         //}
     }
+
+    public class VatMakeRptParamCollection
+    {
+        
+        public List<IDictionary<string, string>> VatMakeParamList = new List<IDictionary<string, string>>();
+
+    }
+
 
     public class KPIMultiDtCollection
     {
