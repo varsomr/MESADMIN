@@ -40,9 +40,9 @@
 
     function controller($scope, $rootScope, $timeout, uiGridConstants, uiGridGroupingConstants, LRWService) {
         $scope.chart = dataJson;
+        
 
-
-
+       
         $scope.randomSize = function (nav, ty) {
             var newHeight; //= Math.floor(Math.random() * (300 - 100 + 1) + 300);
             var newWidth; //= Math.floor(Math.random() * (600 - 200 + 1) + 200);
@@ -239,6 +239,10 @@
 
         };
 
+        $scope.headerGridOptions.onRegisterApi = function (gridApi) {
+            $scope.gridApi2 = gridApi;
+        }
+
         $scope.showExtraColumns = function () {
             //$scope.gridOptionsVatMakeRpt.columnDefs[2].visible = true;
             //$scope.gridOptionsVatMakeRpt.columnDefs[3].visible = true;
@@ -253,7 +257,10 @@
                 hdsumV[a].visible = true;
             }
             $scope.gridApi.grid.refresh();
+            $scope.gridApi2.grid.refresh();
         }
+
+        
 
         $scope.hideExtraColumns = function () {
             //$scope.gridOptionsVatMakeRpt.columnDefs[2].visible = false;
@@ -270,6 +277,14 @@
             }
 
             $scope.gridApi.grid.refresh();
+            $scope.gridApi2.grid.refresh();
+
+        }
+
+        $scope.gridPagination = function (lineNumber) {
+            $scope.removeGridData();
+            $scope.loadgridVatMakeRpt(lineNumber);
+
         }
 
         $scope.showorhideExtraColumns = function () {
@@ -295,15 +310,97 @@
             document.getElementById("graphDisplay").style.display = 'block';
         };
 
+        $scope.fromDate = '2020-05-08'
+        $scope.toDate = '2020-05-08'
 
-        $scope.loadgridVatMakeRpt = function () {
+        $scope.dateChange = function () {
+            var fromD = Date.parse($scope.fromDate);
+            var toD = Date.parse($scope.toDate);
+            if (toD >= fromD) {
+                //$scope.removeGridData();
+                $scope.loadgridVatMakeRpt(null, null, null, $scope.fromDate, $scope.toDate);
+                $scope.lineNumbers = ['All'];
+                $scope.getVatMakeParams($scope.fromDate, $scope.toDate);
+            }
+        }
 
+        $scope.lineNumbers = ['All'];
+        $scope.productionOrderByLines = ['All']
+        $scope.productCodeByLines =['All']
+        $scope.selectedLineNumber = 'All';
+        $scope.selectedProductionOrder = 'All';
+        $scope.selectedProductCode = 'All';
+        $scope.getVatMakeParams = function (fromDate,toDate) {
+            $scope.loading = true;
+            LRWService.getVatMakeParam(fromDate, toDate).success(function (data) {
+                debugger;
+                $scope.vatMakeParams = data.VatMakeParamList;
+                var lines = data.VatMakeParamList.map(a => a.LineNumber)
+                $scope.lineNumbers.push(...lines.filter((v, i, a) => a.indexOf(v) === i))
+                $scope.productionOrderByLines.push(...$scope.vatMakeParams.map(a => a.ProductionOrder));
+                $scope.productCodeByLines.push(...$scope.vatMakeParams.map(a => a.ProductCode));
+                $scope.error = false;
+                
+            }).finally(function () { $scope.loading = false; });
+        }
+
+        $scope.changeLineNumber = function () {
+            $scope.productionOrderByLines = ['All'];
+            $scope.productionOrderByLines.push(...$scope.vatMakeParams.filter(a => a.LineNumber == $scope.selectedLineNumber).map(a => a.ProductionOrder));
+            
+            if ($scope.selectedLineNumber == 'All') {
+                $scope.productionOrderByLines = []
+
+                //$scope.selectedLineNumber = '1'
+                $scope.gridPagination('1');
+            } else {
+
+                $scope.gridPagination($scope.selectedLineNumber);
+            }
+
+        }
+
+        $scope.changeProductionOrder = function () {
+            $scope.productCodeByLines = ['All']
+            $scope.productCodeByLines.push(...$scope.vatMakeParams.filter(a => a.ProductionOrder == $scope.selectedProductionOrder).map(a => a.ProductCode))
+            $scope.removeGridData();
+            $scope.loadgridVatMakeRpt($scope.selectedLineNumber, $scope.selectedProductionOrder)
+        }
+        $scope.changeProductCode = function () {
+            $scope.removeGridData();
+            $scope.loadgridVatMakeRpt($scope.selectedLineNumber, $scope.selectedProductionOrder, $scope.selectedProductCode)
+        }
+        $scope.removeGridData = function () {
+            $scope.gridOptionsVatMakeRpt.columnDefs = [];
+            $scope.headerGridOptions.columnDefs = [];
+            $scope.gridOptionsVatMakeRpt.data = [];
+            $scope.headerGridOptions.data = [];
+        }
+
+        $scope.getVatMakeParams($scope.fromDate, $scope.toDate);
+        $scope.loadgridVatMakeRpt = function (lineNumber,productionOrder,productCode,fromDate, toDate) {
+            if (lineNumber == null || lineNumber == undefined) {
+                lineNumber = '1'
+            }
+            if (productionOrder == null || productionOrder == undefined) {
+                productionOrder = 'ALL'
+            }
+            if (productCode == null || productCode == undefined) {
+                productCode = 'ALL'
+            }
+            if (fromDate == null || fromDate == undefined) {
+                fromDate = $scope.fromDate
+            }
+            if (toDate == null || toDate == undefined) {
+                toDate = $scope.toDate
+            }
+            
             $scope.loading = true;
 
             console.log('loading grid');
 
 
-                LRWService.getVatMakeRpt('1', 'ALL', 'ALL', '2020-05-08', '2020-05-08').success(function (data) {
+            LRWService.getVatMakeRpt(lineNumber, productionOrder, productCode, fromDate, toDate).success(function (data) {
                 if (data === null || data.VatMakeRptList === null || data.VatMakeRptList.length === 0) {
 
                     $scope.error = true;
@@ -313,6 +410,11 @@
                         data.VatMakeRptList.length
                     );
                     var VatMakeRptList = data.VatMakeRptList;
+                    data.VatMakeRptList.forEach(a => {
+                        if (a.KPI_Report_Name != "" && a.KPI_Report_Name != null) {
+                            a["isClickable"] = true;
+                        }
+                    })
                     $scope.gridData = data.VatMakeRptList;
                     var keysArray = [];
    
@@ -351,7 +453,16 @@
                     $scope.gridOptionsVatMakeRpt.columnDefs.push({ name: 'LineNumber', field: 'LineNumber', width: '5%', visible: true, pinnedLeft: true });
                     $scope.gridOptionsVatMakeRpt.columnDefs.push(
                          {
-                            name: 'AttributeName', field: 'AttributeName', width: '15%', visible: true, pinnedLeft: true, cellTemplate:`<div ng-click="grid.appScope.selectGridToLoad(COL_FIELD)">{{COL_FIELD CUSTOM_FILTERS}}</div>`,
+                            name: 'AttributeName', field: 'AttributeName', width: '15%', visible: true, pinnedLeft: true,
+                            cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+                                var newStyle;
+                                if (row.entity.isClickable) {
+                                    newStyle = 'group1';
+                                }
+
+                                return newStyle;
+                            },
+                            cellTemplate: `<div ng-click="grid.appScope.selectGridToLoad(COL_FIELD)">{{COL_FIELD CUSTOM_FILTERS}}</div>`,
                             ////cellTemplate: '<div ng-mouseover="grid.appScope.mouseOver(this);" ng-mouseleave="grid.appScope.mouseLeave(this)">{{COL_FIELD CUSTOM_FILTERS}}</div>',
 
 
@@ -419,9 +530,9 @@
         };
 
         
-
+        
         $scope.loadgridVatMakeRpt();
-
+        
         //$scope.loadgridKPIMultiDt = function () {
 
         //    $scope.loading = true;
@@ -2676,7 +2787,7 @@
 
         };
 
-
+        
         $scope.OpenCalendar = function (nav) {
             // $scope.closeAll();
             document.getElementById("mysidenavRightCalendarFull").style.display = 'inline-block';

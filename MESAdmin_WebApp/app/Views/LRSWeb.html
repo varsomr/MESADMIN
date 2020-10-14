@@ -431,7 +431,9 @@
         .highlight {
             background-color: #b3c4c7 !important;
         }
-
+        .group1 {
+            color: blue;
+        }
 
 
 
@@ -1679,35 +1681,41 @@
 
                     <div style="width:15%;height:100%;float:left">
                         <label style="float:left;color:white">From Date</label>
-                        <input id="RtimestampidF" style="width:100px;height:20px;background-color:black; font-size:x-small; font-style:italic; color:lightgoldenrodyellow; float:left; border:solid 2px; border-color:darkkhaki; text-align:center" ng-click="OpenCalendar('#RtimestampidF')">
+                        <input id="RtimestampidF" ng-model="fromDate" ng-blur="dateChange()" style="width:100px;height:20px;background-color:black; font-size:x-small; font-style:italic; color:lightgoldenrodyellow; float:left; border:solid 2px; border-color:darkkhaki; text-align:center" ng-click="OpenCalendar('#RtimestampidF')">
                         <!--<label style="background-color:transparent;color:white;width:100%; float:left; text-align:center; font-size:12px; ">From Date</label>
-                    <button type="button" class="dropbtn" style="transition: 1s;background-color:transparent; border:none; color:white;float:right" ng-click="OpenCalendar('#timestampid')">
-                        <img src="Calendar.png" title="Select Date" style="width:25px;height:30px;border:outset;border-color:darkslategray " />
-                    </button>
-                    <input id="timestampid" contenteditable="true" style="width:140px;height:40px;background-color:black; font-size:small; font-style:italic; color:lightgoldenrodyellow;border:outset; border-color:darkslategray; float:right;text-align:center" disabled="disabled" ng-click="OpenCalendar('#timestampid')">-->
+    <button type="button" class="dropbtn" style="transition: 1s;background-color:transparent; border:none; color:white;float:right" ng-click="OpenCalendar('#timestampid')">
+        <img src="Calendar.png" title="Select Date" style="width:25px;height:30px;border:outset;border-color:darkslategray " />
+    </button>
+    <input id="timestampid" contenteditable="true" style="width:140px;height:40px;background-color:black; font-size:small; font-style:italic; color:lightgoldenrodyellow;border:outset; border-color:darkslategray; float:right;text-align:center" disabled="disabled" ng-click="OpenCalendar('#timestampid')">-->
 
                     </div>
                     <div style="width:15%;height:100%;float:left">
                         <label style="float:left;color:white">To Date</label>
-                        <input id="RtimestampidT" style="width:100px;height:20px;background-color:black; font-size:x-small; font-style:italic; color:lightgoldenrodyellow; float:left; border:solid 2px; border-color:darkkhaki; text-align:center;" ng-click="OpenCalendar('#RtimestampidT')">
+                        <input id="RtimestampidT" ng-model="toDate" ng-blur="dateChange()" style="width:100px;height:20px;background-color:black; font-size:x-small; font-style:italic; color:lightgoldenrodyellow; float:left; border:solid 2px; border-color:darkkhaki; text-align:center;" ng-click="OpenCalendar('#RtimestampidT')">
                     </div>
                     <div style="width:15%;height:100%;float:left">
                         <label style="float:left;color:white">Line Number</label>
-                        <select id="SULine" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;background-color:darkslategrey;color:lightgoldenrodyellow ">
-                            <option value="" selected> </option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
+                        <!--<select ng-model="selectedLineNumber" ng-options="item for item in lineNumbers">
+        <option value="" selected> </option>
+    </select>-->
+                        
+                        <select id="SULine" ng-model="selectedLineNumber" ng-options="item for item in lineNumbers" ng-change="changeLineNumber()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;background-color:darkslategrey;color:lightgoldenrodyellow ">
+                            <option value="All" selected> </option>
                         </select>
                     </div>
                     <div style="width:15%;height:100%;float:left">
-                        <label style="background-color:transparent;color:white;width:100%; float:left; text-align:center; font-size:12px; ">Production Order</label>
-
+                        <label style="float:left;color:white">Production Order</label>
+                        
+                        <select id="SULine" ng-model="selectedProductionOrder" ng-options="item for item in productionOrderByLines" ng-change="changeProductionOrder()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;background-color:darkslategrey;color:lightgoldenrodyellow ">
+                            <option value="All" selected> </option>
+                        </select>
                     </div>
                     <div style="width:15%;height:100%;float:left">
-                        <label style="background-color:transparent;color:white;width:100%; float:left; text-align:center; font-size:12px; ">Material</label>
-
+                        <label style="float:left;color:white">Material</label>
+                        
+                        <select id="SULine" ng-model="selectedProductCode" ng-options="item for item in productCodeByLines" ng-change="changeProductCode()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;background-color:darkslategrey;color:lightgoldenrodyellow ">
+                            <option value="All" selected> </option>
+                        </select>
                     </div>
                     <!--cancel button-->
 
@@ -1729,7 +1737,10 @@
 
 
 
-                        <input type="checkbox" ng-click="showorhideExtraColumns()" id="hideshowcheckboxid" /> 
+                        <input type="checkbox" ng-click="showorhideExtraColumns()" id="hideshowcheckboxid" />
+                        <button type="button" class="btn btn-sm btn-info" ng-click="gridPagination('1')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">1</button>
+                        <button type="button" class="btn btn-sm btn-info" ng-click="gridPagination('2')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">2</button>
+                        <button type="button" class="btn btn-sm btn-info" ng-click="gridPagination('3')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">3</button>
                         <div id="gridH" ui-grid="headerGridOptions" ui-grid-pinning ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRpt" style=" width:98vw; height: 35vh; color:white;border:none; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
                         <div id="gridW" ui-grid="gridOptionsVatMakeRpt" ui-grid-pinning ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRpt" style=" width:98vw; height: 35vh; color:white;border:none; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
 
