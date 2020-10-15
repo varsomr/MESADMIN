@@ -2518,7 +2518,7 @@ namespace DAL.Data
                 sqlComm.Parameters.Add(p3);
                 sqlComm.Parameters.Add(p4);
 
-                //sqlComm.CommandTimeout = 0;
+                sqlComm.CommandTimeout = 0;
                 sqlComm.ExecuteNonQuery();
 
                 SqlDataAdapter daa = new SqlDataAdapter();

@@ -18,7 +18,7 @@
     if (typeof module === "object" && typeof module.exports === "object") {
         // For CommonJS and CommonJS-like environments where a proper `window`
         // is present, execute the factory and get jQuery.
-        // For environments that do not have a `window` with a `document`
+        // For environments that do not have a `window` with a `document`Hi
         // (such as Node.js), expose a factory as module.exports.
         // This accentuates the need for the creation of a real `window`.
         // e.g. var jQuery = require("jquery")(window);
@@ -18230,6 +18230,7 @@
        allowing multiple different settings on the same page. */
 
     function Datepicker() {
+     
         this._curInst = null; // The current instance in use
         this._keyEvent = false; // If the last event was a key event
         this._disabledInputs = []; // List of date picker inputs that have been disabled

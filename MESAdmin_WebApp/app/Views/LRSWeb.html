@@ -1,14 +1,43 @@
 ﻿
 <head>
     <!--<link rel="stylesheet" type="text/css" href="CSS/LQLSytles.css" media="screen" />-->
+    <!--<script src="/Scripts/calendar.js"></script>-->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.10.2/angular-chart.js"></script>
+    <script type="text/javascript" src="/Scripts/googleCharts.js"></script>
+    <link rel="stylesheet" href="/Content/calendar.css">
+    <link rel="stylesheet" href="/Content/Style.css">
+    <script src="ui-grid.js"></script>
+    <!--<script src="/Scripts/calendar.js"></script>-->
+    <script type="text/javascript" src="/Scripts/Chart.js"></script>
+    <script type="text/javascript" src="/Scripts/loader.js"></script>
+
+
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js">
     </script>
 
     <script type="text/javascript">
-        google.charts.load('current', { packages: ['corechart', 'line'] });
+                google.charts.load('current', { packages: ['corechart', 'line'] });
     </script>
+    <!--<script>
 
+                $(function () {
 
+                    $("#RtimestampidF").datepicker({
+
+                        showWeek: true,
+
+                        firstDay: 1
+
+                    });
+
+                });
+
+    </script>-->
     <style>
         /*###################################### Start Calling GRID FEATURES #############################################*/
         @import url("../../Content/GridFormat.css");
@@ -431,6 +460,7 @@
         .highlight {
             background-color: #b3c4c7 !important;
         }
+
         .group1 {
             color: blue;
         }
@@ -846,7 +876,6 @@
         }*/
 
         .dropdown-content {
-
             display: none;
             position: absolute;
             background-color: white;
@@ -1681,7 +1710,7 @@
 
                     <div style="width:15%;height:100%;float:left">
                         <label style="float:left;color:white">From Date</label>
-                        <input id="RtimestampidF" ng-model="fromDate" ng-blur="dateChange()" style="width:100px;height:20px;background-color:black; font-size:x-small; font-style:italic; color:lightgoldenrodyellow; float:left; border:solid 2px; border-color:darkkhaki; text-align:center" ng-click="OpenCalendar('#RtimestampidF')">
+                        <input type ='text' id="fromDate" ng-model="fromDate"  style="width:100px;height:20px;background-color:black; font-size:x-small; font-style:italic; color:lightgoldenrodyellow; float:left; border:solid 2px; border-color:darkkhaki; text-align:center" ng-click="calendardate('#fromDate')" >
                         <!--<label style="background-color:transparent;color:white;width:100%; float:left; text-align:center; font-size:12px; ">From Date</label>
     <button type="button" class="dropbtn" style="transition: 1s;background-color:transparent; border:none; color:white;float:right" ng-click="OpenCalendar('#timestampid')">
         <img src="Calendar.png" title="Select Date" style="width:25px;height:30px;border:outset;border-color:darkslategray " />
@@ -1691,8 +1720,8 @@
                     </div>
                     <div style="width:15%;height:100%;float:left">
                         <label style="float:left;color:white">To Date</label>
-                        <input id="RtimestampidT" ng-model="toDate" ng-blur="dateChange()" style="width:100px;height:20px;background-color:black; font-size:x-small; font-style:italic; color:lightgoldenrodyellow; float:left; border:solid 2px; border-color:darkkhaki; text-align:center;" ng-click="OpenCalendar('#RtimestampidT')">
-                    </div>
+                        <input type ='text' id="toDate" ng-model="toDate"  style="width:100px;height:20px;background-color:black; font-size:x-small; font-style:italic; color:lightgoldenrodyellow; float:left; border:solid 2px; border-color:darkkhaki; text-align:center;" ng-click="calendardate('#toDate')">
+                                      </div>
                     <div style="width:15%;height:100%;float:left">
                         <label style="float:left;color:white">Line Number</label>
                         <!--<select ng-model="selectedLineNumber" ng-options="item for item in lineNumbers">

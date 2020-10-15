@@ -306,12 +306,110 @@
             document.getElementById("graphDisplay").style.display = 'none';
         }
 
+        //######################Calendar Event###########################//
+
+        $scope.FormatDT = function (date) {
+            var d = new Date(date),
+
+
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+            return [year, month, day].join('-');
+
+            //   date: new Date(),
+            //   time: new Date($filter('d')(new Date(), 'yyyy-MM-dd HH:mm'))
+
+
+        }
+
+        $scope.FormatTM = function (date) {
+            var d = new Date(date),
+                // var e = new Timestamp(date),
+
+                hour = '' + (d.getHours() + 1),
+                minute = '' + d.getMinutes(),
+                second = d.getSeconds();
+
+            if (hour.length < 2) hour = '0' + hour;
+            if (minute.length < 2) minute = '0' + minute;
+            if (second.length < 2) second = '0' + second;
+            return [hour, minute, second].join(':');
+            //return [d];
+
+
+        }
+
+        $scope.getTimeStamp = function (controlname) {
+            var d = new Date();
+            //sttime = sttime.replace(/,\s?/g, " ");
+            //sttime = sttime.split(' ')[0];
+
+
+
+            //  var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+
+            var sttime = [year, month, day].join('-');
+
+            document.getElementById(controlname).value = sttime;
+        };
+
+
+        //####Autopopulate screen function area#################//
+        $scope.FormatDTSlash = function (date) {
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+            return [month, day, year].join('/');
+
+        };
+
+        $scope.calendardate = function (nav) {
+            //debugger
+            $(nav).datepicker();
+  
+
+        };
+
+        $(function () {
+
+            $("#fromDate").datepicker();
+            $("#toDate").datepicker();
+
+            var date = new Date();
+            date.setDate(date.getDate() + 2);
+            date = date.toISOString().substring(0, 10),
+                field = document.querySelector('#fromDate');
+            field.value = $scope.FormatDTSlash(date);
+
+            var dateF = new Date();
+            var firstDay = '09/10/2020';//new Date(dateF.getFullYear(), dateF.getMonth(), 1);
+            field = document.querySelector('#toDate');
+            field.value = $scope.FormatDTSlash(firstDay);
+            //alert('Turr');
+
+        });
+
+        //######################END Calendar Event###########################//
+
         $scope.openModalgraph = function () {
             document.getElementById("graphDisplay").style.display = 'block';
         };
 
-        $scope.fromDate = '2020-05-08'
-        $scope.toDate = '2020-05-08'
+        $scope.fromDate ='2020-05-08'
+        $scope.toDate ='2020-05-08'
 
         $scope.dateChange = function () {
             var fromD = Date.parse($scope.fromDate);
@@ -333,12 +431,13 @@
         $scope.getVatMakeParams = function (fromDate,toDate) {
             $scope.loading = true;
             LRWService.getVatMakeParam(fromDate, toDate).success(function (data) {
-                debugger;
+                //debugger;
                 $scope.vatMakeParams = data.VatMakeParamList;
                 var lines = data.VatMakeParamList.map(a => a.LineNumber)
                 $scope.lineNumbers.push(...lines.filter((v, i, a) => a.indexOf(v) === i))
                 $scope.productionOrderByLines.push(...$scope.vatMakeParams.map(a => a.ProductionOrder));
                 $scope.productCodeByLines.push(...$scope.vatMakeParams.map(a => a.ProductCode));
+                $scope.loadgridVatMakeRpt("1", "ALL", "ALL", fromDate, toDate);
                 $scope.error = false;
                 
             }).finally(function () { $scope.loading = false; });
@@ -612,7 +711,7 @@
 
         };
         
-
+  
         $scope.loadgridKPISingleDt = function (reportName, isChartOpen = false) {
 
             $scope.loading = true;
@@ -3908,6 +4007,8 @@
         //});
 
     }
+
+ 
   
 })();
 
