@@ -48,7 +48,9 @@
             opacity: 2.2;
             filter: alpha(opacity=220);
         }
-
+        hr.new1 {
+            border-top: 1px solid black;
+        }
         body {
             /*padding-top: 50px;
             padding-bottom: 20px;*/
@@ -1702,101 +1704,206 @@
     <!--#################################################### VatMakeRpt  ######################################################-->
     <div id="mysidenavRightVATMake" class="modal" style="background-color:white; border:none" ng-controller="LRWcontroller">
 
-        <div class="modal-content" style="height:100%;  background-color:#005a9e;color:white">
-            <div class="modal-body" style="height:100%;  background-color:#005a9e;color:white">
+        <div class="modal-content" style="height:100%;  background-color:lightblue;color:white">
+            <div class="modal-body" style="height:100%;  background-color:lightblue;color:white">
                 <!--start filter-->
-                <div style="width:100%; height:20%; text-align:center;float:left;">
-                    <label id="modalMessage" style="font-size:medium;font-weight:bold;background-color:brown;color:white;width:100%">Vat Make Report</label>
 
-                    <div style="width:15%;height:100%;float:left">
-                        <label style="float:left;color:white">From Date</label>
-                        <input type ='text' id="fromDate" ng-model="fromDate"  style="width:100px;height:20px;background-color:black; font-size:x-small; font-style:italic; color:lightgoldenrodyellow; float:left; border:solid 2px; border-color:darkkhaki; text-align:center" ng-click="calendardate('#fromDate')" >
-                        <!--<label style="background-color:transparent;color:white;width:100%; float:left; text-align:center; font-size:12px; ">From Date</label>
+                <!--<div class="row">
+                    <div class="col-md-12">
+                        <label id="modalMessage" style="font-size:medium;font-weight:bold;background-color:brown;color:white;width:100%">Vat Make Report</label>
+                    </div>
+                </div>-->
+
+                <div class="row" ng-show="isHideFilters == false">
+                    <div class="col-md-12">
+                        <div class="col-md-2">
+                            <div class="col-md-6">
+                                <label style="float:left;color:black">From Date</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type='text' id="fromDate" ng-model="fromDate" ng-change="dateChange()" style="width:100px;height:20px; font-size:x-small;  float:left; border:solid 2px; text-align:center" ng-click="calendardate('#fromDate')">
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="col-md-6">
+                                <label style="float:left;color:black">To Date</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type='text' id="toDate" ng-model="toDate" ng-change="dateChange()" style="width:100px;height:20px;font-size:x-small; float:left; border:solid 2px; text-align:center;" ng-click="calendardate('#toDate')">
+                            </div>
+                        </div>
+                       
+
+                    </div>
+
+                </div>
+                <div class="row" ng-show="isHideFilters == false" style="margin-top:10px">
+                    <div class="col-md-12">
+                        <div class="col-md-2">
+                            <div class="col-md-6">
+                                <label style="float:left;color:black">Line Number</label>
+                            </div>
+                            <div class="col-md-6">
+                                <select id="SULine" ng-model="selectedLineNumber" ng-options="item for item in lineNumbers" ng-change="changeLineNumber()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;">
+                                    <option value="All" selected> </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="col-md-6">
+                                <label style="float:left;color:black">Production Order</label>
+                            </div>
+                            <div class="col-md-6">
+                                <select id="SULine" ng-model="selectedProductionOrder" ng-options="item for item in productionOrderByLines" ng-change="changeProductionOrder()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;">
+                                    <option value="All" selected> </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <button type="button" ng-click="viewReports()" style="color:black;float:right"> View Report</button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="row" ng-show="isHideFilters == false" style="margin-top:10px">
+                    <div class="col-md-12">
+                        <div class="col-md-2">
+                            <div class="col-md-6">
+                                <label style="float:left;color:black">Material</label>
+                            </div>
+                            <div class="col-md-6">
+                                <select id="SULine" ng-model="selectedProductCode" ng-options="item for item in productCodeByLines" ng-change="changeProductCode()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;">
+                                    <option value="All" selected> </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <button class="col-md-offset-5" style="color:black" type="button"  ng-click="hideShowFilters()"  >Hide/Show Filters</button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row" style="margin-top:10px">
+                    <div class="col-md-6">
+                        <div class="col-md-4">
+                            <input type="checkbox" ng-click="showorhideExtraColumns()" id="hideshowcheckboxid" />
+                            <button type="button" class="btn btn-sm btn-info" ng-click="gridPagination('1')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">1</button>
+                            <button type="button" class="btn btn-sm btn-info" ng-click="gridPagination('2')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">2</button>
+                            <button type="button" class="btn btn-sm btn-info" ng-click="gridPagination('3')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">3</button>
+                        </div>
+                    </div>
+
+                </div>
+                <hr style="margin-bottom:0px;margin-top:0px"/>
+                <div class="row">
+                    <div class="col-md-6">
+                        <img class="img" src="../leprinoFoods.PNG" style="float:left;height:10%;width:10%"/>
+                    </div>
+                </div>
+                <hr class="new1"/>
+                <div class="row" style="margin-top:10px">
+                    <div class="col-md-6">
+                        <label style="color:black;font-weight:bold">Production Date: {{fromDate}} - {{toDate}} </label>
+                    </div>
+                </div>
+                    <!--<div style="width:100%; height:20%; text-align:center;float:left;">
+
+    <div style="width:15%;height:100%;float:left">
+        <label style="float:left;color:white">From Date</label>
+        <input type='text' id="fromDate" ng-model="fromDate" style="width:100px;height:20px;background-color:black; font-size:x-small; font-style:italic; color:lightgoldenrodyellow; float:left; border:solid 2px; border-color:darkkhaki; text-align:center" ng-click="calendardate('#fromDate')">-->
+                    <!--<label style="background-color:transparent;color:white;width:100%; float:left; text-align:center; font-size:12px; ">From Date</label>
     <button type="button" class="dropbtn" style="transition: 1s;background-color:transparent; border:none; color:white;float:right" ng-click="OpenCalendar('#timestampid')">
         <img src="Calendar.png" title="Select Date" style="width:25px;height:30px;border:outset;border-color:darkslategray " />
     </button>
     <input id="timestampid" contenteditable="true" style="width:140px;height:40px;background-color:black; font-size:small; font-style:italic; color:lightgoldenrodyellow;border:outset; border-color:darkslategray; float:right;text-align:center" disabled="disabled" ng-click="OpenCalendar('#timestampid')">-->
-
-                    </div>
-                    <div style="width:15%;height:100%;float:left">
-                        <label style="float:left;color:white">To Date</label>
-                        <input type ='text' id="toDate" ng-model="toDate"  style="width:100px;height:20px;background-color:black; font-size:x-small; font-style:italic; color:lightgoldenrodyellow; float:left; border:solid 2px; border-color:darkkhaki; text-align:center;" ng-click="calendardate('#toDate')">
-                                      </div>
-                    <div style="width:15%;height:100%;float:left">
-                        <label style="float:left;color:white">Line Number</label>
-                        <!--<select ng-model="selectedLineNumber" ng-options="item for item in lineNumbers">
+                    <!--</div>
+    <div style="width:15%;height:100%;float:left">
+        <label style="float:left;color:white">To Date</label>
+        <input type='text' id="toDate" ng-model="toDate" style="width:100px;height:20px;background-color:black; font-size:x-small; font-style:italic; color:lightgoldenrodyellow; float:left; border:solid 2px; border-color:darkkhaki; text-align:center;" ng-click="calendardate('#toDate')">
+    </div>
+    <div style="width:15%;height:100%;float:left">
+        <label style="float:left;color:white">Line Number</label>-->
+                    <!--<select ng-model="selectedLineNumber" ng-options="item for item in lineNumbers">
         <option value="" selected> </option>
     </select>-->
-                        
-                        <select id="SULine" ng-model="selectedLineNumber" ng-options="item for item in lineNumbers" ng-change="changeLineNumber()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;background-color:darkslategrey;color:lightgoldenrodyellow ">
-                            <option value="All" selected> </option>
-                        </select>
-                    </div>
-                    <div style="width:15%;height:100%;float:left">
-                        <label style="float:left;color:white">Production Order</label>
-                        
-                        <select id="SULine" ng-model="selectedProductionOrder" ng-options="item for item in productionOrderByLines" ng-change="changeProductionOrder()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;background-color:darkslategrey;color:lightgoldenrodyellow ">
-                            <option value="All" selected> </option>
-                        </select>
-                    </div>
-                    <div style="width:15%;height:100%;float:left">
-                        <label style="float:left;color:white">Material</label>
-                        
-                        <select id="SULine" ng-model="selectedProductCode" ng-options="item for item in productCodeByLines" ng-change="changeProductCode()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;background-color:darkslategrey;color:lightgoldenrodyellow ">
-                            <option value="All" selected> </option>
-                        </select>
-                    </div>
+                    <!--<select id="SULine" ng-model="selectedLineNumber" ng-options="item for item in lineNumbers" ng-change="changeLineNumber()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;background-color:darkslategrey;color:lightgoldenrodyellow ">
+            <option value="All" selected> </option>
+        </select>
+    </div>
+    <div style="width:15%;height:100%;float:left">
+        <label style="float:left;color:white">Production Order</label>
+
+        <select id="SULine" ng-model="selectedProductionOrder" ng-options="item for item in productionOrderByLines" ng-change="changeProductionOrder()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;background-color:darkslategrey;color:lightgoldenrodyellow ">
+            <option value="All" selected> </option>
+        </select>
+    </div>
+    <div style="width:15%;height:100%;float:left">
+        <label style="float:left;color:white">Material</label>
+
+        <select id="SULine" ng-model="selectedProductCode" ng-options="item for item in productCodeByLines" ng-change="changeProductCode()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;background-color:darkslategrey;color:lightgoldenrodyellow ">
+            <option value="All" selected> </option>
+        </select>
+    </div>-->
                     <!--cancel button-->
+                    <!--<button id="closeSaveMessage" type="button" ng-click="cancelModal()" style="transition: 1s;background:fixed 2px black; color:white;float:left;border-radius:24px;width:80px;height:50px; font-size:medium;float:right">CANCEL</button>
+        <button class="dropbtn" id="getLQLDashboard" type="button" style="transition: 1s;background-color:transparent; border:none; color:white;float:left; " ng-click="GridfromButtonDOPStrChseRpt();">
+            <img src="REFRESH.png" title="refresh" style="width:25px;height:25px; border:outset; border-radius:16px" />
+        </button>
 
-                    <button id="closeSaveMessage" type="button" ng-click="cancelModal()" style="transition: 1s;background:fixed 2px black; color:white;float:left;border-radius:24px;width:80px;height:50px; font-size:medium;float:right">CANCEL</button>
-                    <button class="dropbtn" id="getLQLDashboard" type="button" style="transition: 1s;background-color:transparent; border:none; color:white;float:left; " ng-click="GridfromButtonDOPStrChseRpt();">
-                        <img src="REFRESH.png" title="refresh" style="width:25px;height:25px; border:outset; border-radius:16px" />
-                    </button>
-
-                </div>
-                <!--end filter-->
-                <div id="gridandchartW" style="width:100%; height:100%">
-                    <!--top grid **************************************************************-->
-                    <!--<input type="checkbox" id="p1" name="hidep1" value="Hide source" ng-click="$Scope.GridDisplayStatus($event, 2,'p1')" /> -->
-
-
-                    <div id="gridOperator" style="width:100%;height:50%; float:left; border:hidden">
-                        <!-- <div id="graphcontainer" style="width: 550px; height: 400px; margin: 0 auto">-->
+    </div>-->
+                    <!--end filter-->
+                    <div id="gridandchartW" style="width:100%; height:100%">
+                        <!--top grid **************************************************************-->
+                        <!--<input type="checkbox" id="p1" name="hidep1" value="Hide source" ng-click="$Scope.GridDisplayStatus($event, 2,'p1')" /> -->
 
 
+                        <div id="gridOperator" style="width:100%;height:50%; float:left; border:hidden">
+                            <!-- <div id="graphcontainer" style="width: 550px; height: 400px; margin: 0 auto">-->
+                            <!--<input type="checkbox" ng-click="showorhideExtraColumns()" id="hideshowcheckboxid" />
+            <button type="button" class="btn btn-sm btn-info" ng-click="gridPagination('1')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">1</button>
+            <button type="button" class="btn btn-sm btn-info" ng-click="gridPagination('2')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">2</button>
+            <button type="button" class="btn btn-sm btn-info" ng-click="gridPagination('3')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">3</button>-->
+                            <div id="gridH" ui-grid="headerGridOptions" ui-grid-pinning ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRpt" style=" width:98vw; height: 35vh; color:white;border:none; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
+                            <div id="gridW" ui-grid="gridOptionsVatMakeRpt" ui-grid-pinning ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRpt" style=" width:98vw; height: 35vh; color:white;border:none; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
 
-
-                        <input type="checkbox" ng-click="showorhideExtraColumns()" id="hideshowcheckboxid" />
-                        <button type="button" class="btn btn-sm btn-info" ng-click="gridPagination('1')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">1</button>
-                        <button type="button" class="btn btn-sm btn-info" ng-click="gridPagination('2')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">2</button>
-                        <button type="button" class="btn btn-sm btn-info" ng-click="gridPagination('3')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">3</button>
-                        <div id="gridH" ui-grid="headerGridOptions" ui-grid-pinning ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRpt" style=" width:98vw; height: 35vh; color:white;border:none; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
-                        <div id="gridW" ui-grid="gridOptionsVatMakeRpt" ui-grid-pinning ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRpt" style=" width:98vw; height: 35vh; color:white;border:none; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
-
-                        <div style="padding-left: 120px; padding-top: 400px;background-color:transparent; color:black" class="grid-msg-overlay" ng-hide="!loading">
-                            <div style="background-color:transparent; color:white;" class="msg">
-                                <span>
-                                    Please wait while Loading Data...<br /><!---->
-                                    <br />Working on Retrieving info ...<i class="fa fa-spinner fa-spin"></i>
-                                </span>
+                            <div style="padding-left: 120px; padding-top: 400px;background-color:transparent; color:black" class="grid-msg-overlay" ng-hide="!loading">
+                                <div style="background-color:transparent; color:white;" class="msg">
+                                    <span>
+                                        Please wait while Loading Data...<br /><!---->
+                                        <br />Working on Retrieving info ...<i class="fa fa-spinner fa-spin"></i>
+                                    </span>
+                                </div>
                             </div>
                         </div>
+
+                        <!--Bottom grid **************************************************************-->
+                        <!-- <div id="gridOperatorBottom" style="width:100%;height:50%; float:left; border:hidden">
+                <div id="gridWBottom" ui-grid="gridOptionsVatMakeRptComments" ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRptComments" style=" width:1200px; height: 40vh; color:white;border:none; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
+                <div style="padding-left: 120px; padding-top: 400px;background-color:transparent; color:black" class="grid-msg-overlay" ng-hide="!loading">
+                    <div style="background-color:transparent; color:white;" class="msg">
+                        <span>Please wait while Loading Data...<br /><br />Working on Retrieving info ...<i class="fa fa-spinner fa-spin"></i></span>
                     </div>
-
-                    <!--Bottom grid **************************************************************-->
-                    <!-- <div id="gridOperatorBottom" style="width:100%;height:50%; float:left; border:hidden">
-                        <div id="gridWBottom" ui-grid="gridOptionsVatMakeRptComments" ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRptComments" style=" width:1200px; height: 40vh; color:white;border:none; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
-                        <div style="padding-left: 120px; padding-top: 400px;background-color:transparent; color:black" class="grid-msg-overlay" ng-hide="!loading">
-                            <div style="background-color:transparent; color:white;" class="msg">
-                                <span>Please wait while Loading Data...<br /><br />Working on Retrieving info ...<i class="fa fa-spinner fa-spin"></i></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>-->
-
-
                 </div>
             </div>
+        </div>-->
+
+
+                    </div>
+                </div>
         </div>
 
 

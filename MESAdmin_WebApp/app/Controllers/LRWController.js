@@ -40,9 +40,11 @@
 
     function controller($scope, $rootScope, $timeout, uiGridConstants, uiGridGroupingConstants, LRWService) {
         $scope.chart = dataJson;
-        
+        $scope.isHideFilters = false;
 
-       
+        $scope.hideShowFilters = function () {
+            $scope.isHideFilters = !$scope.isHideFilters;
+        }
         $scope.randomSize = function (nav, ty) {
             var newHeight; //= Math.floor(Math.random() * (300 - 100 + 1) + 300);
             var newWidth; //= Math.floor(Math.random() * (600 - 200 + 1) + 200);
@@ -378,6 +380,7 @@
 
         $scope.calendardate = function (nav) {
             //debugger
+            
             $(nav).datepicker();
   
 
@@ -385,8 +388,22 @@
 
         $(function () {
 
-            $("#fromDate").datepicker();
-            $("#toDate").datepicker();
+            $("#fromDate").datepicker({
+                onSelect: function (dateText, inst) {
+                    debugger;
+                    var date = new Date(dateText);
+                    $scope.fromDate = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()));
+                    $scope.dateChange()
+                }
+            });
+            $("#toDate").datepicker({
+                onSelect: function (dateText, inst) {
+                    debugger;
+                    var date = new Date(dateText);
+                    $scope.toDate = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()));
+                    $scope.dateChange()
+                }
+            });
 
             var date = new Date();
             date.setDate(date.getDate() + 2);
@@ -407,16 +424,16 @@
         $scope.openModalgraph = function () {
             document.getElementById("graphDisplay").style.display = 'block';
         };
+        var date = new Date();
 
-        $scope.fromDate ='2020-05-08'
-        $scope.toDate ='2020-05-08'
-
+        //$scope.fromDate = '2020-05-08'//((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '-' + date.getFullYear()
+        //$scope.toDate = '2020-05-08'//((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '-' + date.getFullYear()
+        $scope.fromDate = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()))
+        $scope.toDate = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()))
         $scope.dateChange = function () {
             var fromD = Date.parse($scope.fromDate);
             var toD = Date.parse($scope.toDate);
             if (toD >= fromD) {
-                //$scope.removeGridData();
-                $scope.loadgridVatMakeRpt(null, null, null, $scope.fromDate, $scope.toDate);
                 $scope.lineNumbers = ['All'];
                 $scope.getVatMakeParams($scope.fromDate, $scope.toDate);
             }
@@ -431,43 +448,48 @@
         $scope.getVatMakeParams = function (fromDate,toDate) {
             $scope.loading = true;
             LRWService.getVatMakeParam(fromDate, toDate).success(function (data) {
-                //debugger;
                 $scope.vatMakeParams = data.VatMakeParamList;
                 var lines = data.VatMakeParamList.map(a => a.LineNumber)
                 $scope.lineNumbers.push(...lines.filter((v, i, a) => a.indexOf(v) === i))
                 $scope.productionOrderByLines.push(...$scope.vatMakeParams.map(a => a.ProductionOrder));
                 $scope.productCodeByLines.push(...$scope.vatMakeParams.map(a => a.ProductCode));
-                $scope.loadgridVatMakeRpt("1", "ALL", "ALL", fromDate, toDate);
+                
                 $scope.error = false;
                 
             }).finally(function () { $scope.loading = false; });
         }
 
+        $scope.viewReports = function () {
+            $scope.loadgridVatMakeRpt($scope.selectedLineNumber, $scope.selectedProductionOrder, $scope.selectedProductCode, $scope.fromDate, $scope.toDate);
+        }
+
         $scope.changeLineNumber = function () {
             $scope.productionOrderByLines = ['All'];
-            $scope.productionOrderByLines.push(...$scope.vatMakeParams.filter(a => a.LineNumber == $scope.selectedLineNumber).map(a => a.ProductionOrder));
+            
             
             if ($scope.selectedLineNumber == 'All') {
-                $scope.productionOrderByLines = []
-
-                //$scope.selectedLineNumber = '1'
+                $scope.productionOrderByLines.push(...$scope.vatMakeParams.map(a => a.ProductionOrder));
                 $scope.gridPagination('1');
             } else {
-
-                $scope.gridPagination($scope.selectedLineNumber);
+                $scope.productionOrderByLines.push(...$scope.vatMakeParams.filter(a => a.LineNumber == $scope.selectedLineNumber).map(a => a.ProductionOrder));
             }
 
         }
 
         $scope.changeProductionOrder = function () {
             $scope.productCodeByLines = ['All']
-            $scope.productCodeByLines.push(...$scope.vatMakeParams.filter(a => a.ProductionOrder == $scope.selectedProductionOrder).map(a => a.ProductCode))
-            $scope.removeGridData();
-            $scope.loadgridVatMakeRpt($scope.selectedLineNumber, $scope.selectedProductionOrder)
+            if ($scope.selectedLineNumber == 'All') {
+                $scope.productCodeByLines.push(...$scope.vatMakeParams.map(a => a.ProductCode));
+                $scope.gridPagination('1');
+            } else {
+                $scope.productCodeByLines.push(...$scope.vatMakeParams.filter(a => a.ProductionOrder == $scope.selectedProductionOrder).map(a => a.ProductCode))
+            }
+            
+            
         }
         $scope.changeProductCode = function () {
-            $scope.removeGridData();
-            $scope.loadgridVatMakeRpt($scope.selectedLineNumber, $scope.selectedProductionOrder, $scope.selectedProductCode)
+            //$scope.removeGridData();
+            
         }
         $scope.removeGridData = function () {
             $scope.gridOptionsVatMakeRpt.columnDefs = [];

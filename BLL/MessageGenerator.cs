@@ -2324,23 +2324,24 @@ namespace BLL
         {
             VatMakeRptCollection dc = new VatMakeRptCollection();
             DataSet dsDefect = DBConnection.DBConnectVatMakeRpt("_usp_Vat_Make", LineNumber, ProductionOrder, ProductCode, StartDate, EndDate);
-
-            foreach (DataRow dr in dsDefect.Tables[0].Rows)
+            if (dsDefect.Tables.Count > 0 && dsDefect.Tables[0].Rows.Count > 0)
             {
-                //Create message object
-                //VatMakeRpt defect = new VatMakeRpt();
-                Dictionary<string, string> defectdictionary = new Dictionary<string, string>();
-                for (int index = 0; index < dsDefect.Tables[0].Columns.Count; index++)
+                foreach (DataRow dr in dsDefect.Tables[0].Rows)
                 {
+                    //Create message object
+                    //VatMakeRpt defect = new VatMakeRpt();
+                    Dictionary<string, string> defectdictionary = new Dictionary<string, string>();
+                    for (int index = 0; index < dsDefect.Tables[0].Columns.Count; index++)
+                    {
 
-                    defectdictionary[dsDefect.Tables[0].Columns[index].ToString()] = dr[index].ToString();
+                        defectdictionary[dsDefect.Tables[0].Columns[index].ToString()] = dr[index].ToString();
+
+                    }
+
+                    dc.VatMakeRptList.Add(defectdictionary);
 
                 }
-
-                dc.VatMakeRptList.Add(defectdictionary);
-              
             }
-
             return dc;
         }
 

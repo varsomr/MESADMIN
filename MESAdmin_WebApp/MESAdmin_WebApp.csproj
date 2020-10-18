@@ -378,6 +378,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <EmbeddedResource Include="LeprinoLogo.png" />
+    <Content Include="leprinoFoods.PNG" />
     <Content Include="LMS1.jpg" />
     <Content Include="LMS2.jpg" />
     <Content Include="lpsWEB.PNG" />
