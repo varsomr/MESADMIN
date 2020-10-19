@@ -60,7 +60,7 @@
                 }
                 //newWidth = 400;
                 newWidth = $(window).width() - $(window).width() * 0.06;
-                document.getElementById('screensz').value = $(window).width() + 'x' + $(window).height();
+                //document.getElementById('screensz').value = $(window).width() + 'x' + $(window).height();
             }
             else if ($(window).width() < 1300) {
                 if (ty === 'fs') {
@@ -74,7 +74,7 @@
                 }
                 //newWidth = 1200;
                 newWidth = $(window).width() - $(window).width() * 0.06;
-                document.getElementById('screensz').value = $(window).width() + 'x' + $(window).height();
+                //document.getElementById('screensz').value = $(window).width() + 'x' + $(window).height();
             }
             else if ($(window).width() < 2000) {
                 if (ty === 'fs') {
@@ -88,7 +88,7 @@
                 }
                 // newWidth = 1800;
                 newWidth = $(window).width() - $(window).width() * 0.06;
-                document.getElementById('screensz').value = $(window).width() + 'x' + $(window).height();
+                //document.getElementById('screensz').value = $(window).width() + 'x' + $(window).height();
             }
 
             else {
@@ -103,7 +103,7 @@
                 }
                 //newWidth = 1800;
                 newWidth = $(window).width() - $(window).width() * 0.06;
-                document.getElementById('screensz').value = $(window).width() + 'x' + $(window).height();
+                //document.getElementById('screensz').value = $(window).width() + 'x' + $(window).height();
             }
             //console.log('Your screen resolution is -' + $(window).width());
             angular.element(document.getElementsByClassName(nav)[0]).css('height', newHeight + 'vh');
@@ -378,32 +378,27 @@
 
         };
 
-        $scope.calendardate = function (nav) {
+        $scope.calendardate = (nav, toFrom) => {
             //debugger
             
-            $(nav).datepicker();
+            $(nav).datepicker({
+                onSelect: (dateText) => {
+                    var date = new Date(dateText);
+                    $scope[toFrom] = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()));
+                    $scope.dateChange();
+                },
+                defaultDate: $scope[toFrom]
+            });
   
 
         };
 
         $(function () {
-
-            $("#fromDate").datepicker({
-                onSelect: function (dateText, inst) {
-                    debugger;
-                    var date = new Date(dateText);
-                    $scope.fromDate = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()));
-                    $scope.dateChange()
-                }
-            });
-            $("#toDate").datepicker({
-                onSelect: function (dateText, inst) {
-                    debugger;
-                    var date = new Date(dateText);
-                    $scope.toDate = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()));
-                    $scope.dateChange()
-                }
-            });
+            var a = $scope;
+            //$scope.calendardate('#fromDate', 'fromDate');
+            //$scope.calendardate('#toDate', 'toDate');
+            //$("#fromDate").datepicker();
+            //$("#toDate").datepicker();
 
             var date = new Date();
             date.setDate(date.getDate() + 2);
@@ -411,10 +406,16 @@
                 field = document.querySelector('#fromDate');
             field.value = $scope.FormatDTSlash(date);
 
-            var dateF = new Date();
-            var firstDay = '09/10/2020';//new Date(dateF.getFullYear(), dateF.getMonth(), 1);
-            field = document.querySelector('#toDate');
-            field.value = $scope.FormatDTSlash(firstDay);
+            var date = new Date();
+            date.setDate(date.getDate() + 2);
+            date = date.toISOString().substring(0, 10),
+                field = document.querySelector('#toDate');
+            field.value = $scope.FormatDTSlash(date);
+
+            //var dateF = new Date();
+            //var firstDay = '09/10/2020';//new Date(dateF.getFullYear(), dateF.getMonth(), 1);
+            //field = document.querySelector('#toDate');
+            //field.value = $scope.FormatDTSlash(firstDay);
             //alert('Turr');
 
         });
@@ -430,44 +431,46 @@
         //$scope.toDate = '2020-05-08'//((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '-' + date.getFullYear()
         $scope.fromDate = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()))
         $scope.toDate = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()))
-        $scope.dateChange = function () {
+        $scope.dateChange = () => {
             var fromD = Date.parse($scope.fromDate);
             var toD = Date.parse($scope.toDate);
             if (toD >= fromD) {
-                $scope.lineNumbers = ['All'];
+                $scope.lineNumbers = ['ALL'];
                 $scope.getVatMakeParams($scope.fromDate, $scope.toDate);
             }
         }
 
-        $scope.lineNumbers = ['All'];
-        $scope.productionOrderByLines = ['All']
-        $scope.productCodeByLines =['All']
-        $scope.selectedLineNumber = 'All';
-        $scope.selectedProductionOrder = 'All';
-        $scope.selectedProductCode = 'All';
-        $scope.getVatMakeParams = function (fromDate,toDate) {
+        $scope.lineNumbers = ['ALL'];
+        $scope.productionOrderByLines = ['ALL']
+        $scope.productCodeByLines = ['ALL']
+        $scope.selectedLineNumber = 'ALL';
+        $scope.selectedProductionOrder = 'ALL';
+        $scope.selectedProductCode = 'ALL';
+        $scope.getVatMakeParams = (fromDate,toDate) => {
             $scope.loading = true;
-            LRWService.getVatMakeParam(fromDate, toDate).success(function (data) {
+            LRWService.getVatMakeParam(fromDate, toDate).success((data) => {
                 $scope.vatMakeParams = data.VatMakeParamList;
                 var lines = data.VatMakeParamList.map(a => a.LineNumber)
                 $scope.lineNumbers.push(...lines.filter((v, i, a) => a.indexOf(v) === i))
                 $scope.productionOrderByLines.push(...$scope.vatMakeParams.map(a => a.ProductionOrder));
                 $scope.productCodeByLines.push(...$scope.vatMakeParams.map(a => a.ProductCode));
-                
+                console.log($scope.lineNumbers)
+                $scope.$applyAsync();
                 $scope.error = false;
                 
             }).finally(function () { $scope.loading = false; });
         }
 
         $scope.viewReports = function () {
+            $scope.removeGridData();
             $scope.loadgridVatMakeRpt($scope.selectedLineNumber, $scope.selectedProductionOrder, $scope.selectedProductCode, $scope.fromDate, $scope.toDate);
         }
 
         $scope.changeLineNumber = function () {
-            $scope.productionOrderByLines = ['All'];
+            $scope.productionOrderByLines = ['ALL'];
             
             
-            if ($scope.selectedLineNumber == 'All') {
+            if ($scope.selectedLineNumber == 'ALL') {
                 $scope.productionOrderByLines.push(...$scope.vatMakeParams.map(a => a.ProductionOrder));
                 $scope.gridPagination('1');
             } else {
@@ -477,8 +480,8 @@
         }
 
         $scope.changeProductionOrder = function () {
-            $scope.productCodeByLines = ['All']
-            if ($scope.selectedLineNumber == 'All') {
+            $scope.productCodeByLines = ['ALL']
+            if ($scope.selectedLineNumber == 'ALL') {
                 $scope.productCodeByLines.push(...$scope.vatMakeParams.map(a => a.ProductCode));
                 $scope.gridPagination('1');
             } else {
@@ -500,7 +503,7 @@
 
         $scope.getVatMakeParams($scope.fromDate, $scope.toDate);
         $scope.loadgridVatMakeRpt = function (lineNumber,productionOrder,productCode,fromDate, toDate) {
-            if (lineNumber == null || lineNumber == undefined) {
+            if (lineNumber == null || lineNumber == undefined || lineNumber == 'ALL') {
                 lineNumber = '1'
             }
             if (productionOrder == null || productionOrder == undefined) {

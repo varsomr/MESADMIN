@@ -1721,7 +1721,7 @@
                                 <label style="float:left;color:black">From Date</label>
                             </div>
                             <div class="col-md-6">
-                                <input type='text' id="fromDate" ng-model="fromDate" ng-change="dateChange()" style="width:100px;height:20px; font-size:x-small;  float:left; border:solid 2px; text-align:center" ng-click="calendardate('#fromDate')">
+                                <input id="fromDate"  style="color:black; width:100px;height:20px; font-size:x-small;  float:left; border:solid 2px; text-align:center" ng-click="calendardate('#fromDate','fromDate')">
                             </div>
                         </div>
 
@@ -1730,7 +1730,7 @@
                                 <label style="float:left;color:black">To Date</label>
                             </div>
                             <div class="col-md-6">
-                                <input type='text' id="toDate" ng-model="toDate" ng-change="dateChange()" style="width:100px;height:20px;font-size:x-small; float:left; border:solid 2px; text-align:center;" ng-click="calendardate('#toDate')">
+                                <input id="toDate"  style="color: black;width:100px; height: 20px; font-size: x-small; float: left; border: solid 2px; text-align: center;" ng-click="calendardate('#toDate','toDate')">
                             </div>
                         </div>
                        
@@ -1746,7 +1746,7 @@
                             </div>
                             <div class="col-md-6">
                                 <select id="SULine" ng-model="selectedLineNumber" ng-options="item for item in lineNumbers" ng-change="changeLineNumber()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;">
-                                    <option value="All" selected> </option>
+                                    <!--<option value="All" selected> </option>-->
                                 </select>
                             </div>
                         </div>
