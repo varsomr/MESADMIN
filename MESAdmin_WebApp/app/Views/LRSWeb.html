@@ -51,6 +51,25 @@
         hr.new1 {
             border-top: 1px solid black;
         }
+        .selectedButton {
+            background-color: transparent;
+            color: white;
+            
+            width: 30px;
+            height: 30px;
+            border-radius: 24px;
+            font-size: small;
+            border-color: darkblue
+        }
+        .pageButton {
+            background-color: transparent;
+            color: white;
+            border-color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 24px;
+            font-size: small;
+        }
         body {
             /*padding-top: 50px;
             padding-bottom: 20px;*/
@@ -1704,16 +1723,15 @@
     <!--#################################################### VatMakeRpt  ######################################################-->
     <div id="mysidenavRightVATMake" class="modal" style="background-color:white; border:none" ng-controller="LRWcontroller">
 
-        <div class="modal-content" style="height:100%;  background-color:lightblue;color:white">
-            <div class="modal-body" style="height:100%;  background-color:lightblue;color:white">
+        <div class="modal-content" style="height:100%;  background-color:white;color:white">
+            <div class="modal-body" style="height:100%;  background-color:white;color:white">
                 <!--start filter-->
-
                 <!--<div class="row">
-                    <div class="col-md-12">
-                        <label id="modalMessage" style="font-size:medium;font-weight:bold;background-color:brown;color:white;width:100%">Vat Make Report</label>
-                    </div>
-                </div>-->
-
+        <div class="col-md-12">
+            <label id="modalMessage" style="font-size:medium;font-weight:bold;background-color:brown;color:white;width:100%">Vat Make Report</label>
+        </div>
+    </div>-->
+                <div style="background-color:lightblue">
                 <div class="row" ng-show="isHideFilters == false">
                     <div class="col-md-12">
                         <div class="col-md-2">
@@ -1721,7 +1739,7 @@
                                 <label style="float:left;color:black">From Date</label>
                             </div>
                             <div class="col-md-6">
-                                <input id="fromDate"  style="color:black; width:100px;height:20px; font-size:x-small;  float:left; border:solid 2px; text-align:center" ng-click="calendardate('#fromDate','fromDate')">
+                                <input id="fromDate" style="color:black; width:100px;height:20px; font-size:x-small;  float:left; border:solid 2px; text-align:center" ng-click="calendardate('#fromDate','fromDate')">
                             </div>
                         </div>
 
@@ -1730,10 +1748,10 @@
                                 <label style="float:left;color:black">To Date</label>
                             </div>
                             <div class="col-md-6">
-                                <input id="toDate"  style="color: black;width:100px; height: 20px; font-size: x-small; float: left; border: solid 2px; text-align: center;" ng-click="calendardate('#toDate','toDate')">
+                                <input id="toDate" style="color: black;width:100px; height: 20px; font-size: x-small; float: left; border: solid 2px; text-align: center;" ng-click="calendardate('#toDate','toDate')">
                             </div>
                         </div>
-                       
+
 
                     </div>
 
@@ -1792,7 +1810,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-12">
-                            <button class="col-md-offset-5" style="color:black" type="button"  ng-click="hideShowFilters()"  >Hide/Show Filters</button>
+                            <button class="col-md-offset-5" style="color:black" type="button" ng-click="hideShowFilters()">Hide/Show Filters</button>
                         </div>
                     </div>
 
@@ -1801,17 +1819,22 @@
                     <div class="col-md-6">
                         <div class="col-md-4">
                             <input type="checkbox" ng-click="showorhideExtraColumns()" id="hideshowcheckboxid" />
-                            <button type="button" class="btn btn-sm btn-info" ng-click="gridPagination('1')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">1</button>
-                            <button type="button" class="btn btn-sm btn-info" ng-click="gridPagination('2')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">2</button>
-                            <button type="button" class="btn btn-sm btn-info" ng-click="gridPagination('3')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">3</button>
+                            <button type="button" ng-class="{selectedButton: selectedLineNumber == '1'}" class="btn btn-sm btn-info" ng-click="gridPagination('1')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">1</button>
+                            <button type="button" ng-class="{selectedButton: selectedLineNumber == '2'}" class="btn btn-sm btn-info" ng-click="gridPagination('2')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">2</button>
+                            <button type="button" ng-class="{selectedButton: selectedLineNumber == '3'}" class="btn btn-sm btn-info" ng-click="gridPagination('3')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">3</button>
                         </div>
                     </div>
 
                 </div>
+            </div>
                 <hr style="margin-bottom:0px;margin-top:0px"/>
                 <div class="row">
                     <div class="col-md-6">
                         <img class="img" src="../leprinoFoods.PNG" style="float:left;height:10%;width:10%"/>
+                    </div>
+                    <div class="col-md-6">
+                        <label style="color:black; text-align:center">Make Report</label><br />
+                        <a style="color:black" ng-click="manageAutoRefresh()">Click to disable report auto-refresh</a>
                     </div>
                 </div>
                 <hr class="new1"/>

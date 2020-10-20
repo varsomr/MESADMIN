@@ -60,7 +60,7 @@
                 }
                 //newWidth = 400;
                 newWidth = $(window).width() - $(window).width() * 0.06;
-                //document.getElementById('screensz').value = $(window).width() + 'x' + $(window).height();
+                document.getElementById('screensz').value = $(window).width() + 'x' + $(window).height();
             }
             else if ($(window).width() < 1300) {
                 if (ty === 'fs') {
@@ -74,7 +74,7 @@
                 }
                 //newWidth = 1200;
                 newWidth = $(window).width() - $(window).width() * 0.06;
-                //document.getElementById('screensz').value = $(window).width() + 'x' + $(window).height();
+                document.getElementById('screensz').value = $(window).width() + 'x' + $(window).height();
             }
             else if ($(window).width() < 2000) {
                 if (ty === 'fs') {
@@ -88,7 +88,7 @@
                 }
                 // newWidth = 1800;
                 newWidth = $(window).width() - $(window).width() * 0.06;
-                //document.getElementById('screensz').value = $(window).width() + 'x' + $(window).height();
+                document.getElementById('screensz').value = $(window).width() + 'x' + $(window).height();
             }
 
             else {
@@ -103,7 +103,7 @@
                 }
                 //newWidth = 1800;
                 newWidth = $(window).width() - $(window).width() * 0.06;
-                //document.getElementById('screensz').value = $(window).width() + 'x' + $(window).height();
+                document.getElementById('screensz').value = $(window).width() + 'x' + $(window).height();
             }
             //console.log('Your screen resolution is -' + $(window).width());
             angular.element(document.getElementsByClassName(nav)[0]).css('height', newHeight + 'vh');
@@ -377,10 +377,20 @@
             return [month, day, year].join('/');
 
         };
-
+        $scope.isAutoRefresh = true;
+        $scope.manageAutoRefresh = function () {
+            $scope.isAutoRefresh = !$scope.isAutoRefresh;
+            
+        }
+        
+        setInterval(function () {
+            if ($scope.isAutoRefresh) {
+                $scope.viewReports();
+            }
+        }, 120000)
         $scope.calendardate = (nav, toFrom) => {
             //debugger
-            
+            $timeout(function () { 
             $(nav).datepicker({
                 onSelect: (dateText) => {
                     var date = new Date(dateText);
@@ -389,7 +399,7 @@
                 },
                 defaultDate: $scope[toFrom]
             });
-  
+            }, 10)
 
         };
 
@@ -577,7 +587,7 @@
                     $scope.gridOptionsVatMakeRpt.columnDefs.push({ name: 'LineNumber', field: 'LineNumber', width: '5%', visible: true, pinnedLeft: true });
                     $scope.gridOptionsVatMakeRpt.columnDefs.push(
                          {
-                            name: 'AttributeName', field: 'AttributeName', width: '15%', visible: true, pinnedLeft: true,
+                            name: 'AttributeName', field: 'AttributeName', width: '10%', visible: true, pinnedLeft: true,
                             cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
                                 var newStyle;
                                 if (row.entity.isClickable) {
@@ -606,8 +616,8 @@
                                 }]
                         }
                     );
-                    $scope.gridOptionsVatMakeRpt.columnDefs.push({ name: 'Source', field: 'source', width: '15%', visible: true  });
-                    $scope.gridOptionsVatMakeRpt.columnDefs.push({ name: 'MIC', field: 'MIC', width: '15%', visible: true });
+                    $scope.gridOptionsVatMakeRpt.columnDefs.push({ name: 'Source', field: 'source', width: '10%', visible: true  });
+                    $scope.gridOptionsVatMakeRpt.columnDefs.push({ name: 'MIC', field: 'MIC', width: '10%', visible: true });
 
                     for (var i = 0; i < sortedKeysArray.length; i++) {
                         var colmn = sortedKeysArray[i];
