@@ -482,7 +482,7 @@
             
             if ($scope.selectedLineNumber == 'ALL') {
                 $scope.productionOrderByLines.push(...$scope.vatMakeParams.map(a => a.ProductionOrder));
-                $scope.gridPagination('1');
+                
             } else {
                 $scope.productionOrderByLines.push(...$scope.vatMakeParams.filter(a => a.LineNumber == $scope.selectedLineNumber).map(a => a.ProductionOrder));
             }
@@ -646,7 +646,11 @@
 
                     
                     $scope.gridOptionsVatMakeRpt.data = VatMakeRptList;
-                    $scope.headerGridOptions.columnDefs = $scope.gridOptionsVatMakeRpt.columnDefs;
+                    $scope.headerGridOptions.columnDefs = [];
+                    $scope.headerGridOptions.columnDefs.push(...$scope.gridOptionsVatMakeRpt.columnDefs);
+                    $scope.headerGridOptions.columnDefs.forEach(column => {
+                        column.cellClass = bgColor
+                    })
                     for (var a = 0; a < 5; a++) {
                         $scope.headerGridOptions.data.push(VatMakeRptList[a]);
                         //$scope.gridOptionsVatMakeRpt.data.splice(0, 1);
@@ -663,8 +667,46 @@
 
         };
 
-        
-        
+        function bgColor (grid, row, col, rowRenderIndex, colRenderIndex) {
+            
+            if (grid != undefined && grid.element[0] != undefined && grid.element[0].id == 'gridH') {
+                return 'greyRow'
+            } else {
+                var newStyle;
+                if (row.entity.isClickable) {
+                    newStyle = 'group1';
+                }
+
+                return newStyle;
+            }
+        }
+
+        $scope.getTableData = function (data, isMultiple) {
+            $scope.tableData = [];
+            $scope.isMultiple = isMultiple;
+            if (isMultiple) {
+                $scope.firstDisplayName = data[0].KPI_Data1_Name
+                $scope.second = data[0].KPI_Data2_Name
+                for (var i = 0; i < data.length; i++) {
+                    $scope.tableData.push({
+                        productionDate: data[i].Production_Date.split(" ")[0],
+                        logicalVat: data[i].KPI_Category,
+                        data1: data[i].KPI_Data1,
+                        data2: data[i].KPI_Data2
+                    });
+                }
+            } else {
+                $scope.firstDisplayName = data[0].KPI_Name
+                for (var i = 0; i < data.length; i++) {
+                    $scope.tableData.push({
+                        productionDate: data[i].Production_Date.split(" ")[0],
+                        logicalVat: data[i].KPI_Category,
+                        data1: data[i].KPI_Data,
+                    });
+                }
+            }
+        }
+
         $scope.loadgridVatMakeRpt();
         
         //$scope.loadgridKPIMultiDt = function () {
@@ -737,6 +779,7 @@
                     }
                     dataJson.data.cols = cols;
                     dataJson.data.rows = rows;
+                    $scope.getTableData(data.KPIMultiDtList, true)
                     $scope.openModal('chartModal');
                 }
                 //console.log(KPIMultiDtList);
@@ -790,6 +833,7 @@
                     }
                     dataJson.data.cols = cols;
                     dataJson.data.rows = rows;
+                    $scope.getTableData(data.KPISingleDtList, false)
                     $scope.openModal('chartModal');
                 }
                 //console.log(KPISingleDtList);
