@@ -2243,21 +2243,22 @@ namespace BLL
             KPIMultiDtCollection dc = new KPIMultiDtCollection();
             DataSet dsDefect = DBConnection.DBConnectKPIMultiDt("_usp_KPI_Chart_Multi_Data", ReportName, DateStart, DateEnd, RD3, RD4, RD5, RD6);
 
-
-            foreach (DataRow dr in dsDefect.Tables[0].Rows)
+            if (dsDefect.Tables.Count > 0 && dsDefect.Tables[0].Rows.Count > 0)
             {
-                Dictionary<string, string> defectdictionary = new Dictionary<string, string>();
-                for (int index = 0; index < dsDefect.Tables[0].Columns.Count; index++)
+                foreach (DataRow dr in dsDefect.Tables[0].Rows)
                 {
+                    Dictionary<string, string> defectdictionary = new Dictionary<string, string>();
+                    for (int index = 0; index < dsDefect.Tables[0].Columns.Count; index++)
+                    {
 
-                    defectdictionary[dsDefect.Tables[0].Columns[index].ToString()] = dr[index].ToString();
+                        defectdictionary[dsDefect.Tables[0].Columns[index].ToString()] = dr[index].ToString();
+
+                    }
+
+                    dc.KPIMultiDtList.Add(defectdictionary);
 
                 }
-
-                dc.KPIMultiDtList.Add(defectdictionary);
-
             }
-
             return dc;
         }
 
@@ -2270,25 +2271,82 @@ namespace BLL
             KPISingleDtCollection dc = new KPISingleDtCollection();
             DataSet dsDefect = DBConnection.DBConnectSingleDt("_usp_KPI_Chart_Single_Data", ReportName, DateStart, DateEnd, RD3, RD4, RD5, RD6);
 
-
-            foreach (DataRow dr in dsDefect.Tables[0].Rows)
+            if (dsDefect.Tables.Count > 0 && dsDefect.Tables[0].Rows.Count > 0)
             {
-
-                Dictionary<string, string> defectdictionary = new Dictionary<string, string>();
-                for (int index = 0; index < dsDefect.Tables[0].Columns.Count; index++)
+                foreach (DataRow dr in dsDefect.Tables[0].Rows)
                 {
 
-                    defectdictionary[dsDefect.Tables[0].Columns[index].ToString()] = dr[index].ToString();
+                    Dictionary<string, string> defectdictionary = new Dictionary<string, string>();
+                    for (int index = 0; index < dsDefect.Tables[0].Columns.Count; index++)
+                    {
+
+                        defectdictionary[dsDefect.Tables[0].Columns[index].ToString()] = dr[index].ToString();
+
+                    }
+
+                    dc.KPISingleDtList.Add(defectdictionary);
 
                 }
-
-                dc.KPISingleDtList.Add(defectdictionary);
-
             }
-
             return dc;
         }
 
+    }
+
+    public class FinishRptGenerator : IFinishRpt
+    {
+        public FinishRptCollection GetFinishRptCollection(string LineNumber, string ProductionOrder, string ProductCode, string StartDate, string EndDate)
+        {
+            FinishRptCollection dc = new FinishRptCollection();
+            DataSet dsDefect = DBConnection.DBConnectFinishRpt("_usp_Finish", LineNumber, ProductionOrder, ProductCode, StartDate, EndDate);
+            if (dsDefect.Tables.Count > 0 && dsDefect.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in dsDefect.Tables[0].Rows)
+                {
+                    //Create message object
+                    //FinishRpt defect = new FinishRpt();
+                    Dictionary<string, string> defectdictionary = new Dictionary<string, string>();
+                    for (int index = 0; index < dsDefect.Tables[0].Columns.Count; index++)
+                    {
+
+                        defectdictionary[dsDefect.Tables[0].Columns[index].ToString()] = dr[index].ToString();
+
+                    }
+
+                    dc.FinishRptList.Add(defectdictionary);
+
+                }
+            }
+            return dc;
+        }
+    }
+
+    public class FinishParamGenerator : IFinishRptParam
+    {
+        public FinishRptParamCollection GetFinishRptCollection(string StartDate, string EndDate)
+        {
+            FinishRptParamCollection dc = new FinishRptParamCollection();
+            DataSet dsDefect = DBConnection.DBConnectFinishParam("_usp_Get_Finish_LinePOProduct_List", StartDate, EndDate);
+            if (dsDefect.Tables.Count > 0 && dsDefect.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in dsDefect.Tables[0].Rows)
+                {
+                    //Create message object
+                    //FinishRpt defect = new FinishRpt();
+                    Dictionary<string, string> defectdictionary = new Dictionary<string, string>();
+                    for (int index = 0; index < dsDefect.Tables[0].Columns.Count; index++)
+                    {
+
+                        defectdictionary[dsDefect.Tables[0].Columns[index].ToString()] = dr[index].ToString();
+
+                    }
+
+                    dc.FinishParamList.Add(defectdictionary);
+
+                }
+            }
+            return dc;
+        }
     }
 
     public class VatMakeParamGenerator : IVatMakeRptParam
@@ -2298,20 +2356,23 @@ namespace BLL
             VatMakeRptParamCollection dc = new VatMakeRptParamCollection();
             DataSet dsDefect = DBConnection.DBConnectVatMakeParam("_usp_Get_Vat_Make_LinePOProduct_List", StartDate, EndDate);
 
-            foreach (DataRow dr in dsDefect.Tables[0].Rows)
+            if (dsDefect.Tables.Count > 0 && dsDefect.Tables[0].Rows.Count > 0)
             {
-                //Create message object
-                //VatMakeRpt defect = new VatMakeRpt();
-                Dictionary<string, string> defectdictionary = new Dictionary<string, string>();
-                for (int index = 0; index < dsDefect.Tables[0].Columns.Count; index++)
+                foreach (DataRow dr in dsDefect.Tables[0].Rows)
                 {
+                    //Create message object
+                    //VatMakeRpt defect = new VatMakeRpt();
+                    Dictionary<string, string> defectdictionary = new Dictionary<string, string>();
+                    for (int index = 0; index < dsDefect.Tables[0].Columns.Count; index++)
+                    {
 
-                    defectdictionary[dsDefect.Tables[0].Columns[index].ToString()] = dr[index].ToString();
+                        defectdictionary[dsDefect.Tables[0].Columns[index].ToString()] = dr[index].ToString();
+
+                    }
+
+                    dc.VatMakeParamList.Add(defectdictionary);
 
                 }
-
-                dc.VatMakeParamList.Add(defectdictionary);
-
             }
 
             return dc;

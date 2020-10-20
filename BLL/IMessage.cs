@@ -28,7 +28,19 @@ namespace BLL.Interfaces
         VatMakeRptParamCollection GetVatMakeRptCollection(string StartDate, string EndDate);
 
     }
+    interface IFinishRpt
+    {
+        //Selection
+        FinishRptCollection GetFinishRptCollection(string LineNumber, string ProductionOrder, string ProductCode, string StartDate, string EndDate);
 
+    }
+
+    interface IFinishRptParam
+    {
+        //Selection
+        FinishRptParamCollection GetFinishRptCollection(string StartDate, string EndDate);
+
+    }
     interface IKPIMultiDt
     {
         //Selection

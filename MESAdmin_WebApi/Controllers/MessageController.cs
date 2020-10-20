@@ -60,6 +60,23 @@ namespace Leprino_Integration_Tool.Controllers
         }
 
 
+        [Route("api/Message/getFinishRpt/{LineNumber}/{ProductionOrder}/{ProductCode}/{StartDate}/{EndDate}")]
+        public FinishRptCollection getFinishRpt(string LineNumber, string ProductionOrder, string ProductCode, string StartDate, string EndDate)
+        {
+
+            FinishRptGenerator vm = new FinishRptGenerator();
+            return vm.GetFinishRptCollection(LineNumber, ProductionOrder, ProductCode, StartDate, EndDate);
+        }
+
+
+        [Route("api/Message/getFinishParam/{StartDate}/{EndDate}")]
+        public FinishRptParamCollection getFinishParam(string StartDate, string EndDate)
+        {
+
+            FinishParamGenerator vm = new FinishParamGenerator();
+            return vm.GetFinishRptCollection(StartDate, EndDate);
+        }
+
         [Route("api/Message/getVatMakeRptComments/{StartDate}/{EndDate}/{ProductCode}/{LineNumber}")]
         public VatMakeRptCommentsCollection getVatMakeRptComments(string StartDate, string EndDate, string ProductCode, string LineNumber)
         {
