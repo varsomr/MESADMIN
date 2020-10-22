@@ -88,7 +88,7 @@
                 }
                 // newWidth = 1800;
                 newWidth = $(window).width() - $(window).width() * 0.06;
-                document.getElementById('screensz').value = $(window).width() + 'x' + $(window).height();
+                //document.getElementById('screensz').value = $(window).width() + 'x' + $(window).height();
             }
 
             else {
@@ -532,7 +532,7 @@
             $scope.headerGridOptions.columnDefs = [];
             $scope.gridOptionsVatMakeRpt.data = [];
             $scope.headerGridOptions.data = [];
-            $scope.gridOptionsVatMakeRptComments = [];
+          
         }
 
         $scope.getVatMakeParams($scope.fromDate, $scope.toDate);
@@ -749,15 +749,16 @@
         //    ).finally(function () { $scope.loading = false; });
 
         //};
-        $scope.loadgridKPIMultiDt = function (reportName, isChartOpen = false) {
-            if (reportName == undefined || reportName == null) {
-                reportName = 'KPI Chart - Fat to Protein Ratio'
+        $scope.loadgridKPIMultiDt = function (reportName, LineNumber, isChartOpen = false) {
+            if (reportName == undefined || reportName == null || LineNumber == undefined || LineNumber == null) {
+                //reportName = 'KPI Chart - Fat to Protein Ratio'
             }
             $scope.loading = true;
 
             //console.log('loading KPIMultiDtList');
 
-            LRWService.getKPIMultiDt('KPI Chart - Fat to Protein Ratio', '2020-05-08', '2020-05-09', '1', 'NULL', 'NULL', 'NULL').success(function (data) {
+            //LRWService.getKPIMultiDt('KPI Chart - Fat to Protein Ratio', '2020-05-08', '2020-05-09', '1', 'NULL', 'NULL', 'NULL').success(function (data) {
+            LRWService.getKPIMultiDt(reportName, $scope.fromDate, $scope.toDate, LineNumber, 'NULL', 'NULL', 'NULL').success(function (data) {
                            var KPIMultiDtList = data.KPIMultiDtList;
                 if (isChartOpen) {
                     var cols = [
@@ -815,15 +816,15 @@
         };
         
   
-        $scope.loadgridKPISingleDt = function (reportName, isChartOpen = false) {
+        $scope.loadgridKPISingleDt = function (reportName, LineNumber, isChartOpen = false) {
 
             $scope.loading = true;
-            if (reportName == undefined || reportName == null) {
-                reportName = 'KPI Chart - Mill pH'
+            if (reportName == undefined || reportName == null || LineNumber == undefined || LineNumber == null) {
+                //reportName = 'KPI Chart - Mill pH'
             }
             //console.log('loading KPISingleDt');
 
-            LRWService.getKPISingleDt('KPI Chart - Mill pH', '2020-05-08', '2020-05-09', '1', 'NULL', 'NULL', 'NULL').success(function (data) {
+            LRWService.getKPISingleDt(reportName, $scope.fromDate, $scope.toDate, LineNumber, 'NULL', 'NULL', 'NULL').success(function (data) {
 
                 var KPISingleDtList = data.KPISingleDtList;
                 $scope.kpiData = data.KPISingleDtList;
@@ -877,9 +878,9 @@
                 if (dataObject.KPI_Report_Name != "" && dataObject.KPI_Report_Name != null) {
                     var reportName = Number(dataObject.KPI_Report_Name[dataObject.KPI_Report_Name.length - 1]);
                     if (reportName > 1) {
-                        $scope.loadgridKPIMultiDt(dataObject.KPI_RD_Name, true)
+                        $scope.loadgridKPIMultiDt(dataObject.KPI_RD_Name, dataObject.LineNumber, true)
                     } else {
-                        $scope.loadgridKPISingleDt(dataObject.KPI_RD_Name, true)
+                        $scope.loadgridKPISingleDt(dataObject.KPI_RD_Name, dataObject.LineNumber, true)
                     }
                 }
             }
@@ -907,6 +908,18 @@
      
         $scope.gridOptionsVatMakeRpt.onRegisterApi = function (gridApi) {
             $scope.gridApi = gridApi;
+
+            gridApi.selection.on.rowSelectionChanged($scope, function (row) {
+                console.log('row selected ' + row.entity.row_id);
+
+
+                if (row.isSelected) {
+                    console.log('push');
+                    $scope.Graphline = row.entity.LineNumber;
+
+                }
+            });
+
             $scope.$watch('gridApi.grid.isScrollingHorizontally', watchFunc);
             function watchFunc(newData) {               
                 $rootScope.$broadcast('scrolled');
@@ -914,115 +927,12 @@
 
             }
             //    $scope.selectRow = function () {
-            $scope.mySelectedRows = $scope.gridApi.selection.getSelectedRows();
+            //$scope.mySelectedRows = $scope.gridApi.selection.getSelectedRows();
             //  console.log($scope.mySelectedRows)
 
-            var objarray = [];
-            gridApi.selection.on.rowSelectionChanged($scope, function (row) {
-                //console.log('row selected ' + row.entity.row_id);
+            //var objarray = [];
 
-
-                if (row.isSelected) {
-                    console.log('push');
-
-                    $scope.openDIV('InputForm');
-
-
-                    document.getElementById('Production_Date').value = row.entity.Production_Date;
-                    document.getElementById('ProductionOrder').value = row.entity.ProductionOrder;
-                    document.getElementById('ReportName').value = row.entity.ReportName;
-                    document.getElementById('LineNumber').value = row.entity.LineNumber;
-                    document.getElementById('AttributeName').value = row.entity.AttributeName;
-                    document.getElementById('Source').value = row.entity.Source;
-                    document.getElementById('MIC').value = row.entity.MIC;
-                    document.getElementById('Lot_No').value = row.entity.Lot_No;
-                    document.getElementById('Position').value = row.entity.Position;
-                    document.getElementById('LogicalVat').value = row.entity.LogicalVat;
-                    document.getElementById('ReportSection').value = row.entity.ReportSection;
-                    document.getElementById('PhysUnitNo').value = row.entity.PhysUnitNo;
-                    document.getElementById('ProductCode').value = row.entity.ProductCode;
-                    document.getElementById('ReportValue').value = row.entity.ReportValue;
-                    document.getElementById('Record_UID').value = row.entity.Record_UID;
-                    document.getElementById('vLSL').value = row.entity.vLSL;
-                    document.getElementById('vTarget').value = row.entity.vTarget;
-                    document.getElementById('vUSL').value = row.entity.vUSL;
-                    document.getElementById('KPI_Report_Name').value = row.entity.KPI_Report_Name;
-                    document.getElementById('KPI_RD_Name').value = row.entity.KPI_RD_Name;
-                    document.getElementById('AvgValue').value = row.entity.AvgValue;
-                    document.getElementById('SDevValue').value = row.entity.SDevValue;
-                    document.getElementById('DisplaySpecs').value = row.entity.DisplaySpecs;
-                    document.getElementById('LatestProductionOrder').value = row.entity.LatestProductionOrder;
-                    document.getElementById('LatestLSL').value = row.entity.LatestLSL;
-                    document.getElementById('LatestTarget').value = row.entity.LatestTarget;
-                    document.getElementById('LatestUSL').value = row.entity.LatestUSL;
-                    document.getElementById('LatestAverageValue').value = row.entity.LatestAverageValue;
-                    document.getElementById('LatestStdDevValue').value = row.entity.LatestStdDevValue;
-                    document.getElementById('ReportingKey').value = row.entity.ReportingKey;
-
-
-
-                    //                    $scope.openDIV('InputForm');
-                    document.getElementById('lblHeader').innerHTML = "Operator's Inprocess GRID Selected";
-                    document.getElementById('lblHeader').backgroundColor = 'darkslategrey';
-                    document.getElementById('InputForm').backgroundColor = 'darkslategrey';
-                    $scope.TextInputValidation();
-
-
-                    if (objarray.indexOf(row.entity.row_id) === -1) {
-                        objarray.push(row.entity.row_id);
-
-                    }
-                }
-                else
-                    if (objarray.indexOf(row.entity.row_id) !== -1) {
-                        console.log("pop");
-                        console.log(objarray);
-
-                        document.getElementById('Production_Date').value = "";
-                        document.getElementById('ProductionOrder').value = "";
-                        document.getElementById('ReportName').value = "";
-                        document.getElementById('LineNumber').value = "";
-                        document.getElementById('AttributeName').value = "";
-                        document.getElementById('Source').value = "";
-                        document.getElementById('MIC').value = "";
-                        document.getElementById('Lot_No').value = "";
-                        document.getElementById('Position').value = "";
-                        document.getElementById('LogicalVat').value = "";
-                        document.getElementById('ReportSection').value = "";
-                        document.getElementById('PhysUnitNo').value = "";
-                        document.getElementById('ProductCode').value = "";
-                        document.getElementById('ReportValue').value = "";
-                        document.getElementById('Record_UID').value = "";
-                        document.getElementById('vLSL').value = "";
-                        document.getElementById('vTarget').value = "";
-                        document.getElementById('vUSL').value = "";
-                        document.getElementById('KPI_Report_Name').value = "";
-                        document.getElementById('KPI_RD_Name').value = "";
-                        document.getElementById('AvgValue').value = "";
-                        document.getElementById('SDevValue').value = "";
-                        document.getElementById('DisplaySpecs').value = "";
-                        document.getElementById('LatestProductionOrder').value = "";
-                        document.getElementById('LatestLSL').value = "";
-                        document.getElementById('LatestTarget').value = "";
-                        document.getElementById('LatestUSL').value = "";
-                        document.getElementById('LatestAverageValue').value = "";
-                        document.getElementById('LatestStdDevValue').value = "";
-                        document.getElementById('ReportingKey').value = "";
-
-
-                        document.getElementById('InputForm').style.width = '0';
-                        document.getElementById('lblHeader').innerHTML = "Select from a Grid";
-                        document.getElementById('lblHeader').backgroundColor = 'black';
-                        document.getElementById('InputForm').backgroundColor = 'black';
-                        $scope.TextInputValidation();
-                        //}
-                        //else {
-                        //    // Do nothing!
-                        //}
-                        objarray.splice(objarray.indexOf(row.entity.row_id), 1);
-                    }
-
-            });
+           
 
         };
 
@@ -1066,23 +976,11 @@
                 '  <div ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ng-class="{ \'ui-grid-row-header-cell\': col.isRowHeader }"  ui-grid-cell></div>' +
                 '</div>',
             columnDefs: [
-                {
-                    field: 'LineNumber', width: '5%', visible: true
-                }
-                //,{ field: 'Production_Date', width: '10%', visible: false }
-                , { field: 'ProductionOrder', width: '10%', visible: true }
-
-                , {
-                    field: 'AttributeName', name: 'Name', width: '35%', visible: true
-                }
-                //, { field: 'Source', width: '10%', visible: false }
-                //, { field: 'MIC', width: '10%', visible: false }
-
-                //, { field: 'Position', width: '10%', visible: false }
-                , { field: 'LogicalVat', width: '10%', visible: true }
-                //, { field: 'PhysUnitNo', width: '10%', visible: false }
-                //, { field: 'ProductCode', width: '10%', visible: false }               
-                , { field: 'Comments', width: '55%', visible: true }
+                {field: 'LineNumber', width: '5%', visible: true}        
+                ,{ field: 'ProductionOrder', width: '10%', visible: true }
+                ,{field: 'AttributeName', name: 'Name', width: '35%', visible: true}
+                ,{ field: 'LogicalVat', width: '10%', visible: true }            
+                ,{ field: 'Comments', width: '55%', visible: true }
 
 
             ]
@@ -1103,11 +1001,11 @@
 
             console.log('loading grid');
 
-            //lineNumber, productionOrder, productCode, fromDate, toDate
+            //LRWService.getVatMakeRptComments('2020-10-20', '2020-10-21', 'ALL', 'ALL').success(function (data) {
 
-            LRWService.getVatMakeRptComments($scope.fromDate, $scope.toDate, $scope.selectedProductCode, $scope.selectedLineNumber).success(function (data) {
-            //LRWService.getVatMakeRptComments('2020-05-08', '2020-05-28', 'ALL', 'ALL').success(function (data) {
-               
+
+            LRWService.getVatMakeRptComments($scope.fromDate, $scope.toDate, $scope.selectedProductCode, $scope.selectedLineNumber).success(function (data) {           
+           
                 if (data === null || data.VatMakeRptCommentsList === null || data.VatMakeRptCommentsList.length === 0) {
 
                     $scope.error = true;
@@ -1117,6 +1015,7 @@
                     $scope.gridOptionsVatMakeRptComments.paginationPageSizes.push(
                         data.VatMakeRptCommentsList.length
                     );
+                    
                     var VatMakeRptCommentsList = data.VatMakeRptCommentsList;
                     $scope.gridOptionsVatMakeRptComments.data = VatMakeRptCommentsList;
                     console.log(VatMakeRptCommentsList);
