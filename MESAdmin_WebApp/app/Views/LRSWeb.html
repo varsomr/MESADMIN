@@ -43,7 +43,7 @@
         @import url("../../Content/GridFormat.css");
         /*###################################### End Calling GRID FEATURES #############################################*/
         .p1 {
-            background: url(MESPortal.png) no-repeat right fixed;
+            /*background: url(MESPortal.png) no-repeat right fixed;*/
             background-size: 700px;
             opacity: 2.2;
             filter: alpha(opacity=220);
@@ -309,11 +309,15 @@
 
         .ui-grid-viewport {
             overflow-anchor: none;
+            font-size: 10px;
+            font-weight: bold;
         }
 
         .ui-grid-cell-contents {
             white-space: normal;
             padding: 2px;
+            font-size: 10px;
+            font-weight: bold;
             word-break: break-word;
         }
 
@@ -1826,6 +1830,7 @@
                             <button type="button" ng-class="{selectedButton: selectedLineNumber == '1'}" class="btn btn-sm btn-info" ng-click="gridPagination('1')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">1</button>
                             <button type="button" ng-class="{selectedButton: selectedLineNumber == '2'}" class="btn btn-sm btn-info" ng-click="gridPagination('2')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">2</button>
                             <button type="button" ng-class="{selectedButton: selectedLineNumber == '3'}" class="btn btn-sm btn-info" ng-click="gridPagination('3')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">3</button>
+                            <button type="button" class="btn btn-sm btn-info" ng-click="gridPagination('4'); loadgridVatMakeRptComments()" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">4</button>
                         </div>
                     </div>
 
@@ -1834,17 +1839,20 @@
                 <hr style="margin-bottom:0px;margin-top:0px"/>
                 <div class="row">
                     <div class="col-md-6">
-                        <img class="img" src="../leprinoFoods.PNG" style="float:left;height:10%;width:10%"/>
+                        <img class="img" src="../leprinoFoods.PNG" style="float:left;height:10%;width:10%" />
                     </div>
                     <div class="col-md-6">
-                        <label style="color:black; text-align:center">Make Report</label><br />
-                        <a style="color:black" ng-click="manageAutoRefresh()">Click to disable report auto-refresh</a>
+                        <label style="color:black; font-size: 20px; text-align:center">Make Report</label><br />
+                        <a style="color:black; font-size: 10px; text-align:center" ng-click="manageAutoRefresh()">Click to {{refreshtxt}} report auto-refresh</a>
                     </div>
                 </div>
                 <hr class="new1"/>
                 <div class="row" style="margin-top:10px">
                     <div class="col-md-6">
                         <label style="color:black;font-weight:bold">Production Date: {{fromDate}} - {{toDate}} </label>
+                    </div>
+                    <div class="col-md-offset-10">
+                        <label style="color:black;font-weight:bold;text-align:right">PlantName: Roswell</label>
                     </div>
                 </div>
                     <!--<div style="width:100%; height:20%; text-align:center;float:left;">
@@ -1901,11 +1909,12 @@
                         <div id="gridOperator" style="width:100%;height:50%; float:left; border:hidden">
                             <!-- <div id="graphcontainer" style="width: 550px; height: 400px; margin: 0 auto">-->
                             <!--<input type="checkbox" ng-click="showorhideExtraColumns()" id="hideshowcheckboxid" />
-            <button type="button" class="btn btn-sm btn-info" ng-click="gridPagination('1')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">1</button>
-            <button type="button" class="btn btn-sm btn-info" ng-click="gridPagination('2')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">2</button>
-            <button type="button" class="btn btn-sm btn-info" ng-click="gridPagination('3')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">3</button>-->
-                            <div id="gridH" ui-grid="headerGridOptions" ui-grid-pinning ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRpt" style=" width:98vw; height: 35vh; color:white;border:none; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
-                            <div id="gridW" ui-grid="gridOptionsVatMakeRpt" ui-grid-pinning ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRpt" style=" width:98vw; height: 35vh; color:white;border:none; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
+    <button type="button" class="btn btn-sm btn-info" ng-click="gridPagination('1')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">1</button>
+    <button type="button" class="btn btn-sm btn-info" ng-click="gridPagination('2')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">2</button>
+    <button type="button" class="btn btn-sm btn-info" ng-click="gridPagination('3')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">3</button>-->
+                            <div id="gridComm" ng-show="isCommentsgrid == true"  ui-grid="gridOptionsVatMakeRptComments" ui-grid-pinning ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRpt" style=" width:98vw; height: 50vh; color:white;border:none; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
+                            <div id="gridH"  ng-show="isCommentsgrid == false"  ui-grid="headerGridOptions" ui-grid-pinning ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRpt" style=" width:98vw; height: 20vh; color:white;border:none; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
+                            <div id="gridW"   ng-show="isCommentsgrid == false"  ui-grid="gridOptionsVatMakeRpt" ui-grid-pinning ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRpt" style=" width:98vw; height: 50vh; color:white;border:none; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
 
                             <div style="padding-left: 120px; padding-top: 400px;background-color:transparent; color:black" class="grid-msg-overlay" ng-hide="!loading">
                                 <div style="background-color:transparent; color:white;" class="msg">
@@ -1915,6 +1924,7 @@
                                     </span>
                                 </div>
                             </div>
+
                         </div>
 
                         <!--Bottom grid **************************************************************-->

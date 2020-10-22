@@ -796,7 +796,7 @@
                     || el.webkitRequestFullScreen
                     || el.mozRequestFullScreen
                 ;
-            rfs.call(el);
+            //rfs.call(el);
             // $scope.ScrAdjust();
 
             document.getElementById("start-menu-modal").style.visibility = 'hidden';

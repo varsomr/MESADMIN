@@ -1,7 +1,7 @@
 ﻿(function () {
     angular
         .module('myApp')
-        .controller('LRWcontroller', controller);
+        .controller('LRWWcontroller', controller);
 
     var flagOperatorOverride = "0";
 

@@ -60,7 +60,7 @@
                 }
                 //newWidth = 400;
                 newWidth = $(window).width() - $(window).width() * 0.06;
-                document.getElementById('screensz').value = $(window).width() + 'x' + $(window).height();
+                //document.getElementById('screensz').value = $(window).width() + 'x' + $(window).height();
             }
             else if ($(window).width() < 1300) {
                 if (ty === 'fs') {
@@ -172,6 +172,8 @@
 
         //###############################################  VatMakeRpt SCREEN ############################################//
 
+        //###############################################  VatMakeRpt SCREEN ############################################//
+
         $scope.gridOptionsVatMakeRpt = {
             headerTemplate: 'app/Views/header.html',
             enableFullRowSelection: false,
@@ -215,7 +217,7 @@
             paginationPageSizes: [20, 40, 60],
             paginationPageSize: 40,
             rowHeight: 30,
-            enableFiltering: true,
+            enableFiltering: true,        
             enableCellEdit: false,
             enableGridMenu: false,
             enablePinning: true,
@@ -284,8 +286,13 @@
         }
 
         $scope.gridPagination = function (lineNumber) {
-            $scope.removeGridData();
-            $scope.loadgridVatMakeRpt(lineNumber);
+            if (lineNumber == 4) {
+                $scope.isCommentsgrid = true;
+            }
+            else {
+                $scope.removeGridData();
+                $scope.loadgridVatMakeRpt(lineNumber);
+            }
 
         }
 
@@ -378,9 +385,16 @@
 
         };
         $scope.isAutoRefresh = true;
+        $scope.refreshtxt = "disable";
         $scope.manageAutoRefresh = function () {
             $scope.isAutoRefresh = !$scope.isAutoRefresh;
-            
+            if ($scope.isAutoRefresh) {
+                $scope.refreshtxt = "disable";
+            }
+            else {
+                $scope.refreshtxt = "enable";
+            }
+       
         }
         
         setInterval(function () {
@@ -388,6 +402,9 @@
                 $scope.viewReports();
             }
         }, 120000)
+
+        $scope.isCommentsgrid = false;
+
         $scope.calendardate = (nav, toFrom) => {
             //debugger
             $timeout(function () { 
@@ -410,11 +427,16 @@
             //$("#fromDate").datepicker();
             //$("#toDate").datepicker();
 
-            var date = new Date();
+            var date = new Date();											 
+							   
+												  
             date.setDate(date.getDate() + 2);
             date = date.toISOString().substring(0, 10),
                 field = document.querySelector('#fromDate');
-            field.value = $scope.FormatDTSlash(date);
+            field.value = $scope.FormatDTSlash(date);																																													
+									   
+				 
+			   
 
             var date = new Date();
             date.setDate(date.getDate() + 2);
@@ -472,6 +494,7 @@
         }
 
         $scope.viewReports = function () {
+            $scope.isCommentsgrid = false;
             $scope.removeGridData();
             $scope.loadgridVatMakeRpt($scope.selectedLineNumber, $scope.selectedProductionOrder, $scope.selectedProductCode, $scope.fromDate, $scope.toDate);
         }
@@ -509,6 +532,7 @@
             $scope.headerGridOptions.columnDefs = [];
             $scope.gridOptionsVatMakeRpt.data = [];
             $scope.headerGridOptions.data = [];
+            $scope.gridOptionsVatMakeRptComments = [];
         }
 
         $scope.getVatMakeParams($scope.fromDate, $scope.toDate);
@@ -535,6 +559,7 @@
 
 
             LRWService.getVatMakeRpt(lineNumber, productionOrder, productCode, fromDate, toDate).success(function (data) {
+                
                 if (data === null || data.VatMakeRptList === null || data.VatMakeRptList.length === 0) {
 
                     $scope.error = true;
@@ -1041,28 +1066,23 @@
                 '  <div ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ng-class="{ \'ui-grid-row-header-cell\': col.isRowHeader }"  ui-grid-cell></div>' +
                 '</div>',
             columnDefs: [
-                { field: 'Production_Date', width: '10%', visible: true }
-                , { field: 'ProductionOrder', width: '10%', visible: true }               
-                , {
-                    field: 'LineNumber', grouping: {
-                        groupPriority: 0
-                    },
-                    width: '10%', visible: true
+                {
+                    field: 'LineNumber', width: '5%', visible: true
                 }
+                //,{ field: 'Production_Date', width: '10%', visible: false }
+                , { field: 'ProductionOrder', width: '10%', visible: true }
+
                 , {
-                    field: 'AttributeName', grouping: {
-                        groupPriority: 1
-                    },
-                    width: '10%', visible: true
+                    field: 'AttributeName', name: 'Name', width: '35%', visible: true
                 }
-                , { field: 'Source', width: '10%', visible: true }
-                , { field: 'MIC', width: '10%', visible: true }
-                
-                , { field: 'Position', width: '10%', visible: true }
-                , { field: 'LogicalVat', width: '10%', visible: true }               
-                , { field: 'PhysUnitNo', width: '10%', visible: true }
-                , { field: 'ProductCode', width: '10%', visible: true }               
-                , { field: 'Comments', width: '10%', visible: true }
+                //, { field: 'Source', width: '10%', visible: false }
+                //, { field: 'MIC', width: '10%', visible: false }
+
+                //, { field: 'Position', width: '10%', visible: false }
+                , { field: 'LogicalVat', width: '10%', visible: true }
+                //, { field: 'PhysUnitNo', width: '10%', visible: false }
+                //, { field: 'ProductCode', width: '10%', visible: false }               
+                , { field: 'Comments', width: '55%', visible: true }
 
 
             ]
@@ -1078,30 +1098,29 @@
 
 
         $scope.loadgridVatMakeRptComments = function () {
-
+          
             $scope.loading = true;
 
             console.log('loading grid');
 
-            //LineNumber = document.getElementById('LineNumber').value;           
-            //ProductionOrder = document.getElementById('ProductionOrder').value;
-            //ProductCode = document.getElementById('ProductCode').value;
-            //var StartDate = document.getElementById('RtimestampidF').value;
-            //var EndDate = document.getElementById('RtimestampidT').value;
-            //EndDate = document.getElementById('EndDate').value;
+            //lineNumber, productionOrder, productCode, fromDate, toDate
 
-            // VatMakeRptCommentService.getVatMakeRptComment(LineNumber, ProductionOrder, ProductCode, StartDate, EndDate).success(function (data) {
-            LRWService.getVatMakeRptComments('2020-02-12', '2020-05-12','100002512','1' ).success(function (data) {
+            LRWService.getVatMakeRptComments($scope.fromDate, $scope.toDate, $scope.selectedProductCode, $scope.selectedLineNumber).success(function (data) {
+            //LRWService.getVatMakeRptComments('2020-05-08', '2020-05-28', 'ALL', 'ALL').success(function (data) {
+               
                 if (data === null || data.VatMakeRptCommentsList === null || data.VatMakeRptCommentsList.length === 0) {
 
                     $scope.error = true;
                     $scope.errorDescription = "No data found for selected criteria.";
+                    //alert("No Data");
                 } else {
                     $scope.gridOptionsVatMakeRptComments.paginationPageSizes.push(
                         data.VatMakeRptCommentsList.length
                     );
                     var VatMakeRptCommentsList = data.VatMakeRptCommentsList;
                     $scope.gridOptionsVatMakeRptComments.data = VatMakeRptCommentsList;
+                    console.log(VatMakeRptCommentsList);
+                    //alert(VatMakeRptCommentsList);
                     $scope.error = false;
                 }
 

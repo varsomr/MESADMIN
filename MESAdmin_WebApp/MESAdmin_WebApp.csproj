@@ -261,7 +261,7 @@
     <Content Include="app\Controllers\ProcessingMassBalanceController.js" />
     <Content Include="app\Controllers\RptVatMakeController.js" />
     <Content Include="app\Controllers\OnCallCalendar.js" />
-    <Content Include="app\Controllers\LRWController.js" />
+    <Content Include="app\Controllers\LRWcontroller.js" />
     <Content Include="app\Controllers\VatMkTst.js" />
     <Content Include="app\Controllers\WBScratchController.js" />
     <Content Include="app\Controllers\WBIndexController.js" />
