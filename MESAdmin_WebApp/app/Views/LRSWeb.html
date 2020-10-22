@@ -1849,7 +1849,7 @@
                 <hr class="new1"/>
                 <div class="row" style="margin-top:10px">
                     <div class="col-md-6">
-                        <label style="color:black;font-weight:bold">Production Date: {{fromDate}} - {{toDate}} </label>
+                        <label style="color:black;font-weight:bold">Production Date: {{FormatDTSlash(fromDate)}} - {{FormatDTSlash(toDate)}} </label>
                     </div>
                     <div class="col-md-offset-10">
                         <label style="color:black;font-weight:bold;text-align:right">PlantName: Fort Morgan</label>
@@ -1912,8 +1912,8 @@
     <button type="button" class="btn btn-sm btn-info" ng-click="gridPagination('1')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">1</button>
     <button type="button" class="btn btn-sm btn-info" ng-click="gridPagination('2')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">2</button>
     <button type="button" class="btn btn-sm btn-info" ng-click="gridPagination('3')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">3</button>-->
-                            <div id="gridComm" ng-show="isCommentsgrid == true"  ui-grid="gridOptionsVatMakeRptComments" ui-grid-pinning ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRpt" style=" width:98vw; height: 50vh; color:white;border:none; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
-                            <div id="gridH"  ng-show="isCommentsgrid == false"  ui-grid="headerGridOptions" ui-grid-pinning ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRpt" style=" width:98vw; height: 20vh; color:white;border:none; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
+                            <div id="gridComm" ng-show="isCommentsgrid == true"  ui-grid="gridOptionsVatMakeRptComments" ui-grid-pinning ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRpt" style=" width:98vw; height: 45vh; color:white;border:none; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
+                            <div id="gridH"  ng-show="isCommentsgrid == false"  ui-grid="headerGridOptions" ui-grid-pinning ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRpt" style=" width:98vw; height: 25vh; color:white;border:none; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
                             <div id="gridW"   ng-show="isCommentsgrid == false"  ui-grid="gridOptionsVatMakeRpt" ui-grid-pinning ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRpt" style=" width:98vw; height: 50vh; color:white;border:none; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
 
                             <div style="padding-left: 120px; padding-top: 400px;background-color:transparent; color:black" class="grid-msg-overlay" ng-hide="!loading">

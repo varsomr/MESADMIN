@@ -292,6 +292,7 @@
             else {
                 $scope.removeGridData();
                 $scope.loadgridVatMakeRpt(lineNumber);
+                $scope.isCommentsgrid = false;
             }
 
         }
@@ -316,7 +317,7 @@
         }
 
         //######################Calendar Event###########################//
-
+        //1)	//Pass mm/dd/yyyy to get yyyy-mm-dd
         $scope.FormatDT = function (date) {
             var d = new Date(date),
 
@@ -374,10 +375,11 @@
 
 
         //####Autopopulate screen function area#################//
+        //2)	//Pass yyyy-mm-dd to get mm/dd/yyyy
         $scope.FormatDTSlash = function (date) {
             var d = new Date(date),
                 month = '' + (d.getMonth() + 1),
-                day = '' + d.getDate(),
+                day = '' + (d.getDate() + 1),
                 year = d.getFullYear();
             if (month.length < 2) month = '0' + month;
             if (day.length < 2) day = '0' + day;
@@ -430,7 +432,7 @@
             var date = new Date();											 
 							   
 												  
-            date.setDate(date.getDate() + 2);
+            date.setDate(date.getDate());
             date = date.toISOString().substring(0, 10),
                 field = document.querySelector('#fromDate');
             field.value = $scope.FormatDTSlash(date);																																													
@@ -439,7 +441,7 @@
 			   
 
             var date = new Date();
-            date.setDate(date.getDate() + 2);
+            date.setDate(date.getDate());
             date = date.toISOString().substring(0, 10),
                 field = document.querySelector('#toDate');
             field.value = $scope.FormatDTSlash(date);
@@ -823,8 +825,8 @@
                 //reportName = 'KPI Chart - Mill pH'
             }
             //console.log('loading KPISingleDt');
-
             LRWService.getKPISingleDt(reportName, $scope.fromDate, $scope.toDate, LineNumber, 'NULL', 'NULL', 'NULL').success(function (data) {
+            //LRWService.getKPISingleDt('KPI Chart - Mill pH', '2020-05-08', '2020-05-09', '1', 'NULL', 'NULL', 'NULL').success(function (data) {
 
                 var KPISingleDtList = data.KPISingleDtList;
                 $scope.kpiData = data.KPISingleDtList;
