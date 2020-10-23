@@ -498,7 +498,7 @@
         $scope.viewReports = function () {
             $scope.isCommentsgrid = false;
             $scope.removeGridData();
-            $scope.loadgridVatMakeRpt($scope.selectedLineNumber, $scope.selectedProductionOrder, $scope.selectedProductCode, $scope.fromDate, $scope.toDate);
+            $scope.loadgridVatMakeRpt($scope.selectedLineNumber, $scope.selectedProductionOrder, $scope.selectedProductCode, $scope.fromDate, $scope.toDate, $scope.isAscending);
         }
 
         $scope.changeLineNumber = function () {
@@ -537,8 +537,19 @@
           
         }
 
+        $scope.sortOptions = ["Ascending", "Descending"];
+        $scope.isAscending = false;
+        $scope.selectedSort = "Descending";
+        $scope.changeSort = function () {
+            if ($scope.selectedSort == "Descending") {
+                $scope.isAscending = false;
+            } else {
+                $scope.isAscending = true;
+            }
+        }
+
         $scope.getVatMakeParams($scope.fromDate, $scope.toDate);
-        $scope.loadgridVatMakeRpt = function (lineNumber,productionOrder,productCode,fromDate, toDate) {
+        $scope.loadgridVatMakeRpt = function (lineNumber, productionOrder, productCode, fromDate, toDate, isAscending = false) {
             if (lineNumber == null || lineNumber == undefined || lineNumber == 'ALL') {
                 lineNumber = '1'
             }
@@ -599,7 +610,7 @@
                         for (var a = 0; a < keys.length; a++) {
                             nKeys.push(keys[a].split('-')[0])
                         }
-                        nKeys = nKeys.sort((a, b) => b - a);
+                        nKeys = isAscending ? nKeys.sort((a, b) => a - b) : nKeys.sort((a, b) => b - a);
                         for (var n = 0; n < nKeys.length; n++) {
                             keys.forEach(a => {
                                 if (a.split('-')[0] == nKeys[n]) {
