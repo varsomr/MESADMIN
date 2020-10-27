@@ -210,7 +210,24 @@
             //    , { field: 'Source', width: '10%', visible: true }
             //    , { field: 'MIC', width: '10%', visible: true }]
         };
-        
+
+        $scope.gridOptionsFinishRpt = {
+            enableFullRowSelection: false,
+            enableRowHeaderSelection: false,
+            paginationPageSizes: [20, 40, 60],
+            paginationPageSize: 40,
+            rowHeight: 30,
+            enableFiltering: true,
+            enableCellEdit: false,
+            enableGridMenu: false,
+            enablePinning: true,
+
+            rowTemplate:
+                '<div ng-class="{ \'grey\':grid.appScope.rowFormatter( row ) }">' +
+                '  <div ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ng-class="{ \'ui-grid-row-header-cell\': col.isRowHeader }"  ui-grid-cell></div>' +
+                '</div>'
+        }
+
         $scope.headerGridOptions = {
             enableFullRowSelection: false,
             enableRowHeaderSelection: false,
@@ -435,8 +452,9 @@
             date.setDate(date.getDate());
             date = date.toISOString().substring(0, 10),
                 field = document.querySelector('#fromDate');
-            field.value = $scope.FormatDTSlash(date);																																													
-									   
+            finRptField = document.querySelector('#finishRepFromDate');
+            field.value = $scope.FormatDTSlash(date);
+            finRptField.value = $scope.FormatDTSlash(date);				   
 				 
 			   
 
@@ -444,7 +462,9 @@
             date.setDate(date.getDate());
             date = date.toISOString().substring(0, 10),
                 field = document.querySelector('#toDate');
+            finRptField = document.querySelector('#finishRepToDate');
             field.value = $scope.FormatDTSlash(date);
+            finRptField.value = $scope.FormatDTSlash(date);
 
             //var dateF = new Date();
             //var firstDay = '09/10/2020';//new Date(dateF.getFullYear(), dateF.getMonth(), 1);
@@ -1148,6 +1168,174 @@
             }, 1500);
         };
 
+        //################################### Finish Report ############################################//
+        $scope.finishrptcalendardate = (nav, toFrom) => {
+            //debugger
+            $timeout(function () {
+                $(nav).datepicker({
+                    onSelect: (dateText) => {
+                        var date = new Date(dateText);
+                        $scope[toFrom] = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()));
+                        $scope.finishRptDateChange();
+                    },
+                    defaultDate: $scope[toFrom]
+                });
+            }, 10)
+
+        };
+        $scope.finishRptFromDate = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()))
+        $scope.finishRptToDate = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()))
+        $scope.finishRptDateChange = () => {
+            var fromD = Date.parse($scope.finishRptFromDate);
+            var toD = Date.parse($scope.finishRptToDate);
+            if (toD >= fromD) {
+                $scope.lineNumbers = ['ALL'];
+                $scope.getFinishRptParams($scope.finishRptFromDate, $scope.finishRptToDate);
+            }
+        }
+        $scope.finishRptLineNumbers = ['ALL'];
+        $scope.finishRptProductionOrderByLines = ['ALL']
+        $scope.finishRptProductCodeByLines = ['ALL']
+        $scope.finishRptSelectedLineNumber = 'ALL';
+        $scope.finishRptSelectedProductionOrder = 'ALL';
+        $scope.finishRptSelectedProductCode = 'ALL';
+
+        $scope.getFinishRptParams = function (fromDate, toDate) {
+            $scope.loading = true;
+            LRWService.getFinishParam(fromDate, toDate).success((data) => {
+                $scope.finishRptParams = data.FinishParamList;
+                var lines = data.FinishParamList.map(a => a.LineNumber)
+                $scope.finishRptLineNumbers.push(...lines.filter((v, i, a) => a.indexOf(v) === i))
+                $scope.finishRptProductionOrderByLines.push(...$scope.finishRptParams.map(a => a.ProductionOrder));
+                $scope.finishRptProductCodeByLines.push(...$scope.finishRptParams.map(a => a.ProductCode));
+                
+                $scope.error = false;
+
+            }).finally(function () { $scope.loading = false; });
+        }
+
+        $scope.changeFinishRptLineNumber = function () {
+            $scope.finishRptProductionOrderByLines = ['ALL'];
+
+
+            if ($scope.finishRptSelectedLineNumber == 'ALL') {
+                $scope.finishRptProductionOrderByLines.push(...$scope.finishRptParams.map(a => a.ProductionOrder));
+
+            } else {
+                $scope.finishRptProductionOrderByLines.push(...$scope.finishRptParams.filter(a => a.LineNumber == $scope.finishRptSelectedLineNumber).map(a => a.ProductionOrder));
+            }
+
+        }
+
+        $scope.changeFinishRptProductionOrder = function () {
+            $scope.finishRptProductCodeByLines = ['ALL']
+            if ($scope.finishRptSelectedProductionOrder == 'ALL') {
+                $scope.finishRptProductCodeByLines.push(...$scope.finishRptParams.map(a => a.ProductCode));
+                
+            } else {
+                $scope.finishRptProductCodeByLines.push(...$scope.finishRptParams.filter(a => a.ProductionOrder == $scope.finishRptSelectedProductionOrder).map(a => a.ProductCode))
+            }
+
+
+        }
+
+        $scope.viewReportsFinishRpt = function () {
+            $scope.removeGridDataFinishRpt();
+            $scope.loadgridFinishRpt($scope.finishRptSelectedLineNumber, $scope.finishRptSelectedProductionOrder, $scope.finishRptSelectedProductCode, $scope.finishRptFromDate, $scope.finishRptToDate, $scope.isAscending);
+        }
+
+        $scope.removeGridDataFinishRpt = function () {
+            $scope.gridOptionsFinishRpt.columnDefs = [];
+            $scope.gridOptionsFinishRpt.data = [];
+
+        }
+
+        $scope.loadgridFinishRpt = function (lineNumber, productionOrder, productCode, fromDate, toDate, isAscending = false) {
+            if (lineNumber == null || lineNumber == undefined || lineNumber == 'ALL') {
+                lineNumber = '1'
+            }
+            if (productionOrder == null || productionOrder == undefined || productionOrder == 'ALL') {
+                productionOrder = '1221613,1221605,1221604,1221603,1221617,1221602,1221753'
+            }
+            if (productCode == null || productCode == undefined || productCode == 'ALL') {
+                productCode = '100000223,100000259,100000268,100001559,100001979,100400168,100402450'
+            }
+            if (fromDate == null || fromDate == undefined) {
+                fromDate = $scope.finishRptFromDate
+            }
+            if (toDate == null || toDate == undefined) {
+                toDate = $scope.finishRptToDate
+            }
+            $scope.loading = true;
+
+            console.log('loading grid');
+
+            //LRWService.getVatMakeRptComments('2020-10-20', '2020-10-21', 'ALL', 'ALL').success(function (data) {
+
+
+            LRWService.getFinishRpt(lineNumber, productionOrder, productCode, fromDate, toDate).success(function (data) {
+                debugger;
+                keysArray = Object.keys(data.FinishRptList[0]);
+                //console.log(keysArray);
+                var sortedKeysArray = keysArray.sort().reverse();
+                var order = sortedKeysArray.filter(a => a.includes('AvgV'))
+                var orderedProductionOders = []
+                for (var s = 0; s < order.length; s++) {
+                    var split = order[s].split('-')
+                    var exist = orderedProductionOders.find(a => a.po == split[1]);
+                    if (exist == undefined || exist == null) {
+                        orderedProductionOders.push({ po: split.sort(function (a, b) { return b.length - a.length; })[0], seqNumber: split[split.length - 1] });
+                    }
+                }
+                for (var o = 0; o < orderedProductionOders.length; o++) {
+                    var po = orderedProductionOders.find(a => a.seqNumber == o + 5).po;
+                    var keys = sortedKeysArray.filter(a => a.includes(po) && !a.includes('Tgt') && !a.includes('LW') && !a.includes('Hi'))
+                    var nKeys = []
+                    var keysToPush = []
+                    for (var a = 0; a < keys.length; a++) {
+                        nKeys.push(keys[a].split('-')[0])
+                    }
+                    nKeys = isAscending ? nKeys.sort((a, b) => a - b) : nKeys.sort((a, b) => b - a);
+                    for (var n = 0; n < nKeys.length; n++) {
+                        keys.forEach(a => {
+                            if (a.split('-')[0] == nKeys[n]) {
+                                keysToPush.push(a)
+                            }
+                        });
+                    }
+                    sortedKeysArray = sortedKeysArray.filter(a => !a.includes(po))
+                    sortedKeysArray.push(...keysToPush)
+                }
+               
+                sortedKeysArray = [...new Set(sortedKeysArray)];
+                $scope.gridOptionsFinishRpt.columnDefs.push({ name: 'LineNumber', field: 'LineNumber', width: '5%', visible: true, pinnedLeft: true });
+                $scope.gridOptionsFinishRpt.columnDefs.push({
+                    name: 'GroupName', field: 'GroupName', width: '5%', visible: true, pinnedLeft: true
+                });
+                $scope.gridOptionsFinishRpt.columnDefs.push({
+                    name: 'AttributeName', field: 'AttributeName', width: '5%', visible: true
+                });
+                $scope.gridOptionsFinishRpt.columnDefs.push({
+                    name: 'source', field: 'source', width: '5%', visible: true
+                });
+                $scope.gridOptionsFinishRpt.columnDefs.push({
+                    name: 'ReportingKey', field: 'ReportingKey', width: '5%', visible: true
+                });
+                for (var i = 0; i < sortedKeysArray.length; i++) {
+                    var colmn = sortedKeysArray[i];
+                    if (!(sortedKeysArray[i] == "ReportingKey" || sortedKeysArray[i] == "GroupName" || sortedKeysArray[i] == "LineNumber" || sortedKeysArray[i] == "AttributeName" || sortedKeysArray[i] == "source" || sortedKeysArray[i] == "MIC" || sortedKeysArray[i].includes("Tgt-") == true || sortedKeysArray[i].includes("LW-") == true || sortedKeysArray[i].includes("Hi-") == true))
+
+                        $scope.gridOptionsFinishRpt.columnDefs.push({
+                            name: sortedKeysArray[i], displayName: sortedKeysArray[i].includes('-') ? sortedKeysArray[i].split('-')[0] + '-' + (sortedKeysArray[i].includes("SDev") || sortedKeysArray[i].includes("AvgV") ? sortedKeysArray[i].split('-').sort(function (a, b) { return b.length - a.length; })[0] : sortedKeysArray[i].split('-').sort(function (a, b) { return b.length - a.length; })[1]) : sortedKeysArray[i]
+                            , field: sortedKeysArray[i], width: '10%', visible: true
+                        });
+                }
+                $scope.gridOptionsFinishRpt.data = data.FinishRptList;
+
+            }).finally(function () { $scope.loading = false; });
+        }
+        
+        $scope.loadgridFinishRpt()
         //###############################################  ChseMakSuprDopRpt SCREEN ############################################//
 
         $scope.gridOptionsChseMakSuprDopRpt = {
