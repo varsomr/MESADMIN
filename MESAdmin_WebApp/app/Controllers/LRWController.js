@@ -212,6 +212,23 @@
         };
 
         $scope.gridOptionsFinishRpt = {
+            headerTemplate: 'app/Views/header.html',
+            enableFullRowSelection: false,
+            enableRowHeaderSelection: false,
+            paginationPageSizes: [20, 40, 60],
+            paginationPageSize: 40,
+            rowHeight: 30,
+            enableFiltering: true,
+            enableCellEdit: false,
+            enableGridMenu: false,
+            enablePinning: true,
+
+            rowTemplate:
+                '<div ng-class="{ \'grey\':grid.appScope.rowFormatter( row ) }">' +
+                '  <div ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ng-class="{ \'ui-grid-row-header-cell\': col.isRowHeader }"  ui-grid-cell></div>' +
+                '</div>'
+        }
+        $scope.headerGridOptionsFinishRpt = {
             enableFullRowSelection: false,
             enableRowHeaderSelection: false,
             paginationPageSizes: [20, 40, 60],
@@ -1330,11 +1347,50 @@
                             , field: sortedKeysArray[i], width: '10%', visible: true
                         });
                 }
+
                 $scope.gridOptionsFinishRpt.data = data.FinishRptList;
+                $scope.headerGridOptionsFinishRpt.columnDefs = [];
+                $scope.headerGridOptionsFinishRpt.columnDefs.push(...$scope.gridOptionsFinishRpt.columnDefs);
+                $scope.headerGridOptionsFinishRpt.columnDefs.forEach(column => {
+                    column.cellClass = bgColorFinishRpt
+                })
+                for (var a = 0; a < 5; a++) {
+                    $scope.headerGridOptionsFinishRpt.data.push(data.FinishRptList[a]);
+                    //$scope.gridOptionsVatMakeRpt.data.splice(0, 1);
+                }
+                $scope.gridOptionsFinishRpt.data.splice(0, 5);
 
             }).finally(function () { $scope.loading = false; });
         }
-        
+
+        function bgColorFinishRpt(grid, row, col, rowRenderIndex, colRenderIndex) {
+
+            if (grid != undefined && grid.element[0] != undefined && grid.element[0].id == 'gridHFinishRpt') {
+                return 'greyRow'
+            } else {
+                var newStyle;
+                if (row.entity.isClickable) {
+                    newStyle = 'group1';
+                }
+
+                return newStyle;
+            }
+        }
+        $scope.$on('scrolledFinishRpt', function (event, args) {
+            document.getElementById('gridHFinishRpt').getElementsByClassName('ui-grid-viewport')[1].scrollLeft = document.getElementById('gridFinishReport').getElementsByClassName('ui-grid-viewport')[1].scrollLeft
+            $scope.gridApi3.grid.isScrollingHorizontally = false;
+            //console.log("called");
+        });
+        $scope.gridOptionsFinishRpt.onRegisterApi = function (gridApi) {
+            $scope.gridApi3 = gridApi
+            $scope.$watch('gridApi3.grid.isScrollingHorizontally', watchFunc);
+            function watchFunc(newData) {
+                $rootScope.$broadcast('scrolledFinishRpt');
+
+
+            }
+        }
+       
         $scope.loadgridFinishRpt()
         //###############################################  ChseMakSuprDopRpt SCREEN ############################################//
 
