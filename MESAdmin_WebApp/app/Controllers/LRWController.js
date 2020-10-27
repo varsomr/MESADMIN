@@ -30,6 +30,8 @@
         }
     }
 
+   
+
     controller.$inject = ['$scope', '$rootScope','$timeout', 'uiGridConstants', 'uiGridGroupingConstants', 'LRWService'];
 
     app.config(function ($httpProvider) {
@@ -40,6 +42,7 @@
 
     function controller($scope, $rootScope, $timeout, uiGridConstants, uiGridGroupingConstants, LRWService) {
         $scope.chart = dataJson;
+        
         $scope.isHideFilters = false;
 
         $scope.hideShowFilters = function () {
@@ -780,6 +783,9 @@
                     });
                 }
             }
+            var a = $scope.tableData;
+            $scope.$applyAsync();
+            
         }
 
         $scope.loadgridVatMakeRpt();
@@ -799,7 +805,7 @@
         //    ).finally(function () { $scope.loading = false; });
 
         //};
-        $scope.loadgridKPIMultiDt = function (reportName, LineNumber, isChartOpen = false) {
+        $scope.loadgridKPIMultiDt = function (reportName,fromDate,toDate, LineNumber, isChartOpen = false) {
             if (reportName == undefined || reportName == null || LineNumber == undefined || LineNumber == null) {
                 //reportName = 'KPI Chart - Fat to Protein Ratio'
             }
@@ -808,7 +814,7 @@
             //console.log('loading KPIMultiDtList');
 
             //LRWService.getKPIMultiDt('KPI Chart - Fat to Protein Ratio', '2020-05-08', '2020-05-09', '1', 'NULL', 'NULL', 'NULL').success(function (data) {
-            LRWService.getKPIMultiDt(reportName, $scope.fromDate, $scope.toDate, LineNumber, 'NULL', 'NULL', 'NULL').success(function (data) {
+            LRWService.getKPIMultiDt(reportName, fromDate, toDate, LineNumber, 'NULL', 'NULL', 'NULL').success(function (data) {
                            var KPIMultiDtList = data.KPIMultiDtList;
                 if (isChartOpen) {
                     var cols = [
@@ -866,14 +872,14 @@
         };
         
   
-        $scope.loadgridKPISingleDt = function (reportName, LineNumber, isChartOpen = false) {
+        $scope.loadgridKPISingleDt = function (reportName,fromDate,toDate, LineNumber, isChartOpen = false) {
 
             $scope.loading = true;
             if (reportName == undefined || reportName == null || LineNumber == undefined || LineNumber == null) {
                 //reportName = 'KPI Chart - Mill pH'
             }
             //console.log('loading KPISingleDt');
-            LRWService.getKPISingleDt(reportName, $scope.fromDate, $scope.toDate, LineNumber, 'NULL', 'NULL', 'NULL').success(function (data) {
+            LRWService.getKPISingleDt(reportName, fromDate, toDate, LineNumber, 'NULL', 'NULL', 'NULL').success(function (data) {
             //LRWService.getKPISingleDt('KPI Chart - Mill pH', '2020-05-08', '2020-05-09', '1', 'NULL', 'NULL', 'NULL').success(function (data) {
 
                 var KPISingleDtList = data.KPISingleDtList;
@@ -928,9 +934,9 @@
                 if (dataObject.KPI_Report_Name != "" && dataObject.KPI_Report_Name != null) {
                     var reportName = Number(dataObject.KPI_Report_Name[dataObject.KPI_Report_Name.length - 1]);
                     if (reportName > 1) {
-                        $scope.loadgridKPIMultiDt(dataObject.KPI_RD_Name, dataObject.LineNumber, true)
+                        $scope.loadgridKPIMultiDt(dataObject.KPI_RD_Name, $scope.fromDate, $scope.toDate, dataObject.LineNumber, true)
                     } else {
-                        $scope.loadgridKPISingleDt(dataObject.KPI_RD_Name, dataObject.LineNumber, true)
+                        $scope.loadgridKPISingleDt(dataObject.KPI_RD_Name, $scope.fromDate, $scope.toDate, dataObject.LineNumber, true)
                     }
                 }
             }
@@ -1292,6 +1298,12 @@
 
             LRWService.getFinishRpt(lineNumber, productionOrder, productCode, fromDate, toDate).success(function (data) {
                 debugger;
+                data.FinishRptList.forEach(a => {
+                    if (a.KPI_Report_Name != "" && a.KPI_Report_Name != null) {
+                        a["isClickable"] = true;
+                    }
+                })
+                $scope.finishRptData = data.FinishRptList;
                 keysArray = Object.keys(data.FinishRptList[0]);
                 //console.log(keysArray);
                 var sortedKeysArray = keysArray.sort().reverse();
@@ -1330,7 +1342,8 @@
                     name: 'GroupName', field: 'GroupName', width: '5%', visible: true, pinnedLeft: true
                 });
                 $scope.gridOptionsFinishRpt.columnDefs.push({
-                    name: 'AttributeName', field: 'AttributeName', width: '5%', visible: true
+                    name: 'AttributeName', field: 'AttributeName', width: '5%', visible: true,
+                    cellTemplate: `<div ng-click="grid.appScope.selectGridToLoadFinishRpt(COL_FIELD)">{{COL_FIELD CUSTOM_FILTERS}}</div>`
                 });
                 $scope.gridOptionsFinishRpt.columnDefs.push({
                     name: 'source', field: 'source', width: '5%', visible: true
@@ -1361,6 +1374,23 @@
                 $scope.gridOptionsFinishRpt.data.splice(0, 5);
 
             }).finally(function () { $scope.loading = false; });
+        }
+
+        $scope.selectGridToLoadFinishRpt = function (data) {
+
+            var dataObject = $scope.finishRptData.find(obj => {
+                return obj.AttributeName === data
+            });
+            if (dataObject != null) {
+                if (dataObject.KPI_Report_Name != "" && dataObject.KPI_Report_Name != null) {
+                    var reportName = Number(dataObject.KPI_Report_Name[dataObject.KPI_Report_Name.length - 1]);
+                    if (reportName > 1) {
+                        $scope.loadgridKPIMultiDt(dataObject.KPI_RD_Name, $scope.finishRptFromDate, $scope.finishRptToDate, dataObject.LineNumber, true)
+                    } else {
+                        $scope.loadgridKPISingleDt(dataObject.KPI_RD_Name, $scope.finishRptFromDate, $scope.finishRptToDate, dataObject.LineNumber, true)
+                    }
+                }
+            }
         }
 
         function bgColorFinishRpt(grid, row, col, rowRenderIndex, colRenderIndex) {
