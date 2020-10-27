@@ -35,6 +35,13 @@ namespace BLL.Interfaces
 
     }
 
+    interface IMilkPre
+    {
+        //Selection
+        MilkPreCollection GetMilkPreCollection(string StartDate, string EndDate);
+
+    }
+
     interface IFinishRptParam
     {
         //Selection

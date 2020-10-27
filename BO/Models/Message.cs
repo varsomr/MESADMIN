@@ -1145,15 +1145,16 @@ namespace BO.Models
 
     public class FinishRptCollection
     {
-        //public List<VatMakeRpt> VatMakeRptList;
 
         public List<IDictionary<string, string>> FinishRptList = new List<IDictionary<string, string>>();
 
-        //public VatMakeRptCollection ()
-        //{
-        //    //VatMakeRptList = new List<VatMakeRpt>();
-        //    VatMakeRptList = new List<IDictionary<string, string>>();
-        //}
+    }
+
+    public class MilkPreCollection
+    {
+
+        public List<IDictionary<string, string>> MilkPreList = new List<IDictionary<string, string>>();
+
     }
 
 

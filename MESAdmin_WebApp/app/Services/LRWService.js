@@ -65,6 +65,20 @@
                     return $http(req);
                 },
 
+                getMilkPreRpt: function (StartDate, EndDate) {
+
+                    console.log("Milk Prescreen LRS ");
+                    var url = window.location.protocol + "//" + window.location.hostname + ":1630/api/Message/getMilkPreRpt/" + StartDate + "/" + EndDate + "/";
+                    console.log(url);
+                    var req = {
+                        method: 'GET',
+                        url: url
+                    };
+                    console.log("making api call url for Support");
+
+                    return $http(req);
+                },
+
                 getKPIMultiDt: function (ReportName, DateStart, DateEnd, RD3, RD4, RD5, RD6) {
 
                     console.log("KPI Multi Data");

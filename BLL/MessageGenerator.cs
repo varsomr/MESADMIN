@@ -2349,6 +2349,33 @@ namespace BLL
         }
     }
 
+    public class MilkPreGenerator : IMilkPre
+    {
+        public MilkPreCollection GetMilkPreCollection(string StartDate, string EndDate)
+        {
+            MilkPreCollection dc = new MilkPreCollection();
+            DataSet dsDefect = DBConnection.DBConnectMilkPre("_usp_Milk_PreScreen_dw", StartDate, EndDate);
+            if (dsDefect.Tables.Count > 0 && dsDefect.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in dsDefect.Tables[0].Rows)
+                {
+                   
+                    Dictionary<string, string> defectdictionary = new Dictionary<string, string>();
+                    for (int index = 0; index < dsDefect.Tables[0].Columns.Count; index++)
+                    {
+
+                        defectdictionary[dsDefect.Tables[0].Columns[index].ToString()] = dr[index].ToString();
+
+                    }
+
+                    dc.MilkPreList.Add(defectdictionary);
+
+                }
+            }
+            return dc;
+        }
+    }
+
     public class VatMakeParamGenerator : IVatMakeRptParam
     {
         public VatMakeRptParamCollection GetVatMakeRptCollection(string StartDate, string EndDate)
