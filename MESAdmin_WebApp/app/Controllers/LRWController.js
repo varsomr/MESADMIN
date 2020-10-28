@@ -473,9 +473,10 @@
             date = date.toISOString().substring(0, 10),
                 field = document.querySelector('#fromDate');
             finRptField = document.querySelector('#finishRepFromDate');
+            milkRptField = document.querySelector('#fromMKPreDate');
             field.value = $scope.FormatDTSlash(date);
             finRptField.value = $scope.FormatDTSlash(date);				   
-				 
+            milkRptField.value = $scope.FormatDTSlash(date);	 
 			   
 
             var date = new Date();
@@ -483,8 +484,10 @@
             date = date.toISOString().substring(0, 10),
                 field = document.querySelector('#toDate');
             finRptField = document.querySelector('#finishRepToDate');
+            milkRptField = document.querySelector('#toMKPreDate');
             field.value = $scope.FormatDTSlash(date);
             finRptField.value = $scope.FormatDTSlash(date);
+            milkRptField.value = $scope.FormatDTSlash(date);	
 
             //var dateF = new Date();
             //var firstDay = '09/10/2020';//new Date(dateF.getFullYear(), dateF.getMonth(), 1);
@@ -1500,12 +1503,14 @@
         $scope.toMKPreDate = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()))
 
         $scope.viewReportsMilkPre = function () {
-            $scope.removeGridData();
-            $scope.loadgridVatMakeRpt($scope.fromMKPreDate, $scope.totoMKPreDateDate);
+            $scope.removeGridDataMilkPre();
+            $scope.loadgridMilkPreRpt($scope.fromMKPreDate, $scope.totoMKPreDateDate);
         }
-
+        $scope.removeGridDataMilkPre = function () {
+            $scope.gridOptionsMilkPreRpt.data = [];
+        }
         $scope.gridOptionsMilkPreRpt = {
-            headerTemplate: 'app/Views/header.html',
+            
             enableFullRowSelection: false,
             enableRowHeaderSelection: false,
             paginationPageSizes: [20, 40, 60],
