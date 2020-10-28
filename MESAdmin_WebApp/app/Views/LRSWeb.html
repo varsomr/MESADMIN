@@ -2093,6 +2093,16 @@
                         </div>
 
                     </div>
+                    <div class="row" style="margin-top:10px">
+                        <div class="col-md-6">
+                            <div class="col-md-4">
+                                <button type="button" ng-class="{selectedButton: selectedLineNumber == '1'}" class="btn btn-sm btn-info" ng-click="gridPaginationFinishRpt('1')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">1</button>
+                                <button type="button" ng-class="{selectedButton: selectedLineNumber == '2'}" class="btn btn-sm btn-info" ng-click="gridPaginationFinishRpt('2')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">2</button>
+                                <button type="button" ng-class="{selectedButton: selectedLineNumber == '3'}" class="btn btn-sm btn-info" ng-click="gridPaginationFinishRpt('3')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">3</button>
+                            </div>
+                        </div>
+
+                    </div>
                     <hr style="margin-bottom:0px;margin-top:0px" />
                     <div class="row">
                         <div class="col-md-6">
@@ -2116,6 +2126,14 @@
                         <div id="gridOperator" style="width:100%;height:50%; float:left; border:hidden">
                             <div id="gridHFinishRpt" ui-grid="headerGridOptionsFinishRpt" ui-grid-pinning ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRpt" style=" width:98vw; height: 25vh; color:white;border:none; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
                             <div id="gridFinishReport" ui-grid="gridOptionsFinishRpt" ui-grid-pinning ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRpt" style=" width:98vw; height: 40vh; color:white;border:none; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
+                        </div>
+                    </div>
+                    <div style="padding-left: 120px; padding-top: 400px;background-color:transparent; color:black" class="grid-msg-overlay" ng-hide="!loading">
+                        <div style="background-color:transparent; color:white;" class="msg">
+                            <span>
+                                Please wait while Loading Data...<br /><!---->
+                                <br />Working on Retrieving info ...<i class="fa fa-spinner fa-spin"></i>
+                            </span>
                         </div>
                     </div>
                 </div>

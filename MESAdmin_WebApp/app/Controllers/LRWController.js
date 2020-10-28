@@ -1338,8 +1338,12 @@
                         orderedProductionOders.push({ po: split.sort(function (a, b) { return b.length - a.length; })[0], seqNumber: split[split.length - 1] });
                     }
                 }
-                for (var o = 0; o < orderedProductionOders.length; o++) {
-                    var po = orderedProductionOders.find(a => a.seqNumber == o + 5).po;
+                orderedProductionOders = orderedProductionOders.sort(function (a, b) {
+                    return a.seqNumber - b.seqNumber;
+                });
+                
+                orderedProductionOders.forEach(a => {
+                    var po = a.po;
                     var keys = sortedKeysArray.filter(a => a.includes(po) && !a.includes('Tgt') && !a.includes('LW') && !a.includes('Hi'))
                     var nKeys = []
                     var keysToPush = []
@@ -1356,7 +1360,26 @@
                     }
                     sortedKeysArray = sortedKeysArray.filter(a => !a.includes(po))
                     sortedKeysArray.push(...keysToPush)
-                }
+                });
+                //for (var o = 0; o < orderedProductionOders.length; o++) {
+                //    var po = orderedProductionOders.find(a => a.seqNumber == o).po;
+                //    var keys = sortedKeysArray.filter(a => a.includes(po) && !a.includes('Tgt') && !a.includes('LW') && !a.includes('Hi'))
+                //    var nKeys = []
+                //    var keysToPush = []
+                //    for (var a = 0; a < keys.length; a++) {
+                //        nKeys.push(keys[a].split('-')[0])
+                //    }
+                //    nKeys = isAscending ? nKeys.sort((a, b) => a - b) : nKeys.sort((a, b) => b - a);
+                //    for (var n = 0; n < nKeys.length; n++) {
+                //        keys.forEach(a => {
+                //            if (a.split('-')[0] == nKeys[n]) {
+                //                keysToPush.push(a)
+                //            }
+                //        });
+                //    }
+                //    sortedKeysArray = sortedKeysArray.filter(a => !a.includes(po))
+                //    sortedKeysArray.push(...keysToPush)
+                //}
                
                 sortedKeysArray = [...new Set(sortedKeysArray)];
                 $scope.gridOptionsFinishRpt.columnDefs.push({ name: 'LineNumber', field: 'LineNumber', width: '5%', visible: true, pinnedLeft: true });
@@ -1444,6 +1467,18 @@
         }
        
         $scope.loadgridFinishRpt()
+        $scope.gridPaginationFinishRpt = function (lineNumber) {
+           
+                $scope.removeGridDataFinishRpt();
+            $scope.loadgridFinishRpt(lineNumber);
+
+        }
+        $scope.removeGridDataFinishRpt = function () {
+            $scope.gridOptionsFinishRpt.columnDefs = [];
+            $scope.headerGridOptionsFinishRpt.columnDefs = [];
+            $scope.gridOptionsFinishRpt.data = [];
+            $scope.headerGridOptionsFinishRpt.data = [];
+        }
 
         //############################################### Milk Prescreen ######################################################//
 
