@@ -258,6 +258,7 @@
             enableCellEdit: false,
             enableGridMenu: false,
             enablePinning: true,
+            //showHeader: false,
 
             rowTemplate:
                 '<div ng-class="{ \'grey\':grid.appScope.rowFormatter( row ) }">' +
@@ -266,8 +267,7 @@
             customScroller: function myScrolling(uiGridViewport, scrollHandler) {
                 uiGridViewport.on('scrolled', function myScrollingOverride(event) {
                     $scope.$on('scrolled', function (event, args) {
-                        debugger;
-                        console.log('was jjjjjj scrolled');
+                       console.log('was jjjjjj scrolled');
                     });
                     scrollHandler(event);
                 });
@@ -589,6 +589,26 @@
         }
 
         $scope.getVatMakeParams($scope.fromDate, $scope.toDate);
+		        $scope.getVatMakeParams($scope.fromDate, $scope.toDate);
+        $scope.pushKeys = function (sortedKeysArray, po, isAscending) {
+            var keys = sortedKeysArray.filter(a => a.includes(po) && !a.includes('Tgt') && !a.includes('LW') && !a.includes('Hi'))
+            var nKeys = []
+            var keysToPush = []
+            for (var a = 0; a < keys.length; a++) {
+                nKeys.push(keys[a].split('-')[0])
+            }
+            nKeys = isAscending ? nKeys.sort((a, b) => a - b) : nKeys.sort((a, b) => b - a);
+            for (var n = 0; n < nKeys.length; n++) {
+                keys.forEach(a => {
+                    if (a.split('-')[0] == nKeys[n]) {
+                        keysToPush.push(a)
+                    }
+                });
+            }
+            sortedKeysArray = sortedKeysArray.filter(a => !a.includes(po))
+            sortedKeysArray.push(...keysToPush)
+            return sortedKeysArray;
+        }
         $scope.loadgridVatMakeRpt = function (lineNumber, productionOrder, productCode, fromDate, toDate, isAscending = false) {
             if (lineNumber == null || lineNumber == undefined || lineNumber == 'ALL') {
                 lineNumber = '1'
@@ -642,25 +662,27 @@
                     }
                     //orderedProductionOders = orderedProductionOders.sort(function (a, b) { return b.seqNumber - a.seqNumber });
 
-                    for (var o = 0; o < orderedProductionOders.length; o++) {
-                        var po = orderedProductionOders.find(a => a.seqNumber == o + 1).po;
-                        var keys = sortedKeysArray.filter(a => a.includes(po) && !a.includes('Tgt') && !a.includes('LW') && !a.includes('Hi'))
-                        var nKeys = []
-                        var keysToPush = []
-                        for (var a = 0; a < keys.length; a++) {
-                            nKeys.push(keys[a].split('-')[0])
+                    if (!isAscending) {
+                        for (var o = 0; o < orderedProductionOders.length; o++) {
+                            var po = orderedProductionOders.find(a => a.seqNumber == o + 1).po;
+                            sortedKeysArray = $scope.pushKeys(sortedKeysArray, po, isAscending);										   
+																																			  
+									  
+										   
+															   
+															 
                         }
-                        nKeys = isAscending ? nKeys.sort((a, b) => a - b) : nKeys.sort((a, b) => b - a);
-                        for (var n = 0; n < nKeys.length; n++) {
-                            keys.forEach(a => {
-                                if (a.split('-')[0] == nKeys[n]) {
-                                    keysToPush.push(a)
-                                }
-                            });
+                    } else {
+                        for (var o = orderedProductionOders.length; o >= 1; o--) {
+                            var po = orderedProductionOders.find(a => a.seqNumber == o).po;
+                            sortedKeysArray = $scope.pushKeys(sortedKeysArray, po, isAscending);
+													  
+								 
+							   
                         }
-                        sortedKeysArray = sortedKeysArray.filter(a => !a.includes(po))
-                        sortedKeysArray.push(...keysToPush)
-                    }
+																					  
+														   
+                    }													   
                     //debugger
                     $scope.gridOptionsVatMakeRpt.columnDefs.push({ name: 'LineNumber', field: 'LineNumber', width: '5%', visible: true, pinnedLeft: true });
                     $scope.gridOptionsVatMakeRpt.columnDefs.push(
@@ -1297,7 +1319,7 @@
 
 
             LRWService.getFinishRpt(lineNumber, productionOrder, productCode, fromDate, toDate).success(function (data) {
-                debugger;
+               
                 data.FinishRptList.forEach(a => {
                     if (a.KPI_Report_Name != "" && a.KPI_Report_Name != null) {
                         a["isClickable"] = true;
@@ -1422,6 +1444,110 @@
         }
        
         $scope.loadgridFinishRpt()
+
+        //############################################### Milk Prescreen ######################################################//
+
+        $scope.MilkPrerptcalendardate = (nav, toFrom) => {
+            //debugger
+            $timeout(function () {
+                $(nav).datepicker({
+                    onSelect: (dateText) => {
+                        var date = new Date(dateText);
+                        $scope[toFrom] = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()));
+                        $scope.finishRptDateChange();
+                    },
+                    defaultDate: $scope[toFrom]
+                });
+            }, 10)
+
+        };
+        $scope.fromMKPreDate = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()))
+        $scope.toMKPreDate = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()))
+
+        $scope.viewReportsMilkPre = function () {
+            $scope.removeGridData();
+            $scope.loadgridVatMakeRpt($scope.fromMKPreDate, $scope.totoMKPreDateDate);
+        }
+
+        $scope.gridOptionsMilkPreRpt = {
+            headerTemplate: 'app/Views/header.html',
+            enableFullRowSelection: false,
+            enableRowHeaderSelection: false,
+            paginationPageSizes: [20, 40, 60],
+            paginationPageSize: 40,
+            rowHeight: 30,
+            enableFiltering: true,
+            enableCellEdit: false,
+            enableGridMenu: false,
+            enablePinning: true,
+            rowTemplate:
+                '<div ng-class="{ \'grey\':grid.appScope.rowFormatter( row ) }">' +
+                '  <div ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ng-class="{ \'ui-grid-row-header-cell\': col.isRowHeader }"  ui-grid-cell></div>' +
+                '</div>',
+            columnDefs: [
+                { field: 'LoadNumber', Name: 'LoadNo.', width: '5%', visible: true }
+                , { field: 'ProducerTicket', width: '10%', visible: true }
+                , { field: 'Route', width: '5%', visible: true }
+                , { field: 'Truck_ID', width: '10%', visible: true }
+                , { field: 'Btu', Name: 'BTU', width: '5%', visible: true }
+                , { field: 'Supplier', Name: 'Supplier', width: '5%', visible: true }
+                , { field: 'Bay_Number', Name: 'Bay No.', width: '5%', visible: true }
+                , { field: 'SampleID', Name: 'PreScreeen SampleID', width: '10%', visible: true }
+                , { field: 'SampleDate', Name: 'SampleDate', width: '5%', visible: true }
+                , { field: 'SampleTime', Name: 'Sample Pulled Time', width: '5%', visible: true }
+
+                , { field: 'Truck Sample Temperature', Name: 'Truck Sample Temp', width: '5%', visible: true }
+                , { field: 'Prescreen Sample Receipt Time', Name: 'Sample Receipt Time', width: '5%', visible: true }
+                , { field: 'Prescreen Receipt Temperature', Name: 'Receipt Temp', width: '5%', visible: true }
+                , { field: 'SampleDate', Name: 'Sample Tested Date', width: '5%', visible: true }
+                , { field: 'Prescreen Tested Time', Name: 'Sample Tested Time', width: '5%', visible: true }
+                , { field: 'Prescreen Tested Temperature', Name: 'Tested Temp', width: '5%', visible: true }
+                , { field: 'Reader Result', Name: 'Reader Result', width: '5%', visible: true }
+                , { field: 'Antibiotic', Name: 'Antibiotic', width: '5%', visible: true }
+
+                , { field: 'Tetracycline Presence', Name: 'Tetracycline Presence', width: '5%', visible: true }
+                , { field: 'Tetracycline Reader Result', Name: 'Tetracycline Reader Result', width: '5%', visible: true }
+                , { field: 'pH', Name: 'pH', width: '5%', visible: true }
+                , { field: 'Color', Name: 'Color', width: '5%', visible: true }
+                , { field: 'Cryoscope', Name: 'PreScreen Cryoscope', width: '5%', visible: true }
+                , { field: 'MILK CRYOSCOPE', Name: 'Drip Sample Cryoscope', width: '5%', visible: true }
+                , { field: 'UserName', Name: 'Licensed Operator', width: '5%', visible: true }
+                , { field: 'Comment', Name: 'Comments', width: '5%', visible: true }
+
+
+            ]
+        };
+
+        $scope.loadgridMilkPreRpt = function () {
+
+            $scope.loading = true;
+
+            console.log('loading grid');
+
+
+            LRWService.getMilkPreRpt($scope.fromMKPreDate, $scope.fromMKPreDate).success(function (data) {
+
+                if (data === null || data.MilkPreList === null || data.MilkPreList.length === 0) {
+
+                    $scope.error = true;
+                    $scope.errorDescription = "No data found for selected criteria.";
+
+                } else {
+                    $scope.gridOptionsMilkPreRpt.paginationPageSizes.push(
+                        data.MilkPreList.length
+                    );
+
+                    var MilkPreList = data.MilkPreList;
+                    $scope.gridOptionsMilkPreRpt.data = MilkPreList;
+                    console.log(MilkPreList);
+                    $scope.error = false;
+                }
+
+            }).finally(function () { $scope.loading = false; });
+
+        };
+
+        //############################################## Milk PreScreen  #######End###########################################//
         //###############################################  ChseMakSuprDopRpt SCREEN ############################################//
 
         $scope.gridOptionsChseMakSuprDopRpt = {

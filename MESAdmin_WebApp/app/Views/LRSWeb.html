@@ -311,6 +311,8 @@
             overflow-anchor: none;
             font-size: 10px;
             font-weight: bold;
+			border-style: solid;
+            border-width: thin;
         }
 
         .ui-grid-cell-contents {
@@ -319,6 +321,8 @@
             font-size: 10px;
             font-weight: bold;
             word-break: break-word;
+			border-style: solid;
+            border-width: thin;
         }
 
         .gridFS {
@@ -1471,11 +1475,11 @@
     <div class="calloutMain" style="float:left;width:100%;float:left;background-color:#3b3a3f;color:white" ng-controller="LRSWebcontroller">
         <button id="startmenubtn" title="Help!" class="mainBtn" style="width:80px;height:40px;float:left;background-color:transparent;color:white;border:hidden" ng-click="openModalStartMenu('start-menu-modal');"><img src="/images/Lepr.png" style="height:90%;width:90%" /></button>
         <!--<input id="keyword" style="width:240px;height:40px;background-color:#fff; font-size:large; color:#90c02f; float:left;border:inset;border-color:darkslategrey; text-align:center" placeholder="sample/batch/po/inspLot/truckid" ng-keyup="SelectKeyword()" />
-        <button id="go" ng-click="clearTooltip();SearchAll()" class="bigbtn" style='float:left;width:50px;font-size:small;background-color:black; color:white; border:outset 2px darkslategrey;height:40px;'><img src="/images/go.PNG" style="width:40px;height:30px;border-radius:48px;border-bottom-left-radius:0px;border-top-left-radius:0px;" /></button>-->
+    <button id="go" ng-click="clearTooltip();SearchAll()" class="bigbtn" style='float:left;width:50px;font-size:small;background-color:black; color:white; border:outset 2px darkslategrey;height:40px;'><img src="/images/go.PNG" style="width:40px;height:30px;border-radius:48px;border-bottom-left-radius:0px;border-top-left-radius:0px;" /></button>-->
         <div class="digital-clock" style="width:100px;height:40px;background-color:transparent; font-size:medium; color:white; float:right; border:hidden;background-color:transparent;color:white;text-align:center">00:00:00</div>
         <input id="MainClock" style="width:100px;height:20px;padding-bottom:5px; background-color:transparent; font-size:medium; color:white; float:right; border:hidden;background-color:transparent;color:white;text-align:center" ng-click="calendardate('#MainClock')" disabled>
         <!--<input id="VATPlantOff" style="width:3%;height:22px; font-size:small; float:right;text-align:center;background-color:transparent;color:lightgoldenrodyellow; border:hidden " disabled="disabled" name="VATPlantOff">
-        <input id="HMI" style="width:3%;height:22px; font-size:small; float:right;text-align:center;background-color:transparent;color:lightgoldenrodyellow; border:hidden " disabled="disabled">-->
+    <input id="HMI" style="width:3%;height:22px; font-size:small; float:right;text-align:center;background-color:transparent;color:lightgoldenrodyellow; border:hidden " disabled="disabled">-->
         <label style="float:right;font-size:small;color:#fff;display:none"> {{title}}</label>
         <label id="uid" name="uid" style="font-family:sans-serif;display:none">{{function_one()}} </label>
         <input id="LoggedIn" name="LoggedIn" ng-model="LoggedIn" style="font-size:small; font-family:sans-serif;color:#fff;float:right" disabled />
@@ -1504,6 +1508,9 @@
         </button>
         <button id="Tsk" class="mainBtn" ng-click="openModal('mysidenavRightFinishReport')" style="width:7%; height:40px; border:solid 1px darkslategrey; background-color:transparent;color:white; float:left;font-size:small;border-bottom:hidden">
             Finish Report<span class="tooltiptext" id="myTooltipFr"></span>
+        </button>
+        <button id="MkPr" class="mainBtn" ng-click="openModal('mysidenavMilkPreScreen')" style="width:7%; height:40px; border:solid 1px darkslategrey; background-color:transparent;color:white; float:left;font-size:small;border-bottom:hidden">
+            Milk PreScreen<span class="tooltiptext" id="myTooltipFr"></span>
         </button>
     </div>
 
@@ -1815,8 +1822,7 @@
                                     <label style="float:left;color:black">Sort</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <select id="SULine" ng-model="selectedSort" ng-options="item for item in sortOptions" ng-change="changeSort()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;">
-                                    </select>
+                                    <select id="SULine" ng-model="selectedSort" ng-options="item for item in sortOptions" ng-change="changeSort()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;"></select>
                                 </div>
                             </div>
 
@@ -2006,7 +2012,7 @@
             </script>
         </div>
     </div>
-    <!--#################################################### VatMakeRpt  ######################################################-->
+    <!--#################################################### Finish Rpt  ######################################################-->
 
     <div id="mysidenavRightFinishReport" class="modal" style="background-color:white; border:none" ng-controller="LRWcontroller">
         <div class="modal-content" style="height:100%;  background-color:white;color:white">
@@ -2040,8 +2046,7 @@
                                     <label style="float:left;color:black">Line Number</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <select id="finishReportLineNumber" ng-model="finishRptSelectedLineNumber" ng-options="item for item in finishRptLineNumbers" ng-change="changeFinishRptLineNumber()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;">
-                                    </select>
+                                    <select id="finishReportLineNumber" ng-model="finishRptSelectedLineNumber" ng-options="item for item in finishRptLineNumbers" ng-change="changeFinishRptLineNumber()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;"></select>
                                 </div>
                             </div>
 
@@ -2081,8 +2086,7 @@
                                     <label style="float:left;color:black">Sort</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <select id="SULine" ng-model="selectedSort" ng-options="item for item in sortOptions" ng-change="changeSort()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;">
-                                    </select>
+                                    <select id="SULine" ng-model="selectedSort" ng-options="item for item in sortOptions" ng-change="changeSort()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;"></select>
                                 </div>
                             </div>
 
@@ -2095,7 +2099,7 @@
                             <img class="img" src="../leprinoFoods.PNG" style="float:left;height:10%;width:10%" />
                         </div>
                         <div class="col-md-6">
-                            <label style="color:black; font-size: 20px; text-align:center">Make Report</label><br />
+                            <label style="color:black; font-size: 20px; text-align:center">FInish Report</label><br />
                             <a style="color:black; font-size: 10px; text-align:center" ng-click="manageAutoRefresh()">Click to {{refreshtxt}} report auto-refresh</a>
                         </div>
                     </div>
@@ -2118,6 +2122,102 @@
             </div>
         </div>
     </div>
+    <!--#################################################### MilkPreScreen  ######################################################-->
+    <div id="mysidenavMilkPreScreen" class="modal" style="background-color:white; border:none" ng-controller="LRWcontroller">
+
+        <div class="modal-content" style="height:100%;  background-color:white;color:white">
+            <div class="modal-body" style="height:100%;  background-color:white;color:white">
+                <!--start filter-->
+                <!--<div class="row">
+                    <div class="col-md-12">
+                        <label id="modalMessage" style="font-size:medium;font-weight:bold;background-color:brown;color:white;width:100%">MilkPreScreen Report</label>
+                    </div>
+                </div>-->
+                <div style="background-color:lightblue">
+                    <div class="row" ng-show="isHideFilters == false">
+                        <div class="col-md-12">
+                            <div class="col-md-2">
+                                <div class="col-md-6">
+                                    <label style="float:left;color:black">From Date</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input id="fromMKPreDate" style="color:black; width:100px;height:20px; font-size:x-small;  float:left; border:solid 2px; text-align:center" ng-click="MilkPrerptcalendardate('#fromMKPreDate','fromMKPreDate')">
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="col-md-6">
+                                    <label style="float:left;color:black">To Date</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input id="toMKPreDate" style="color: black;width:100px; height: 20px; font-size: x-small; float: left; border: solid 2px; text-align: center;" ng-click="MilkPrerptcalendardate('#toMKPreDate','toMKPreDate')">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" ng-click="viewReportsMilkPre()" style="color:black;float:right"> View Report</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="row" ng-show="isHideFilters == false" style="margin-top:10px">
+                        <div class="col-md-12">
+                         </div>
+
+                    </div>
+
+                         <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <button class="col-md-offset-5" style="color:black" type="button" ng-click="hideShowFilters()">Hide/Show Filters</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <hr style="margin-bottom:0px;margin-top:0px" />
+                <div class="row">
+                    <div class="col-md-6">
+                        <img class="img" src="../leprinoFoods.PNG" style="float:left;height:10%;width:10%" />
+                    </div>
+                    <div class="col-md-6">
+                        <label style="color:black; font-size: 20px; text-align:center">Milk PreScreen Report</label><br />
+                        <a style="color:black; font-size: 10px; text-align:center" ng-click="manageAutoRefresh()">Click to {{refreshtxt}} report auto-refresh</a>
+                    </div>
+                </div>
+                <hr class="new1" />
+                <div class="row" style="margin-top:10px">
+                    <div class="col-md-6">
+                        <label style="color:black;font-weight:bold">Production Date: {{FormatDTSlash(fromMKPreDate)}} - {{FormatDTSlash(toMKPreDate)}} </label>
+                    </div>
+                    <div class="col-md-offset-10">
+                        <label style="color:black;font-weight:bold;text-align:right">PlantName: Fort Morgan</label>
+                    </div>
+                </div>
+                <div id="gridandchartW" style="width:100%; height:100%">
+                    <!--top grid **************************************************************-->
+                    <!--<input type="checkbox" id="p1" name="hidep1" value="Hide source" ng-click="$Scope.GridDisplayStatus($event, 2,'p1')" /> -->
+
+
+                    <div id="gridOperator" style="width:100%;height:50%; float:left; border:hidden">
+                      
+                        <div id="gridMkPr"  ui-grid="gridOptionsMilkPreRpt" ui-grid-pinning ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRpt" style=" width:98vw; height: 45vh; color:white;border:none; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
+
+                        <div style="padding-left: 120px; padding-top: 400px;background-color:transparent; color:black" class="grid-msg-overlay" ng-hide="!loading">
+                            <div style="background-color:transparent; color:white;" class="msg">
+                                <span>
+                                    Please wait while Loading Data...<br /><!---->
+                                    <br />Working on Retrieving info ...<i class="fa fa-spinner fa-spin"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--#################################################### MilkPreScreen  ################ END ######################################-->
     <!--Recipe Plan Vs Actual Plan-->
     <div id="mysidenavRightRecPln" ng-controller="LRWcontroller" class="modal">
         <!-- Modal content -->
@@ -2467,7 +2567,7 @@
                     <button id="closeSaveMessage" type="button" ng-click="cancelModalDynamic('chartModal')" style="transition: 1s;background:fixed 2px black; color:white;float:left;border-radius:24px;width:80px;height:80px; font-size:medium;float:right">CANCEL</button>
                     <div google-chart chart="chart" style="width: 1200px; height: 400px;" />
                 </div>
-                
+
                 <div style="height:400px; color:black; overflow:auto">
                     <table border=1 class="table-bordered" style="margin-top:10px">
                         <thead>
@@ -2490,7 +2590,7 @@
         </div>
     </div>
 
-    
+
 
 </body>
 
