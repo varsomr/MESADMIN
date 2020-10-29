@@ -1564,9 +1564,13 @@
        
         $scope.loadgridFinishRpt()
         $scope.gridPaginationFinishRpt = function (lineNumber) {
-           
+            if (lineNumber == 4) {
+                $scope.isCommentsgrid = true;
+            } else {
                 $scope.removeGridDataFinishRpt();
-            $scope.loadgridFinishRpt(lineNumber);
+                $scope.loadgridFinishRpt(lineNumber);
+                $scope.isCommentsgrid = false;
+            }
 
         }
         $scope.removeGridDataFinishRpt = function () {
@@ -1611,37 +1615,43 @@
         };
 
 
-        //$scope.loadgridFinishRptComments = function () {
+        $scope.loadgridFinishRptComments = function () {
             
-        //    $scope.loading = true;
+            $scope.loading = true;
+            var productionOrder = "";
+            var productCode = "";
+            console.log('loading grid');
+            if ( $scope.finishRptSelectedProductionOrder == 'ALL') {
+                productionOrder = '1221613,1221605,1221604,1221603,1221617,1221602,1221753'
+            }
+            if ( $scope.finishRptSelectedProductCode == 'ALL') {
+                productCode = '100000223,100000259,100000268,100001559,100001979,100400168,100402450'
+            }
 
-        //    console.log('loading grid');
-            
+            LRWService.getFinishRptComments($scope.finishRptSelectedLineNumber, productionOrder, productCode, $scope.finishRptFromDate, $scope.finishRptToDate).success(function (data) {
 
-        //    LRWService.getFinishRptComments($scope.finishRptFromDate, $scope.finishRptToDate, $scope.finishRptSelectedLineNumber, $scope.finishRptSelectedProductionOrder, $scope.finishRptSelectedProductCode).success(function (data) {
+                if (data === null || data.FinishRptCommentsList === null || data.FinishRptCommentsList.length === 0) {
 
-        //        if (data === null || data.FinishRptCommentsList === null || data.FinishRptCommentsList.length === 0) {
+                    $scope.error = true;
+                    $scope.errorDescription = "No data found for selected criteria.";
+                    //alert("No Data");
+                } else {
+                    $scope.gridOptionsFinishRptComments.paginationPageSizes.push(
+                        data.FinishRptCommentsList.length
+                    );
 
-        //            $scope.error = true;
-        //            $scope.errorDescription = "No data found for selected criteria.";
-        //            //alert("No Data");
-        //        } else {
-        //            $scope.gridOptionsFinishRptComments.paginationPageSizes.push(
-        //                data.FinishRptCommentsList.length
-        //            );
+                    var FinishRptCommentsList = data.FinishRptCommentsList;
+                    $scope.gridOptionsFinishRptComments.data = FinishRptCommentsList;
+                    console.log(FinishRptCommentsList);
+                    //alert(FinishRptCommentsList);
+                    $scope.error = false;
+                }
 
-        //            var FinishRptCommentsList = data.FinishRptCommentsList;
-        //            $scope.gridOptionsFinishRptComments.data = FinishRptCommentsList;
-        //            console.log(FinishRptCommentsList);
-        //            //alert(FinishRptCommentsList);
-        //            $scope.error = false;
-        //        }
+            }).finally(function () { $scope.loading = false; });
 
-        //    }).finally(function () { $scope.loading = false; });
+        };
 
-        //};
-
-        //$scope.loadgridFinishRptComments();
+        $scope.loadgridFinishRptComments();
 
      //###############################################  FinishRpt Comment SCREEN #############  End   ###############################//		
 
