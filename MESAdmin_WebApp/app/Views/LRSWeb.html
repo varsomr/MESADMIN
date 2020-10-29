@@ -2018,7 +2018,7 @@
         <div class="modal-content" style="height:100%;  background-color:white;color:white">
             <div class="modal-body" style="height:100%;  background-color:white;color:white">
                 <div style="background-color:lightblue">
-                    <div class="row">
+                    <div class="row" ng-show="isHideFilters == false">
                         <div class="col-md-12">
                             <div class="col-md-2">
                                 <div class="col-md-6">
@@ -2039,7 +2039,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row" style="margin-top:10px">
+                    <div class="row" style="margin-top:10px" ng-show="isHideFilters == false">
                         <div class="col-md-12">
                             <div class="col-md-2">
                                 <div class="col-md-6">
@@ -2067,7 +2067,7 @@
                         </div>
 
                     </div>
-                    <div class="row" style="margin-top:10px">
+                    <div class="row" style="margin-top:10px" ng-show="isHideFilters == false">
                         <div class="col-md-12">
                             <div class="col-md-2">
                                 <div class="col-md-6">
@@ -2086,16 +2086,25 @@
                                     <label style="float:left;color:black">Sort</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <select id="SULine" ng-model="selectedSort" ng-options="item for item in sortOptions" ng-change="changeSort()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;"></select>
+                                    <select id="SULine" ng-model="selectedSortFinishRpt" ng-options="item for item in sortOptionsFinishRpt" ng-change="changeSortFinishRpt()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;"></select>
                                 </div>
                             </div>
 
                         </div>
 
                     </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <button class="col-md-offset-5" style="color:black" type="button" ng-click="hideShowFilters()">Hide/Show Filters</button>
+                            </div>
+                        </div>
+
+                    </div>
                     <div class="row" style="margin-top:10px">
                         <div class="col-md-6">
                             <div class="col-md-4">
+                                <input type="checkbox" ng-click="showorhideExtraColumnsFinishRpt()" id="hideshowcheckboxidfinishrpt" />
                                 <button type="button" ng-class="{selectedButton: selectedLineNumber == '1'}" class="btn btn-sm btn-info" ng-click="gridPaginationFinishRpt('1')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">1</button>
                                 <button type="button" ng-class="{selectedButton: selectedLineNumber == '2'}" class="btn btn-sm btn-info" ng-click="gridPaginationFinishRpt('2')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">2</button>
                                 <button type="button" ng-class="{selectedButton: selectedLineNumber == '3'}" class="btn btn-sm btn-info" ng-click="gridPaginationFinishRpt('3')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">3</button>
