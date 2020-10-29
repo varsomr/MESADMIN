@@ -77,6 +77,15 @@ namespace Leprino_Integration_Tool.Controllers
             return vm.GetFinishRptCollection(StartDate, EndDate);
         }
 
+
+        [Route("api/Message/getFinishRptComments/{StartDate}/{EndDate}/{LineNumber}/{ProductionOrder}/{ProductCode}")]
+        public FinishRptCommentsCollection getFinishRptComments(string StartDate, string EndDate, string LineNumber, string ProductionOrder, string ProductCode)
+        {
+
+            FinishRptCommentsGenerator vm = new FinishRptCommentsGenerator();
+            return vm.GetFinishRptCommentsCollection(StartDate, EndDate, LineNumber, ProductionOrder, ProductCode);
+        }
+
         [Route("api/Message/getMilkPreRpt/{StartDate}/{EndDate}")]
         public MilkPreCollection getMilkPreRpt(string StartDate, string EndDate)
         {
