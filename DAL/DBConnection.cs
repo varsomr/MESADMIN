@@ -2635,6 +2635,7 @@ namespace DAL.Data
                 sqlComm.Parameters.Add(p5);
                 sqlComm.Parameters.Add(p6);
 
+                sqlComm.CommandTimeout = 0;
                 sqlComm.ExecuteNonQuery();
 
                 SqlDataAdapter daa = new SqlDataAdapter();
@@ -2685,6 +2686,7 @@ namespace DAL.Data
                 sqlComm.Parameters.Add(p5);
                 sqlComm.Parameters.Add(p6);
 
+                sqlComm.CommandTimeout = 0;
                 sqlComm.ExecuteNonQuery();
 
                 SqlDataAdapter daa = new SqlDataAdapter();
@@ -2712,7 +2714,8 @@ namespace DAL.Data
      
                 sqlComm.Parameters.Add(p);
                 sqlComm.Parameters.Add(p1);
- 
+
+                sqlComm.CommandTimeout = 0;
                 sqlComm.ExecuteNonQuery();
 
                 SqlDataAdapter daa = new SqlDataAdapter();
@@ -2741,6 +2744,7 @@ namespace DAL.Data
                 sqlComm.Parameters.Add(p);
                 sqlComm.Parameters.Add(p1);
 
+                sqlComm.CommandTimeout = 0;
                 sqlComm.ExecuteNonQuery();
 
                 SqlDataAdapter daa = new SqlDataAdapter();
@@ -2777,8 +2781,49 @@ namespace DAL.Data
                 sqlComm.Parameters.Add(p1);
                 sqlComm.Parameters.Add(p2);
                 sqlComm.Parameters.Add(p3);
-                
 
+                sqlComm.CommandTimeout = 0;
+                sqlComm.ExecuteNonQuery();
+
+                SqlDataAdapter daa = new SqlDataAdapter();
+                daa.SelectCommand = sqlComm;
+                daa.Fill(dsrpt);
+                return dsrpt;
+            }
+
+        }
+
+        //DBConnection-FOR SELECT QUERY- PARAMETERS TO PASS TO the SP
+        public static DataSet DBConnectFinishRptComments(string storedprocedure, string parameter, string parameter1, string parameter2, string parameter3, string parameter4)
+        {
+            DataSet dsrpt = new DataSet();
+            using (SqlConnection LRWConnect = new SqlConnection(ConfigurationManager.ConnectionStrings["LRWConnnect"].ConnectionString.ToString()))
+            {
+                LRWConnect.Open();
+                SqlCommand sqlComm = new SqlCommand(storedprocedure, LRWConnect);
+                sqlComm.CommandType = CommandType.StoredProcedure;
+
+                var p = new SqlParameter("StartDate", SqlDbType.VarChar);
+                var p1 = new SqlParameter("EndDate", SqlDbType.VarChar);
+                var p2 = new SqlParameter("LineNumber", SqlDbType.VarChar);
+                var p3 = new SqlParameter("ProductionOrder", SqlDbType.VarChar);
+                var p4 = new SqlParameter("ProductCode", SqlDbType.VarChar);
+
+
+                p.Value = parameter;
+                p1.Value = parameter1;
+                p2.Value = parameter2;
+                p3.Value = parameter3;
+                p4.Value = parameter4;
+
+
+                sqlComm.Parameters.Add(p);
+                sqlComm.Parameters.Add(p1);
+                sqlComm.Parameters.Add(p2);
+                sqlComm.Parameters.Add(p3);
+                sqlComm.Parameters.Add(p4);
+
+                sqlComm.CommandTimeout = 0;
                 sqlComm.ExecuteNonQuery();
 
                 SqlDataAdapter daa = new SqlDataAdapter();

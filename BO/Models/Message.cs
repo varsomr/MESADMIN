@@ -1186,6 +1186,13 @@ namespace BO.Models
             VatMakeRptCommentsList = new List<VatMakeRptComments>();
         }
     }
+
+    public class FinishRptCommentsCollection
+    {
+        public List<IDictionary<string, string>>FinishRptCommentsList = new List<IDictionary<string, string>>();
+    }
+
+
     public class RecPlnRpt
     {
         public string Production_Date;

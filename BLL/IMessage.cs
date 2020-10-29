@@ -68,6 +68,13 @@ namespace BLL.Interfaces
         VatMakeRptCommentsCollection GetVatMakeRptCommentsCollection(string StartDate, string EndDate, string ProductCode, string LineNumber);
 
     }
+
+    interface IFinishRptComments
+    {
+        //Selection
+       FinishRptCommentsCollection GetFinishRptCommentsCollection(string StartDate, string EndDate, string LineNumber, string ProductionOrder, string ProductCode);
+
+    }
     interface IChseMakSuprDopRpt
     {
         //Selection

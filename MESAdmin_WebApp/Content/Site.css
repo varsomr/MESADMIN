@@ -52,6 +52,12 @@ textarea {
 
 .ui-grid-cell-contents {
     text-align: center;
+    /*border: thin 1px darkslategrey !important;*/
+    /*border-style: solid;*/
+    /*border-style: solid;
+    border-width: thin 0.1px;*/
+    border-left: 0.1px solid darkslategrey;
+    border-bottom: 0.1px solid darkslategrey;
 }
 
 .ui-grid-cell-contents {

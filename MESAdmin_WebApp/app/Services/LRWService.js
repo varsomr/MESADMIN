@@ -65,6 +65,22 @@
                     return $http(req);
                 },
 
+
+                getFinishRptComments: function (StartDate, EndDate, LineNumber, ProductionOrder, ProductCode) {
+
+                    console.log("Finish Rpt comments LRS ");
+                    var url = window.location.protocol + "//" + window.location.hostname + ":1630/api/Message/getFinishRpt/" + "/" + StartDate + "/" + EndDate + "/" + LineNumber + "/" + ProductionOrder + "/" + ProductCode  + "/";
+                    console.log(url);
+                    var req = {
+                        method: 'GET',
+                        url: url
+                    };
+                    console.log("making api call url for Support");
+
+                    return $http(req);
+                },
+
+
                 getMilkPreRpt: function (StartDate, EndDate) {
 
                     console.log("Milk Prescreen LRS ");

@@ -260,10 +260,10 @@
             enablePinning: true,
             //showHeader: false,
 
-            rowTemplate:
-                '<div ng-class="{ \'grey\':grid.appScope.rowFormatter( row ) }">' +
-                '  <div ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ng-class="{ \'ui-grid-row-header-cell\': col.isRowHeader }"  ui-grid-cell></div>' +
-                '</div>',
+            //rowTemplate:
+            //    '<div ng-class="{ \'grey\':grid.appScope.rowFormatter( row ) }">' +
+            //    '  <div ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ng-class="{ \'ui-grid-row-header-cell\': col.isRowHeader }" style = "border: hidden" ui-grid-cell></div>' +
+            //    '</div>',
             customScroller: function myScrolling(uiGridViewport, scrollHandler) {
                 uiGridViewport.on('scrolled', function myScrollingOverride(event) {
                     $scope.$on('scrolled', function (event, args) {
@@ -1415,7 +1415,7 @@
                 $scope.headerGridOptionsFinishRpt.columnDefs.forEach(column => {
                     column.cellClass = bgColorFinishRpt
                 })
-                for (var a = 0; a < 5; a++) {
+                for (var a = 0; a < 4; a++) {
                     $scope.headerGridOptionsFinishRpt.data.push(data.FinishRptList[a]);
                     //$scope.gridOptionsVatMakeRpt.data.splice(0, 1);
                 }
@@ -1482,6 +1482,75 @@
             $scope.gridOptionsFinishRpt.data = [];
             $scope.headerGridOptionsFinishRpt.data = [];
         }
+
+        //###############################################  FinishRpt Comment SCREEN ############################################//
+
+        $scope.gridOptionsFinishRptComments = {
+            enableFullRowSelection: true,
+            enableRowHeaderSelection: false,
+            paginationPageSizes: [20, 40, 60],
+            paginationPageSize: 40,
+            rowHeight: 53,
+            enableFiltering: true,
+            enableCellEdit: false,
+            enableGridMenu: false,
+            rowTemplate:
+                '<div ng-class="{ \'grey\':grid.appScope.rowFormatter( row ) }">' +
+                '  <div ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ng-class="{ \'ui-grid-row-header-cell\': col.isRowHeader }"  ui-grid-cell></div>' +
+                '</div>',
+            columnDefs: [
+                { field: 'LineNumber', width: '5%', visible: true }
+                , { field: 'ProductionOrder', width: '10%', visible: true }
+                , { field: 'AttributeName', name: 'Name', width: '35%', visible: true }
+                , { field: 'DataTime', width: '10%', visible: true }
+                , { field: 'Comments', width: '55%', visible: true }
+
+
+            ]
+        };
+
+        $scope.GridfromButtonFinishRptComments = function () {
+
+
+
+            $scope.refreshgridFinishRptComment();
+
+        };
+
+
+        //$scope.loadgridFinishRptComments = function () {
+            
+        //    $scope.loading = true;
+
+        //    console.log('loading grid');
+            
+
+        //    LRWService.getFinishRptComments($scope.finishRptFromDate, $scope.finishRptToDate, $scope.finishRptSelectedLineNumber, $scope.finishRptSelectedProductionOrder, $scope.finishRptSelectedProductCode).success(function (data) {
+
+        //        if (data === null || data.FinishRptCommentsList === null || data.FinishRptCommentsList.length === 0) {
+
+        //            $scope.error = true;
+        //            $scope.errorDescription = "No data found for selected criteria.";
+        //            //alert("No Data");
+        //        } else {
+        //            $scope.gridOptionsFinishRptComments.paginationPageSizes.push(
+        //                data.FinishRptCommentsList.length
+        //            );
+
+        //            var FinishRptCommentsList = data.FinishRptCommentsList;
+        //            $scope.gridOptionsFinishRptComments.data = FinishRptCommentsList;
+        //            console.log(FinishRptCommentsList);
+        //            //alert(FinishRptCommentsList);
+        //            $scope.error = false;
+        //        }
+
+        //    }).finally(function () { $scope.loading = false; });
+
+        //};
+
+        //$scope.loadgridFinishRptComments();
+
+     //###############################################  FinishRpt Comment SCREEN #############  End   ###############################//		
 
         //############################################### Milk Prescreen ######################################################//
 
