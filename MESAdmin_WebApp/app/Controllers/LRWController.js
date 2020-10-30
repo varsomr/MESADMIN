@@ -729,6 +729,7 @@
                     $scope.headerGridOptions.columnDefs.push({ name: 'MIC', field: 'MIC', width: '10%', visible: true, cellClass: bgColor });
                     for (var i = 0; i < sortedKeysArray.length; i++) {
                         var colmn = sortedKeysArray[i];
+
                         if (!(sortedKeysArray[i] == "LineNumber" || sortedKeysArray[i] == "AttributeName" || sortedKeysArray[i] == "source" || sortedKeysArray[i] == "MIC" || sortedKeysArray[i].includes("Tgt-") == true || sortedKeysArray[i].includes("LW-") == true || sortedKeysArray[i].includes("Hi-") == true)) {
 
                             $scope.gridOptionsVatMakeRpt.columnDefs.push({
@@ -748,6 +749,18 @@
                                     } else {
                                         return "None";
                                     }
+                                },
+                                cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+                                    var newStyle;
+                                    if (!col.field.includes('AvgV') && !col.field.includes('SumV') && !col.field.includes('SDev')) {
+                                        var d = $scope.gridData.find(a => a.AttributeName == row.entity.AttributeName);
+                                        if (d != null && d != undefined) {
+                                            if ((d['Hi-' + col.field] != "" && d[col.field] > d['Hi-' + col.field]) || (d[col.field] < d['LW-' + col.field] && d['LW-' + col.field] != "")) {
+                                                newStyle = 'redText';
+                                            }
+                                        }
+                                    }
+                                    return newStyle;
                                 }
                             });
                             $scope.headerGridOptions.columnDefs.push({
@@ -1382,7 +1395,7 @@
 
 
             LRWService.getFinishRpt(lineNumber, productionOrder, productCode, fromDate, toDate).success(function (data) {
-               
+                $scope.finifshRptGridData = data.FinishRptList;
                 data.FinishRptList.forEach(a => {
                     if (a.KPI_Report_Name != "" && a.KPI_Report_Name != null) {
                         a["isClickable"] = true;
@@ -1488,7 +1501,19 @@
 
                         $scope.gridOptionsFinishRpt.columnDefs.push({
                             name: sortedKeysArray[i], displayName: sortedKeysArray[i].includes('-') ? sortedKeysArray[i].split('-')[0] + '-' + (sortedKeysArray[i].includes("SDev") || sortedKeysArray[i].includes("AvgV") ? sortedKeysArray[i].split('-').sort(function (a, b) { return b.length - a.length; })[0] : sortedKeysArray[i].split('-').sort(function (a, b) { return b.length - a.length; })[1]) : sortedKeysArray[i]
-                            , field: sortedKeysArray[i], width: '10%', visible: true
+                            , field: sortedKeysArray[i], width: '10%', visible: true,
+                            cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+                                var newStyle;
+                                if (!col.field.includes('AvgV') && !col.field.includes('SumV') && !col.field.includes('SDev')) {
+                                    var d = $scope.finifshRptGridData.find(a => a.AttributeName == row.entity.AttributeName);
+                                    if (d != null && d != undefined) {
+                                        if ((d['Hi-' + col.field] != "" && d[col.field] > d['Hi-' + col.field]) || (d[col.field] < d['LW-' + col.field] && d['LW-' + col.field] != "")) {
+                                            newStyle = 'redText';
+                                        }
+                                    }
+                                }
+                                return newStyle;
+                            }
                         });
                         $scope.headerGridOptionsFinishRpt.columnDefs.push({
                             name: sortedKeysArray[i], displayName: sortedKeysArray[i].includes('-') ? sortedKeysArray[i].split('-')[0] + '-' + (sortedKeysArray[i].includes("SDev") || sortedKeysArray[i].includes("AvgV") ? sortedKeysArray[i].split('-').sort(function (a, b) { return b.length - a.length; })[0] : sortedKeysArray[i].split('-').sort(function (a, b) { return b.length - a.length; })[1]) : sortedKeysArray[i]
