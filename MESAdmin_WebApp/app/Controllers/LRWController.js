@@ -465,7 +465,7 @@
             //$scope.calendardate('#toDate', 'toDate');
             //$("#fromDate").datepicker();
             //$("#toDate").datepicker();
-
+            
             var date = new Date();											 
 							   
 												  
@@ -687,6 +687,7 @@
 														   
                     }													   
                     //debugger
+                    $scope.headerGridOptions.columnDefs = [];
                     $scope.gridOptionsVatMakeRpt.columnDefs.push({ name: 'LineNumber', field: 'LineNumber', width: '5%', visible: true, pinnedLeft: true });
                     $scope.gridOptionsVatMakeRpt.columnDefs.push(
                          {
@@ -722,10 +723,15 @@
                     $scope.gridOptionsVatMakeRpt.columnDefs.push({ name: 'Source', field: 'source', width: '10%', visible: true  });
                     $scope.gridOptionsVatMakeRpt.columnDefs.push({ name: 'MIC', field: 'MIC', width: '10%', visible: true });
 
+                    $scope.headerGridOptions.columnDefs.push({ name: 'LineNumber', field: 'LineNumber', width: '5%', visible: true, pinnedLeft: true, cellClass: bgColor });
+                    $scope.headerGridOptions.columnDefs.push({ name: 'AttributeName', field: 'AttributeName', width: '10%', visible: true, pinnedLeft: true, cellClass: bgColor });
+                    $scope.headerGridOptions.columnDefs.push({ name: 'Source', field: 'source', width: '10%', visible: true, cellClass: bgColor });
+                    $scope.headerGridOptions.columnDefs.push({ name: 'MIC', field: 'MIC', width: '10%', visible: true, cellClass: bgColor });
                     for (var i = 0; i < sortedKeysArray.length; i++) {
                         var colmn = sortedKeysArray[i];
-                     if (!(sortedKeysArray[i] == "LineNumber" || sortedKeysArray[i] == "AttributeName" || sortedKeysArray[i] == "source" || sortedKeysArray[i] == "MIC" || sortedKeysArray[i].includes("Tgt-") == true || sortedKeysArray[i].includes("LW-") == true || sortedKeysArray[i].includes("Hi-") == true))
-                  
+
+                        if (!(sortedKeysArray[i] == "LineNumber" || sortedKeysArray[i] == "AttributeName" || sortedKeysArray[i] == "source" || sortedKeysArray[i] == "MIC" || sortedKeysArray[i].includes("Tgt-") == true || sortedKeysArray[i].includes("LW-") == true || sortedKeysArray[i].includes("Hi-") == true)) {
+
                             $scope.gridOptionsVatMakeRpt.columnDefs.push({
                                 name: sortedKeysArray[i], displayName: sortedKeysArray[i].includes('-') ? sortedKeysArray[i].split('-')[0] + '-' + sortedKeysArray[i].split('-').sort(function (a, b) { return b.length - a.length; })[0] : sortedKeysArray[i]
                                 , field: sortedKeysArray[i], width: '10%', visible: true, cellTooltip: function (row) {
@@ -741,19 +747,36 @@
                                         return value;
                                         //console.log("Hi:" + HghVal + " Tgt:" + TgtVal + " Low:" + LWVal);
                                     } else {
-                                        return "None" ;
-                                    } 
+                                        return "None";
+                                    }
+                                },
+                                cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+                                    var newStyle;
+                                    if (!col.field.includes('AvgV') && !col.field.includes('SumV') && !col.field.includes('SDev')) {
+                                        var d = $scope.gridData.find(a => a.AttributeName == row.entity.AttributeName);
+                                        if (d != null && d != undefined) {
+                                            if ((d['Hi-' + col.field] != "" && d[col.field] > d['Hi-' + col.field]) || (d[col.field] < d['LW-' + col.field] && d['LW-' + col.field] != "")) {
+                                                newStyle = 'redText';
+                                            }
+                                        }
+                                    }
+                                    return newStyle;
                                 }
                             });
+                            $scope.headerGridOptions.columnDefs.push({
+                                name: sortedKeysArray[i], displayName: sortedKeysArray[i].includes('-') ? sortedKeysArray[i].split('-')[0] + '-' + sortedKeysArray[i].split('-').sort(function (a, b) { return b.length - a.length; })[0] : sortedKeysArray[i]
+                                , field: sortedKeysArray[i], width: '10%', visible: true, cellClass: bgColor
+                            })
+                        }
                     }
 
                     
                     $scope.gridOptionsVatMakeRpt.data = VatMakeRptList;
-                    $scope.headerGridOptions.columnDefs = [];
-                    $scope.headerGridOptions.columnDefs.push(...$scope.gridOptionsVatMakeRpt.columnDefs);
-                    $scope.headerGridOptions.columnDefs.forEach(column => {
-                        column.cellClass = bgColor
-                    })
+                    
+                    //$scope.headerGridOptions.columnDefs.push(...$scope.gridOptionsVatMakeRpt.columnDefs);
+                    //$scope.headerGridOptions.columnDefs.forEach(column => {
+                    //    column.cellClass = bgColor
+                    //})
                     for (var a = 0; a < 5; a++) {
                         $scope.headerGridOptions.data.push(VatMakeRptList[a]);
                         //$scope.gridOptionsVatMakeRpt.data.splice(0, 1);
@@ -1219,7 +1242,7 @@
         //################################### Finish Report ############################################//
         $scope.finishrptcalendardate = (nav, toFrom) => {
             //debugger
-            $timeout(function () {
+            
                 $(nav).datepicker({
                     onSelect: (dateText) => {
                         var date = new Date(dateText);
@@ -1228,7 +1251,8 @@
                     },
                     defaultDate: $scope[toFrom]
                 });
-            }, 10)
+            
+            
 
         };
         $scope.finishRptFromDate = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()))
@@ -1247,6 +1271,42 @@
         $scope.finishRptSelectedLineNumber = 'ALL';
         $scope.finishRptSelectedProductionOrder = 'ALL';
         $scope.finishRptSelectedProductCode = 'ALL';
+
+        $scope.showorhideExtraColumnsFinishRpt = function () {
+            if (document.getElementById("hideshowcheckboxidfinishrpt").checked == true) {
+                $scope.showExtraColumnsFinishRpt();
+            } else {
+
+                $scope.hideExtraColumnsFinishRpt();
+            }
+        }
+
+        $scope.showExtraColumnsFinishRpt = function () {
+            var hdsumV = $scope.gridOptionsFinishRpt.columnDefs.filter(a => a.name.includes('SDev') || a.name.includes('AvgV') || a.name.includes('Source') || a.name.includes('Reporting'))
+            var headsumV = $scope.headerGridOptionsFinishRpt.columnDefs.filter(a => a.name.includes('SDev') || a.name.includes('AvgV') || a.name.includes('Source') || a.name.includes('Reporting'))
+            hdsumV.push(...headsumV)
+
+            for (var a = 0; a < hdsumV.length; a++) {
+                hdsumV[a].visible = true;
+            }
+            $scope.gridApi3.grid.refresh();
+            $scope.gridApi4.grid.refresh();
+        }
+
+
+
+        $scope.hideExtraColumnsFinishRpt = function () {
+            var hdsumV = $scope.gridOptionsFinishRpt.columnDefs.filter(a => a.name.includes('SDev') || a.name.includes('AvgV') || a.name.includes('Source') || a.name.includes('Reporting'))
+            var headsumV = $scope.headerGridOptionsFinishRpt.columnDefs.filter(a => a.name.includes('SDev') || a.name.includes('AvgV') || a.name.includes('Source') || a.name.includes('Reporting'))
+            hdsumV.push(...headsumV)
+            for (var a = 0; a < hdsumV.length; a++) {
+                hdsumV[a].visible = false;
+            }
+
+            $scope.gridApi3.grid.refresh();
+            $scope.gridApi4.grid.refresh();
+
+        }
 
         $scope.getFinishRptParams = function (fromDate, toDate) {
             $scope.loading = true;
@@ -1289,7 +1349,7 @@
 
         $scope.viewReportsFinishRpt = function () {
             $scope.removeGridDataFinishRpt();
-            $scope.loadgridFinishRpt($scope.finishRptSelectedLineNumber, $scope.finishRptSelectedProductionOrder, $scope.finishRptSelectedProductCode, $scope.finishRptFromDate, $scope.finishRptToDate, $scope.isAscending);
+            $scope.loadgridFinishRpt($scope.finishRptSelectedLineNumber, $scope.finishRptSelectedProductionOrder, $scope.finishRptSelectedProductCode, $scope.finishRptFromDate, $scope.finishRptToDate, $scope.isAscendingFinishRpt);
         }
 
         $scope.removeGridDataFinishRpt = function () {
@@ -1297,6 +1357,19 @@
             $scope.gridOptionsFinishRpt.data = [];
 
         }
+
+        $scope.sortOptionsFinishRpt = ["Ascending", "Descending"];
+        $scope.isAscendingFinishRpt = false;
+        $scope.selectedSortFinishRpt = "Descending";
+        $scope.changeSortFinishRpt = function () {
+            if ($scope.selectedSortFinishRpt == "Descending") {
+                $scope.isAscendingFinishRpt = false;
+            } else {
+                $scope.isAscendingFinishRpt = true;
+            }
+        }
+
+        
 
         $scope.loadgridFinishRpt = function (lineNumber, productionOrder, productCode, fromDate, toDate, isAscending = false) {
             if (lineNumber == null || lineNumber == undefined || lineNumber == 'ALL') {
@@ -1322,7 +1395,7 @@
 
 
             LRWService.getFinishRpt(lineNumber, productionOrder, productCode, fromDate, toDate).success(function (data) {
-               
+                $scope.finifshRptGridData = data.FinishRptList;
                 data.FinishRptList.forEach(a => {
                     if (a.KPI_Report_Name != "" && a.KPI_Report_Name != null) {
                         a["isClickable"] = true;
@@ -1342,7 +1415,7 @@
                     }
                 }
                 orderedProductionOders = orderedProductionOders.sort(function (a, b) {
-                    return a.seqNumber - b.seqNumber;
+                    return isAscending ? a.seqNumber - b.seqNumber : b.seqNumber - a.seqNumber;
                 });
                 
                 orderedProductionOders.forEach(a => {
@@ -1385,13 +1458,22 @@
                 //}
                
                 sortedKeysArray = [...new Set(sortedKeysArray)];
+                $scope.headerGridOptionsFinishRpt.columnDefs = [];
                 $scope.gridOptionsFinishRpt.columnDefs.push({ name: 'LineNumber', field: 'LineNumber', width: '5%', visible: true, pinnedLeft: true });
                 $scope.gridOptionsFinishRpt.columnDefs.push({
                     name: 'GroupName', field: 'GroupName', width: '5%', visible: true, pinnedLeft: true
                 });
                 $scope.gridOptionsFinishRpt.columnDefs.push({
                     name: 'AttributeName', field: 'AttributeName', width: '5%', visible: true,
-                    cellTemplate: `<div ng-click="grid.appScope.selectGridToLoadFinishRpt(COL_FIELD)">{{COL_FIELD CUSTOM_FILTERS}}</div>`
+                    cellTemplate: `<div ng-click="grid.appScope.selectGridToLoadFinishRpt(COL_FIELD)">{{COL_FIELD CUSTOM_FILTERS}}</div>`,
+                    cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+                        var newStyle;
+                        if (row.entity.isClickable) {
+                            newStyle = 'group1';
+                        }
+
+                        return newStyle;
+                    }
                 });
                 $scope.gridOptionsFinishRpt.columnDefs.push({
                     name: 'source', field: 'source', width: '5%', visible: true
@@ -1399,22 +1481,54 @@
                 $scope.gridOptionsFinishRpt.columnDefs.push({
                     name: 'ReportingKey', field: 'ReportingKey', width: '5%', visible: true
                 });
+                $scope.headerGridOptionsFinishRpt.columnDefs.push({ name: 'LineNumber', field: 'LineNumber', width: '5%', visible: true, pinnedLeft: true, cellClass: bgColorFinishRpt });
+                $scope.headerGridOptionsFinishRpt.columnDefs.push({
+                    name: 'GroupName', field: 'GroupName', width: '5%', visible: true, pinnedLeft: true, cellClass: bgColorFinishRpt
+                });
+                $scope.headerGridOptionsFinishRpt.columnDefs.push({
+                    name: 'AttributeName', field: 'AttributeName', width: '5%', visible: true, cellClass: bgColorFinishRpt,
+                    cellTemplate: `<div ng-click="grid.appScope.selectGridToLoadFinishRpt(COL_FIELD)">{{COL_FIELD CUSTOM_FILTERS}}</div>`
+                });
+                $scope.headerGridOptionsFinishRpt.columnDefs.push({
+                    name: 'source', field: 'source', width: '5%', visible: true, cellClass: bgColorFinishRpt
+                });
+                $scope.headerGridOptionsFinishRpt.columnDefs.push({
+                    name: 'ReportingKey', field: 'ReportingKey', width: '5%', visible: true, cellClass: bgColorFinishRpt
+                });
                 for (var i = 0; i < sortedKeysArray.length; i++) {
                     var colmn = sortedKeysArray[i];
-                    if (!(sortedKeysArray[i] == "ReportingKey" || sortedKeysArray[i] == "GroupName" || sortedKeysArray[i] == "LineNumber" || sortedKeysArray[i] == "AttributeName" || sortedKeysArray[i] == "source" || sortedKeysArray[i] == "MIC" || sortedKeysArray[i].includes("Tgt-") == true || sortedKeysArray[i].includes("LW-") == true || sortedKeysArray[i].includes("Hi-") == true))
+                    if (!(sortedKeysArray[i] == "ReportingKey" || sortedKeysArray[i] == "GroupName" || sortedKeysArray[i] == "LineNumber" || sortedKeysArray[i] == "AttributeName" || sortedKeysArray[i] == "source" || sortedKeysArray[i] == "MIC" || sortedKeysArray[i].includes("Tgt-") == true || sortedKeysArray[i].includes("LW-") == true || sortedKeysArray[i].includes("Hi-") == true)) {
 
                         $scope.gridOptionsFinishRpt.columnDefs.push({
                             name: sortedKeysArray[i], displayName: sortedKeysArray[i].includes('-') ? sortedKeysArray[i].split('-')[0] + '-' + (sortedKeysArray[i].includes("SDev") || sortedKeysArray[i].includes("AvgV") ? sortedKeysArray[i].split('-').sort(function (a, b) { return b.length - a.length; })[0] : sortedKeysArray[i].split('-').sort(function (a, b) { return b.length - a.length; })[1]) : sortedKeysArray[i]
-                            , field: sortedKeysArray[i], width: '10%', visible: true
+                            , field: sortedKeysArray[i], width: '10%', visible: true,
+                            cellClass: function (grid, row, col, rowRenderIndex, colRenderIndex) {
+                                var newStyle;
+                                if (!col.field.includes('AvgV') && !col.field.includes('SumV') && !col.field.includes('SDev')) {
+                                    var d = $scope.finifshRptGridData.find(a => a.AttributeName == row.entity.AttributeName);
+                                    if (d != null && d != undefined) {
+                                        if ((d['Hi-' + col.field] != "" && d[col.field] > d['Hi-' + col.field]) || (d[col.field] < d['LW-' + col.field] && d['LW-' + col.field] != "")) {
+                                            newStyle = 'redText';
+                                        }
+                                    }
+                                }
+                                return newStyle;
+                            }
                         });
+                        $scope.headerGridOptionsFinishRpt.columnDefs.push({
+                            name: sortedKeysArray[i], displayName: sortedKeysArray[i].includes('-') ? sortedKeysArray[i].split('-')[0] + '-' + (sortedKeysArray[i].includes("SDev") || sortedKeysArray[i].includes("AvgV") ? sortedKeysArray[i].split('-').sort(function (a, b) { return b.length - a.length; })[0] : sortedKeysArray[i].split('-').sort(function (a, b) { return b.length - a.length; })[1]) : sortedKeysArray[i]
+                            , field: sortedKeysArray[i], width: '10%', visible: true, cellClass: bgColorFinishRpt
+                        });
+                    }
                 }
 
                 $scope.gridOptionsFinishRpt.data = data.FinishRptList;
-                $scope.headerGridOptionsFinishRpt.columnDefs = [];
-                $scope.headerGridOptionsFinishRpt.columnDefs.push(...$scope.gridOptionsFinishRpt.columnDefs);
-                $scope.headerGridOptionsFinishRpt.columnDefs.forEach(column => {
-                    column.cellClass = bgColorFinishRpt
-                })
+                
+                //$scope.headerGridOptionsFinishRpt.columnDefs.push(...$scope.gridOptionsFinishRpt.columnDefs);
+                //$scope.headerGridOptionsFinishRpt.columnDefs.forEach(column => {
+                //    column.cellClass = bgColorFinishRpt
+                //})
+                $scope.headerGridOptionsFinishRpt.enableHorizontalScrollbar = 0;
                 for (var a = 0; a < 4; a++) {
                     $scope.headerGridOptionsFinishRpt.data.push(data.FinishRptList[a]);
                     //$scope.gridOptionsVatMakeRpt.data.splice(0, 1);
@@ -1468,12 +1582,20 @@
 
             }
         }
+
+        $scope.headerGridOptionsFinishRpt.onRegisterApi = function (gridApi) {
+            $scope.gridApi4 = gridApi
+        }
        
         $scope.loadgridFinishRpt()
         $scope.gridPaginationFinishRpt = function (lineNumber) {
-           
+            if (lineNumber == 4) {
+                $scope.isCommentsgrid = true;
+            } else {
                 $scope.removeGridDataFinishRpt();
-            $scope.loadgridFinishRpt(lineNumber);
+                $scope.loadgridFinishRpt(lineNumber);
+                $scope.isCommentsgrid = false;
+            }
 
         }
         $scope.removeGridDataFinishRpt = function () {
@@ -1518,37 +1640,43 @@
         };
 
 
-        //$scope.loadgridFinishRptComments = function () {
+        $scope.loadgridFinishRptComments = function () {
             
-        //    $scope.loading = true;
+            $scope.loading = true;
+            var productionOrder = "";
+            var productCode = "";
+            console.log('loading grid');
+            if ( $scope.finishRptSelectedProductionOrder == 'ALL') {
+                productionOrder = '1221613,1221605,1221604,1221603,1221617,1221602,1221753'
+            }
+            if ( $scope.finishRptSelectedProductCode == 'ALL') {
+                productCode = '100000223,100000259,100000268,100001559,100001979,100400168,100402450'
+            }
 
-        //    console.log('loading grid');
-            
+            LRWService.getFinishRptComments($scope.finishRptSelectedLineNumber, productionOrder, productCode, $scope.finishRptFromDate, $scope.finishRptToDate).success(function (data) {
 
-        //    LRWService.getFinishRptComments($scope.finishRptFromDate, $scope.finishRptToDate, $scope.finishRptSelectedLineNumber, $scope.finishRptSelectedProductionOrder, $scope.finishRptSelectedProductCode).success(function (data) {
+                if (data === null || data.FinishRptCommentsList === null || data.FinishRptCommentsList.length === 0) {
 
-        //        if (data === null || data.FinishRptCommentsList === null || data.FinishRptCommentsList.length === 0) {
+                    $scope.error = true;
+                    $scope.errorDescription = "No data found for selected criteria.";
+                    //alert("No Data");
+                } else {
+                    $scope.gridOptionsFinishRptComments.paginationPageSizes.push(
+                        data.FinishRptCommentsList.length
+                    );
 
-        //            $scope.error = true;
-        //            $scope.errorDescription = "No data found for selected criteria.";
-        //            //alert("No Data");
-        //        } else {
-        //            $scope.gridOptionsFinishRptComments.paginationPageSizes.push(
-        //                data.FinishRptCommentsList.length
-        //            );
+                    var FinishRptCommentsList = data.FinishRptCommentsList;
+                    $scope.gridOptionsFinishRptComments.data = FinishRptCommentsList;
+                    console.log(FinishRptCommentsList);
+                    //alert(FinishRptCommentsList);
+                    $scope.error = false;
+                }
 
-        //            var FinishRptCommentsList = data.FinishRptCommentsList;
-        //            $scope.gridOptionsFinishRptComments.data = FinishRptCommentsList;
-        //            console.log(FinishRptCommentsList);
-        //            //alert(FinishRptCommentsList);
-        //            $scope.error = false;
-        //        }
+            }).finally(function () { $scope.loading = false; });
 
-        //    }).finally(function () { $scope.loading = false; });
+        };
 
-        //};
-
-        //$scope.loadgridFinishRptComments();
+        $scope.loadgridFinishRptComments();
 
      //###############################################  FinishRpt Comment SCREEN #############  End   ###############################//		
 
