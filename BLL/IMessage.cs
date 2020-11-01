@@ -42,6 +42,20 @@ namespace BLL.Interfaces
 
     }
 
+    interface IOtherDairyrc
+    {
+        //Selection
+        OtherDairyrcCollection GetOtherDairyrcCollection(string StartDate, string EndDate);
+
+    }
+
+    interface IOtherDairyldo
+    {
+        //Selection
+        OtherDairyldoCollection GetOtherDairyldoCollection(string StartDate, string EndDate);
+
+
+    }
     interface IFinishRptParam
     {
         //Selection

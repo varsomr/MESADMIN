@@ -1192,6 +1192,22 @@ namespace BO.Models
         public List<IDictionary<string, string>>FinishRptCommentsList = new List<IDictionary<string, string>>();
     }
 
+    public class OtherDairyrcCollection
+    {
+
+        public List<IDictionary<string, string>> OtherDairyrcList = new List<IDictionary<string, string>>();
+
+    }
+
+    public class OtherDairyldoCollection
+    {
+
+        public List<IDictionary<string, string>> OtherDairyldoList = new List<IDictionary<string, string>>();
+
+    }
+
+
+
 
     public class RecPlnRpt
     {

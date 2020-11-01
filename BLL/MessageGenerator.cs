@@ -2376,6 +2376,60 @@ namespace BLL
         }
     }
 
+    public class OtherDairyrcGenerator : IOtherDairyrc
+    {
+        public OtherDairyrcCollection GetOtherDairyrcCollection(string StartDate, string EndDate)
+        {
+            OtherDairyrcCollection dc = new OtherDairyrcCollection();
+            DataSet dsDefect = DBConnection.DBConnectOtherDairyrc("_usp_Other_Dairy_Liquids_Receipt_dw", StartDate, EndDate);
+            if (dsDefect.Tables.Count > 0 && dsDefect.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in dsDefect.Tables[0].Rows)
+                {
+
+                    Dictionary<string, string> defectdictionary = new Dictionary<string, string>();
+                    for (int index = 0; index < dsDefect.Tables[0].Columns.Count; index++)
+                    {
+
+                        defectdictionary[dsDefect.Tables[0].Columns[index].ToString()] = dr[index].ToString();
+
+                    }
+
+                    dc.OtherDairyrcList.Add(defectdictionary);
+
+                }
+            }
+            return dc;
+        }
+    }
+
+    public class OtherDairyldoGenerator : IOtherDairyldo
+    {
+        public OtherDairyldoCollection GetOtherDairyldoCollection(string StartDate, string EndDate)
+        {
+            OtherDairyldoCollection dc = new OtherDairyldoCollection();
+            DataSet dsDefect = DBConnection.DBConnectOtherDairyldo("_usp_Other_Dairy_Liquids_Load_Out_dw", StartDate, EndDate);
+            if (dsDefect.Tables.Count > 0 && dsDefect.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in dsDefect.Tables[0].Rows)
+                {
+
+                    Dictionary<string, string> defectdictionary = new Dictionary<string, string>();
+                    for (int index = 0; index < dsDefect.Tables[0].Columns.Count; index++)
+                    {
+
+                        defectdictionary[dsDefect.Tables[0].Columns[index].ToString()] = dr[index].ToString();
+
+                    }
+
+                    dc.OtherDairyldoList.Add(defectdictionary);
+
+                }
+            }
+            return dc;
+        }
+    }
+
     public class FinishRptCommentsGenerator : IFinishRptComments
     {
         public FinishRptCommentsCollection GetFinishRptCommentsCollection(string StartDate, string EndDate, string LineNumber, string ProductionOrder, string ProductCode)

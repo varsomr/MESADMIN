@@ -77,6 +77,22 @@ namespace Leprino_Integration_Tool.Controllers
             return vm.GetFinishRptCollection(StartDate, EndDate);
         }
 
+        [Route("api/Message/getOtherDairyrc/{StartDate}/{EndDate}")]
+        public OtherDairyrcCollection getOtherDairyrc(string StartDate, string EndDate)
+        {
+
+            OtherDairyrcGenerator vm = new OtherDairyrcGenerator();
+            return vm.GetOtherDairyrcCollection(StartDate, EndDate);
+        }
+
+        [Route("api/Message/getOtherDairyldo/{StartDate}/{EndDate}")]
+        public OtherDairyldoCollection getOtherDairyldo(string StartDate, string EndDate)
+        {
+
+            OtherDairyldoGenerator vm = new OtherDairyldoGenerator();
+            return vm.GetOtherDairyldoCollection(StartDate, EndDate);
+        }
+
 
         [Route("api/Message/getFinishRptComments/{StartDate}/{EndDate}/{LineNumber}/{ProductionOrder}/{ProductCode}")]
         public FinishRptCommentsCollection getFinishRptComments(string StartDate, string EndDate, string LineNumber, string ProductionOrder, string ProductCode)

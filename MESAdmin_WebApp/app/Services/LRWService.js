@@ -95,6 +95,37 @@
                     return $http(req);
                 },
 
+
+                getOtherDairyrc: function (StartDate, EndDate) {
+
+                    console.log("Other Dairy Liquid receipt LRS ");
+                    var url = window.location.protocol + "//" + window.location.hostname + ":1630/api/Message/getOtherDairyrc/" + StartDate + "/" + EndDate + "/";
+                    console.log(url);
+                    var req = {
+                        method: 'GET',
+                        url: url
+                    };
+                    console.log("making api call url for Support");
+
+                    return $http(req);
+                },
+
+
+                getOtherDairyldo: function (StartDate, EndDate) {
+
+                    console.log("Other Dairy Liquid Load out LRS ");
+                    var url = window.location.protocol + "//" + window.location.hostname + ":1630/api/Message/getOtherDairyldo/" + StartDate + "/" + EndDate + "/";
+                    console.log(url);
+                    var req = {
+                        method: 'GET',
+                        url: url
+                    };
+                    console.log("making api call url for Support");
+
+                    return $http(req);
+                },
+
+
                 getKPIMultiDt: function (ReportName, DateStart, DateEnd, RD3, RD4, RD5, RD6) {
 
                     console.log("KPI Multi Data");
