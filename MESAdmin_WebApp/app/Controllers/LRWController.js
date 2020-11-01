@@ -416,7 +416,7 @@
         $scope.FormatDTSlash = function (date) {
             var d = new Date(date),
                 month = '' + (d.getMonth() + 1),
-                day = '' + (d.getDate() + 1),
+                day = '' + (d.getDate() ),
                 year = d.getFullYear();
             if (month.length < 2) month = '0' + month;
             if (day.length < 2) day = '0' + day;
@@ -1713,7 +1713,7 @@
             paginationPageSizes: [20, 40, 60],
             paginationPageSize: 40,
             rowHeight: 30,
-            enableFiltering: true,
+            enableFiltering: false,
             enableCellEdit: false,
             enableGridMenu: false,
             enablePinning: true,
@@ -1722,34 +1722,34 @@
                 '  <div ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ng-class="{ \'ui-grid-row-header-cell\': col.isRowHeader }"  ui-grid-cell></div>' +
                 '</div>',
             columnDefs: [
-                { field: 'LoadNumber', Name: 'LoadNo.', width: '5%', visible: true }
-                , { field: 'ProducerTicket', width: '10%', visible: true }
-                , { field: 'Route', width: '5%', visible: true }
-                , { field: 'Truck_ID', width: '10%', visible: true }
-                , { field: 'Btu', Name: 'BTU', width: '5%', visible: true }
-                , { field: 'Supplier', Name: 'Supplier', width: '5%', visible: true }
-                , { field: 'Bay_Number', Name: 'Bay No.', width: '5%', visible: true }
-                , { field: 'SampleID', Name: 'PreScreeen SampleID', width: '10%', visible: true }
-                , { field: 'SampleDate', Name: 'SampleDate', width: '5%', visible: true }
-                , { field: 'SampleTime', Name: 'Sample Pulled Time', width: '5%', visible: true }
+                { field: 'LoadNumber', Name: 'LoadNo.', width: '5%', visible: true, headerCellClass: 'greyRow'  }
+                , { field: 'ProducerTicket', width: '10%', visible: true, headerCellClass: 'greyRow'   }
+                , { field: 'Route', width: '5%', visible: true, headerCellClass: 'greyRow'  }
+                , { field: 'Truck_ID', width: '10%', visible: true, headerCellClass: 'greyRow'  }
+                , { field: 'Btu', Name: 'BTU', width: '5%', visible: true, headerCellClass: 'greyRow'  }
+                , { field: 'Supplier', Name: 'Supplier', width: '5%', visible: true, headerCellClass: 'greyRow'  }
+                , { field: 'Bay_Number', Name: 'Bay No.', width: '5%', visible: true, headerCellClass: 'greyRow'  }
+                , { field: 'SampleID', Name: 'PreScreeen SampleID', width: '10%', visible: true, headerCellClass: 'greyRow'  }
+                , { field: 'SampleDate', Name: 'SampleDate', width: '5%', visible: true, headerCellClass: 'greyRow'  }
+                , { field: 'SampleTime', Name: 'Sample Pulled Time', width: '5%', visible: true, headerCellClass: 'greyRow'  }
 
-                , { field: 'Truck Sample Temperature', Name: 'Truck Sample Temp', width: '5%', visible: true }
-                , { field: 'Prescreen Sample Receipt Time', Name: 'Sample Receipt Time', width: '5%', visible: true }
-                , { field: 'Prescreen Receipt Temperature', Name: 'Receipt Temp', width: '5%', visible: true }
-                , { field: 'SampleDate', Name: 'Sample Tested Date', width: '5%', visible: true }
-                , { field: 'Prescreen Tested Time', Name: 'Sample Tested Time', width: '5%', visible: true }
-                , { field: 'Prescreen Tested Temperature', Name: 'Tested Temp', width: '5%', visible: true }
-                , { field: 'Reader Result', Name: 'Reader Result', width: '5%', visible: true }
-                , { field: 'Antibiotic', Name: 'Antibiotic', width: '5%', visible: true }
+                , { field: 'Truck Sample Temperature', Name: 'Truck Sample Temp', width: '5%', visible: true, headerCellClass: 'greyRow'  }
+                , { field: 'Prescreen Sample Receipt Time', Name: 'Sample Receipt Time', width: '5%', visible: true, headerCellClass: 'greyRow'  }
+                , { field: 'Prescreen Receipt Temperature', Name: 'Receipt Temp', width: '5%', visible: true, headerCellClass: 'greyRow'  }
+                , { field: 'SampleDate', Name: 'Sample Tested Date', width: '5%', visible: true, headerCellClass: 'greyRow'  }
+                , { field: 'Prescreen Tested Time', Name: 'Sample Tested Time', width: '5%', visible: true, headerCellClass: 'greyRow'  }
+                , { field: 'Prescreen Tested Temperature', Name: 'Tested Temp', width: '5%', visible: true, headerCellClass: 'greyRow'  }
+                , { field: 'Reader Result', Name: 'Reader Result', width: '5%', visible: true, headerCellClass: 'greyRow'  }
+                , { field: 'Antibiotic', Name: 'Antibiotic', width: '5%', visible: true, headerCellClass: 'greyRow'  }
 
-                , { field: 'Tetracycline Presence', Name: 'Tetracycline Presence', width: '5%', visible: true }
-                , { field: 'Tetracycline Reader Result', Name: 'Tetracycline Reader Result', width: '5%', visible: true }
-                , { field: 'pH', Name: 'pH', width: '5%', visible: true }
-                , { field: 'Color', Name: 'Color', width: '5%', visible: true }
-                , { field: 'Cryoscope', Name: 'PreScreen Cryoscope', width: '5%', visible: true }
-                , { field: 'MILK CRYOSCOPE', Name: 'Drip Sample Cryoscope', width: '5%', visible: true }
-                , { field: 'UserName', Name: 'Licensed Operator', width: '5%', visible: true }
-                , { field: 'Comment', Name: 'Comments', width: '5%', visible: true }
+                , { field: 'Tetracycline Presence', Name: 'Tetracycline Presence', width: '5%', visible: true, headerCellClass: 'greyRow'  }
+                , { field: 'Tetracycline Reader Result', Name: 'Tetracycline Reader Result', width: '5%', visible: true, headerCellClass: 'greyRow'  }
+                , { field: 'pH', Name: 'pH', width: '5%', visible: true, headerCellClass: 'greyRow'  }
+                , { field: 'Color', Name: 'Color', width: '5%', visible: true, headerCellClass: 'greyRow'  }
+                , { field: 'Cryoscope', Name: 'PreScreen Cryoscope', width: '5%', visible: true, headerCellClass: 'greyRow'  }
+                , { field: 'MILK CRYOSCOPE', Name: 'Drip Sample Cryoscope', width: '5%', visible: true, headerCellClass: 'greyRow'  }
+                , { field: 'UserName', Name: 'Licensed Operator', width: '5%', visible: true, headerCellClass: 'greyRow'  }
+                , { field: 'Comment', Name: 'Comments', width: '5%', visible: true, headerCellClass: 'greyRow'  }
 
 
             ]
@@ -3449,8 +3449,11 @@
         };
         $scope.openModal = function (nav) {
             document.getElementById(nav).style.display = 'block';
-        };
-
+            if (nav == "mysidenavMilkPreScreen") {
+                $scope.viewReportsMilkPre();
+                $scope.viewReportsMilkPre();
+            }
+        }
 
         $scope.go_full_screen = function () {
             var elem = document.documentElement;
