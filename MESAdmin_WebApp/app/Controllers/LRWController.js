@@ -1671,7 +1671,7 @@
 
         };
 
-        $scope.loadgridFinishRptComments();
+        //$scope.loadgridFinishRptComments();
 
      //###############################################  FinishRpt Comment SCREEN #############  End   ###############################//		
 
@@ -1696,7 +1696,7 @@
 
         $scope.viewReportsMilkPre = function () {
             //$scope.removeGridDataMilkPre();
-            $scope.loadgridMilkPreRpt($scope.fromMKPreDate, $scope.totoMKPreDateDate);
+            $scope.loadgridMilkPreRpt($scope.fromMKPreDate, $scope.toMKPreDate);
         }
         //$scope.removeGridDataMilkPre = function () {
         //    $scope.gridOptionsMilkPreRpt.data = [];
