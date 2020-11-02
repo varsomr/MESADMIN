@@ -2435,7 +2435,7 @@ namespace BLL
         public FinishRptCommentsCollection GetFinishRptCommentsCollection(string StartDate, string EndDate, string LineNumber, string ProductionOrder, string ProductCode)
         {
             FinishRptCommentsCollection dc = new FinishRptCommentsCollection();
-            DataSet dsDefect = DBConnection.DBConnectFinishRpt("_usp_Finish_Comments", StartDate, EndDate, LineNumber, ProductionOrder, ProductCode);
+            DataSet dsDefect = DBConnection.DBConnectFinishRptComments("_usp_Finish_Comments", StartDate, EndDate, LineNumber, ProductionOrder, ProductCode);
             if (dsDefect.Tables.Count > 0 && dsDefect.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow dr in dsDefect.Tables[0].Rows)

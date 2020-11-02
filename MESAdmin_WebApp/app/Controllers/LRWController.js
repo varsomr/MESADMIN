@@ -668,21 +668,13 @@
                     if (!isAscending) {
                         for (var o = 0; o < orderedProductionOders.length; o++) {
                             var po = orderedProductionOders.find(a => a.seqNumber == o + 1).po;
-                            sortedKeysArray = $scope.pushKeys(sortedKeysArray, po, isAscending);										   
-																																			  
-									  
-										   
-															   
+                            sortedKeysArray = $scope.pushKeys(sortedKeysArray, po, isAscending);	   
 															 
                         }
                     } else {
                         for (var o = orderedProductionOders.length; o >= 1; o--) {
                             var po = orderedProductionOders.find(a => a.seqNumber == o).po;
-                            sortedKeysArray = $scope.pushKeys(sortedKeysArray, po, isAscending);
-													  
-								 
-							   
-                        }
+                            sortedKeysArray = $scope.pushKeys(sortedKeysArray, po, isAscending);              }
 																					  
 														   
                     }													   
@@ -1282,12 +1274,12 @@
         }
 
         $scope.showExtraColumnsFinishRpt = function () {
-            var hdsumV = $scope.gridOptionsFinishRpt.columnDefs.filter(a => a.name.includes('SDev') || a.name.includes('AvgV') || a.name.includes('Source') || a.name.includes('Reporting'))
-            var headsumV = $scope.headerGridOptionsFinishRpt.columnDefs.filter(a => a.name.includes('SDev') || a.name.includes('AvgV') || a.name.includes('Source') || a.name.includes('Reporting'))
-            hdsumV.push(...headsumV)
+            var hdsumFnV = $scope.gridOptionsFinishRpt.columnDefs.filter(a => a.name.includes('SDev') || a.name.includes('AvgV') || a.name.includes('Source') || a.name.includes('Reporting') || a.name.includes('Source'))
+            var headsumFnV = $scope.headerGridOptionsFinishRpt.columnDefs.filter(a => a.name.includes('SDev') || a.name.includes('AvgV') || a.name.includes('Source') || a.name.includes('Reporting') || a.name.includes('Source'))
+            hdsumFnV.push(...headsumFnV)
 
-            for (var a = 0; a < hdsumV.length; a++) {
-                hdsumV[a].visible = true;
+            for (var a = 0; a < hdsumFnV.length; a++) {
+                hdsumFnV[a].visible = true;
             }
             $scope.gridApi3.grid.refresh();
             $scope.gridApi4.grid.refresh();
@@ -1296,11 +1288,11 @@
 
 
         $scope.hideExtraColumnsFinishRpt = function () {
-            var hdsumV = $scope.gridOptionsFinishRpt.columnDefs.filter(a => a.name.includes('SDev') || a.name.includes('AvgV') || a.name.includes('Source') || a.name.includes('Reporting'))
-            var headsumV = $scope.headerGridOptionsFinishRpt.columnDefs.filter(a => a.name.includes('SDev') || a.name.includes('AvgV') || a.name.includes('Source') || a.name.includes('Reporting'))
-            hdsumV.push(...headsumV)
-            for (var a = 0; a < hdsumV.length; a++) {
-                hdsumV[a].visible = false;
+            var hdsumFnV = $scope.gridOptionsFinishRpt.columnDefs.filter(a => a.name.includes('SDev') || a.name.includes('AvgV') || a.name.includes('Source') || a.name.includes('Reporting') || a.name.includes('Source') || a.name.includes('Position') || a.name.includes('KPI_Report_Name') || a.name.includes('KPI_RD_Name'))
+            var headsumFnV = $scope.headerGridOptionsFinishRpt.columnDefs.filter(a => a.name.includes('SDev') || a.name.includes('AvgV') || a.name.includes('Source') || a.name.includes('Reporting') || a.name.includes('Source') || a.name.includes('Position') || a.name.includes('KPI_Report_Name') || a.name.includes('KPI_RD_Name'))
+            hdsumFnV.push(...headsumFnV)
+            for (var a = 0; a < hdsumFnV.length; a++) {
+                hdsumFnV[a].visible = false;
             }
 
             $scope.gridApi3.grid.refresh();
@@ -1346,8 +1338,10 @@
 
 
         }
+        $scope.isFinCommentsgrid = false;
 
         $scope.viewReportsFinishRpt = function () {
+            $scope.isFinCommentsgrid = false;
             $scope.removeGridDataFinishRpt();
             $scope.loadgridFinishRpt($scope.finishRptSelectedLineNumber, $scope.finishRptSelectedProductionOrder, $scope.finishRptSelectedProductCode, $scope.finishRptFromDate, $scope.finishRptToDate, $scope.isAscendingFinishRpt);
         }
@@ -1376,10 +1370,12 @@
                 lineNumber = '1'
             }
             if (productionOrder == null || productionOrder == undefined || productionOrder == 'ALL') {
-                productionOrder = '1221613,1221605,1221604,1221603,1221617,1221602,1221753'
+                productionOrder = 'ALL';
+            //    productionOrder = '1221613,1221605,1221604,1221603,1221617,1221602,1221753'
             }
             if (productCode == null || productCode == undefined || productCode == 'ALL') {
-                productCode = '100000223,100000259,100000268,100001559,100001979,100400168,100402450'
+                productCode = 'ALL';
+            //    productCode = '100000223,100000259,100000268,100001559,100001979,100400168,100402450'
             }
             if (fromDate == null || fromDate == undefined) {
                 fromDate = $scope.finishRptFromDate
@@ -1402,6 +1398,7 @@
                     }
                 })
                 $scope.finishRptData = data.FinishRptList;
+                keysArray = [];//varun added on 11-01-2020
                 keysArray = Object.keys(data.FinishRptList[0]);
                 //console.log(keysArray);
                 var sortedKeysArray = keysArray.sort().reverse();
@@ -1414,31 +1411,26 @@
                         orderedProductionOders.push({ po: split.sort(function (a, b) { return b.length - a.length; })[0], seqNumber: split[split.length - 1] });
                     }
                 }
-                orderedProductionOders = orderedProductionOders.sort(function (a, b) {
-                    return isAscending ? a.seqNumber - b.seqNumber : b.seqNumber - a.seqNumber;
-                });
+                //orderedProductionOders = orderedProductionOders.sort(function (a, b) {
+                //    return isAscending ? a.seqNumber - b.seqNumber : b.seqNumber - a.seqNumber;
+                if (!isAscending) {     ///Varun added on 11-01-2020
+                    for (var o = 0; o < orderedProductionOders.length; o++) {
+                        var po = orderedProductionOders.find(a => a.seqNumber == o + 1).po;
+                        sortedKeysArray = $scope.pushKeys(sortedKeysArray, po, isAscending);
+
+                    }
+                } else {
+                    for (var o = orderedProductionOders.length; o >= 1; o--) {
+                        var po = orderedProductionOders.find(a => a.seqNumber == o).po;
+                        sortedKeysArray = $scope.pushKeys(sortedKeysArray, po, isAscending);
+                    }
+
+
+                }	
+                //});
                 
-                orderedProductionOders.forEach(a => {
-                    var po = a.po;
-                    var keys = sortedKeysArray.filter(a => a.includes(po) && !a.includes('Tgt') && !a.includes('LW') && !a.includes('Hi'))
-                    var nKeys = []
-                    var keysToPush = []
-                    for (var a = 0; a < keys.length; a++) {
-                        nKeys.push(keys[a].split('-')[0])
-                    }
-                    nKeys = isAscending ? nKeys.sort((a, b) => a - b) : nKeys.sort((a, b) => b - a);
-                    for (var n = 0; n < nKeys.length; n++) {
-                        keys.forEach(a => {
-                            if (a.split('-')[0] == nKeys[n]) {
-                                keysToPush.push(a)
-                            }
-                        });
-                    }
-                    sortedKeysArray = sortedKeysArray.filter(a => !a.includes(po))
-                    sortedKeysArray.push(...keysToPush)
-                });
-                //for (var o = 0; o < orderedProductionOders.length; o++) {
-                //    var po = orderedProductionOders.find(a => a.seqNumber == o).po;
+                //orderedProductionOders.forEach(a => {                    Varun commented on 11-01-2020
+                //    var po = a.po;
                 //    var keys = sortedKeysArray.filter(a => a.includes(po) && !a.includes('Tgt') && !a.includes('LW') && !a.includes('Hi'))
                 //    var nKeys = []
                 //    var keysToPush = []
@@ -1455,7 +1447,8 @@
                 //    }
                 //    sortedKeysArray = sortedKeysArray.filter(a => !a.includes(po))
                 //    sortedKeysArray.push(...keysToPush)
-                //}
+               //}        );
+
                
                 sortedKeysArray = [...new Set(sortedKeysArray)];
                 $scope.headerGridOptionsFinishRpt.columnDefs = [];
@@ -1533,7 +1526,8 @@
                     $scope.headerGridOptionsFinishRpt.data.push(data.FinishRptList[a]);
                     //$scope.gridOptionsVatMakeRpt.data.splice(0, 1);
                 }
-                $scope.gridOptionsFinishRpt.data.splice(0, 5);
+                $scope.gridOptionsFinishRpt.data.splice(0, 4);
+                $scope.hideExtraColumnsFinishRpt();
 
             }).finally(function () { $scope.loading = false; });
         }
@@ -1587,14 +1581,15 @@
             $scope.gridApi4 = gridApi
         }
        
-        $scope.loadgridFinishRpt()
+        //$scope.loadgridFinishRpt()
         $scope.gridPaginationFinishRpt = function (lineNumber) {
             if (lineNumber == 4) {
-                $scope.isCommentsgrid = true;
+                $scope.isFinCommentsgrid = true;
             } else {
                 $scope.removeGridDataFinishRpt();
                 $scope.loadgridFinishRpt(lineNumber);
-                $scope.isCommentsgrid = false;
+                $scope.isFinCommentsgrid = false;
+                
             }
 
         }
@@ -1643,17 +1638,17 @@
         $scope.loadgridFinishRptComments = function () {
             
             $scope.loading = true;
-            var productionOrder = "";
-            var productCode = "";
-            console.log('loading grid');
-            if ( $scope.finishRptSelectedProductionOrder == 'ALL') {
-                productionOrder = '1221613,1221605,1221604,1221603,1221617,1221602,1221753'
-            }
-            if ( $scope.finishRptSelectedProductCode == 'ALL') {
-                productCode = '100000223,100000259,100000268,100001559,100001979,100400168,100402450'
-            }
+            //var productionOrder = "";
+            //var productCode = "";
+            console.log('loading Finish comments grid');
+            //if ( $scope.finishRptSelectedProductionOrder == 'ALL') {
+            //    productionOrder = '1221613,1221605,1221604,1221603,1221617,1221602,1221753'
+            //}
+            //if ( $scope.finishRptSelectedProductCode == 'ALL') {
+            //    productCode = '100000223,100000259,100000268,100001559,100001979,100400168,100402450'
+            //}
 
-            LRWService.getFinishRptComments($scope.finishRptSelectedLineNumber, productionOrder, productCode, $scope.finishRptFromDate, $scope.finishRptToDate).success(function (data) {
+            LRWService.getFinishRptComments($scope.finishRptFromDate, $scope.finishRptToDate, $scope.finishRptSelectedLineNumber, $scope.finishRptSelectedProductionOrder, $scope.finishRptSelectedProductCode).success(function (data) {
 
                 if (data === null || data.FinishRptCommentsList === null || data.FinishRptCommentsList.length === 0) {
 
@@ -1689,7 +1684,7 @@
                     onSelect: (dateText) => {
                         var date = new Date(dateText);
                         $scope[toFrom] = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()));
-                        $scope.finishRptDateChange();
+                       
                     },
                     defaultDate: $scope[toFrom]
                 });
@@ -1700,12 +1695,12 @@
         $scope.toMKPreDate = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()))
 
         $scope.viewReportsMilkPre = function () {
-            $scope.removeGridDataMilkPre();
+            //$scope.removeGridDataMilkPre();
             $scope.loadgridMilkPreRpt($scope.fromMKPreDate, $scope.totoMKPreDateDate);
         }
-        $scope.removeGridDataMilkPre = function () {
-            $scope.gridOptionsMilkPreRpt.data = [];
-        }
+        //$scope.removeGridDataMilkPre = function () {
+        //    $scope.gridOptionsMilkPreRpt.data = [];
+        //}
         $scope.gridOptionsMilkPreRpt = {
             
             enableFullRowSelection: false,
@@ -1717,10 +1712,10 @@
             enableCellEdit: false,
             enableGridMenu: false,
             enablePinning: true,
-            rowTemplate:
-                '<div ng-class="{ \'grey\':grid.appScope.rowFormatter( row ) }">' +
-                '  <div ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ng-class="{ \'ui-grid-row-header-cell\': col.isRowHeader }"  ui-grid-cell></div>' +
-                '</div>',
+            //rowTemplate:
+            //    '<div ng-class="{ \'grey\':grid.appScope.rowFormatter( row ) }">' +
+            //    '  <div ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ng-class="{ \'ui-grid-row-header-cell\': col.isRowHeader }"  ui-grid-cell></div>' +
+            //    '</div>',
             columnDefs: [
                 { field: 'LoadNumber', Name: 'LoadNo.', width: '5%', visible: true, headerCellClass: 'greyRow'  }
                 , { field: 'ProducerTicket', width: '10%', visible: true, headerCellClass: 'greyRow'   }
@@ -1761,8 +1756,9 @@
 
             console.log('loading grid');
 
-
+            $timeout(function () {
             LRWService.getMilkPreRpt($scope.fromMKPreDate, $scope.fromMKPreDate).success(function (data) {
+               
 
                 if (data === null || data.MilkPreList === null || data.MilkPreList.length === 0) {
 
@@ -1778,9 +1774,10 @@
                     $scope.gridOptionsMilkPreRpt.data = MilkPreList;
                     console.log(MilkPreList);
                     $scope.error = false;
-                }
-
+                    }
+                
             }).finally(function () { $scope.loading = false; });
+                }, 3500);
 
         };
 
@@ -3451,8 +3448,7 @@
             document.getElementById(nav).style.display = 'block';
             if (nav == "mysidenavMilkPreScreen") {
                 $scope.viewReportsMilkPre();
-                $scope.viewReportsMilkPre();
-            }
+              }
         }
 
         $scope.go_full_screen = function () {

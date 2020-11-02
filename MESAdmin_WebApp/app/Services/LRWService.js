@@ -35,6 +35,7 @@
                     console.log("making api call url for Support");
 
                     return $http(req);
+
                 },
 
                 getFinishRpt: function (LineNumber, ProductionOrder, ProductCode, StartDate, EndDate) {
@@ -69,7 +70,7 @@
                 getFinishRptComments: function (StartDate, EndDate, LineNumber, ProductionOrder, ProductCode) {
 
                     console.log("Finish Rpt comments LRS ");
-                    var url = window.location.protocol + "//" + window.location.hostname + ":1630/api/Message/getFinishRpt/" + "/" + StartDate + "/" + EndDate + "/" + LineNumber + "/" + ProductionOrder + "/" + ProductCode  + "/";
+                    var url = window.location.protocol + "//" + window.location.hostname + ":1630/api/Message/getFinishRptComments/" + "/" + StartDate + "/" + EndDate + "/" + LineNumber + "/" + ProductionOrder + "/" + ProductCode  + "/";
                     console.log(url);
                     var req = {
                         method: 'GET',
@@ -93,6 +94,7 @@
                     console.log("making api call url for Support");
 
                     return $http(req);
+                 
                 },
 
 
