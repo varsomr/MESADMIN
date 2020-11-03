@@ -1262,12 +1262,13 @@
             }
         }
         $scope.finishRptLineNumbers = ['ALL'];
-        $scope.finishRptProductionOrderByLines = ['ALL']
-        $scope.finishRptProductCodeByLines = ['ALL']
+        $scope.finishRptProductionOrderByLines = []
+        $scope.finishRptProductCodeByLines = [];
         $scope.finishRptSelectedLineNumber = 'ALL';
-        $scope.finishRptSelectedProductionOrder = 'ALL';
-        $scope.finishRptSelectedProductCode = 'ALL';
-
+        $scope.finishRptSelectedProductionOrder = [];
+        $scope.finishRptSelectedProductCode = [];
+        $scope.selectedPos = 'ALL';
+        $scope.selectedCodes = 'ALL';
         $scope.showorhideExtraColumnsFinishRpt = function () {
             if (document.getElementById("hideshowcheckboxidfinishrpt").checked == true) {
                 $scope.showExtraColumnsFinishRpt();
@@ -1304,50 +1305,146 @@
 
         }
 
+        $scope.manageData = (data, list) => {
+            data.forEach(po => {
+                list.push({
+                    'label': po,
+                    'id': po
+                })
+            })
+        }
+
         $scope.getFinishRptParams = function (fromDate, toDate) {
             $scope.loading = true;
             LRWService.getFinishParam(fromDate, toDate).success((data) => {
                 $scope.finishRptParams = data.FinishParamList;
                 var lines = data.FinishParamList.map(a => a.LineNumber)
                 $scope.finishRptLineNumbers.push(...lines.filter((v, i, a) => a.indexOf(v) === i))
-                $scope.finishRptProductionOrderByLines.push(...$scope.finishRptParams.map(a => a.ProductionOrder));
-                $scope.finishRptProductCodeByLines.push(...$scope.finishRptParams.map(a => a.ProductCode));
-                
+                var pos = $scope.finishRptParams.map(a => a.ProductionOrder);
+                $scope.manageData(pos, $scope.finishRptProductionOrderByLines)
+                var codes = $scope.finishRptParams.map(a => a.ProductCode);
+                $scope.manageData(codes, $scope.finishRptProductCodeByLines)
                 $scope.error = false;
 
             }).finally(function () { $scope.loading = false; });
         }
 
         $scope.changeFinishRptLineNumber = function () {
-            $scope.finishRptProductionOrderByLines = ['ALL'];
-
+            $scope.finishRptProductionOrderByLines = [];
+            $scope.finishRptSelectedProductionOrder = [];
+            $scope.finishRptProductCodeByLines = []
+            $scope.finishRptSelectedProductCode = [];
+            var pos = [];
 
             if ($scope.finishRptSelectedLineNumber == 'ALL') {
-                $scope.finishRptProductionOrderByLines.push(...$scope.finishRptParams.map(a => a.ProductionOrder));
+                $scope.selectedPos = 'ALL'
+                $scope.selectedCodes = 'ALL'
+                if ($scope.finishRptParams != undefined && $scope.finishRptParams.length > 0) {
+                    pos = $scope.finishRptParams.map(a => a.ProductionOrder);
+                }
+                
+                //$scope.finishRptProductionOrderByLines.push(...$scope.finishRptParams.map(a => a.ProductionOrder));
 
             } else {
-                $scope.finishRptProductionOrderByLines.push(...$scope.finishRptParams.filter(a => a.LineNumber == $scope.finishRptSelectedLineNumber).map(a => a.ProductionOrder));
-            }
+                pos = $scope.finishRptParams.filter(a => a.LineNumber == $scope.finishRptSelectedLineNumber).map(a => a.ProductionOrder)
 
+                //$scope.finishRptProductionOrderByLines.push(...$scope.finishRptParams.filter(a => a.LineNumber == $scope.finishRptSelectedLineNumber).map(a => a.ProductionOrder));
+            }
+            $scope.manageData(pos, $scope.finishRptProductionOrderByLines)
         }
 
-        $scope.changeFinishRptProductionOrder = function () {
-            $scope.finishRptProductCodeByLines = ['ALL']
-            if ($scope.finishRptSelectedProductionOrder == 'ALL') {
-                $scope.finishRptProductCodeByLines.push(...$scope.finishRptParams.map(a => a.ProductCode));
+
+        // MultiSelect Drop down select - Event
+       
+
+        $scope.changeFinishRptProductionOrder = function (isAll) {
+            $scope.finishRptProductCodeByLines = []
+            $scope.finishRptSelectedProductCode = [];
+            var codes = [];
+            if ($scope.finishRptSelectedProductionOrder.length == 0) {
+                $scope.selectedPos = 'ALL'
+                $scope.selectedCodes = 'ALL'
+                if ($scope.finishRptParams != undefined && $scope.finishRptParams.length > 0) {
+                    codes = $scope.finishRptParams.map(a => a.ProductCode);
+                }
                 
             } else {
-                $scope.finishRptProductCodeByLines.push(...$scope.finishRptParams.filter(a => a.ProductionOrder == $scope.finishRptSelectedProductionOrder).map(a => a.ProductCode))
+                var pos = $scope.finishRptSelectedProductionOrder.map(a => a.id);
+                $scope.selectedPos = pos.toString();
+                pos.forEach(po => {
+                    var d = $scope.finishRptParams.find(a => a.ProductionOrder == po)
+                    if (d != null && d != undefined) {
+                        codes.push(d.ProductCode);
+                    }
+                });
+                //codes = $scope.finishRptParams.filter(a => a.ProductionOrder == $scope.finishRptSelectedProductionOrder).map(a => a.ProductCode);
             }
-
+            $scope.manageData(codes, $scope.finishRptProductCodeByLines)
 
         }
+
+        $scope.changeFinishRptProductCode = function (isAll) {
+            if ($scope.finishRptSelectedProductCode.length == 0) {
+                $scope.selectedCodes = 'ALL'
+            } else {
+                $scope.selectedCodes = $scope.finishRptSelectedProductCode.map(a => a.id).toString();
+            }
+        }
+
+        $scope.myEventListenersPo = {
+            onItemSelect: onItemSelect,
+            onItemDeselect: onItemDeselect,
+            onSelectAll: onSelectAll,
+            onDeselectAll: onDeselectAll
+        };
+
+        // MultiSelect Drop down select - Event
+        function onItemSelect(property) {
+            $scope.changeFinishRptProductionOrder()
+        }
+
+        function onItemDeselect(property) {
+            $scope.changeFinishRptProductionOrder()
+        }
+
+        function onSelectAll() {
+            $scope.changeFinishRptProductionOrder()
+        }
+
+        function onDeselectAll() {
+            $scope.changeFinishRptProductionOrder()
+        }
+
+
+        $scope.myEventListenersCode = {
+            onItemSelect: onItemSelectCode,
+            onItemDeselect: onItemDeselectCode,
+            onSelectAll: onSelectAllCode,
+            onDeselectAll: onDeselectAllCode
+        };
+
+        function onItemSelectCode(property) {
+            $scope.changeFinishRptProductCode()
+        }
+
+        function onItemDeselectCode(property) {
+            $scope.changeFinishRptProductCode()
+        }
+
+        function onSelectAllCode() {
+            $scope.changeFinishRptProductCode()
+        }
+
+        function onDeselectAllCode() {
+            $scope.changeFinishRptProductCode()
+        }
+
         $scope.isFinCommentsgrid = false;
 
         $scope.viewReportsFinishRpt = function () {
             $scope.isFinCommentsgrid = false;
             $scope.removeGridDataFinishRpt();
-            $scope.loadgridFinishRpt($scope.finishRptSelectedLineNumber, $scope.finishRptSelectedProductionOrder, $scope.finishRptSelectedProductCode, $scope.finishRptFromDate, $scope.finishRptToDate, $scope.isAscendingFinishRpt);
+            $scope.loadgridFinishRpt($scope.finishRptSelectedLineNumber, $scope.selectedPos, $scope.selectedCodes, $scope.finishRptFromDate, $scope.finishRptToDate, $scope.isAscendingFinishRpt);
         }
 
         $scope.removeGridDataFinishRpt = function () {
@@ -1366,8 +1463,16 @@
                 $scope.isAscendingFinishRpt = true;
             }
         }
-
-        
+        $scope.settingPo = {
+            scrollableHeight: '200px',
+            scrollable: true,
+            enableSearch: true
+        };
+        $scope.settingCode = {
+            scrollableHeight: '200px',
+            scrollable: true,
+            enableSearch: true
+        };
 
         $scope.loadgridFinishRpt = function (lineNumber, productionOrder, productCode, fromDate, toDate, isAscending = false) {
             if (lineNumber == null || lineNumber == undefined || lineNumber == 'ALL') {
@@ -1642,17 +1747,11 @@
         $scope.loadgridFinishRptComments = function () {
             
             $scope.loading = true;
-            //var productionOrder = "";
-            //var productCode = "";
+            
             console.log('loading Finish comments grid');
-            //if ( $scope.finishRptSelectedProductionOrder == 'ALL') {
-            //    productionOrder = '1221613,1221605,1221604,1221603,1221617,1221602,1221753'
-            //}
-            //if ( $scope.finishRptSelectedProductCode == 'ALL') {
-            //    productCode = '100000223,100000259,100000268,100001559,100001979,100400168,100402450'
-            //}
+            
 
-            LRWService.getFinishRptComments($scope.finishRptFromDate, $scope.finishRptToDate, $scope.finishRptSelectedLineNumber, $scope.finishRptSelectedProductionOrder, $scope.finishRptSelectedProductCode).success(function (data) {
+            LRWService.getFinishRptComments($scope.finishRptFromDate, $scope.finishRptToDate, $scope.finishRptSelectedLineNumber, $scope.selectedPos, $scope.selectedCodes).success(function (data) {
 
                 if (data === null || data.FinishRptCommentsList === null || data.FinishRptCommentsList.length === 0) {
 

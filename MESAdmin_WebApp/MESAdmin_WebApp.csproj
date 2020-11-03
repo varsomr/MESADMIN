@@ -209,6 +209,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\angularjs-dropdown-multiselect.min.js" />
     <Content Include="app\app.js" />
     <Content Include="app\Controllers\CalendarCustomController.js" />
     <Content Include="app\Controllers\ChangeMgmtDashController.js" />
@@ -435,6 +436,7 @@
     <Content Include="Scripts\tc-angular-chartjs.min.js" />
     <Content Include="Scripts\ui-grid.js" />
     <Content Include="Scripts\ui-grid.min.js" />
+    <Content Include="Scripts\underscore.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

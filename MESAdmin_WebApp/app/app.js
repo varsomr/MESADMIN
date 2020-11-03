@@ -1,5 +1,5 @@
 ﻿// 'use strict';
-var app = angular.module("myApp", ['ngRoute', 'ui.grid', 'ui.grid.edit', 'ui.grid.pagination', 'ui.grid.selection', 'ui.grid.exporter', 'ui.grid.grouping', 'ui.grid.pinning', 'googlechart']);
+var app = angular.module("myApp", ['ngRoute', 'ui.grid', 'ui.grid.edit', 'ui.grid.pagination', 'ui.grid.selection', 'ui.grid.exporter', 'ui.grid.grouping', 'ui.grid.pinning', 'googlechart', 'angularjs-dropdown-multiselect']);
 app.config(function ($routeProvider) {
     $routeProvider
         .when("/XMLContent", {

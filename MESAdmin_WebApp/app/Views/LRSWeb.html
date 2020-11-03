@@ -8,6 +8,7 @@
 
             <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.10.2/angular-chart.js"></script>
+
     <script type="text/javascript" src="/Scripts/googleCharts.js"></script>
     <link rel="stylesheet" href="/Content/calendar.css">
     <link rel="stylesheet" href="/Content/Style.css">
@@ -2075,9 +2076,10 @@
                                     <label style="float:left;color:black">Production Order</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <select id="SULine" ng-model="finishRptSelectedProductionOrder" ng-options="item for item in finishRptProductionOrderByLines" ng-change="changeFinishRptProductionOrder()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;">
+                                    <!--<select id="SULine" ng-model="finishRptSelectedProductionOrder" ng-options="item for item in finishRptProductionOrderByLines" ng-change="changeFinishRptProductionOrder()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;">
                                         <option value="All" selected> </option>
-                                    </select>
+                                    </select>-->
+                                    <div ng-dropdown-multiselect="" options="finishRptProductionOrderByLines" events="myEventListenersPo"  selected-model="finishRptSelectedProductionOrder" checkboxes="true" extra-settings="settingPo"></div>
                                 </div>
                             </div>
                             <div class="col-md-8">
@@ -2094,10 +2096,10 @@
                                     <label style="float:left;color:black">Material</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <select id="SULine" ng-model="finishRptSelectedProductCode" ng-options="item for item in finishRptProductCodeByLines" ng-change="changeProductCode()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;">
+                                    <!--<select id="SULine" ng-model="finishRptSelectedProductCode" ng-options="item for item in finishRptProductCodeByLines" ng-change="changeProductCode()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;">
                                         <option value="All" selected> </option>
-                                    </select>
-
+                                    </select>-->
+                                    <div ng-dropdown-multiselect="" options="finishRptProductCodeByLines" events="myEventListenersCode" selected-model="finishRptSelectedProductCode" checkboxes="true" extra-settings="settingCode"></div>
                                 </div>
                             </div>
 
@@ -2119,7 +2121,7 @@
                                 <button class="col-md-offset-5" style="color:black" type="button" ng-click="hideShowFilters()">Hide/Show Filters</button>
                             </div>
                         </div>
-
+                        
                     </div>
                     <div class="row" style="margin-top:10px">
                         <div class="col-md-6">

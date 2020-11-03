@@ -28,7 +28,9 @@ namespace Leprino_Integration_WebApp
                "~/Scripts/ui-grid.js",
                "~/Scripts/angular-idle.min.js",
                "~/Scripts/angular-sanitize.js",
-               "~/App/ng-google-chart.js"));
+               "~/App/ng-google-chart.js",
+               "~/Scripts/underscore.js",
+               "~/App/angularjs-dropdown-multiselect.min.js"));
 
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
