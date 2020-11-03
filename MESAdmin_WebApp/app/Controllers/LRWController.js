@@ -474,9 +474,11 @@
                 field = document.querySelector('#fromDate');
             finRptField = document.querySelector('#finishRepFromDate');
             milkRptField = document.querySelector('#fromMKPreDate');
+            ODLRptField = document.querySelector('#fromODLDate');
             field.value = $scope.FormatDTSlash(date);
             finRptField.value = $scope.FormatDTSlash(date);				   
             milkRptField.value = $scope.FormatDTSlash(date);	 
+            ODLRptField.value = $scope.FormatDTSlash(date);
 			   
 
             var date = new Date();
@@ -485,9 +487,11 @@
                 field = document.querySelector('#toDate');
             finRptField = document.querySelector('#finishRepToDate');
             milkRptField = document.querySelector('#toMKPreDate');
+            ODLRptField = document.querySelector('#toODLDate');
             field.value = $scope.FormatDTSlash(date);
             finRptField.value = $scope.FormatDTSlash(date);
-            milkRptField.value = $scope.FormatDTSlash(date);	
+            milkRptField.value = $scope.FormatDTSlash(date);
+            ODLRptField.value = $scope.FormatDTSlash(date);
 
             //var dateF = new Date();
             //var firstDay = '09/10/2020';//new Date(dateF.getFullYear(), dateF.getMonth(), 1);
@@ -1782,6 +1786,96 @@
         };
 
         //############################################## Milk PreScreen  #######End###########################################//
+        //############################################### Dairy Liquid Load Out ######################################################//
+
+        $scope.ODLrptcalendardate = (nav, toFrom) => {
+            //debugger
+            $timeout(function () {
+                $(nav).datepicker({
+                    onSelect: (dateText) => {
+                        var date = new Date(dateText);
+                        $scope[toFrom] = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()));
+
+                    },
+                    defaultDate: $scope[toFrom]
+                });
+            }, 10)
+
+        };
+        $scope.fromODLDate = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()))
+        $scope.toODLDate = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()))
+
+        $scope.viewReportsODL = function () {
+            //$scope.removeGridDataODL();
+            $scope.loadgridODLRpt($scope.fromODLDate, $scope.toODLDate);
+        }
+        //$scope.removeGridDataODL = function () {
+        //    $scope.gridOptionsODLLDRpt.data = [];
+        //}
+        $scope.gridOptionsODLLDRpt = {
+
+            enableFullRowSelection: false,
+            enableRowHeaderSelection: false,
+            paginationPageSizes: [20, 40, 60],
+            paginationPageSize: 40,
+            rowHeight: 30,
+            enableFiltering: false,
+            enableCellEdit: false,
+            enableGridMenu: false,
+            enablePinning: true,
+
+            columnDefs: [
+                { field: 'Sample_Date_Time', Name: 'Sample Date Time', width: '20%', visible: true, headerCellClass: 'greyRow', cellClass: bgColorODL }
+                , { field: 'Material_Number', Name: 'Material Number', width: '10%', visible: true, headerCellClass: 'greyRow', cellClass: bgColorODL }
+                , { field: 'Material_Desc', Name: 'Material Desc', width: '30%', visible: true, headerCellClass: 'greyRow', cellClass: bgColorODL }
+                , { field: 'Attribute_Name', Name: 'Attribute Name', width: '30%', visible: true, headerCellClass: 'greyRow', cellClass: bgColorODL }
+                , { field: 'Sample_Value', Name: 'Sample Value', width: '10%', visible: true, headerCellClass: 'greyRow', cellClass: bgColorODL }
+
+            ]
+        };
+
+        function bgColorODL(grid, row, col, rowRenderIndex, colRenderIndex) {
+            if (grid.getCellValue(row, col) == '') {
+                return 'blankRow'
+            } 
+
+            if (grid.getCellValue(row, col) == 'Sample Date Time' || grid.getCellValue(row, col) == 'Material Number' || grid.getCellValue(row, col) == 'Material Desc' || grid.getCellValue(row, col) == 'Attribute Name' || grid.getCellValue(row, col) == 'Sample Value' ) {
+                return 'greyRow'
+            } 
+        }
+
+        $scope.loadgridODLRpt = function () {
+
+            $scope.loading = true;
+
+            console.log('loading grid');
+
+
+            LRWService.getOtherDairyldo($scope.fromODLDate, $scope.toODLDate).success(function (data) {
+
+
+                if (data === null || data.OtherDairyldoList === null || data.OtherDairyldoList.length === 0) {
+
+                    $scope.error = true;
+                    $scope.errorDescription = "No data found for selected criteria.";
+
+                } else {
+                    $scope.gridOptionsODLLDRpt.paginationPageSizes.push(
+                        data.OtherDairyldoList.length
+                    );
+
+                    var OtherDairyldoList = data.OtherDairyldoList;
+                    $scope.gridOptionsODLLDRpt.data = OtherDairyldoList;
+                    console.log(OtherDairyldoList);
+                    $scope.error = false;
+                }
+
+            }).finally(function () { $scope.loading = false; });
+
+
+        };
+
+        //############################################## Dairy Liquid Load Out  #######End###########################################//
         //###############################################  ChseMakSuprDopRpt SCREEN ############################################//
 
         $scope.gridOptionsChseMakSuprDopRpt = {
@@ -3448,7 +3542,10 @@
             document.getElementById(nav).style.display = 'block';
             if (nav == "mysidenavMilkPreScreen") {
                 $scope.viewReportsMilkPre();
-              }
+            }
+            if (nav == "mysidenavOthDairyLiqLoadOut") {
+                $scope.viewReportsODL();
+            }
         }
 
         $scope.go_full_screen = function () {
