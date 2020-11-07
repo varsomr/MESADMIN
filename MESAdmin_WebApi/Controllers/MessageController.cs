@@ -118,6 +118,25 @@ namespace Leprino_Integration_Tool.Controllers
             VatMakeRptCommentsGenerator vm = new VatMakeRptCommentsGenerator();
             return vm.GetVatMakeRptCommentsCollection(StartDate, EndDate, ProductCode, LineNumber);
         }
+
+        [Route("api/Message/getMilkRec/{StartDate}/{EndDate}")]
+        public MilkReceivingLoadDetailCollection getMilkRec(string StartDate, string EndDate)
+        {
+
+            MilkRecGenerator vm = new MilkRecGenerator();
+            return vm.GetMilkReceivingLoadDetailCollection(StartDate, EndDate);
+        }
+
+
+        [Route("api/Message/getKPIMilkRec/{DateStart}/{DateEnd}/{SupplierID}/{Route_Num}/{Material}")]
+        public KPIMilkReceivingCollection getKPIMilkRec(string DateStart, string DateEnd, string SupplierID, string Route_Num, string Material)
+        {
+
+            KPIMilkRecGenerator vm = new KPIMilkRecGenerator();
+            return vm.GetKPIMilkReceivingCollection(DateStart, DateEnd, SupplierID, Route_Num, Material);
+        }
+
+
         [Route("api/Message/getChseMakSuprDopRpt/{LineNumber}/{ProductionOrder}/{ProductCode}/{StartDate}/{EndDate}")]
         public ChseMakSuprDopRptCollection getChseMakSuprDopRpt(string LineNumber, string ProductionOrder, string ProductCode, string StartDate, string EndDate)
         {

@@ -171,6 +171,35 @@
 
                     return $http(req);
                 },
+
+                getMilkRec: function (StartDate, EndDate) {
+
+                    console.log("Milk receiving LRS ");
+                    var url = window.location.protocol + "//" + window.location.hostname + ":1630/api/Message/getMilkRec/" + "/" + StartDate + "/" + EndDate + "/" ;
+                    console.log(url);
+                    var req = {
+                        method: 'GET',
+                        url: url
+                    };
+                    console.log("making api call url for Support");
+
+                    return $http(req);
+                },
+
+                getKPIMilkRec: function (DateStart, DateEnd, SupplierID, Route_Num, Material) {
+
+                    console.log("Milk receiving KPI LRS ");
+                    var url = window.location.protocol + "//" + window.location.hostname + ":1630/api/Message/getKPIMilkRec/" + "/" + DateStart + "/" + DateEnd + "/" + SupplierID + "/" + Route_Num + "/" + Material + "/";
+                    console.log(url);
+                    var req = {
+                        method: 'GET',
+                        url: url
+                    };
+                    console.log("making api call url for Support");
+
+                    return $http(req);
+                },
+
                 //ChseMakSuprDopRpt
                 getChseMakSuprDopRpt: function (LineNumber, ProductionOrder, ProductCode, StartDate, EndDate) {
 

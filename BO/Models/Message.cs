@@ -1206,7 +1206,19 @@ namespace BO.Models
 
     }
 
+    public class MilkReceivingLoadDetailCollection
+    {
 
+        public List<IDictionary<string, string>> MilkReceivingLoadDetailList = new List<IDictionary<string, string>>();
+
+    }
+
+    public class KPIMilkReceivingCollection
+    {
+
+        public List<IDictionary<string, string>> KPIMilkReceivingList = new List<IDictionary<string, string>>();
+
+    }
 
 
     public class RecPlnRpt

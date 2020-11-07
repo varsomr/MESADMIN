@@ -225,16 +225,22 @@
             text-align: center;
         }
 
+        /*.btn {
+            background-color: white !important;
+            color: black !important;
+            height: 25px !important;
+            width: 100px !important;
+        }*/
+
         .gridVatMakeRpt {
             width: 99vw;
             height: 80vh;
             background-color: white !important;
             color: black !important;
             /*grid-template-columns: repeat(auto-fit, minmax(min-content, 400px));*/
-            text-align: center;
-            border: solid;
-            border-width: 0.5px !important;
-            border-color: darkslategrey !important;
+            text-align: center;         
+            /*border-left: 0.1px solid darkslategrey;
+            border-bottom: 0.1px solid darkslategrey;*/
         }
 
         .gridVatMakeRptComments {
@@ -512,6 +518,10 @@
             background-color: white !important;
             /*border-right: 1px hidden white;*/
             border: none !important;
+            /*border-spacing: 0px !important;
+            border-collapse: collapse !important;*/
+            /*border-left: 0.1px solid hidden;
+            border-bottom: 0.1px solid hidden;*/
         }
 
         .advancedSearchTextbox {
@@ -1531,6 +1541,9 @@
             <button id="ODLRpt" class="mainBtn" ng-click="openModal('mysidenavOthDairyLiqLoadOut')" style="width:7%; height:40px; border:solid 1px darkslategrey; background-color:transparent;color:white; float:left;font-size:small;border-bottom:hidden">
                 Other Dairy Liquid Load Out<span class="tooltiptext" id="myTooltipFr"></span>
             </button>
+            <button id="ODRRpt" class="mainBtn" ng-click="openModal('mysidenavOthDairyLiqReceipt')" style="width:7%; height:40px; border:solid 1px darkslategrey; background-color:transparent;color:white; float:left;font-size:small;border-bottom:hidden">
+                Other Dairy Liquid Load Out<span class="tooltiptext" id="myTooltipFr"></span>
+            </button>
         </div>
     </div>
 
@@ -1947,8 +1960,8 @@
                         <button type="button" class="btn btn-sm btn-info" ng-click="gridPagination('2')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">2</button>
                         <button type="button" class="btn btn-sm btn-info" ng-click="gridPagination('3')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">3</button>-->
                         <div id="gridComm" ng-show="isCommentsgrid == true" ui-grid="gridOptionsVatMakeRptComments" ui-grid-pinning ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRpt" style=" width:98vw; height: 45vh; color:white;border:none; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
-                        <div id="gridH" ng-show="isCommentsgrid == false" ui-grid="headerGridOptions" ui-grid-pinning ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRpt" style=" width:98vw; height: 25vh; color:white;border:solid 0.5px darkslategrey; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
-                        <div id="gridW" ng-show="isCommentsgrid == false" ui-grid="gridOptionsVatMakeRpt" ui-grid-pinning ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRpt" style=" width:98vw; height: 50vh; color:white;border:none; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
+                        <div id="gridH" ng-show="isCommentsgrid == false" ui-grid="headerGridOptions" ui-grid-pinning ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRpt" style=" width:98vw; height: 20vh; color:white;border:solid 0.5px darkslategrey; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
+                        <div id="gridW" ng-show="isCommentsgrid == false" ui-grid="gridOptionsVatMakeRpt" ui-grid-pinning ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRpt" style=" width:98vw; height: 42vh; color:white;border:none; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
 
                         <div style="padding-left: 120px; padding-top: 400px;background-color:transparent; color:black" class="grid-msg-overlay" ng-hide="!loading">
                             <div style="background-color:transparent; color:white;" class="msg">
@@ -2075,9 +2088,10 @@
                                     <label style="float:left;color:black">Production Order</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <select id="SULine" ng-model="finishRptSelectedProductionOrder" ng-options="item for item in finishRptProductionOrderByLines" ng-change="changeFinishRptProductionOrder()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;">
-                                        <option value="All" selected> </option>
-                                    </select>
+                                    <!--<select id="SULine" ng-model="finishRptSelectedProductionOrder" ng-options="item for item in finishRptProductionOrderByLines" ng-change="changeFinishRptProductionOrder()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;">
+                               <option value="All" selected> </option>
+                                    </select>-->
+                                    <div ng-dropdown-multiselect="" options="finishRptProductionOrderByLines" class="multi-select-btn" events="myEventListenersPo" selected-model="finishRptSelectedProductionOrder" checkboxes="true" extra-settings="settingPo"></div>
                                 </div>
                             </div>
                             <div class="col-md-8">
@@ -2094,9 +2108,10 @@
                                     <label style="float:left;color:black">Material</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <select id="SULine" ng-model="finishRptSelectedProductCode" ng-options="item for item in finishRptProductCodeByLines" ng-change="changeProductCode()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;">
-                                        <option value="All" selected> </option>
-                                    </select>
+                                    <!--<select id="SULine" ng-model="finishRptSelectedProductCode" ng-options="item for item in finishRptProductCodeByLines" ng-change="changeProductCode()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;">
+                                    <option value="All" selected> </option>
+                                    </select>-->
+                                    <div ng-dropdown-multiselect="" options="finishRptProductCodeByLines" class="multi-select-btn" events="myEventListenersCode" selected-model="finishRptSelectedProductCode" checkboxes="true" extra-settings="settingCode"></div>
 
                                 </div>
                             </div>
@@ -2133,6 +2148,8 @@
                         </div>
 
                     </div>
+                </div>
+            <div>
                     <hr style="margin-bottom:0px;margin-top:0px" />
                     <div class="row">
                         <div class="col-md-6">
@@ -2155,7 +2172,7 @@
                     <div id="gridandchartW" style="width:100%; height:100%">
                         <div id="gridOperator" style="width:100%;height:50%; float:left; border:hidden">
                             <div id="gridCommFinishRpt" ng-show="isFinCommentsgrid == true" ui-grid="gridOptionsFinishRptComments" ui-grid-pinning ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRpt" style=" width:98vw; height: 45vh; color:white;border:none; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
-                            <div id="gridHFinishRpt" ng-show="isFinCommentsgrid == false" ui-grid="headerGridOptionsFinishRpt" ui-grid-pinning ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRpt" style=" width:98vw; height: 28vh; color:white;border:none; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
+                            <div id="gridHFinishRpt" ng-show="isFinCommentsgrid == false" ui-grid="headerGridOptionsFinishRpt" ui-grid-pinning ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRpt" style=" width:98vw; height: 20vh; color:white;border:none; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
                             <div id="gridFinishReport" ng-show="isFinCommentsgrid == false" ui-grid="gridOptionsFinishRpt" ui-grid-pinning ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRpt" style=" width:98vw; height: 42vh; color:white;border:none; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
                         </div>
                     </div>
@@ -2267,6 +2284,102 @@
         </div>
     </div>
     <!--#################################################### MilkPreScreen  ################ END ######################################-->
+    <!--#################################################### Other Dairy Liquids Receipt  ######################################################-->
+    <div id="mysidenavOthDairyLiqReceipt" class="modal" style="background-color:white; border:none" ng-controller="LRWcontroller">
+
+        <div class="modal-content" style="height:100%;  background-color:white;color:white">
+            <div class="modal-body" style="height:100%;  background-color:white;color:white">
+                <!--start filter-->
+                <!--<div class="row">
+                    <div class="col-md-12">
+                        <label id="modalMessage" style="font-size:medium;font-weight:bold;background-color:brown;color:white;width:100%">Other Dairy Liquids Receipt Report</label>
+                    </div>
+                </div>-->
+                <div style="background-color:lightblue">
+                    <div class="row" ng-show="isHideFilters == false">
+                        <div class="col-md-12">
+                            <div class="col-md-2">
+                                <div class="col-md-6">
+                                    <label style="float:left;color:black">From Date</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input id="fromODRDate" style="color:black; width:100px;height:20px; font-size:x-small;  float:left; border:solid 2px; text-align:center" ng-click="ODRrptcalendardate('#fromODRDate','fromODRDate')">
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="col-md-6">
+                                    <label style="float:left;color:black">To Date</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input id="toODRDate" style="color: black;width:100px; height: 20px; font-size: x-small; float: left; border: solid 2px; text-align: center;" ng-click="ODRrptcalendardate('#toODRDate','toODRDate')">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" ng-click="viewReportsODR()" style="color:black;float:right"> View Report</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="row" ng-show="isHideFilters == false" style="margin-top:10px">
+                        <div class="col-md-12">
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <button class="col-md-offset-5" style="color:black" type="button" ng-click="hideShowFilters()">Hide/Show Filters</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <hr style="margin-bottom:0px;margin-top:0px" />
+                <div class="row">
+                    <div class="col-md-6">
+                        <img class="img" src="../leprinoFoods.PNG" style="float:left;height:10%;width:10%" />
+                    </div>
+                    <div class="col-md-6">
+                        <label style="color:black; font-size: 20px; text-align:center">Other Dairy Liquids Receipt</label><br />
+                        <a style="color:black; font-size: 10px; text-align:center" ng-click="manageAutoRefresh()">Click to {{refreshtxt}} report auto-refresh</a>
+                    </div>
+                </div>
+                <hr class="new1" />
+                <div class="row" style="margin-top:10px">
+                    <div class="col-md-6">
+                        <label style="color:black;font-weight:bold">Production Date: {{FormatDTSlash(fromODRDate)}} - {{FormatDTSlash(toODRDate)}} </label>
+                    </div>
+                    <div class="col-md-offset-10">
+                        <label style="color:black;font-weight:bold;text-align:right">PlantName: Fort Morgan</label>
+                    </div>
+                </div>
+                <div id="gridandchartW" style="width:100%; height:100%">
+                    <!--top grid **************************************************************-->
+                    <!--<input type="checkbox" id="p1" name="hidep1" value="Hide source" ng-click="$Scope.GridDisplayStatus($event, 2,'p1')" /> -->
+
+
+                    <div id="gridOperator" style="width:100%;height:50%; float:left; border:hidden">
+
+                        <div id="gridODR" ui-grid="gridOptionsODRRpt" ui-grid-pinning ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRpt" style=" width:70vw; height: 45vh; color:white;border:none; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
+
+                        <div style="padding-left: 120px; padding-top: 400px;background-color:transparent; color:black" class="grid-msg-overlay" ng-hide="!loading">
+                            <div style="background-color:transparent; color:white;" class="msg">
+                                <span>
+                                    Please wait while Loading Data...<br /><!---->
+                                    <br />Working on Retrieving info ...<i class="fa fa-spinner fa-spin"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--#################################################### Other Dairy Liquids Receipt  ################ END ######################################-->
     <!--#################################################### Dairy Liquid Load Out  ######################################################-->
     <div id="mysidenavOthDairyLiqLoadOut" class="modal" style="background-color:white; border:none" ng-controller="LRWcontroller">
 

@@ -89,6 +89,25 @@ namespace BLL.Interfaces
        FinishRptCommentsCollection GetFinishRptCommentsCollection(string StartDate, string EndDate, string LineNumber, string ProductionOrder, string ProductCode);
 
     }
+
+    interface IMilkReceivingLoadDetail
+    {
+        //Selection
+        MilkReceivingLoadDetailCollection GetMilkReceivingLoadDetailCollection(string StartDate, string EndDate);
+
+    }
+
+
+
+    interface IKPIMilkReceiving
+    {
+        //Selection
+        KPIMilkReceivingCollection GetKPIMilkReceivingCollection(string DateStart, string DateEnd, string SupplierID, string Route_Num, string Material);
+
+    }
+
+
+
     interface IChseMakSuprDopRpt
     {
         //Selection

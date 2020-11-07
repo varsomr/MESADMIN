@@ -291,7 +291,7 @@
             //$scope.gridOptionsVatMakeRpt.columnDefs[5].visible = true;
             //$scope.gridOptionsVatMakeRpt.columnDefs[6].visible = true;// 
             var hdsumV = $scope.gridOptionsVatMakeRpt.columnDefs.filter(a => a.name.includes('SumV') || a.name.includes('SDev') || a.name.includes('AvgV') || a.name.includes('Source') || a.name.includes('MIC') || a.name.includes('Position') || a.name.includes('Source'))
-            var headsumV = $scope.headerGridOptions.columnDefs.filter(a => a.name.includes('SumV') || a.name.includes('SDev') || a.name.includes('AvgV'))
+            var headsumV = $scope.headerGridOptions.columnDefs.filter(a => a.name.includes('SumV') || a.name.includes('SDev') || a.name.includes('AvgV') || a.name.includes('Source') || a.name.includes('MIC')  || a.name.includes('Source'))
             hdsumV.push(...headsumV)
 
             for (var a = 0; a < hdsumV.length; a++) {
@@ -311,7 +311,7 @@
             //$scope.gridOptionsVatMakeRpt.columnDefs[6].visible = false;
             //$scope.gridOptionsVatMakeRpt.columnDefs[7].visible = false;
             var hdsumV = $scope.gridOptionsVatMakeRpt.columnDefs.filter(a => a.name.includes('SumV') || a.name.includes('SDev') || a.name.includes('AvgV') || a.name.includes('KPI') || a.name.includes('MIC') || a.name.includes('Position') || a.name.includes('Source'))
-            var headsumV = $scope.headerGridOptions.columnDefs.filter(a => a.name.includes('SumV') || a.name.includes('SDev') || a.name.includes('AvgV'))
+            var headsumV = $scope.headerGridOptions.columnDefs.filter(a => a.name.includes('SumV') || a.name.includes('SDev') || a.name.includes('AvgV') || a.name.includes('KPI') || a.name.includes('MIC') || a.name.includes('Position') || a.name.includes('Source'))
             hdsumV.push(...headsumV)
             for (var a = 0; a < hdsumV.length; a++) {
                 hdsumV[a].visible = false;
@@ -475,10 +475,13 @@
             finRptField = document.querySelector('#finishRepFromDate');
             milkRptField = document.querySelector('#fromMKPreDate');
             ODLRptField = document.querySelector('#fromODLDate');
+            ODRFrmRptField = document.querySelector('#fromODRDate');
+
             field.value = $scope.FormatDTSlash(date);
             finRptField.value = $scope.FormatDTSlash(date);				   
             milkRptField.value = $scope.FormatDTSlash(date);	 
             ODLRptField.value = $scope.FormatDTSlash(date);
+            ODRFrmRptField.value = $scope.FormatDTSlash(date);
 			   
 
             var date = new Date();
@@ -488,10 +491,13 @@
             finRptField = document.querySelector('#finishRepToDate');
             milkRptField = document.querySelector('#toMKPreDate');
             ODLRptField = document.querySelector('#toODLDate');
+            ODRToRptField = document.querySelector('#toODRDate');
+
             field.value = $scope.FormatDTSlash(date);
             finRptField.value = $scope.FormatDTSlash(date);
             milkRptField.value = $scope.FormatDTSlash(date);
             ODLRptField.value = $scope.FormatDTSlash(date);
+            ODRToRptField.value = $scope.FormatDTSlash(date);
 
             //var dateF = new Date();
             //var firstDay = '09/10/2020';//new Date(dateF.getFullYear(), dateF.getMonth(), 1);
@@ -1262,11 +1268,13 @@
             }
         }
         $scope.finishRptLineNumbers = ['ALL'];
-        $scope.finishRptProductionOrderByLines = ['ALL']
-        $scope.finishRptProductCodeByLines = ['ALL']
+        $scope.finishRptProductionOrderByLines = []
+        $scope.finishRptProductCodeByLines = [];
         $scope.finishRptSelectedLineNumber = 'ALL';
-        $scope.finishRptSelectedProductionOrder = 'ALL';
-        $scope.finishRptSelectedProductCode = 'ALL';
+        $scope.finishRptSelectedProductionOrder = [];
+        $scope.finishRptSelectedProductCode = [];
+        $scope.selectedPos = 'ALL';
+        $scope.selectedCodes = 'ALL';
 
         $scope.showorhideExtraColumnsFinishRpt = function () {
             if (document.getElementById("hideshowcheckboxidfinishrpt").checked == true) {
@@ -1303,51 +1311,112 @@
             $scope.gridApi4.grid.refresh();
 
         }
-
+        $scope.settingPo = {
+            scrollableHeight: '200px',
+            scrollable: true,
+            enableSearch: true
+        };
+        $scope.settingCode = {
+            scrollableHeight: '200px',
+            scrollable: true,
+            enableSearch: true
+        };
+        $scope.manageData = (data, list) => {
+            data.forEach(po => {
+                list.push({
+                    'label': po,
+                    'id': po
+                })
+            })
+        }
         $scope.getFinishRptParams = function (fromDate, toDate) {
             $scope.loading = true;
             LRWService.getFinishParam(fromDate, toDate).success((data) => {
                 $scope.finishRptParams = data.FinishParamList;
                 var lines = data.FinishParamList.map(a => a.LineNumber)
                 $scope.finishRptLineNumbers.push(...lines.filter((v, i, a) => a.indexOf(v) === i))
-                $scope.finishRptProductionOrderByLines.push(...$scope.finishRptParams.map(a => a.ProductionOrder));
-                $scope.finishRptProductCodeByLines.push(...$scope.finishRptParams.map(a => a.ProductCode));
-                
+                var pos = $scope.finishRptParams.map(a => a.ProductionOrder);
+                $scope.manageData(pos, $scope.finishRptProductionOrderByLines)
+                var codes = $scope.finishRptParams.map(a => a.ProductCode);
+                $scope.manageData(codes, $scope.finishRptProductCodeByLines);
+                pos.forEach(p => {
+                    $scope.finishRptSelectedProductionOrder.push({ 'id': p })
+                })
+                codes.forEach(p => {
+                    $scope.finishRptSelectedProductCode.push({ 'id': p })
+                })
                 $scope.error = false;
 
             }).finally(function () { $scope.loading = false; });
         }
 
         $scope.changeFinishRptLineNumber = function () {
-            $scope.finishRptProductionOrderByLines = ['ALL'];
-
+            $scope.finishRptProductionOrderByLines = [];
+            $scope.finishRptSelectedProductionOrder = [];
+            $scope.finishRptProductCodeByLines = []
+            $scope.finishRptSelectedProductCode = [];
+            var pos = [];
 
             if ($scope.finishRptSelectedLineNumber == 'ALL') {
-                $scope.finishRptProductionOrderByLines.push(...$scope.finishRptParams.map(a => a.ProductionOrder));
+                $scope.selectedPos = 'ALL'
+                $scope.selectedCodes = 'ALL'
+                if ($scope.finishRptParams != undefined && $scope.finishRptParams.length > 0) {
+                    pos = $scope.finishRptParams.map(a => a.ProductionOrder);
+                }
+
+                //$scope.finishRptProductionOrderByLines.push(...$scope.finishRptParams.map(a => a.ProductionOrder));
 
             } else {
-                $scope.finishRptProductionOrderByLines.push(...$scope.finishRptParams.filter(a => a.LineNumber == $scope.finishRptSelectedLineNumber).map(a => a.ProductionOrder));
+                pos = $scope.finishRptParams.filter(a => a.LineNumber == $scope.finishRptSelectedLineNumber).map(a => a.ProductionOrder)
+
+                //$scope.finishRptProductionOrderByLines.push(...$scope.finishRptParams.filter(a => a.LineNumber == $scope.finishRptSelectedLineNumber).map(a => a.ProductionOrder));
             }
+            $scope.manageData(pos, $scope.finishRptProductionOrderByLines)
+        }
+
+
+        // MultiSelect Drop down select - Event
+
+
+        $scope.changeFinishRptProductionOrder = function (isAll) {
+            $scope.finishRptProductCodeByLines = []
+            $scope.finishRptSelectedProductCode = [];
+            var codes = [];
+            if ($scope.finishRptSelectedProductionOrder.length == 0) {
+                $scope.selectedPos = 'ALL'
+                $scope.selectedCodes = 'ALL'
+                if ($scope.finishRptParams != undefined && $scope.finishRptParams.length > 0) {
+                    codes = $scope.finishRptParams.map(a => a.ProductCode);
+                }
+
+            } else {
+                var pos = $scope.finishRptSelectedProductionOrder.map(a => a.id);
+                $scope.selectedPos = pos.toString();
+                pos.forEach(po => {
+                    var d = $scope.finishRptParams.find(a => a.ProductionOrder == po)
+                    if (d != null && d != undefined) {
+                        codes.push(d.ProductCode);
+                    }
+                });
+                //codes = $scope.finishRptParams.filter(a => a.ProductionOrder == $scope.finishRptSelectedProductionOrder).map(a => a.ProductCode);
+            }
+            $scope.manageData(codes, $scope.finishRptProductCodeByLines)
 
         }
 
-        $scope.changeFinishRptProductionOrder = function () {
-            $scope.finishRptProductCodeByLines = ['ALL']
-            if ($scope.finishRptSelectedProductionOrder == 'ALL') {
-                $scope.finishRptProductCodeByLines.push(...$scope.finishRptParams.map(a => a.ProductCode));
-                
+        $scope.changeFinishRptProductCode = function (isAll) {
+            if ($scope.finishRptSelectedProductCode.length == 0) {
+                $scope.selectedCodes = 'ALL'
             } else {
-                $scope.finishRptProductCodeByLines.push(...$scope.finishRptParams.filter(a => a.ProductionOrder == $scope.finishRptSelectedProductionOrder).map(a => a.ProductCode))
+                $scope.selectedCodes = $scope.finishRptSelectedProductCode.map(a => a.id).toString();
             }
-
-
         }
         $scope.isFinCommentsgrid = false;
 
         $scope.viewReportsFinishRpt = function () {
             $scope.isFinCommentsgrid = false;
             $scope.removeGridDataFinishRpt();
-            $scope.loadgridFinishRpt($scope.finishRptSelectedLineNumber, $scope.finishRptSelectedProductionOrder, $scope.finishRptSelectedProductCode, $scope.finishRptFromDate, $scope.finishRptToDate, $scope.isAscendingFinishRpt);
+            $scope.loadgridFinishRpt($scope.finishRptSelectedLineNumber, $scope.selectedPos, $scope.selectedCodes, $scope.finishRptFromDate, $scope.finishRptToDate, $scope.isAscendingFinishRpt);
         }
 
         $scope.removeGridDataFinishRpt = function () {
@@ -1367,7 +1436,54 @@
             }
         }
 
-        
+        $scope.myEventListenersPo = {
+            onItemSelect: onItemSelect,
+            onItemDeselect: onItemDeselect,
+            onSelectAll: onSelectAll,
+            onDeselectAll: onDeselectAll
+        };
+
+        // MultiSelect Drop down select - Event
+        function onItemSelect(property) {
+            $scope.changeFinishRptProductionOrder()
+
+        }
+
+        function onItemDeselect(property) {
+            $scope.changeFinishRptProductionOrder()
+        }
+
+        function onSelectAll() {
+            $scope.changeFinishRptProductionOrder()
+        }
+
+        function onDeselectAll() {
+            $scope.changeFinishRptProductionOrder()
+        }
+
+
+        $scope.myEventListenersCode = {
+            onItemSelect: onItemSelectCode,
+            onItemDeselect: onItemDeselectCode,
+            onSelectAll: onSelectAllCode,
+            onDeselectAll: onDeselectAllCode
+        };
+
+        function onItemSelectCode(property) {
+            $scope.changeFinishRptProductCode()
+        }
+
+        function onItemDeselectCode(property) {
+            $scope.changeFinishRptProductCode()
+        }
+
+        function onSelectAllCode() {
+            $scope.changeFinishRptProductCode()
+        }
+
+        function onDeselectAllCode() {
+            $scope.changeFinishRptProductCode()
+        }   
 
         $scope.loadgridFinishRpt = function (lineNumber, productionOrder, productCode, fromDate, toDate, isAscending = false) {
             if (lineNumber == null || lineNumber == undefined || lineNumber == 'ALL') {
@@ -1652,7 +1768,7 @@
             //    productCode = '100000223,100000259,100000268,100001559,100001979,100400168,100402450'
             //}
 
-            LRWService.getFinishRptComments($scope.finishRptFromDate, $scope.finishRptToDate, $scope.finishRptSelectedLineNumber, $scope.finishRptSelectedProductionOrder, $scope.finishRptSelectedProductCode).success(function (data) {
+            LRWService.getFinishRptComments($scope.finishRptFromDate, $scope.finishRptToDate, $scope.finishRptSelectedLineNumber, $scope.selectedPos, $scope.selectedCodes).success(function (data) {
 
                 if (data === null || data.FinishRptCommentsList === null || data.FinishRptCommentsList.length === 0) {
 
@@ -1761,7 +1877,7 @@
             console.log('loading grid');
 
             $timeout(function () {
-            LRWService.getMilkPreRpt($scope.fromMKPreDate, $scope.fromMKPreDate).success(function (data) {
+                LRWService.getMilkPreRpt($scope.fromMKPreDate, $scope.toMKPreDate).success(function (data) {
                
 
                 if (data === null || data.MilkPreList === null || data.MilkPreList.length === 0) {
@@ -1786,6 +1902,94 @@
         };
 
         //############################################## Milk PreScreen  #######End###########################################//
+        //############################################### Other_Dairy_Liquids_Receipt ######################################################//
+
+        $scope.ODRrptcalendardate = (nav, toFrom) => {
+            //debugger
+            $timeout(function () {
+                $(nav).datepicker({
+                    onSelect: (dateText) => {
+                        var date = new Date(dateText);
+                        $scope[toFrom] = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()));
+
+                    },
+                    defaultDate: $scope[toFrom]
+                });
+            }, 10)
+
+        };
+        $scope.fromODRDate = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()))
+        $scope.toODRDate = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()))
+
+        $scope.viewReportsODR = function () {
+            $scope.removeGridDataODR();
+            $scope.loadgridODRRpt($scope.fromODRDate, $scope.toODRDate);
+        }
+        $scope.removeGridDataODR = function () {
+            $scope.gridOptionsODRRpt.data = [];
+        }
+        $scope.gridOptionsODRRpt = {
+
+            enableFullRowSelection: false,
+            enableRowHeaderSelection: false,
+            paginationPageSizes: [20, 40, 60],
+            paginationPageSize: 40,
+            rowHeight: 30,
+            enableFiltering: false,
+            enableCellEdit: false,
+            enableGridMenu: false,
+            enablePinning: true,
+            //rowTemplate:
+            //    '<div ng-class="{ \'grey\':grid.appScope.rowFormatter( row ) }">' +
+            //    '  <div ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ng-class="{ \'ui-grid-row-header-cell\': col.isRowHeader }"  ui-grid-cell></div>' +
+            //    '</div>',
+            columnDefs: [
+                { field: 'Sample_Date_Time', Name: 'Sample Date', width: '5%', visible: true, headerCellClass: 'greyRow', cellClass: bgColorODL }
+                , { field: 'Sample_Time', Name: 'Sample Time', width: '5%', visible: true, headerCellClass: 'greyRow', cellClass: bgColorODL }
+                , { field: 'Material_Number', Name: 'Material Number', width: '5%', visible: true, headerCellClass: 'greyRow', cellClass: bgColorODL }
+                , { field: 'Material_Desc', Name: 'Material Desc', width: '10%', visible: true, headerCellClass: 'greyRow', cellClass: bgColorODL }
+                , { field: 'LFC_Lbs', Name: 'LFC Lbs', width: '5%', visible: true, headerCellClass: 'greyRow', cellClass: bgColorODL }
+                , { field: 'Receipt_Reference_Number', Name: 'Receipt Reference Number', width: '15%', visible: true, headerCellClass: 'greyRow', cellClass: bgColorODL }
+                , { field: 'Receipt_Delivery_Number', Name: 'Receipt Delivery Number', width: '15%', visible: true, headerCellClass: 'greyRow', cellClass: bgColorODL }
+                , { field: 'Dairy_Liquid_Temperature', Name: 'Dairy Liquid Temperature', width: '10%', visible: true, headerCellClass: 'greyRow', cellClass: bgColorODL }
+                , { field: 'Dairy_Liquid_LockorSeal#', Name: 'Dairy Liquid Lock or Seal', width: '10%', visible: true, headerCellClass: 'greyRow', cellClass: bgColorODL }
+                , { field: 'DairyLiquidTankerInspection#', Name: 'Dairy Liquid Tanker Inspection', width: '10%', visible: true, headerCellClass: 'greyRow', cellClass: bgColorODL }
+                , { field: 'Operator_Initials_Receipt', Name: 'Operator Initials Receipt', width: '10%', visible: true, headerCellClass: 'greyRow', cellClass: bgColorODL }
+            ]
+        };
+
+        $scope.loadgridODRRpt = function () {
+
+            $scope.loading = true;
+
+            console.log('loading grid');
+
+            $timeout(function () {
+                LRWService.getOtherDairyrc($scope.fromODRDate, $scope.toODRDate).success(function (data) {
+
+
+                    if (data === null || data.OtherDairyrcList === null || data.OtherDairyrcList.length === 0) {
+
+                        $scope.error = true;
+                        $scope.errorDescription = "No data found for selected criteria.";
+
+                    } else {
+                        $scope.gridOptionsODRRpt.paginationPageSizes.push(
+                            data.OtherDairyrcList.length
+                        );
+
+                        var OtherDairyrcList = data.OtherDairyrcList;
+                        $scope.gridOptionsODRRpt.data = OtherDairyrcList;
+                        console.log(OtherDairyrcList);
+                        $scope.error = false;
+                    }
+
+                }).finally(function () { $scope.loading = false; });
+            }, 3500);
+
+        };
+
+        //############################################## Other_Dairy_Liquids_Receipt  #######End###########################################//
         //############################################### Dairy Liquid Load Out ######################################################//
 
         $scope.ODLrptcalendardate = (nav, toFrom) => {
@@ -3545,6 +3749,10 @@
             }
             if (nav == "mysidenavOthDairyLiqLoadOut") {
                 $scope.viewReportsODL();
+            }
+
+            if (nav == "mysidenavOthDairyLiqReceipt") {
+                $scope.viewReportsODR();
             }
         }
 

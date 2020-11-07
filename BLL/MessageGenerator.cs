@@ -2430,6 +2430,60 @@ namespace BLL
         }
     }
 
+    public class MilkRecGenerator : IMilkReceivingLoadDetail
+    {
+        public MilkReceivingLoadDetailCollection GetMilkReceivingLoadDetailCollection(string StartDate, string EndDate)
+        {
+            MilkReceivingLoadDetailCollection dc = new MilkReceivingLoadDetailCollection();
+            DataSet dsDefect = DBConnection.DBConnectMilkRec("_usp_Milk_Receiving_Load_Detail_dw", StartDate, EndDate);
+            if (dsDefect.Tables.Count > 0 && dsDefect.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in dsDefect.Tables[0].Rows)
+                {
+                    Dictionary<string, string> defectdictionary = new Dictionary<string, string>();
+                    for (int index = 0; index < dsDefect.Tables[0].Columns.Count; index++)
+                    {
+
+                        defectdictionary[dsDefect.Tables[0].Columns[index].ToString()] = dr[index].ToString();
+
+                    }
+
+                    dc.MilkReceivingLoadDetailList.Add(defectdictionary);
+
+                }
+            }
+            return dc;
+        }
+    }
+
+    public class KPIMilkRecGenerator : IKPIMilkReceiving
+    {
+        public KPIMilkReceivingCollection GetKPIMilkReceivingCollection(string DateStart, string DateEnd, string SupplierID, string Route_Num, string Material)
+        {
+            KPIMilkReceivingCollection dc = new KPIMilkReceivingCollection();
+            DataSet dsDefect = DBConnection.DBConnectKPIMilkRec("_usp_Milk_Receiving_Load_Diff_Chart_dw", DateStart, DateEnd, SupplierID, Route_Num, Material);
+
+            if (dsDefect.Tables.Count > 0 && dsDefect.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in dsDefect.Tables[0].Rows)
+                {
+                    Dictionary<string, string> defectdictionary = new Dictionary<string, string>();
+                    for (int index = 0; index < dsDefect.Tables[0].Columns.Count; index++)
+                    {
+
+                        defectdictionary[dsDefect.Tables[0].Columns[index].ToString()] = dr[index].ToString();
+
+                    }
+
+                    dc.KPIMilkReceivingList.Add(defectdictionary);
+
+                }
+            }
+            return dc;
+        }
+
+    }
+
     public class FinishRptCommentsGenerator : IFinishRptComments
     {
         public FinishRptCommentsCollection GetFinishRptCommentsCollection(string StartDate, string EndDate, string LineNumber, string ProductionOrder, string ProductCode)
@@ -2485,6 +2539,8 @@ namespace BLL
             return dc;
         }
     }
+
+
 
     public class VatMakeRptGenerator : IVatMakeRpt
     {
