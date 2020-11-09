@@ -209,6 +209,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\angularjs-dropdown-multiselect.min.js" />
     <Content Include="app\app.js" />
     <Content Include="app\Controllers\CalendarCustomController.js" />
     <Content Include="app\Controllers\ChangeMgmtDashController.js" />
