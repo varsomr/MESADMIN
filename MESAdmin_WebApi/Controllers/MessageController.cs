@@ -137,6 +137,23 @@ namespace Leprino_Integration_Tool.Controllers
         }
 
 
+        [Route("api/Message/getDailySiloInv/{ProductionDay}/{Silo}")]
+        public DailySiloInvCollection getDailySiloInv(string ProductionDay, string Silo)
+        {
+
+            DailySiloInvGenerator vm = new DailySiloInvGenerator();
+            return vm.GetDailySiloInvCollection(ProductionDay, Silo);
+        }
+
+        [Route("api/Message/getDailySiloInvSilo/{ProductionDay}")]
+        public DailySiloInvSiloCollection getDailySiloInvSilo(string ProductionDay)
+        {
+
+            DailySiloInvSiloGenerator vm = new DailySiloInvSiloGenerator();
+            return vm.GetDailySiloInvSiloCollection(ProductionDay);
+        }
+
+
         [Route("api/Message/getChseMakSuprDopRpt/{LineNumber}/{ProductionOrder}/{ProductCode}/{StartDate}/{EndDate}")]
         public ChseMakSuprDopRptCollection getChseMakSuprDopRpt(string LineNumber, string ProductionOrder, string ProductCode, string StartDate, string EndDate)
         {

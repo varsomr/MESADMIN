@@ -2510,6 +2510,59 @@ namespace BLL
         }
     }
 
+
+    public class DailySiloInvGenerator : IDailySiloInv
+    {
+        public DailySiloInvCollection GetDailySiloInvCollection(string ProductionDay, string Silo)
+        {
+            DailySiloInvCollection dc = new DailySiloInvCollection();
+            DataSet dsDefect = DBConnection.DBConnectDailySiloInv("_usp_Daily_Silo_Inventory_dw", ProductionDay, Silo);
+            if (dsDefect.Tables.Count > 0 && dsDefect.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in dsDefect.Tables[0].Rows)
+                {
+                    Dictionary<string, string> defectdictionary = new Dictionary<string, string>();
+                    for (int index = 0; index < dsDefect.Tables[0].Columns.Count; index++)
+                    {
+
+                        defectdictionary[dsDefect.Tables[0].Columns[index].ToString()] = dr[index].ToString();
+
+                    }
+
+                    dc.DailySiloInvList.Add(defectdictionary);
+
+                }
+            }
+            return dc;
+        }
+    }
+
+    public class DailySiloInvSiloGenerator : IDailySiloInvSilo
+    {
+        public DailySiloInvSiloCollection GetDailySiloInvSiloCollection(string ProductionDay)
+        {
+            DailySiloInvSiloCollection dc = new DailySiloInvSiloCollection();
+            DataSet dsDefect = DBConnection.DBConnectDailySiloInvSilo("_usp_Daily_Silo_Inventory_Silos_dw", ProductionDay);
+            if (dsDefect.Tables.Count > 0 && dsDefect.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in dsDefect.Tables[0].Rows)
+                {
+                    Dictionary<string, string> defectdictionary = new Dictionary<string, string>();
+                    for (int index = 0; index < dsDefect.Tables[0].Columns.Count; index++)
+                    {
+
+                        defectdictionary[dsDefect.Tables[0].Columns[index].ToString()] = dr[index].ToString();
+
+                    }
+
+                    dc.DailySiloInvSiloList.Add(defectdictionary);
+
+                }
+            }
+            return dc;
+        }
+    }
+
     public class VatMakeParamGenerator : IVatMakeRptParam
     {
         public VatMakeRptParamCollection GetVatMakeRptCollection(string StartDate, string EndDate)

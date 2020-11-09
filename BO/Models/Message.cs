@@ -1220,6 +1220,20 @@ namespace BO.Models
 
     }
 
+    public class DailySiloInvCollection
+    {
+
+        public List<IDictionary<string, string>> DailySiloInvList = new List<IDictionary<string, string>>();
+
+    }
+
+    public class DailySiloInvSiloCollection
+    {
+
+        public List<IDictionary<string, string>> DailySiloInvSiloList = new List<IDictionary<string, string>>();
+
+    }
+
 
     public class RecPlnRpt
     {

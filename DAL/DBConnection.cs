@@ -2970,6 +2970,65 @@ namespace DAL.Data
         }
 
         //DBConnection-FOR SELECT QUERY- PARAMETERS TO PASS TO the SP
+        public static DataSet DBConnectDailySiloInv(string storedprocedure, string parameter, string parameter1)
+        {
+            DataSet dsrpt = new DataSet();
+            using (SqlConnection LRWConnect = new SqlConnection(ConfigurationManager.ConnectionStrings["LRWConnnect"].ConnectionString.ToString()))
+            {
+                LRWConnect.Open();
+                SqlCommand sqlComm = new SqlCommand(storedprocedure, LRWConnect);
+                sqlComm.CommandType = CommandType.StoredProcedure;
+                var p = new SqlParameter("ProductionDay", SqlDbType.VarChar);
+                var p1 = new SqlParameter("Silo", SqlDbType.VarChar);
+
+
+
+                p.Value = parameter;
+                p1.Value = parameter1;
+
+
+                sqlComm.Parameters.Add(p);
+                sqlComm.Parameters.Add(p1);
+
+
+                sqlComm.CommandTimeout = 0;
+                sqlComm.ExecuteNonQuery();
+
+                SqlDataAdapter daa = new SqlDataAdapter();
+                daa.SelectCommand = sqlComm;
+                daa.Fill(dsrpt);
+                return dsrpt;
+            }
+
+        }
+
+        //DBConnection-FOR SELECT QUERY- PARAMETERS TO PASS TO the SP
+        public static DataSet DBConnectDailySiloInvSilo(string storedprocedure, string parameter)
+        {
+            DataSet dsrpt = new DataSet();
+            using (SqlConnection LRWConnect = new SqlConnection(ConfigurationManager.ConnectionStrings["LRWConnnect"].ConnectionString.ToString()))
+            {
+                LRWConnect.Open();
+                SqlCommand sqlComm = new SqlCommand(storedprocedure, LRWConnect);
+                sqlComm.CommandType = CommandType.StoredProcedure;
+                var p = new SqlParameter("ProductionDay", SqlDbType.VarChar);
+           
+                p.Value = parameter;
+
+                sqlComm.Parameters.Add(p);
+           
+                sqlComm.CommandTimeout = 0;
+                sqlComm.ExecuteNonQuery();
+
+                SqlDataAdapter daa = new SqlDataAdapter();
+                daa.SelectCommand = sqlComm;
+                daa.Fill(dsrpt);
+                return dsrpt;
+            }
+
+        }
+
+        //DBConnection-FOR SELECT QUERY- PARAMETERS TO PASS TO the SP
         public static DataSet DBConnectChseMakSuprDopRpt(string storedprocedure, string parameter, string parameter1)
         {
             DataSet dsrpt = new DataSet();

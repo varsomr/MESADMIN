@@ -200,6 +200,36 @@
                     return $http(req);
                 },
 
+
+                getDailySiloInv: function (ProductionDay, Silo) {
+
+                    console.log("Daily Silo Inv LRS ");
+                    var url = window.location.protocol + "//" + window.location.hostname + ":1630/api/Message/getDailySiloInv/" + "/" + ProductionDay + "/" + Silo + "/";
+                    console.log(url);
+                    var req = {
+                        method: 'GET',
+                        url: url
+                    };
+                    console.log("making api call url for Support");
+
+                    return $http(req);
+                },
+
+
+                getDailySiloInvSilo: function (ProductionDay) {
+
+                    console.log("Daily Silo Inv Silo LRS ");
+                    var url = window.location.protocol + "//" + window.location.hostname + ":1630/api/Message/getDailySiloInvSilo/" + "/" + ProductionDay + "/" ;
+                    console.log(url);
+                    var req = {
+                        method: 'GET',
+                        url: url
+                    };
+                    console.log("making api call url for Support");
+
+                    return $http(req);
+                },
+
                 //ChseMakSuprDopRpt
                 getChseMakSuprDopRpt: function (LineNumber, ProductionOrder, ProductCode, StartDate, EndDate) {
 

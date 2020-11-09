@@ -97,8 +97,6 @@ namespace BLL.Interfaces
 
     }
 
-
-
     interface IKPIMilkReceiving
     {
         //Selection
@@ -107,6 +105,21 @@ namespace BLL.Interfaces
     }
 
 
+
+    interface IDailySiloInv
+    {
+        //Selection
+        DailySiloInvCollection GetDailySiloInvCollection(string ProductionDay, string Silo);
+
+    }
+
+
+    interface IDailySiloInvSilo
+    {
+        //Selection
+        DailySiloInvSiloCollection GetDailySiloInvSiloCollection(string ProductionDay);
+
+    }
 
     interface IChseMakSuprDopRpt
     {
