@@ -476,13 +476,14 @@
             milkRptField = document.querySelector('#fromMKPreDate');
             ODLRptField = document.querySelector('#fromODLDate');
             ODRFrmRptField = document.querySelector('#fromODRDate');
+            mldFrmRptField = document.querySelector('#mldFromDate');
 
             field.value = $scope.FormatDTSlash(date);
             finRptField.value = $scope.FormatDTSlash(date);				   
             milkRptField.value = $scope.FormatDTSlash(date);	 
             ODLRptField.value = $scope.FormatDTSlash(date);
             ODRFrmRptField.value = $scope.FormatDTSlash(date);
-			   
+            mldFrmRptField.value = $scope.FormatDTSlash(date);
 
             var date = new Date();
             date.setDate(date.getDate());
@@ -492,13 +493,14 @@
             milkRptField = document.querySelector('#toMKPreDate');
             ODLRptField = document.querySelector('#toODLDate');
             ODRToRptField = document.querySelector('#toODRDate');
+            mldToRptField = document.querySelector('#mldToDate');
 
             field.value = $scope.FormatDTSlash(date);
             finRptField.value = $scope.FormatDTSlash(date);
             milkRptField.value = $scope.FormatDTSlash(date);
             ODLRptField.value = $scope.FormatDTSlash(date);
             ODRToRptField.value = $scope.FormatDTSlash(date);
-
+            mldToRptField.value = $scope.FormatDTSlash(date);
             //var dateF = new Date();
             //var firstDay = '09/10/2020';//new Date(dateF.getFullYear(), dateF.getMonth(), 1);
             //field = document.querySelector('#toDate');
@@ -2080,6 +2082,182 @@
         };
 
         //############################################## Dairy Liquid Load Out  #######End###########################################//
+
+        //############################################## Milk receiving load detail  #######End###########################################//
+
+        $scope.mldcalendardate = (nav, toFrom) => {
+            //debugger
+
+            $(nav).datepicker({
+                onSelect: (dateText) => {
+                    var date = new Date(dateText);
+                    $scope[toFrom] = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()));
+                    $scope.lodMldGrid();
+                },
+                defaultDate: $scope[toFrom]
+            });
+
+            
+
+
+        };
+        $scope.mldFromDate = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()))
+        $scope.mldToDate = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()))
+
+        $scope.gridOptionsMld = {
+            enableFullRowSelection: false,
+            enableRowHeaderSelection: false,
+            paginationPageSizes: [20, 40, 60],
+            paginationPageSize: 40,
+            rowHeight: 30,
+            enableFiltering: false,
+            enableCellEdit: false,
+            enableGridMenu: false,
+            enablePinning: true,
+            rowTemplate:
+                '<div ng-class="{ \'grey\':grid.appScope.rowFormatter( row ) }">' +
+                '  <div ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ng-class="{ \'ui-grid-row-header-cell\': col.isRowHeader }"  ui-grid-cell></div>' +
+                '</div>'
+            
+
+        };
+        $scope.mldSelectedGroup = 'Supplier';
+        $scope.changeGroupBy = function () {
+            var data = [];
+            var groupedData = _.groupBy($scope.mldData, $scope.mldSelectedGroup)
+            var groupedKeys = Object.keys(groupedData);
+            groupedKeys.forEach(gk => {
+                var totalRow = {}
+                var extraRow = {}
+                var keysForFirst = Object.keys(groupedData[gk][0])
+                keysForFirst.forEach(k => {
+                    if (k === $scope.mldSelectedGroup) {
+                        totalRow[k] = gk
+                    } else if (k === 'Prod_Lbs') {
+                        totalRow[k] = groupedData[gk].reduce((s, f) => {
+                            return s + Number(f.Prod_Lbs);               // return the sum of the accumulator and the current time, as the the new accumulator
+                        }, 0)
+                    } else if (k === 'LFC_Lbs') {
+                        totalRow[k] = groupedData[gk].reduce((s, f) => {
+                            return s + Number(f.LFC_Lbs);               // return the sum of the accumulator and the current time, as the the new accumulator
+                        }, 0)
+                    } else if (k === 'Diff') {
+                        totalRow[k] = groupedData[gk].reduce((s, f) => {
+                            return s + Number(f.Diff);               // return the sum of the accumulator and the current time, as the the new accumulator
+                        }, 0)
+                    } else {
+                        totalRow[k] = ""
+                    }
+                    extraRow[k] = ""
+                })
+                groupedData[gk].push(totalRow);
+                groupedData[gk].push(extraRow);
+                data.push(...groupedData[gk])
+            })
+            $scope.gridBind(data[0], data)
+        }
+
+        $scope.sortOptionsMld = ["Ascending", "Descending"];
+        $scope.isAscendingMld = false;
+        $scope.selectedSortMld = "Descending";
+
+        $scope.changeSortMld = function () {
+            $scope.isAscendingMld = $scope.selectedSortMld == 'Ascending';
+            $scope.mldData = $scope.isAscendingMld ? _.sortBy($scope.mldData, $scope.mldSelectedGroup) : _.sortBy($scope.mldData, $scope.mldSelectedGroup).reverse();
+            $scope.changeGroupBy()
+        }
+
+        $scope.groupByData = [{
+            'id': 'Hauler_ID',
+            'value': 'Hauler'
+        }, {
+                'id': 'Supplier',
+                'value': 'Supplier'
+            }, {
+                'id': 'Load_Num',
+                'value': 'Load Number'
+            }, {
+                'id': 'Route_Num',
+                'value': 'Route'
+            },
+            {
+                'id': 'Status',
+                'value': 'Status'
+            }]
+        $scope.viewReportsMld = function () {
+            $scope.lodMldGrid();
+        }
+
+        function bgColorMld(grid, row, col, rowRenderIndex, colRenderIndex) {
+            var newStyle;
+            if ((Number(row.entity.Diff) / Number(row.entity.LFC_Lbs) < -0.0025) && Number(row.entity.Prod_Lbs) > 0) {
+                newStyle = 'redRow';
+            }
+            if (row.entity.Status == 'Rejected') {
+                newStyle = 'blackRow';
+            }
+
+
+            return newStyle;
+        }
+
+        $scope.lodMldGrid = function () {
+            var fromD = Date.parse($scope.finishRptFromDate);
+            var toD = Date.parse($scope.finishRptToDate);
+            if (toD < fromD) {
+                return
+            }
+            $scope.loading = true;
+
+            console.log('loading grid');
+
+
+            LRWService.getMilkRec($scope.mldFromDate, $scope.mldToDate).success(function (data) {
+                
+                if (data === null || data.MilkReceivingLoadDetailList === null || data.MilkReceivingLoadDetailList.length === 0) {
+
+                    $scope.error = true;
+                    $scope.errorDescription = "No data found for selected criteria.";
+
+                } else {
+                    $scope.mldData = data.MilkReceivingLoadDetailList;
+                    var keys = Object.keys(data.MilkReceivingLoadDetailList[0]);
+                    $scope.gridOptionsMld.paginationPageSizes.push(
+                        data.MilkReceivingLoadDetailList.length
+                    );
+                    for (var i = 0; i < keys.length; i++)
+                    {
+                        var colmn = keys[i];
+                        $scope.gridOptionsMld.columnDefs.push({
+                            name: keys[i],
+                            field: keys[i], width: '10%', visible: true,
+                            cellClass: bgColorMld
+                        })
+                    }
+                    $scope.gridOptionsMld.data = [];
+                    $scope.gridOptionsMld.data = data.MilkReceivingLoadDetailList;
+                    $scope.changeSortMld()
+                    $scope.error = false;
+                }
+
+            }).finally(function () { $scope.loading = false; });
+        }
+        $scope.gridBind = function (dataObject, data) {
+            $scope.gridOptionsMld.columnDefs = [];
+            $scope.gridOptionsMld.data = [];
+            var keys = Object.keys(dataObject);
+            for (var i = 0; i < keys.length; i++) {
+                var colmn = keys[i];
+                $scope.gridOptionsMld.columnDefs.push({
+                    name: keys[i],
+                    field: keys[i], width: '10%', visible: true,
+                    cellClass: bgColorMld
+                })
+            }
+            $scope.gridOptionsMld.data = data;
+        }
+        //############################################## Milk receiving load detail  #######End###########################################//
+
         //###############################################  ChseMakSuprDopRpt SCREEN ############################################//
 
         $scope.gridOptionsChseMakSuprDopRpt = {

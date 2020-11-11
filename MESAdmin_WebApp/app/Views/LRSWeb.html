@@ -6,7 +6,7 @@
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-chart.js/0.10.2/angular-chart.js"></script>
     <script type="text/javascript" src="/Scripts/googleCharts.js"></script>
     <link rel="stylesheet" href="/Content/calendar.css">
@@ -21,7 +21,7 @@
     </script>
 
     <script type="text/javascript">
-                google.charts.load('current', { packages: ['corechart', 'line'] });
+        google.charts.load('current', { packages: ['corechart', 'line'] });
     </script>
     <!--<script>
 
@@ -48,20 +48,21 @@
             opacity: 2.2;
             filter: alpha(opacity=220);
         }
+
         hr.new1 {
             border-top: 1px solid black;
         }
+
         .selectedButton {
             background-color: transparent;
             color: white;
-            
             width: 30px;
             height: 30px;
             border-radius: 24px;
             font-size: small;
             border-color: darkblue
         }
-        
+
         .pageButton {
             background-color: transparent;
             color: white;
@@ -71,6 +72,7 @@
             border-radius: 24px;
             font-size: small;
         }
+
         body {
             /*padding-top: 50px;
             padding-bottom: 20px;*/
@@ -238,7 +240,7 @@
             background-color: white !important;
             color: black !important;
             /*grid-template-columns: repeat(auto-fit, minmax(min-content, 400px));*/
-            text-align: center;         
+            text-align: center;
             /*border-left: 0.1px solid darkslategrey;
             border-bottom: 0.1px solid darkslategrey;*/
         }
@@ -320,7 +322,7 @@
             overflow-anchor: none;
             font-size: 10px;
             font-weight: bold;
-			/*border-style: solid;
+            /*border-style: solid;
             border-width: thin;*/
         }
 
@@ -330,7 +332,7 @@
             font-size: 10px;
             font-weight: bold;
             word-break: break-word;
-			/*border-style: solid;
+            /*border-style: solid;
             border-width: thin;*/
         }
 
@@ -507,7 +509,13 @@
         .redText {
             color: red;
         }
-
+        .redRow {
+            background-color: red !important;
+        }
+        .blackRow {
+            background-color: red !important;
+            color:white !important
+        }
         .greyRow {
             background-color: lightgray !important;
             border-left: 0.1px solid darkslategrey;
@@ -1544,6 +1552,9 @@
             <button id="ODRRpt" class="mainBtn" ng-click="openModal('mysidenavOthDairyLiqReceipt')" style="width:7%; height:40px; border:solid 1px darkslategrey; background-color:transparent;color:white; float:left;font-size:small;border-bottom:hidden">
                 Other Dairy Liquid Load Out<span class="tooltiptext" id="myTooltipFr"></span>
             </button>
+            <button id="Tsk" class="mainBtn" ng-click="openModal('mysidenavRightMldReport')" style="width:7%; height:40px; border:solid 1px darkslategrey; background-color:transparent;color:white; float:left;font-size:small;border-bottom:hidden">
+                Milk load delivery Report<span class="tooltiptext" id="myTooltipFr"></span>
+            </button>
         </div>
     </div>
 
@@ -2089,8 +2100,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <!--<select id="SULine" ng-model="finishRptSelectedProductionOrder" ng-options="item for item in finishRptProductionOrderByLines" ng-change="changeFinishRptProductionOrder()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;">
-                               <option value="All" selected> </option>
-                                    </select>-->
+                                    <option value="All" selected> </option>
+                                         </select>-->
                                     <div ng-dropdown-multiselect="" options="finishRptProductionOrderByLines" class="multi-select-btn" events="myEventListenersPo" selected-model="finishRptSelectedProductionOrder" checkboxes="true" extra-settings="settingPo"></div>
                                 </div>
                             </div>
@@ -2149,7 +2160,7 @@
 
                     </div>
                 </div>
-            <div>
+                <div>
                     <hr style="margin-bottom:0px;margin-top:0px" />
                     <div class="row">
                         <div class="col-md-6">
@@ -2380,6 +2391,91 @@
         </div>
     </div>
     <!--#################################################### Other Dairy Liquids Receipt  ################ END ######################################-->
+    <!--#################################################### Milk load Receipt  ################ END ######################################-->
+    <div id="mysidenavRightMldReport" class="modal" style="background-color:white; border:none" ng-controller="LRWcontroller">
+        <div class="modal-content" style="height:100%;  background-color:white;color:white">
+            <div class="modal-body" style="height:100%;  background-color:white;color:white">
+                <div style="background-color:lightblue">
+                    <div class="row" ng-show="isHideFilters == false">
+                        <div class="col-md-12">
+                            <div class="col-md-2">
+                                <div class="col-md-6">
+                                    <label style="float:left;color:black">From Date</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input id="mldFromDate" style="color:black; width:100px;height:20px; font-size:x-small;  float:left; border:solid 2px; text-align:center" ng-click="mldcalendardate('#mldFromDate','mldFromDate')">
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="col-md-6">
+                                    <label style="float:left;color:black">To Date</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input id="mldToDate" style="color: black;width:100px; height: 20px; font-size: x-small; float: left; border: solid 2px; text-align: center;" ng-click="mldcalendardate('#mldToDate','mldToDate')">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:10px" ng-show="isHideFilters == false">
+                        <div class="col-md-12">
+                            <div class="col-md-2">
+                                <div class="col-md-6">
+                                    <label style="float:left;color:black">Sort</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <select id="mldSort" ng-model="selectedSortMld" ng-options="item for item in sortOptionsMld" ng-change="changeSortMld()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;"></select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="col-md-6">
+                                    <label style="float:left;color:black">Group</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <select id="SULine" ng-model="mldSelectedGroup" ng-options="item.id as item.value for item in groupByData" ng-change="changeGroupBy()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <button type="button" ng-click="viewReportsMld()" style="color:black;float:right"> View Report</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <button class="col-md-offset-5" style="color:black" type="button" ng-click="hideShowFilters()">Hide/Show Filters</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <hr class="new1" />
+                <div>
+                    <div id="gridandchartW" style="width:100%; height:100%">
+                        <div id="gridOperator" style="width:100%;height:50%; float:left">
+                            <div id="gridMldReport" ui-grid="gridOptionsMld" ui-grid-pinning ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRpt" style=" width:98vw; height: 70vh; color:white; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
+                        </div>
+                    </div>
+                    <div style="padding-left: 120px; padding-top: 400px;background-color:transparent; color:black" class="grid-msg-overlay" ng-hide="!loading">
+                        <div style="background-color:transparent; color:white;" class="msg">
+                            <span>
+                                Please wait while Loading Data...<br /><!---->
+                                <br />Working on Retrieving info ...<i class="fa fa-spinner fa-spin"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--#################################################### Milk load Liquids Receipt  ################ END ######################################-->
     <!--#################################################### Dairy Liquid Load Out  ######################################################-->
     <div id="mysidenavOthDairyLiqLoadOut" class="modal" style="background-color:white; border:none" ng-controller="LRWcontroller">
 
