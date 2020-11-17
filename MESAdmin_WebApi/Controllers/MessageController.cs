@@ -154,6 +154,36 @@ namespace Leprino_Integration_Tool.Controllers
         }
 
 
+
+        [Route("api/Message/getPalletRpt/{StartProductionDate}/{Line}/{ProdCode}/{PType}/{DisplayReprints}/{Reason}/{reas_grp_desc}/{BulkOff_Status}")]
+        public PalletRptCollection getPalletRpt(string StartProductionDate, string Line, string ProdCode, string PType, string DisplayReprints, string Reason, string reas_grp_desc, string BulkOff_Status)
+        {
+
+            PalletRptGenerator vm = new PalletRptGenerator();
+            return vm.GetPalletRptCollection(StartProductionDate, Line, ProdCode, PType, DisplayReprints, Reason, reas_grp_desc, BulkOff_Status);
+        }
+
+        
+
+        [Route("api/Message/getPalletRptParam/{StartProductionDate}/{PType}")]
+        public PalletRptParamCollection getPalletRptParam(string StartProductionDate, string PType)
+        {
+
+            PalletRptParamGenerator vm = new PalletRptParamGenerator();
+            return vm.GetPalletRptParamCollection(StartProductionDate, PType);
+        }
+
+
+        [Route("api/Message/getPalletRptPtypeDate")]
+        public PalletRptPtypeDatesCollection getPalletRptPtypeDate()
+        {
+
+            PalletRptPtypeDatesGenerator vm = new PalletRptPtypeDatesGenerator();
+            return vm.GetPalletRptPtypeDatesCollection();
+        }
+
+
+
         [Route("api/Message/getChseMakSuprDopRpt/{LineNumber}/{ProductionOrder}/{ProductCode}/{StartDate}/{EndDate}")]
         public ChseMakSuprDopRptCollection getChseMakSuprDopRpt(string LineNumber, string ProductionOrder, string ProductCode, string StartDate, string EndDate)
         {

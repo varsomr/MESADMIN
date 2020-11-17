@@ -3029,6 +3029,107 @@ namespace DAL.Data
         }
 
         //DBConnection-FOR SELECT QUERY- PARAMETERS TO PASS TO the SP
+        public static DataSet DBConnectPalletRpt(string storedprocedure, string parameter, string parameter1, string parameter2, string parameter3, string parameter4, string parameter5, string parameter6, string parameter7)
+        {
+            DataSet dsrpt = new DataSet();
+            using (SqlConnection LRWConnect = new SqlConnection(ConfigurationManager.ConnectionStrings["LRWConnnect"].ConnectionString.ToString()))
+            {
+                LRWConnect.Open();
+                SqlCommand sqlComm = new SqlCommand(storedprocedure, LRWConnect);
+                sqlComm.CommandType = CommandType.StoredProcedure;
+                var p = new SqlParameter("StartProductionDate", SqlDbType.VarChar);
+                var p1 = new SqlParameter("Line", SqlDbType.VarChar);
+                var p2 = new SqlParameter("ProdCode", SqlDbType.VarChar);
+                var p3 = new SqlParameter("PType", SqlDbType.VarChar);
+                var p4 = new SqlParameter("DisplayReprints", SqlDbType.VarChar);
+                var p5 = new SqlParameter("Reason", SqlDbType.VarChar);
+                var p6 = new SqlParameter("reas_grp_desc", SqlDbType.VarChar);
+                var p7 = new SqlParameter("BulkOff_Status", SqlDbType.VarChar);
+
+
+                p.Value = parameter;
+                p1.Value = parameter1;
+                p2.Value = parameter2;
+                p3.Value = parameter3;
+                p4.Value = parameter4;
+                p5.Value = parameter5;
+                p6.Value = parameter6;
+                p7.Value = parameter7;
+    
+
+
+                sqlComm.Parameters.Add(p);
+                sqlComm.Parameters.Add(p1);
+                sqlComm.Parameters.Add(p2);
+                sqlComm.Parameters.Add(p3);
+                sqlComm.Parameters.Add(p4);
+                sqlComm.Parameters.Add(p5);
+                sqlComm.Parameters.Add(p6);
+                sqlComm.Parameters.Add(p7);
+
+                sqlComm.CommandTimeout = 0;
+                sqlComm.ExecuteNonQuery();
+
+                SqlDataAdapter daa = new SqlDataAdapter();
+                daa.SelectCommand = sqlComm;
+                daa.Fill(dsrpt);
+                return dsrpt;
+            }
+
+        }
+
+        //DBConnection-FOR SELECT QUERY- PARAMETERS TO PASS TO the SP
+        public static DataSet DBConnectPalletRptParam(string storedprocedure, string parameter, string parameter1)
+        {
+            DataSet dsrpt = new DataSet();
+            using (SqlConnection LRWConnect = new SqlConnection(ConfigurationManager.ConnectionStrings["LRWConnnect"].ConnectionString.ToString()))
+            {
+                LRWConnect.Open();
+                SqlCommand sqlComm = new SqlCommand(storedprocedure, LRWConnect);
+                sqlComm.CommandType = CommandType.StoredProcedure;
+                var p = new SqlParameter("StartProductionDate", SqlDbType.VarChar);
+                var p1 = new SqlParameter("PType", SqlDbType.VarChar);
+
+                p.Value = parameter;
+                p1.Value = parameter1;
+
+                sqlComm.Parameters.Add(p);
+                sqlComm.Parameters.Add(p1);
+
+                sqlComm.CommandTimeout = 0;
+                sqlComm.ExecuteNonQuery();
+
+                SqlDataAdapter daa = new SqlDataAdapter();
+                daa.SelectCommand = sqlComm;
+                daa.Fill(dsrpt);
+                return dsrpt;
+            }
+
+        }
+
+        //DBConnection-FOR SELECT QUERY- PARAMETERS TO PASS TO the SP
+        public static DataSet DBConnectPalletRptPtypeDates(string storedprocedure)
+        {
+            DataSet dsrpt = new DataSet();
+            using (SqlConnection LRWConnect = new SqlConnection(ConfigurationManager.ConnectionStrings["LRWConnnect"].ConnectionString.ToString()))
+            {
+                LRWConnect.Open();
+                SqlCommand sqlComm = new SqlCommand(storedprocedure, LRWConnect);
+                sqlComm.CommandType = CommandType.StoredProcedure;
+
+                sqlComm.CommandTimeout = 0;
+                sqlComm.ExecuteNonQuery();
+
+                SqlDataAdapter daa = new SqlDataAdapter();
+                daa.SelectCommand = sqlComm;
+                daa.Fill(dsrpt);
+                return dsrpt;
+            }
+
+        }
+
+
+        //DBConnection-FOR SELECT QUERY- PARAMETERS TO PASS TO the SP
         public static DataSet DBConnectChseMakSuprDopRpt(string storedprocedure, string parameter, string parameter1)
         {
             DataSet dsrpt = new DataSet();

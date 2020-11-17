@@ -2563,6 +2563,87 @@ namespace BLL
         }
     }
 
+    public class PalletRptGenerator : IPalletRpt
+    {
+        public PalletRptCollection GetPalletRptCollection(string StartProductionDate, string Line, string ProdCode, string PType, string DisplayReprints, string Reason, string reas_grp_desc, string BulkOff_Status)
+        {
+            PalletRptCollection dc = new PalletRptCollection();
+            DataSet dsDefect = DBConnection.DBConnectPalletRpt("_usp_Pallet_Report_dw", StartProductionDate, Line, ProdCode, PType, DisplayReprints, Reason, reas_grp_desc, BulkOff_Status);
+            if (dsDefect.Tables.Count > 0 && dsDefect.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in dsDefect.Tables[0].Rows)
+                {
+                    Dictionary<string, string> defectdictionary = new Dictionary<string, string>();
+                    for (int index = 0; index < dsDefect.Tables[0].Columns.Count; index++)
+                    {
+
+                        defectdictionary[dsDefect.Tables[0].Columns[index].ToString()] = dr[index].ToString();
+
+                    }
+
+                    dc.PalletRptList.Add(defectdictionary);
+
+                }
+            }
+            return dc;
+        }
+    }
+
+    public class PalletRptParamGenerator : IPalletRptParam
+    {
+        public PalletRptParamCollection GetPalletRptParamCollection(string StartProductionDate, string PType)
+        {
+            PalletRptParamCollection dc = new PalletRptParamCollection();
+            DataSet dsDefect = DBConnection.DBConnectPalletRptParam("_usp_Pallet_Report_Param_dw", StartProductionDate, PType);
+            if (dsDefect.Tables.Count > 0 && dsDefect.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in dsDefect.Tables[0].Rows)
+                {
+      
+                    Dictionary<string, string> defectdictionary = new Dictionary<string, string>();
+                    for (int index = 0; index < dsDefect.Tables[0].Columns.Count; index++)
+                    {
+
+                        defectdictionary[dsDefect.Tables[0].Columns[index].ToString()] = dr[index].ToString();
+
+                    }
+
+                    dc.PalletRptParamList.Add(defectdictionary);
+
+                }
+            }
+            return dc;
+        }
+    }
+
+
+    public class PalletRptPtypeDatesGenerator : IPalletRptPtypeDates
+    {
+        public PalletRptPtypeDatesCollection GetPalletRptPtypeDatesCollection()
+        {
+            PalletRptPtypeDatesCollection dc = new PalletRptPtypeDatesCollection();
+            DataSet dsDefect = DBConnection.DBConnectPalletRptPtypeDates("_usp_Pallet_Report_PtypeDates_dw");
+            if (dsDefect.Tables.Count > 0 && dsDefect.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in dsDefect.Tables[0].Rows)
+                {
+
+                    Dictionary<string, string> defectdictionary = new Dictionary<string, string>();
+                    for (int index = 0; index < dsDefect.Tables[0].Columns.Count; index++)
+                    {
+
+                        defectdictionary[dsDefect.Tables[0].Columns[index].ToString()] = dr[index].ToString();
+
+                    }
+
+                    dc.PalletRptPtypeDateList.Add(defectdictionary);
+
+                }
+            }
+            return dc;
+        }
+    }
+
     public class VatMakeParamGenerator : IVatMakeRptParam
     {
         public VatMakeRptParamCollection GetVatMakeRptCollection(string StartDate, string EndDate)

@@ -121,6 +121,30 @@ namespace BLL.Interfaces
 
     }
 
+
+    interface IPalletRpt
+    {
+        //Selection
+        PalletRptCollection GetPalletRptCollection(string StartProductionDate, string Line, string ProdCode, string PType, string DisplayReprints, string Reason, string reas_grp_desc, string BulkOff_Status);
+
+    }
+
+
+    interface IPalletRptParam
+    {
+        //Selection
+        PalletRptParamCollection GetPalletRptParamCollection(string StartProductionDate, string PType);
+
+    }
+
+
+    interface IPalletRptPtypeDates
+    {
+        //Selection
+        PalletRptPtypeDatesCollection GetPalletRptPtypeDatesCollection();
+
+    }
+
     interface IChseMakSuprDopRpt
     {
         //Selection

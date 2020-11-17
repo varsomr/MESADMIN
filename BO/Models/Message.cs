@@ -1234,6 +1234,26 @@ namespace BO.Models
 
     }
 
+    public class PalletRptCollection
+    {
+
+        public List<IDictionary<string, string>> PalletRptList = new List<IDictionary<string, string>>();
+
+    }
+
+    public class PalletRptParamCollection
+    {
+
+        public List<IDictionary<string, string>> PalletRptParamList = new List<IDictionary<string, string>>();
+
+    }
+
+    public class PalletRptPtypeDatesCollection
+    {
+
+        public List<IDictionary<string, string>> PalletRptPtypeDateList = new List<IDictionary<string, string>>();
+
+    }
 
     public class RecPlnRpt
     {

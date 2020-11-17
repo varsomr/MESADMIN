@@ -230,6 +230,44 @@
                     return $http(req);
                 },
 
+                getPalletRpt: function (DateStart, DateEnd, SupplierID, Route_Num, Material) {
+                    console.log("Pallet report LRS ");
+                    var url = window.location.protocol + "//" + window.location.hostname + ":1630/api/Message/getPalletRpt/" + "/" + StartProductionDate + "/" + Line + "/" + ProdCode + "/" + PType + "/" + DisplayReprints + "/" + Reason + "/" + reas_grp_desc + "/" + BulkOff_Status + "/";
+                    console.log(url);
+                    var req = {
+                        method: 'GET',
+                        url: url
+                    };
+                    console.log("making api call url for Support");
+
+                    return $http(req);
+                },
+
+                getPalletRptParam: function (StartProductionDate, PType) {
+                    console.log("Pallet report Param LRS ");
+                    var url = window.location.protocol + "//" + window.location.hostname + ":1630/api/Message/getPalletRptParam/" + "/" + StartProductionDate + "/" + PType + "/";
+                    console.log(url);
+                    var req = {
+                        method: 'GET',
+                        url: url
+                    };
+                    console.log("making api call url for Support");
+
+                    return $http(req);
+                },
+
+                getPalletRptPtypeDate: function () {
+                    console.log("Pallet report PtypeDate LRS ");
+                    var url = window.location.protocol + "//" + window.location.hostname + ":1630/api/Message/getPalletRptPtypeDate/" + "/" ;
+                    console.log(url);
+                    var req = {
+                        method: 'GET',
+                        url: url
+                    };
+                    console.log("making api call url for Support");
+
+                    return $http(req);
+                },
                 //ChseMakSuprDopRpt
                 getChseMakSuprDopRpt: function (LineNumber, ProductionOrder, ProductCode, StartDate, EndDate) {
 
