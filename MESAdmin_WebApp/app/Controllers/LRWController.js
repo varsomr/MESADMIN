@@ -2170,7 +2170,6 @@
             $scope.scaleStatusPounds = $scope.getSum(data, "LFC_Lbs_Scale_Down");
             $scope.lbsDiff = $scope.totalLfcPounds - $scope.totalProdPounds;
             $scope.lbsScaleDiff = $scope.scaleStatusPounds - $scope.totalProdPounds;
-            debugger;
             
             $scope.gridBind(data[0], data)
         }
