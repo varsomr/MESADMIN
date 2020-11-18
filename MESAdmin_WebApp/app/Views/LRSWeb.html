@@ -2394,7 +2394,7 @@
     <!--#################################################### Milk load Receipt  ################ END ######################################-->
     <div id="mysidenavRightMldReport" class="modal" style="background-color:white; border:none" ng-controller="LRWcontroller">
         <div class="modal-content" style="height:100%;  background-color:white;color:white">
-            <div class="modal-body" style="height:100%;  background-color:white;color:white">
+            <div class="modal-body" style="height:100%;  background-color:white;color:white; overflow:auto">
                 <div style="background-color:lightblue">
                     <div class="row" ng-show="isHideFilters == false">
                         <div class="col-md-12">
@@ -2463,6 +2463,39 @@
                             <div id="gridMldReport" ui-grid="gridOptionsMld" ui-grid-pinning ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRpt" style=" width:98vw; height: 70vh; color:white; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
                         </div>
                     </div>
+                    <hr class="new1" />
+                    <table border=1 class="table-bordered" style="margin-top:20px; color:black; float:right">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Total Weight</th>
+                                <th>Diff</th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <td> Total Producer Pounds</td>
+                            <td> {{totalProdPounds}} </td>
+                        </tr>
+                        <tr>
+                            <td> Total LFC Pounds</td>
+                            <td> {{totalLfcPounds}} </td>
+                            <td> {{lbsDiff}} </td>
+                        </tr>
+                        <tr>
+                            <td> Scale status Pounds</td>
+                            <td> {{scaleStatusPounds}} </td>
+                            <td> {{lbsScaleDiff}} </td>
+                        </tr>
+                        <tr>
+                            <td> Rejected Pounds</td>
+                            <td> {{rejectedPounds}} </td>
+                        </tr>
+                        <tr>
+                            <td> Average Time in Bay</td>
+                            <td> {{avgTime}} </td>
+                        </tr>
+                    </table>
+                    
                     <div style="padding-left: 120px; padding-top: 400px;background-color:transparent; color:black" class="grid-msg-overlay" ng-hide="!loading">
                         <div style="background-color:transparent; color:white;" class="msg">
                             <span>

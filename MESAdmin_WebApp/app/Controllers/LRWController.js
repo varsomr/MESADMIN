@@ -2104,6 +2104,15 @@
         $scope.mldFromDate = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()))
         $scope.mldToDate = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()))
 
+        $scope.totalProdPounds = 0;
+        $scope.totalLfcPounds = 0;
+        $scope.scaleStatusPounds = 0;
+        $scope.rejectedPounds = 0;
+        $scope.avgTime = 0;
+        $scope.lbsDiff = 0;
+        $scope.lbsScaleDiff = 0;
+
+
         $scope.gridOptionsMld = {
             enableFullRowSelection: false,
             enableRowHeaderSelection: false,
@@ -2125,6 +2134,7 @@
         $scope.changeGroupBy = function () {
             var data = [];
             var groupedData = _.groupBy($scope.mldData, $scope.mldSelectedGroup)
+            var noOfRows = $scope.mldData.length;
             var groupedKeys = Object.keys(groupedData);
             groupedKeys.forEach(gk => {
                 var totalRow = {}
@@ -2148,13 +2158,31 @@
                     } else {
                         totalRow[k] = ""
                     }
+                    totalRow["isTotal"] = true;
                     extraRow[k] = ""
                 })
                 groupedData[gk].push(totalRow);
                 groupedData[gk].push(extraRow);
                 data.push(...groupedData[gk])
             })
+            $scope.totalProdPounds = $scope.getSum(data, "Prod_Lbs");
+            $scope.totalLfcPounds = $scope.getSum(data, "LFC_Lbs");
+            $scope.scaleStatusPounds = $scope.getSum(data, "LFC_Lbs_Scale_Down");
+            $scope.lbsDiff = $scope.totalLfcPounds - $scope.totalProdPounds;
+            $scope.lbsScaleDiff = $scope.scaleStatusPounds - $scope.totalProdPounds;
+            debugger;
+            
             $scope.gridBind(data[0], data)
+        }
+
+        $scope.getSum = function (data, property) {
+            return data.reduce((s, f) => {
+                if (f[property] != "" || f[property] != undefined) {
+                    return s + Number(f[property]);
+                } else {
+                    return 0;
+                }
+            }, 0)
         }
 
         $scope.sortOptionsMld = ["Ascending", "Descending"];
@@ -2190,7 +2218,7 @@
 
         function bgColorMld(grid, row, col, rowRenderIndex, colRenderIndex) {
             var newStyle;
-            if ((Number(row.entity.Diff) / Number(row.entity.LFC_Lbs) < -0.0025) && Number(row.entity.Prod_Lbs) > 0) {
+            if ((row["isTotal"] == undefined || row["isTotal"] == false) && (Number(row.entity.Diff) / Number(row.entity.LFC_Lbs) < -0.0025) && Number(row.entity.Prod_Lbs) > 0) {
                 newStyle = 'redRow';
             }
             if (row.entity.Status == 'Rejected') {
@@ -2237,6 +2265,7 @@
                     $scope.gridOptionsMld.data = [];
                     $scope.gridOptionsMld.data = data.MilkReceivingLoadDetailList;
                     $scope.changeSortMld()
+                    
                     $scope.error = false;
                 }
 
