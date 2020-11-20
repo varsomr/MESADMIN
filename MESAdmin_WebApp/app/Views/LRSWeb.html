@@ -1555,6 +1555,9 @@
             <button id="Tsk" class="mainBtn" ng-click="openModal('mysidenavRightMldReport')" style="width:7%; height:40px; border:solid 1px darkslategrey; background-color:transparent;color:white; float:left;font-size:small;border-bottom:hidden">
                 Milk load delivery Report<span class="tooltiptext" id="myTooltipFr"></span>
             </button>
+            <button id="Tsk" class="mainBtn" ng-click="openModal('mysidenavRightPelletReport')" style="width:7%; height:40px; border:solid 1px darkslategrey; background-color:transparent;color:white; float:left;font-size:small;border-bottom:hidden">
+                Pellet Report<span class="tooltiptext" id="myTooltipFr"></span>
+            </button>
         </div>
     </div>
 
@@ -2495,7 +2498,7 @@
                             <td> {{avgTime}} </td>
                         </tr>
                     </table>
-                    
+
                     <div style="padding-left: 120px; padding-top: 400px;background-color:transparent; color:black" class="grid-msg-overlay" ng-hide="!loading">
                         <div style="background-color:transparent; color:white;" class="msg">
                             <span>
@@ -2509,6 +2512,153 @@
         </div>
     </div>
     <!--#################################################### Milk load Liquids Receipt  ################ END ######################################-->
+    <!--#################################################### Pellet Report  ################ END ######################################-->
+
+    <div id="mysidenavRightPelletReport" class="modal" style="background-color:white; border:none" ng-controller="LRWcontroller">
+        <div class="modal-content" style="height:100%;  background-color:white;color:white">
+            <div class="modal-body" style="height:100%;  background-color:white;color:white">
+                <div style="background-color:lightblue">
+                    <div class="row" ng-show="isHideFilters == false">
+                        <div class="col-md-12">
+                            <div class="col-md-2">
+                                <div class="col-md-6">
+                                    <label style="float:left;color:black">Product Type</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <div ng-dropdown-multiselect="" options="prodTypeList" class="multi-select-btn" events="myEventListenersProdType" selected-model="selectedProdType" checkboxes="true" extra-settings="settingMultiSelect"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="col-md-6">
+                                    <label style="float:left;color:black">Production Date</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <select id="mldSort" ng-model="selectedProductionDate" ng-options="item for item in productionDateList" ng-change="changeProdTypePellet()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="isHideFilters == false">
+                        <div class="col-md-12">
+                            <div class="col-md-2">
+                                <div class="col-md-6">
+                                    <label style="float:left;color:black">Line</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <div ng-dropdown-multiselect="" options="lineNumberList" class="multi-select-btn" events="myEventListenersLineNo" selected-model="selectedLineNos" checkboxes="true" extra-settings="settingMultiSelect"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="col-md-6">
+                                    <label style="float:left;color:black">Product code</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <select id="mldSort" ng-model="selectedProductCode" ng-options="item for item in productionCodeList" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" ng-click="getPalletRpt()" style="color:black;float:right"> View Report</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="isHideFilters == false">
+                        <div class="col-md-12">
+                            <div class="col-md-2">
+                                <div class="col-md-6">
+                                    <label style="float:left;color:black">Sort</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <select id="mldSort" ng-model="selectedSortPelletRpt" ng-options="item for item in sortOptions" ng-change="changeSortPellet()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;"></select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="col-md-6">
+                                    <label style="float:left;color:black">Group BY</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <select id="SULine" ng-model="selectedGrpBy" ng-options="item.id as item.value for item in grpByList" ng-change="groupByPellet()" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="isHideFilters == false">
+                        <div class="col-md-12">
+                            <div class="col-md-2">
+                                <div class="col-md-6">
+                                    <label style="float:left;color:black">Display Reprints</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <select id="mldSort" ng-model="selectedReprint" ng-options="item.id as item.value for item in displayReprintsList" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;"></select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="col-md-6">
+                                    <label style="float:left;color:black">Display Material</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <select id="mldSort" ng-model="selectedDisplayMaterial" ng-options="item for item in displayMaterialList" type="text" style=" float:left;width:100px;height:20px; font-size:x-small; text-align-last:center; border:solid 2px #0fbef4; border-top-left-radius:0; align-content:center;float:left;text-align:left;"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="isHideFilters == false">
+                        <div class="col-md-12">
+                            <div class="col-md-2">
+                                <div class="col-md-6">
+                                    <label style="float:left;color:black">Production Types</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <div ng-dropdown-multiselect="" options="productionTypeList" class="multi-select-btn" selected-model="selectedProductionType" checkboxes="true" extra-settings="settingMultiSelect"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="col-md-6">
+                                    <label style="float:left;color:black">Bulk Of Status</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <div ng-dropdown-multiselect="" options="bulkOffStatusList" class="multi-select-btn" selected-model="selectedBulkOff" checkboxes="true" extra-settings="settingMultiSelect"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <button class="col-md-offset-5" style="color:black" type="button" ng-click="hideShowFilters()">Hide/Show Filters</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <hr class="new1" />
+                <div>
+                    <div id="gridandchartW" style="width:100%; height:100%">
+                        <div id="gridOperator" style="width:100%;height:50%; float:left">
+                            <div id="gridPellet" ui-grid="gridOptionsPellet" ui-grid-pinning ui-grid-selection ui-grid-auto-resize ui-grid-edit ui-grid-exporter ui-grid-resize-columns class="gridVatMakeRpt" style=" width:98vw; height: 70vh; color:white; font-size:medium; font-family: Arial, Helvetica, sans-serif, cursive, sans-serif; color: red;"></div>
+                        </div>
+                    </div>
+                    <div style="padding-left: 120px; padding-top: 400px;background-color:transparent; color:black" class="grid-msg-overlay" ng-hide="!loading">
+                        <div style="background-color:transparent; color:white;" class="msg">
+                            <span>
+                                Please wait while Loading Data...<br /><!---->
+                                <br />Working on Retrieving info ...<i class="fa fa-spinner fa-spin"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--#################################################### Pellet Report ################ END ######################################-->
     <!--#################################################### Dairy Liquid Load Out  ######################################################-->
     <div id="mysidenavOthDairyLiqLoadOut" class="modal" style="background-color:white; border:none" ng-controller="LRWcontroller">
 

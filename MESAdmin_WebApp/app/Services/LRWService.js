@@ -230,7 +230,7 @@
                     return $http(req);
                 },
 
-                getPalletRpt: function (DateStart, DateEnd, SupplierID, Route_Num, Material) {
+                getPalletRpt: function (StartProductionDate, Line, ProdCode, PType, DisplayReprints, Reason, reas_grp_desc, BulkOff_Status) {
                     console.log("Pallet report LRS ");
                     var url = window.location.protocol + "//" + window.location.hostname + ":1630/api/Message/getPalletRpt/" + "/" + StartProductionDate + "/" + Line + "/" + ProdCode + "/" + PType + "/" + DisplayReprints + "/" + Reason + "/" + reas_grp_desc + "/" + BulkOff_Status + "/";
                     console.log(url);

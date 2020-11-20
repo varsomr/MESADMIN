@@ -2286,6 +2286,234 @@
         }
         //############################################## Milk receiving load detail  #######End###########################################//
 
+
+        //############################################## Pellet Report  #######End###########################################//
+
+        $scope.gridOptionsPellet = {
+            enableFullRowSelection: false,
+            enableRowHeaderSelection: false,
+            paginationPageSizes: [20, 40, 60],
+            paginationPageSize: 40,
+            rowHeight: 30,
+            enableFiltering: false,
+            enableCellEdit: false,
+            enableGridMenu: false,
+            enablePinning: true,
+            rowTemplate:
+                '<div ng-class="{ \'grey\':grid.appScope.rowFormatter( row ) }">' +
+                '  <div ng-repeat="(colRenderIndex, col) in colContainer.renderedColumns track by col.colDef.name" class="ui-grid-cell" ng-class="{ \'ui-grid-row-header-cell\': col.isRowHeader }"  ui-grid-cell></div>' +
+                '</div>'
+
+
+        };
+
+        $scope.settingMultiSelect = {
+            scrollableHeight: '200px',
+            scrollable: true,
+            enableSearch: true
+        };
+
+        $scope.prodTypeList = [];
+        $scope.selectedProdType = [];
+        $scope.productionDateList = [];
+        $scope.selectedProductionDate = "";
+
+        $scope.lineNumberList = [];
+        $scope.selectedLineNos = [];
+        $scope.productionCodeList = ['All'];
+        $scope.selectedProductCode = "All";
+        $scope.productionTypeList = [];
+        $scope.selectedProductionType = [];
+        $scope.displayMaterialList = ['All'];
+        $scope.selectedDisplayMaterial = "All";
+        $scope.grpByList = [{ 'id': 'Production_Order', 'value': 'Production Order' }, { 'id': 'Product_Code', 'value': 'Product Code' }];
+        $scope.selectedGrpBy = 'Production_Order';
+        $scope.displayReprintsList = [{ 'id': '1', 'value': 'Yes' }, { 'id': '0', 'value': 'No' }];
+        $scope.selectedReprint = '0';
+        $scope.bulkOffStatusList = [];
+        $scope.bulkOffData = ['BulkOff', 'Non-BulkOff'];
+        $scope.manageData($scope.bulkOffData, $scope.bulkOffStatusList)
+        $scope.selectedBulkOff = [];
+        $scope.bulkOffData.forEach(p => {
+            $scope.selectedBulkOff.push({ 'id': p })
+        });
+        $scope.selectedSortPelletRpt = 'Descending';
+        $scope.isAscendingPellet = false;
+
+        
+        $scope.groupByPellet = function (gridData) {
+            if (gridData == undefined || gridData == null) {
+                gridData = $scope.pelletData;
+            }
+            var data = [];
+            var groupedData = _.groupBy(gridData, $scope.selectedGrpBy)
+            var groupedKeys = Object.keys(groupedData);
+            
+            groupedKeys.forEach(gk => {
+                groupedData[gk] = $scope.isAscendingPellet ? _.sortBy(groupedData[gk], 'Print_Date') : _.sortBy(groupedData[gk], 'Print_Date').reverse();
+                var totalRow = {}
+                var extraRow = {}
+                var keysForFirst = Object.keys(groupedData[gk][0])
+
+                keysForFirst.forEach(k => {
+                    if (k === 'Product_Code') {
+                        totalRow[k] = 'Pellet Count ' + groupedData[gk].length
+                    } else if (k === 'SKU') {
+                        totalRow[k] = groupedData[gk].reduce((s, f) => {
+                            return s + Number(f.SKU);               // return the sum of the accumulator and the current time, as the the new accumulator
+                        }, 0)
+                    } else if (k === 'Net_Weight') {
+                        totalRow[k] = groupedData[gk].reduce((s, f) => {
+                            return s + Number(f.Net_Weight);               // return the sum of the accumulator and the current time, as the the new accumulator
+                        }, 0)
+                    } else {
+                        totalRow[k] = ""
+                    }
+                    totalRow["isTotal"] = true;
+                    extraRow[k] = ""
+                })
+                groupedData[gk].push(totalRow);
+                groupedData[gk].push(extraRow);
+                data.push(...groupedData[gk])
+            })
+            $scope.gridOptionsPellet.data = data;
+        }
+
+        $scope.getPelletParam = function () {
+            LRWService.getPalletRptPtypeDate().success(function (data) {
+                $scope.loading = true;
+                var prodTypeDta = _.uniq(data.PalletRptPtypeDateList.map(a => a.oper_type));
+                $scope.productionDateList = _.uniq(data.PalletRptPtypeDateList.map(a => a.ProductionStartDate));
+                $scope.selectedProductionDate = $scope.productionDateList[0];
+                $scope.manageData(prodTypeDta, $scope.prodTypeList);
+                prodTypeDta.forEach(p => {
+                    $scope.selectedProdType.push({ 'id': p })
+                });
+                $scope.changeProdTypePellet();
+            }).finally(function () { $scope.loading = false; });
+        }
+
+        $scope.getPelletParam()
+
+        $scope.myEventListenersProdType = {
+            onItemSelect: onItemSelectPt,
+            onItemDeselect: onItemDeselectPt,
+            onSelectAll: onSelectAllPt,
+            onDeselectAll: onDeselectAllPt
+        };
+
+        // MultiSelect Drop down select - Event
+        function onItemSelectPt(property) {
+            $scope.changeProdTypePellet()
+
+        }
+
+        function onItemDeselectPt(property) {
+            $scope.changeProdTypePellet()
+        }
+
+        function onSelectAllPt() {
+            $scope.changeProdTypePellet()
+        }
+
+        function onDeselectAllPt() {
+            $scope.changeProdTypePellet()
+        }
+
+        
+
+        $scope.changeProdTypePellet = function () {
+            LRWService.getPalletRptParam($scope.selectedProductionDate.replaceAll("/", "-"), $scope.selectedProdType.map(a => a.id).toString()).success(function (data) {
+                $scope.loading = true;
+                var lineNoList = _.uniq(data.PalletRptParamList.map(a => a.Line));
+                var rgList = _.uniq(data.PalletRptParamList.map(a => a.reas_grp_desc));
+                $scope.manageData(lineNoList, $scope.lineNumberList);
+                lineNoList.forEach(p => {
+                    $scope.selectedLineNos.push({ 'id': p })
+                });
+                $scope.manageData(rgList, $scope.productionTypeList);
+                rgList.forEach(p => {
+                    $scope.selectedProductionType.push({ 'id': p })
+                });
+                $scope.productionCodeList.push(..._.uniq(data.PalletRptParamList.map(a => a.Product_Code)))
+                $scope.displayMaterialList.push(..._.uniq(data.PalletRptParamList.map(a => a.Reas_Grp)))
+                
+            }).finally(function () { $scope.loading = false; });
+        }
+
+        $scope.changeSortPellet = function () {
+            $scope.isAscendingPellet = $scope.selectedSortPelletRpt == 'Ascending';
+            $scope.groupByPellet()
+        }
+
+        $scope.myEventListenersLineNo = {
+            onItemSelect: onItemSelectLn,
+            onItemDeselect: onItemDeselectLn,
+            onSelectAll: onSelectAllLn,
+            onDeselectAll: onDeselectAllLn
+        };
+
+        function onItemSelectLn(property) {
+            $scope.changeLineNoPellet()
+
+        }
+
+        function onItemDeselectLn(property) {
+            $scope.changeLineNoPellet()
+        }
+
+        function onSelectAllLn() {
+            $scope.changeLineNoPellet()
+        }
+
+        function onDeselectAllLn() {
+            $scope.changeLineNoPellet()
+        }
+
+        $scope.changeLineNoPellet = function () {
+            var linoNos = $scope.selectedLineNos.map(a => a.id);
+            var data = [];
+            linoNos.forEach(a => {
+                $scope.pelletData.filter(b => { return b.Line == a})
+                data.push(...$scope.pelletData.filter(b => { return b.Line == a }))
+            })
+            $scope.groupByPellet(data);
+        }
+
+        $scope.getPalletRpt = function () {
+            LRWService.getPalletRpt($scope.selectedProductionDate.replaceAll("/", "-"), $scope.selectedLineNos.map(a => a.id).toString(), $scope.selectedProductCode, $scope.selectedProdType.map(a => a.id).toString(), $scope.selectedReprint, $scope.selectedDisplayMaterial, $scope.selectedProductionType.map(a => a.id).toString(), $scope.selectedBulkOff.map(a => a.id).toString()).success(function (data) {
+                $scope.loading = true;
+                $scope.gridOptionsPellet.data = [];
+                $scope.gridOptionsPellet.columnDefs = [];
+                if (data === null || data.PalletRptList === null || data.PalletRptList.length === 0) {
+
+                    $scope.error = true;
+                    $scope.errorDescription = "No data found for selected criteria.";
+
+                } else {
+                    $scope.pelletData = data.PalletRptList;
+                    var keys = Object.keys(data.PalletRptList[0]);
+                    $scope.gridOptionsPellet.paginationPageSizes.push(
+                        data.PalletRptList.length
+                    );
+                    $scope.gridOptionsPellet.columnDefs.push({ name: 'Product_Code', field: 'Product_Code', visible: true })
+                    $scope.gridOptionsPellet.columnDefs.push({ name: 'SKU', field: 'SKU', visible: true })
+                    $scope.gridOptionsPellet.columnDefs.push({ name: 'Print_Date', field: 'Print_Date', visible: true })
+                    $scope.gridOptionsPellet.columnDefs.push({ name: 'Row_Order', field: 'Row_Order', visible: true })
+                    $scope.gridOptionsPellet.columnDefs.push({ name: 'Net_Weight', field: 'Net_Weight', visible: true })
+                    $scope.gridOptionsPellet.columnDefs.push({ name: 'Production_Order', field: 'Production_Order', visible: false })
+                   
+                    $scope.gridOptionsPellet.data = [];
+                    $scope.gridOptionsPellet.data = data.PalletRptList;
+                    $scope.groupByPellet($scope.pelletData);
+
+                    $scope.error = false;
+                }
+            }).finally(function () { $scope.loading = false; });
+        }
+
+        //############################################## Pellet Report  #######End###########################################//
+
         //###############################################  ChseMakSuprDopRpt SCREEN ############################################//
 
         $scope.gridOptionsChseMakSuprDopRpt = {
@@ -3960,6 +4188,7 @@
             if (nav == "mysidenavOthDairyLiqReceipt") {
                 $scope.viewReportsODR();
             }
+            
         }
 
         $scope.go_full_screen = function () {
