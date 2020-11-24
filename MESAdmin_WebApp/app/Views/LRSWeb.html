@@ -2637,6 +2637,48 @@
 
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <img class="img" src="../leprinoFoods.PNG" style="float:left;height:10%;width:10%" />
+                    </div>
+                    <div class="col-md-6">
+                        <label style="color:black; font-size: 20px; text-align:center">Pellet Report</label><br />
+                        <a style="color:black; font-size: 10px; text-align:center" ng-click="manageAutoRefreshPellet()">Click to {{refreshtxt}} report auto-refresh</a>
+                    </div>
+                </div>
+                <hr class="new1"/>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col-md-12">
+                            <label class="col-md-3" style="color:black">Production Date:</label>
+                            <label class="col-md-3" style="color:black">{{selectedProductionDate}}</label>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="col-md-3" style="color:black">Product type:</label>
+                            <label class="col-md-3" style="color:black">{{selectedpTypes}}</label>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="col-md-3" style="color:black">Sort Order:</label>
+                            <label class="col-md-3"  style="color:black">{{selectedSortPelletRpt}}</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        
+                            <div class="col-md-12">
+                                <label class="col-md-3 col-md-offset-6" style="color:black">Plant Name:</label>
+                                <label class="col-md-3" style="color:black">Lemoore West</label>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="col-md-3 col-md-offset-6" style="color:black">Display Material Production Type:</label>
+                                <label class="col-md-3" style="color:black">{{selectedDisplayMaterial}}</label>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="col-md-3 col-md-offset-6" style="color:black">Grouping:</label>
+                                <label class="col-md-3" style="color:black">{{keyToGrp}}</label>
+                            </div>
+                        
+                    </div>
+                </div>
                 <hr class="new1" />
                 <div>
                     <div id="gridandchartW" style="width:100%; height:100%">

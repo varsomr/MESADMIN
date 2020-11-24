@@ -2328,6 +2328,7 @@
         $scope.selectedDisplayMaterial = "All";
         $scope.grpByList = [{ 'id': 'Production_Order', 'value': 'Production Order' }, { 'id': 'Product_Code', 'value': 'Product Code' }];
         $scope.selectedGrpBy = 'Production_Order';
+        $scope.keyToGrp = 'Production Order';
         $scope.displayReprintsList = [{ 'id': '1', 'value': 'Yes' }, { 'id': '0', 'value': 'No' }];
         $scope.selectedReprint = '0';
         $scope.bulkOffStatusList = [];
@@ -2345,6 +2346,7 @@
             if (gridData == undefined || gridData == null) {
                 gridData = $scope.pelletData;
             }
+            $scope.keyToGrp = $scope.grpByList.find(a => a.id == $scope.selectedGrpBy).value;
             var data = [];
             var groupedData = _.groupBy(gridData, $scope.selectedGrpBy)
             var groupedKeys = Object.keys(groupedData);
@@ -2353,11 +2355,20 @@
                 groupedData[gk] = $scope.isAscendingPellet ? _.sortBy(groupedData[gk], 'Print_Date') : _.sortBy(groupedData[gk], 'Print_Date').reverse();
                 var totalRow = {}
                 var extraRow = {}
+                var titleRow = {}
                 var keysForFirst = Object.keys(groupedData[gk][0])
 
                 keysForFirst.forEach(k => {
                     if (k === 'Product_Code') {
                         totalRow[k] = 'Pellet Count ' + groupedData[gk].length
+                        var mess = "";
+                        if ($scope.selectedGrpBy == 'Production_Order') {
+                            mess = mess + 'Production Order: ' + groupedData[gk][0].Production_Order
+                        } else {
+                            mess = mess + 'Product Code: ' + groupedData[gk][0].Product_Code
+                        }
+                        mess = mess + ' | Product Type: ' + groupedData[gk][0].Product_Type
+                        titleRow[k] = mess
                     } else if (k === 'SKU') {
                         totalRow[k] = groupedData[gk].reduce((s, f) => {
                             return s + Number(f.SKU);               // return the sum of the accumulator and the current time, as the the new accumulator
@@ -2368,10 +2379,13 @@
                         }, 0)
                     } else {
                         totalRow[k] = ""
+                        titleRow[k] = "";
                     }
                     totalRow["isTotal"] = true;
                     extraRow[k] = ""
+                    
                 })
+                groupedData[gk].unshift(titleRow);
                 groupedData[gk].push(totalRow);
                 groupedData[gk].push(extraRow);
                 data.push(...groupedData[gk])
@@ -2420,9 +2434,19 @@
             $scope.changeProdTypePellet()
         }
 
-        
+        $scope.manageAutoRefreshPellet = function () {
+            $scope.isAutoRefresh = !$scope.isAutoRefresh;
+            if ($scope.isAutoRefresh) {
+                $scope.refreshtxt = "disable";
+            }
+            else {
+                $scope.refreshtxt = "enable";
+            }
+
+        }
 
         $scope.changeProdTypePellet = function () {
+            $scope.selectedpTypes = $scope.selectedProdType.map(a => a.id).toString();
             LRWService.getPalletRptParam($scope.selectedProductionDate.replaceAll("/", "-"), $scope.selectedProdType.map(a => a.id).toString()).success(function (data) {
                 $scope.loading = true;
                 var lineNoList = _.uniq(data.PalletRptParamList.map(a => a.Line));
