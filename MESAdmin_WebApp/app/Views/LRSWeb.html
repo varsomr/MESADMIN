@@ -516,6 +516,11 @@
             background-color: red !important;
             color:white !important
         }
+        /* New class added for row color*/
+        .totalRow {
+            background-color: lightyellow !important;
+            color: black !important
+        }
         .greyRow {
             background-color: lightgray !important;
             border-left: 0.1px solid darkslategrey;
@@ -2467,6 +2472,7 @@
                         </div>
                     </div>
                     <hr class="new1" />
+                    <!-- applying the number format for the total sum so that it will be appropriate -->
                     <table border=1 class="table-bordered" style="margin-top:20px; color:black; float:right">
                         <thead>
                             <tr>
@@ -2477,25 +2483,25 @@
                         </thead>
                         <tr>
                             <td> Total Producer Pounds</td>
-                            <td> {{totalProdPounds}} </td>
+                            <td> {{totalProdPounds | number}} </td>
                         </tr>
                         <tr>
                             <td> Total LFC Pounds</td>
-                            <td> {{totalLfcPounds}} </td>
-                            <td> {{lbsDiff}} </td>
+                            <td> {{totalLfcPounds | number}} </td>
+                            <td> {{lbsDiff | number}} </td>
                         </tr>
                         <tr>
                             <td> Scale status Pounds</td>
-                            <td> {{scaleStatusPounds}} </td>
-                            <td> {{lbsScaleDiff}} </td>
+                            <td> {{scaleStatusPounds | number}} </td>
+                            <td> {{lbsScaleDiff | number}} </td>
                         </tr>
                         <tr>
                             <td> Rejected Pounds</td>
-                            <td> {{rejectedPounds}} </td>
+                            <td> {{rejectedPounds | number}} </td>
                         </tr>
                         <tr>
                             <td> Average Time in Bay</td>
-                            <td> {{avgTime}} </td>
+                            <td> {{avgTime | number}} </td>
                         </tr>
                     </table>
 

@@ -2161,7 +2161,10 @@
                     totalRow["isTotal"] = true;
                     extraRow[k] = ""
                 })
-                groupedData[gk].push(totalRow);
+                // we dont want to show the grouping sum when load number is selected as grouping option
+                if ($scope.mldSelectedGroup != "Load_Num") {
+                    groupedData[gk].push(totalRow);
+                }
                 //removed adding of extra row after every group.
                 //groupedData[gk].push(extraRow);
                 data.push(...groupedData[gk])
@@ -2218,13 +2221,18 @@
 
         function bgColorMld(grid, row, col, rowRenderIndex, colRenderIndex) {
             var newStyle;
-            if ((row["isTotal"] == undefined || row["isTotal"] == false) && (Number(row.entity.Diff) / Number(row.entity.LFC_Lbs) < -0.0025) && Number(row.entity.Prod_Lbs) > 0) {
+            //if ((row["isTotal"] == undefined || row["isTotal"] == false) && (Number(row.entity.Diff) / Number(row.entity.LFC_Lbs) < -0.0025) && Number(row.entity.Prod_Lbs) > 0) {
+            // modified the condition so that the colors show appropriatly
+            if ((row.entity.isTotal == false) && ((Number(row.entity.Diff) / Number(row.entity.LFC_Lbs)) < -0.0025) && Number(row.entity.Prod_Lbs) > 0) {
                 newStyle = 'redRow';
             }
             if (row.entity.Status == 'Rejected') {
                 newStyle = 'blackRow';
             }
-
+            // added a new code so that the total row shows differently and can be identified easily
+            if (row.entity.isTotal == true) {
+                newStyle = 'totalRow';
+            }
 
             return newStyle;
         }
@@ -2256,10 +2264,15 @@
                     for (var i = 0; i < keys.length; i++)
                     {
                         var colmn = keys[i];
+                        //applying number filter to the columns so that it shows , as the seperator
+                        var fltr = '';
+                        if (keys[i] == "Prod_Lbs" || keys[i] == "LFC_Lbs" || keys[i] == "Diff")
+                            fltr = 'number';
                         $scope.gridOptionsMld.columnDefs.push({
                             name: keys[i],
                             field: keys[i], width: '10%', visible: true,
-                            cellClass: bgColorMld
+                            cellClass: bgColorMld,
+                            cellFilter: fltr // applying the filter
                         })
                     }
                     $scope.gridOptionsMld.data = [];
@@ -2277,10 +2290,15 @@
             var keys = Object.keys(dataObject);
             for (var i = 0; i < keys.length; i++) {
                 var colmn = keys[i];
+                //applying number filter to the columns so that it shows , as the seperator
+                var fltr = '';
+                if (keys[i] == "Prod_Lbs" || keys[i] == "LFC_Lbs" || keys[i] == "Diff")
+                    fltr = 'number';
                 $scope.gridOptionsMld.columnDefs.push({
                     name: keys[i],
                     field: keys[i], width: '10%', visible: true,
-                    cellClass: bgColorMld
+                    cellClass: bgColorMld,
+                    cellFilter: fltr // applying the filter
                 })
             }
             $scope.gridOptionsMld.data = data;
