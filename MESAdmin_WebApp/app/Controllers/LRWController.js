@@ -2162,7 +2162,8 @@
                     extraRow[k] = ""
                 })
                 groupedData[gk].push(totalRow);
-                groupedData[gk].push(extraRow);
+                //removed adding of extra row after every group.
+                //groupedData[gk].push(extraRow);
                 data.push(...groupedData[gk])
             })
             $scope.totalProdPounds = $scope.getSum(data, "Prod_Lbs");
