@@ -2222,8 +2222,9 @@
         function bgColorMld(grid, row, col, rowRenderIndex, colRenderIndex) {
             var newStyle;
             //if ((row["isTotal"] == undefined || row["isTotal"] == false) && (Number(row.entity.Diff) / Number(row.entity.LFC_Lbs) < -0.0025) && Number(row.entity.Prod_Lbs) > 0) {
+            //if ((row.entity.isTotal == false) && ((Number(row.entity.Diff) / Number(row.entity.LFC_Lbs)) < -0.0025) && Number(row.entity.Prod_Lbs) > 0) {
             // modified the condition so that the colors show appropriatly
-            if ((row.entity.isTotal == false) && ((Number(row.entity.Diff) / Number(row.entity.LFC_Lbs)) < -0.0025) && Number(row.entity.Prod_Lbs) > 0) {
+            if ((row.entity.isTotal == undefined || row.entity.isTotal == false) && (Number(row.entity.Diff) / Number(row.entity.LFC_Lbs) < -0.0025) && Number(row.entity.Prod_Lbs) > 0) {
                 newStyle = 'redRow';
             }
             if (row.entity.Status == 'Rejected') {
