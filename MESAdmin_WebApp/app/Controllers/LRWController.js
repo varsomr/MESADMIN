@@ -2267,11 +2267,11 @@
                         var colmn = keys[i];
                         //applying number filter to the columns so that it shows , as the seperator
                         var fltr = '';
-                        if (keys[i] == "Prod_Lbs" || keys[i] == "LFC_Lbs" || keys[i] == "Diff")
+                        if (keys[i] == "Prod_Lbs" || keys[i] == "LFC_Lbs" || keys[i] == "Diff" || keys[i] == "Prod_Lbs_Net" || keys[i] == "LFC_Lbs_Scale_Down")
                             fltr = 'number';
                         $scope.gridOptionsMld.columnDefs.push({
                             name: keys[i],
-                            field: keys[i], width: '10%', visible: true,
+                            field: keys[i], minWidth: '120', visible: true,
                             cellClass: bgColorMld,
                             cellFilter: fltr // applying the filter
                         })
@@ -2293,11 +2293,11 @@
                 var colmn = keys[i];
                 //applying number filter to the columns so that it shows , as the seperator
                 var fltr = '';
-                if (keys[i] == "Prod_Lbs" || keys[i] == "LFC_Lbs" || keys[i] == "Diff")
+                if (keys[i] == "Prod_Lbs" || keys[i] == "LFC_Lbs" || keys[i] == "Diff" || keys[i] == "Prod_Lbs_Net" || keys[i] == "LFC_Lbs_Scale_Down")
                     fltr = 'number';
                 $scope.gridOptionsMld.columnDefs.push({
                     name: keys[i],
-                    field: keys[i], width: '10%', visible: true,
+                    field: keys[i], minWidth: '120', visible: true,
                     cellClass: bgColorMld,
                     cellFilter: fltr // applying the filter
                 })
