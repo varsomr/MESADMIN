@@ -2085,9 +2085,27 @@
 
         //############################################## Milk receiving load detail  #######End###########################################//
 
-        $scope.mldcalendardate = (nav, toFrom) => {
-            //debugger
+        //Loding the datepicker initially so that it will open on firstclick
+        $scope.onmldLoad = function (navfrom, navto) {
+            $("#mldFromDate").datepicker({
+                onSelect: (dateText) => {
+                    var date = new Date(dateText);
+                    $scope['mldFromDate'] = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()));
+                    $scope.lodMldGrid();
+                },
+                defaultDate: $scope['mldFromDate']
+            });
+            $("#mldToDate").datepicker({
+                onSelect: (dateText) => {
+                    var date = new Date(dateText);
+                    $scope['mldToDate'] = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()));
+                    $scope.lodMldGrid();
+                },
+                defaultDate: $scope['mldToDate']
+            });
+        }
 
+        $scope.mldcalendardate = (nav, toFrom) => {
             $(nav).datepicker({
                 onSelect: (dateText) => {
                     var date = new Date(dateText);
@@ -2096,10 +2114,6 @@
                 },
                 defaultDate: $scope[toFrom]
             });
-
-            
-
-
         };
         $scope.mldFromDate = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()))
         $scope.mldToDate = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()))
@@ -2239,8 +2253,8 @@
         }
 
         $scope.lodMldGrid = function () {
-            var fromD = Date.parse($scope.finishRptFromDate);
-            var toD = Date.parse($scope.finishRptToDate);
+            var fromD = Date.parse($scope.mldFromDate);
+            var toD = Date.parse($scope.mldToDate);
             if (toD < fromD) {
                 return
             }
