@@ -457,6 +457,14 @@
             width: 80px;
             font-size: x-small;
         }
+        /*added new class for round linenumber buttons*/
+        .btnRound {
+            background-color: #17561b;
+            color: white;
+            height: 35px;
+            width: 80px;
+            font-size: x-small;
+        }
 
 
 
@@ -516,10 +524,16 @@
             background-color: red !important;
             color:white !important
         }
-        /* New class added for row color*/
+        /* New class added for total row color*/
         .totalRow {
             background-color: lightyellow !important;
             color: black !important
+        }
+        /* New class added for group row color*/
+        .groupRow {
+            background-color: lightgreen !important;
+            color: black !important;
+            font-weight: bold !important;
         }
         .greyRow {
             background-color: lightgray !important;
@@ -1561,7 +1575,7 @@
                 Milk load delivery Report<span class="tooltiptext" id="myTooltipFr"></span>
             </button>
             <button id="Tsk" class="mainBtn" ng-click="openModal('mysidenavRightPelletReport')" style="width:7%; height:40px; border:solid 1px darkslategrey; background-color:transparent;color:white; float:left;font-size:small;border-bottom:hidden">
-                Pellet Report<span class="tooltiptext" id="myTooltipFr"></span>
+                Pallet Report<span class="tooltiptext" id="myTooltipFr"></span>
             </button>
         </div>
     </div>
@@ -1790,7 +1804,7 @@
         </div>
     </div>
     <!--#################################################### VatMakeRpt  ######################################################-->
-    <div id="mysidenavRightVATMake" class="modal" style="background-color:white; border:none" ng-controller="LRWcontroller">
+    <div id="mysidenavRightVATMake" class="modal" style="background-color:white; border:none" ng-controller="LRWcontroller" ng-init="onvatmakeLoad('#fromDate','fromDate','#toDate','toDate')" >
 
         <div class="modal-content" style="height:100%;  background-color:white;color:white">
             <div class="modal-body" style="height:100%;  background-color:white;color:white">
@@ -1893,10 +1907,10 @@
                         <div class="col-md-6">
                             <div class="col-md-4">
                                 <input type="checkbox" ng-click="showorhideExtraColumns()" id="hideshowcheckboxid" />
-                                <button type="button" ng-class="{selectedButton: selectedLineNumber == '1'}" class="btn btn-sm btn-info" ng-click="gridPagination('1')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">1</button>
-                                <button type="button" ng-class="{selectedButton: selectedLineNumber == '2'}" class="btn btn-sm btn-info" ng-click="gridPagination('2')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">2</button>
-                                <button type="button" ng-class="{selectedButton: selectedLineNumber == '3'}" class="btn btn-sm btn-info" ng-click="gridPagination('3')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">3</button>
-                                <button type="button" class="btn btn-sm btn-info" ng-click="gridPagination('4'); loadgridVatMakeRptComments()" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">4</button>
+                                <button type="button" ng-class="{selectedButton: selectedLineNumber == '1'}" class="btnRound btn-sm btn-info" ng-click="gridPagination('1')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">1</button>
+                                <button type="button" ng-class="{selectedButton: selectedLineNumber == '2'}" class="btnRound btn-sm btn-info" ng-click="gridPagination('2')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">2</button>
+                                <button type="button" ng-class="{selectedButton: selectedLineNumber == '3'}" class="btnRound btn-sm btn-info" ng-click="gridPagination('3')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">3</button>
+                                <button type="button" class="btnRound btn-sm btn-info" ng-click="gridPagination('4'); loadgridVatMakeRptComments()" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">4</button>
                             </div>
                         </div>
 
@@ -2524,7 +2538,7 @@
         <div class="modal-content" style="height:100%;  background-color:white;color:white">
             <div class="modal-body" style="height:100%;  background-color:white;color:white">
                 <div style="background-color:lightblue">
-                    <div class="row" ng-show="isHideFilters == false">
+                    <div class="row" ng-show="isHideFilters == false" style="margin-top:10px">
                         <div class="col-md-12">
                             <div class="col-md-2">
                                 <div class="col-md-6">
@@ -2545,7 +2559,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row" ng-show="isHideFilters == false">
+                    <div class="row" ng-show="isHideFilters == false" style="margin-top:4px">
                         <div class="col-md-12">
                             <div class="col-md-2">
                                 <div class="col-md-6">
@@ -2591,7 +2605,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row" ng-show="isHideFilters == false">
+                    <div class="row" ng-show="isHideFilters == false" style="margin-top:4px">
                         <div class="col-md-12">
                             <div class="col-md-2">
                                 <div class="col-md-6">
@@ -2612,7 +2626,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row" ng-show="isHideFilters == false">
+                    <div class="row" ng-show="isHideFilters == false" style="margin-top:4px">
                         <div class="col-md-12">
                             <div class="col-md-2">
                                 <div class="col-md-6">
@@ -2633,8 +2647,22 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="row">
+                    <div class="row" style="margin-top:4px" ng-show="isHideFilters == false">
+                        <div class="col-md-12">
+                            <!--<div class="col-md-4">
+                                <button type="button" ng-class="{selectedButton: selectedLineNumber == '1'}" class="btnRound btn-sm btn-info" ng-click="gridPalletPagination('1')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">1</button>
+                                <button type="button" ng-class="{selectedButton: selectedLineNumber == '2'}" class="btnRound btn-sm btn-info" ng-click="gridPalletPagination('2')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">2</button>
+                                <button type="button" ng-class="{selectedButton: selectedLineNumber == '3'}" class="btnRound btn-sm btn-info" ng-click="gridPalletPagination('3')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">3</button>
+                                <button type="button" class="btnRound btn-sm btn-info" ng-click="gridPalletPagination('4')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">4</button>
+                             </div>-->
+                            <div class="col-md-12">
+                                <div ng-repeat="x in lineNumberList" style="float:left;padding-right:4px">
+                                    <button type="button" ng-class="{selectedButton: selectedLineNumber == '{{x.label}}'}" class="btnRound btn-sm btn-info" ng-click="gridPalletPagination(x.label)" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">{{x.label}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top:4px">
                         <div class="col-md-12">
                             <div class="col-md-12">
                                 <button class="col-md-offset-5" style="color:black" type="button" ng-click="hideShowFilters()">Hide/Show Filters</button>
@@ -2644,15 +2672,20 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
-                        <img class="img" src="../leprinoFoods.PNG" style="float:left;height:10%;width:10%" />
+                    <div class="col-md-12" style="text-align:left">
+                        <label style="color:black; font-size: 20px; text-align:center">{{selLineInfo}}</label>
                     </div>
-                    <div class="col-md-6">
-                        <label style="color:black; font-size: 20px; text-align:center">Pellet Report</label><br />
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <img class="img" src="../leprinoFoods.PNG" style="float:left;height:40%;width:40%" />
+                    </div>
+                    <div class="col-md-10" style="text-align:center">
+                        <label style="color:black; font-size: 20px; text-align:center">Pallet Report</label><br />
                         <a style="color:black; font-size: 10px; text-align:center" ng-click="manageAutoRefreshPellet()">Click to {{refreshtxt}} report auto-refresh</a>
                     </div>
                 </div>
-                <hr class="new1"/>
+                <hr class="new1" />
                 <div class="row">
                     <div class="col-md-6">
                         <div class="col-md-12">
@@ -2665,27 +2698,30 @@
                         </div>
                         <div class="col-md-12">
                             <label class="col-md-3" style="color:black">Sort Order:</label>
-                            <label class="col-md-3"  style="color:black">{{selectedSortPelletRpt}}</label>
+                            <label class="col-md-3" style="color:black">{{selectedSortPelletRpt}}</label>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        
-                            <div class="col-md-12">
-                                <label class="col-md-3 col-md-offset-6" style="color:black">Plant Name:</label>
-                                <label class="col-md-3" style="color:black">Lemoore West</label>
-                            </div>
-                            <div class="col-md-12">
-                                <label class="col-md-3 col-md-offset-6" style="color:black">Display Material Production Type:</label>
-                                <label class="col-md-3" style="color:black">{{selectedDisplayMaterial}}</label>
-                            </div>
-                            <div class="col-md-12">
-                                <label class="col-md-3 col-md-offset-6" style="color:black">Grouping:</label>
-                                <label class="col-md-3" style="color:black">{{keyToGrp}}</label>
-                            </div>
-                        
+
+                        <div class="col-md-12">
+                            <label class="col-md-3 col-md-offset-6" style="color:black">Plant Name:</label>
+                            <label class="col-md-3" style="color:black">Lemoore West</label>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="col-md-3 col-md-offset-6" style="color:black">Display Material Production Type:</label>
+                            <label class="col-md-3" style="color:black">{{selectedDisplayMaterial}}</label>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="col-md-3 col-md-offset-6" style="color:black">Grouping:</label>
+                            <label class="col-md-3" style="color:black">{{keyToGrp}}</label>
+                        </div>
+
                     </div>
                 </div>
                 <hr class="new1" />
+                <div>
+                    <label style="color:red; font-size: 20px; text-align:left">{{errorDescription}}</label>
+                </div>
                 <div>
                     <div id="gridandchartW" style="width:100%; height:100%">
                         <div id="gridOperator" style="width:100%;height:50%; float:left">

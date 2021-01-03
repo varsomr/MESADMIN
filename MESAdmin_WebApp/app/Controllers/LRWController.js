@@ -444,6 +444,32 @@
 
         $scope.isCommentsgrid = false;
 
+        //Loding the datepicker initially so that it will open on firstclick
+        $scope.onvatmakeLoad = function (navFrom, From, navTo, to) {
+            $timeout(function () {
+                $(navFrom).datepicker({
+                    onSelect: (dateText) => {
+                        var date = new Date(dateText);
+                        $scope[From] = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()));
+                        $scope.dateChange();
+                    },
+                    defaultDate: $scope[From]
+                });
+            }, 10);
+
+            $timeout(function () {
+                $(navTo).datepicker({
+                    onSelect: (dateText) => {
+                        var date = new Date(dateText);
+                        $scope[to] = date.getFullYear() + '-' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '-' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()));
+                        $scope.dateChange();
+                    },
+                    defaultDate: $scope[to]
+                });
+            }, 10);
+
+        }
+
         $scope.calendardate = (nav, toFrom) => {
             //debugger
             $timeout(function () { 
@@ -2375,6 +2401,8 @@
         $scope.selectedSortPelletRpt = 'Descending';
         $scope.isAscendingPellet = false;
 
+        $scope.error = false;
+        $scope.errorDescription = "";
         
         $scope.groupByPellet = function (gridData) {
             if (gridData == undefined || gridData == null) {
@@ -2421,7 +2449,8 @@
                 })
                 groupedData[gk].unshift(titleRow);
                 groupedData[gk].push(totalRow);
-                groupedData[gk].push(extraRow);
+                //removing an extra line
+                //groupedData[gk].push(extraRow);
                 data.push(...groupedData[gk])
             })
             $scope.gridOptionsPellet.data = data;
@@ -2479,6 +2508,17 @@
 
         }
 
+        // code used to call when line number is clicked
+        $scope.gridPalletPagination = function (line) {
+            if (line != -1) {
+                $scope.selLineInfo = "Line: " + line;
+                $scope.selectedParticularLineNos = [];
+                $scope.selectedParticularLineNos.push({ 'id': line });
+                $scope.getPalletRpt();
+
+            }
+        }
+
         $scope.changeProdTypePellet = function () {
             $scope.selectedpTypes = $scope.selectedProdType.map(a => a.id).toString();
             LRWService.getPalletRptParam($scope.selectedProductionDate.replaceAll("/", "-"), $scope.selectedProdType.map(a => a.id).toString()).success(function (data) {
@@ -2496,12 +2536,13 @@
                 $scope.productionCodeList.push(..._.uniq(data.PalletRptParamList.map(a => a.Product_Code)))
                 $scope.displayMaterialList.push(..._.uniq(data.PalletRptParamList.map(a => a.Reas_Grp)))
                 
-            }).finally(function () { $scope.loading = false; });
+            }).finally(function () { $scope.getPalletRpt(); $scope.loading = false; });
         }
 
         $scope.changeSortPellet = function () {
             $scope.isAscendingPellet = $scope.selectedSortPelletRpt == 'Ascending';
-            $scope.groupByPellet()
+            //$scope.groupByPellet()
+            $scope.getPalletRpt();
         }
 
         $scope.myEventListenersLineNo = {
@@ -2530,44 +2571,112 @@
 
         $scope.changeLineNoPellet = function () {
             var linoNos = $scope.selectedLineNos.map(a => a.id);
-            var data = [];
-            linoNos.forEach(a => {
-                $scope.pelletData.filter(b => { return b.Line == a})
-                data.push(...$scope.pelletData.filter(b => { return b.Line == a }))
-            })
-            $scope.groupByPellet(data);
+            /*var data = [];
+             linoNos.forEach(a => {
+                 $scope.pelletData.filter(b => { return b.Line == a})
+                 data.push(...$scope.pelletData.filter(b => { return b.Line == a }))
+             })
+             $scope.groupByPellet(data);*/
+            $scope.getPalletRpt();
+        }
+
+        function bgColorPellet(grid, row, col, rowRenderIndex, colRenderIndex) {
+            var newStyle;
+            // added a new code so that the total row shows differently and can be identified easily
+            if (row.entity.isTotal == true) {
+                newStyle = 'totalRow';
+            }
+            //to easily identify and view the group header
+            if (row.entity.isTotal != true && row.entity.Product_Code.indexOf(" | ") > 0) {
+                newStyle = 'groupRow';
+            }
+            return newStyle;
+        }
+
+        //code used for calling a  seperate function when view report is clicked
+        $scope.viewPalletRpt = function () {
+            $scope.selLineInfo = "";
+            $scope.selectedParticularLineNos = [];
+            $scope.getPalletRpt();
         }
 
         $scope.getPalletRpt = function () {
-            LRWService.getPalletRpt($scope.selectedProductionDate.replaceAll("/", "-"), $scope.selectedLineNos.map(a => a.id).toString(), $scope.selectedProductCode, $scope.selectedProdType.map(a => a.id).toString(), $scope.selectedReprint, $scope.selectedDisplayMaterial, $scope.selectedProductionType.map(a => a.id).toString(), $scope.selectedBulkOff.map(a => a.id).toString()).success(function (data) {
-                $scope.loading = true;
-                $scope.gridOptionsPellet.data = [];
-                $scope.gridOptionsPellet.columnDefs = [];
-                if (data === null || data.PalletRptList === null || data.PalletRptList.length === 0) {
-
-                    $scope.error = true;
-                    $scope.errorDescription = "No data found for selected criteria.";
-
-                } else {
-                    $scope.pelletData = data.PalletRptList;
-                    var keys = Object.keys(data.PalletRptList[0]);
-                    $scope.gridOptionsPellet.paginationPageSizes.push(
-                        data.PalletRptList.length
-                    );
-                    $scope.gridOptionsPellet.columnDefs.push({ name: 'Product_Code', field: 'Product_Code', visible: true })
-                    $scope.gridOptionsPellet.columnDefs.push({ name: 'SKU', field: 'SKU', visible: true })
-                    $scope.gridOptionsPellet.columnDefs.push({ name: 'Print_Date', field: 'Print_Date', visible: true })
-                    $scope.gridOptionsPellet.columnDefs.push({ name: 'Row_Order', field: 'Row_Order', visible: true })
-                    $scope.gridOptionsPellet.columnDefs.push({ name: 'Net_Weight', field: 'Net_Weight', visible: true })
-                    $scope.gridOptionsPellet.columnDefs.push({ name: 'Production_Order', field: 'Production_Order', visible: false })
-                   
+            //code used to generate report for selecting particular line #
+            if ($scope.selectedParticularLineNos.length > 0) {
+                LRWService.getPalletRpt($scope.selectedProductionDate.replaceAll("/", "-"), $scope.selectedParticularLineNos.map(a => a.id).toString(), $scope.selectedProductCode, $scope.selectedProdType.map(a => a.id).toString(), $scope.selectedReprint, $scope.selectedDisplayMaterial, $scope.selectedProductionType.map(a => a.id).toString(), $scope.selectedBulkOff.map(a => a.id).toString()).success(function (data) {
+                    $scope.loading = true;
                     $scope.gridOptionsPellet.data = [];
-                    $scope.gridOptionsPellet.data = data.PalletRptList;
-                    $scope.groupByPellet($scope.pelletData);
+                    $scope.gridOptionsPellet.columnDefs = [];
+                    $scope.selectedParticularLineNos = [];
 
-                    $scope.error = false;
-                }
-            }).finally(function () { $scope.loading = false; });
+                    if (data === null || data.PalletRptList === null || data.PalletRptList.length === 0) {
+
+                        $scope.error = true;
+                        $scope.errorDescription = "No data found for selected criteria.";
+
+                    } else {
+                        $scope.error = false;
+                        $scope.errorDescription = "";
+                        $scope.pelletData = data.PalletRptList;
+                        $scope.tempPelletData = data.PalletRptList;
+                        var keys = Object.keys(data.PalletRptList[0]);
+                        $scope.gridOptionsPellet.paginationPageSizes.push(
+                            data.PalletRptList.length
+                        );
+                        $scope.gridOptionsPellet.columnDefs.push({ name: 'Product_Code', field: 'Product_Code', visible: true, cellClass: bgColorPellet })
+                        $scope.gridOptionsPellet.columnDefs.push({ name: 'Batch #', field: 'Pallet_Number', visible: true, cellClass: bgColorPellet })
+                        $scope.gridOptionsPellet.columnDefs.push({ name: 'SKU', field: 'SKU', visible: true, cellClass: bgColorPellet, cellFilter: 'number' })
+                        $scope.gridOptionsPellet.columnDefs.push({ name: 'Print_Date', field: 'Print_Date', visible: true, cellClass: bgColorPellet })
+                        $scope.gridOptionsPellet.columnDefs.push({ name: 'Row_Order', field: 'Row_Order', visible: true, cellClass: bgColorPellet })
+                        $scope.gridOptionsPellet.columnDefs.push({ name: 'Net_Weight', field: 'Net_Weight', visible: true, cellClass: bgColorPellet, cellFilter: 'number' })
+                        //$scope.gridOptionsPellet.columnDefs.push({ name: 'Line', field: 'Line', visible: true, cellClass: bgColorPellet, cellFilter: 'number' })
+                        $scope.gridOptionsPellet.columnDefs.push({ name: 'Production_Order', field: 'Production_Order', visible: false, cellClass: bgColorPellet })
+
+                        $scope.gridOptionsPellet.data = [];
+                        $scope.gridOptionsPellet.data = data.PalletRptList;
+                        $scope.groupByPellet($scope.pelletData);
+
+                        $scope.error = false;
+                    }
+                }).finally(function () { $scope.loading = false; });
+            }
+            else {
+                LRWService.getPalletRpt($scope.selectedProductionDate.replaceAll("/", "-"), $scope.selectedLineNos.map(a => a.id).toString(), $scope.selectedProductCode, $scope.selectedProdType.map(a => a.id).toString(), $scope.selectedReprint, $scope.selectedDisplayMaterial, $scope.selectedProductionType.map(a => a.id).toString(), $scope.selectedBulkOff.map(a => a.id).toString()).success(function (data) {
+                    $scope.loading = true;
+                    $scope.gridOptionsPellet.data = [];
+                    $scope.gridOptionsPellet.columnDefs = [];
+                    //$scope.selectedParticularLineNos = [];
+                    if (data === null || data.PalletRptList === null || data.PalletRptList.length === 0) {
+
+                        $scope.error = true;
+                        $scope.errorDescription = "No data found for selected criteria.";
+
+                    } else {
+                        $scope.error = false;
+                        $scope.errorDescription = "";
+                        $scope.pelletData = data.PalletRptList;
+                        $scope.tempPelletData = data.PalletRptList;
+                        var keys = Object.keys(data.PalletRptList[0]);
+                        $scope.gridOptionsPellet.paginationPageSizes.push(
+                            data.PalletRptList.length
+                        );
+                        $scope.gridOptionsPellet.columnDefs.push({ name: 'Product_Code', field: 'Product_Code', visible: true, cellClass: bgColorPellet })
+                        $scope.gridOptionsPellet.columnDefs.push({ name: 'Batch #', field: 'Pallet_Number', visible: true, cellClass: bgColorPellet })
+                        $scope.gridOptionsPellet.columnDefs.push({ name: 'SKU', field: 'SKU', visible: true, cellClass: bgColorPellet, cellFilter: 'number' })
+                        $scope.gridOptionsPellet.columnDefs.push({ name: 'Print_Date', field: 'Print_Date', visible: true, cellClass: bgColorPellet })
+                        $scope.gridOptionsPellet.columnDefs.push({ name: 'Row_Order', field: 'Row_Order', visible: true, cellClass: bgColorPellet })
+                        $scope.gridOptionsPellet.columnDefs.push({ name: 'Net_Weight', field: 'Net_Weight', visible: true, cellClass: bgColorPellet, cellFilter: 'number' })
+                        //$scope.gridOptionsPellet.columnDefs.push({ name: 'Line', field: 'Line', visible: true, cellClass: bgColorPellet, cellFilter: 'number' })
+                        $scope.gridOptionsPellet.columnDefs.push({ name: 'Production_Order', field: 'Production_Order', visible: false, cellClass: bgColorPellet })
+
+                        $scope.gridOptionsPellet.data = [];
+                        $scope.gridOptionsPellet.data = data.PalletRptList;
+                        $scope.groupByPellet($scope.pelletData);
+
+                        $scope.error = false;
+                    }
+                }).finally(function () { $scope.loading = false; });
+            }
         }
 
         //############################################## Pellet Report  #######End###########################################//
