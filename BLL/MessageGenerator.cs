@@ -2594,7 +2594,7 @@ namespace BLL
         public PalletRptParamCollection GetPalletRptParamCollection(string StartProductionDate, string PType)
         {
             PalletRptParamCollection dc = new PalletRptParamCollection();
-            DataSet dsDefect = DBConnection.DBConnectPalletRptParam("_usp_Pallet_Report_Param_dw", StartProductionDate, PType);
+            DataSet dsDefect = DBConnection.DBConnectPalletRptParam("_usp_Pallet_Report_Param_dw", StartProductionDate.Replace("-", "/"), PType);
             if (dsDefect.Tables.Count > 0 && dsDefect.Tables[0].Rows.Count > 0)
             {
                 foreach (DataRow dr in dsDefect.Tables[0].Rows)
