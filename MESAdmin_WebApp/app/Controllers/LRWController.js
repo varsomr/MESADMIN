@@ -172,6 +172,9 @@
             angular.element(document.getElementsByClassName(nav)[0]).css('width', newWidth + 'px');
         };
 
+        // Build Bredcrum for entire menu
+        buildBredCrum();
+        // End Build Bredcrum
 
         //###############################################  VatMakeRpt SCREEN ############################################//
 
@@ -2346,6 +2349,112 @@
         }
         //############################################## Milk receiving load detail  #######End###########################################//
 
+        //################### Menu Building Start ##################### //
+        $scope.loadMenu = function () {
+            LRWService.getMasterMenu().success(function (data) {
+                $scope.loading = true;
+                $scope.menudata = [];
+                $scope.mainmenudata = [];
+                $scope.parentId = "0";
+                $scope.previousParentId = "0"
+                $scope.mainmenudata = data.MasterMenuList;
+                $scope.menudata = data.MasterMenuList.filter(a => a.ParentID == "0");
+                document.getElementById("lblBC").innerHTML = "";
+            }).finally(function () { $scope.loading = false; });
+        }
+
+        $scope.openSubMenu = function (pId) {
+            $scope.menudata = [];
+            var pathObj = $scope.mainmenudata.filter(a => a.ID == pId);
+            if (pathObj.length > 0) {
+                document.getElementById("lblBC").innerHTML = pathObj[0].Path.substring(5).replaceAll(">", " > ");
+            } else {
+                document.getElementById("lblBC").innerHTML = "";
+            }
+            $scope.menudata = $scope.mainmenudata.filter(a => a.ParentID == pId);
+            if ($scope.menudata.length == 0) {
+                $scope.previousParentId = "-1";
+            } else {
+                $scope.previousParentId = $scope.menudata[0].ParentID.toString();
+            }
+
+            //LRWService.getMasterMenu().success(function (data) {
+            //    $scope.loading = true;
+            //    $scope.menudata = [];
+            //    $scope.menudata = data.MasterMenuList.filter(a => a.ParentID == pId); //(data.MasterMenuList.ParentID == pId);
+            //    $scope.previousParentId = $scope.menudata[0].ParentID.toString();
+            //}).finally(function () { $scope.loading = false; });
+        }
+
+        $scope.closeReportandOpenSubMenu = function (pId, menuid) {
+            if (menuid != "") {
+                $timeout(function () {
+                    LRWService.getMasterMenu().success(function (data) {
+                        $scope.loading = true;
+                        $scope.mainmenudata = [];
+                        $scope.menudata = [];
+                        $scope.parentId = "0";
+                        $scope.previousParentId = "0"
+                        $scope.mainmenudata = data.MasterMenuList;
+                        $timeout(function () {
+                            $scope.menudata = ($scope.mainmenudata.filter(a => a.ParentID == pId));
+                            document.getElementById(menuid).style.display = 'none';
+                        });
+                    }).finally(function () { $scope.loading = false; });
+                });
+
+            }
+        };
+
+        $scope.openBackMenu = function (pId) {
+            if (pId == "-1") {
+                $scope.menudata = [];
+                $scope.menudata = $scope.mainmenudata.filter(a => a.ParentID == "0");
+                document.getElementById("lblBC").innerHTML = "";
+            }
+            else {
+                $scope.menudata = [];
+                var prevParent = [];
+                prevParent = $scope.mainmenudata.filter(a => a.ID == pId);
+                if (prevParent.length == 0) {
+                    $scope.previousParentId = "-1";
+                } else {
+                    $scope.previousParentId = prevParent[0].ParentID.toString();
+                }
+                $scope.menudata = $scope.mainmenudata.filter(a => a.ParentID == $scope.previousParentId);
+                var pathObj = $scope.mainmenudata.filter(a => a.ID == $scope.previousParentId);
+                if (pathObj.length > 0) {
+                    document.getElementById("lblBC").innerHTML = pathObj[0].Path.substring(5).replaceAll(">", " > ");
+                } else {
+                    document.getElementById("lblBC").innerHTML = "";
+                }
+            }
+
+            //LRWService.getMasterMenu().success(function (data) {
+            //    $scope.loading = true;
+            //    $scope.menudata = [];
+            //    var prevParent = data.MasterMenuList.filter(a => a.ID == pId); //(data.MasterMenuList.ParentID == pId);
+            //    $scope.previousParentId = prevParent[0].ParentID.toString();
+            //    $scope.menudata = data.MasterMenuList.filter(a => a.ParentID == $scope.previousParentId); //(data.MasterMenuList.ParentID == pId);
+
+            //}).finally(function () { $scope.loading = false; });
+        }
+
+
+
+        function buildBredCrum() {
+            LRWService.getMasterMenu().success(function (data) {
+                $scope.loading = true;
+                $scope.bredcrumdata = data.MasterMenuList.filter(a => a.Url != "");
+
+            }).finally(function () { $scope.loading = false; });
+
+        }
+
+        $scope.isParent = function (mnu) {
+            return mnu.ParentID == "0";
+        };
+        //############## Menu Builder End ###############################//
 
         //############################################## Pellet Report  #######End###########################################//
 

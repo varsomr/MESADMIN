@@ -5,6 +5,12 @@ using System.Web;
 
 namespace BO.Models
 {
+    //Menu Builder Class
+    public class MasterMenuCollection
+    {
+        public List<IDictionary<string, string>> MasterMenuList = new List<IDictionary<string, string>>();
+    }
+
     public class Message
     {
         public string ProjectName;

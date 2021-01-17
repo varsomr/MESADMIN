@@ -15,6 +15,15 @@ namespace BLL.Interfaces
         void addMainProject(string ProjectNameValue, string DescriptionValue, string requestorValue, string EstTotalHoursValue, string EstStartDateDValue, string EstCompleteDateDValue, string PriorityValue, string StatusValue, string row_idValue);
         void approveTasks(string ProjectNameValue, string DefectNameValue, string PriorityValue, string StatusValue, string DescriptionValue, string TestCycleValue, string EnteredByValue, string AssignedToValue, string InsertDateTimeValue, string UpdateDateTimeValue, string CommentValue, string TotalHoursSpentAPPSValue, string EstStartDateValue, string EstCompleteDateValue, string row_idValue);
     }
+
+    //Menu Builder Interface
+    interface IMasterMenuGenerator
+    {
+        //Selection
+        MasterMenuCollection GetMasterMenuCollections();
+
+    }
+
     interface IVatMakeRpt
     {
         //Selection

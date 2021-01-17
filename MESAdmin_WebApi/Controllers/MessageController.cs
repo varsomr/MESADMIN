@@ -8,10 +8,20 @@ using System.Net.Http;
 using System.Web.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using static BLL.MessageGenerator;
+
 namespace Leprino_Integration_Tool.Controllers
 {
     public class MessageController : ApiController
     {
+        //Menu Builder API Call details
+        [Route("api/Message/getMasterMenu")]
+        public MasterMenuCollection getMasterMenu()
+        {
+            MasterMenuGenerator vm = new MasterMenuGenerator();
+            return vm.GetMasterMenuCollections();
+        }
+
         // GET: api/Message
         [Route("api/Message/getprojects/{handle}/{sql}")]
         public ProjectCollection Get(string handle, string sql) //MessageCollection<List> 

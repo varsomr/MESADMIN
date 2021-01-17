@@ -11,6 +11,25 @@ namespace DAL.Data
 {
     public class DBConnection
     {
+        //Menu Builder DB Object
+        public static DataSet DBConnectMasterMenus(string storedprocedure)
+        {
+            DataSet dsrpt = new DataSet();
+            using (SqlConnection LRWConnect = new SqlConnection(ConfigurationManager.ConnectionStrings["LRWConnnect"].ConnectionString.ToString()))
+            {
+                LRWConnect.Open();
+                SqlCommand sqlComm = new SqlCommand(storedprocedure, LRWConnect);
+                sqlComm.CommandType = CommandType.StoredProcedure;
+
+                sqlComm.CommandTimeout = 0;
+                sqlComm.ExecuteNonQuery();
+
+                SqlDataAdapter daa = new SqlDataAdapter();
+                daa.SelectCommand = sqlComm;
+                daa.Fill(dsrpt);
+                return dsrpt;
+            }
+        }
 
         public static DataSet DBConnectProjects(string storedprocedure, string param1, string param2)
         {

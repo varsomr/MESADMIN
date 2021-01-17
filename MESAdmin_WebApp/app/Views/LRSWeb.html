@@ -1525,20 +1525,49 @@
 
     <div class="calloutMain" style="float:left;width:100%;float:left;background-color:#3b3a3f;color:white" ng-controller="LRSWebcontroller">
         <button id="startmenubtn" title="Help!" class="mainBtn" style="width:80px;height:40px;float:left;background-color:transparent;color:white;border:hidden" ng-click="openModalStartMenu('start-menu-modal');"><img src="/images/Lepr.png" style="height:90%;width:90%" /></button>
+        <!-- Display Menu Path -->
+        <div style="float:left;">
+            <label id="lblBC" style="font-family:Arial;float:left;font-size:12px;color:#fff;display:block">{{path}}</label>
+        </div>
         <!--<input id="keyword" style="width:240px;height:40px;background-color:#fff; font-size:large; color:#90c02f; float:left;border:inset;border-color:darkslategrey; text-align:center" placeholder="sample/batch/po/inspLot/truckid" ng-keyup="SelectKeyword()" />
-        <button id="go" ng-click="clearTooltip();SearchAll()" class="bigbtn" style='float:left;width:50px;font-size:small;background-color:black; color:white; border:outset 2px darkslategrey;height:40px;'><img src="/images/go.PNG" style="width:40px;height:30px;border-radius:48px;border-bottom-left-radius:0px;border-top-left-radius:0px;" /></button>-->
+    <button id="go" ng-click="clearTooltip();SearchAll()" class="bigbtn" style='float:left;width:50px;font-size:small;background-color:black; color:white; border:outset 2px darkslategrey;height:40px;'><img src="/images/go.PNG" style="width:40px;height:30px;border-radius:48px;border-bottom-left-radius:0px;border-top-left-radius:0px;" /></button>-->
         <div class="digital-clock" style="width:100px;height:40px;background-color:transparent; font-size:medium; color:white; float:right; border:hidden;background-color:transparent;color:white;text-align:center">00:00:00</div>
         <input id="MainClock" style="width:100px;height:20px;padding-bottom:5px; background-color:transparent; font-size:medium; color:white; float:right; border:hidden;background-color:transparent;color:white;text-align:center" ng-click="calendardate('#MainClock')" disabled>
         <!--<input id="VATPlantOff" style="width:3%;height:22px; font-size:small; float:right;text-align:center;background-color:transparent;color:lightgoldenrodyellow; border:hidden " disabled="disabled" name="VATPlantOff">
-        <input id="HMI" style="width:3%;height:22px; font-size:small; float:right;text-align:center;background-color:transparent;color:lightgoldenrodyellow; border:hidden " disabled="disabled">-->
+    <input id="HMI" style="width:3%;height:22px; font-size:small; float:right;text-align:center;background-color:transparent;color:lightgoldenrodyellow; border:hidden " disabled="disabled">-->
         <label style="float:right;font-size:small;color:#fff;display:none"> {{title}}</label>
         <label id="uid" name="uid" style="font-family:sans-serif;display:none">{{function_one()}} </label>
         <input id="LoggedIn" name="LoggedIn" ng-model="LoggedIn" style="font-size:small; font-family:sans-serif;color:#fff;float:right" disabled />
         <label style="font-family:sans-serif;float:right">Logged in as:</label>
 
-        <div ng-controller="LRWcontroller">
-
-            <button id="CMS" class="mainBtn" ng-click="openModal('mysidenavRightCMSupervisor');" style="width:7%; height:40px; border:solid 1px darkslategrey; background-color:transparent;color:white; float:left;font-size:small;border-bottom:hidden;content:string(name)">
+        <div ng-controller="LRWcontroller" ng-init="loadMenu()" style="padding-bottom:2px;">
+            <!--Menu Display-->
+            <button ng-if="menudata.length == 0" ng-click="openSubMenu('0');" style="width:40px;margin:5px;width:4%; height:40px; border:solid 1px white; background-color:white;color:Black; float:left;font-size:small;">
+                <img src="../menuhome.png" />
+            </button>
+            <div ng-if="menudata" ng-repeat="mnu in menudata  | orderBy:'IsPage' track by $index" style="padding-right:5px">
+                <button ng-if="$index == 0 && mnu.PathValues.split('>').length > 2 " ng-click="openSubMenu('0');" style="margin:5px;width:4%; height:40px; border:solid 1px white; background-color:white;color:Black; float:left;font-size:small;">
+                    <img src="../menuhome.png" />
+                </button>
+                <button ng-if="mnu.IsPage=='False' && mnu.Cnt > 0 " ng-click="openSubMenu(mnu.ID);" style="min-width:5%; vertical-align:middle; margin:5px; height:40px; border:solid 1px lightyellow; background-color:yellow;color:black; float:left;font-size:small;">
+                    {{mnu.Name}}
+                </button>
+                <button ng-if="mnu.IsPage=='False' && mnu.Cnt == 0 " style="min-width:5%; vertical-align:middle; margin:5px; height:40px; border:solid 1px lightyellow; background-color:yellow;color:silver; float:left;font-size:small;">
+                    {{mnu.Name}}
+                </button>
+                <button ng-if="mnu.IsPage=='True' && mnu.Url.trim() != '' " ng-click="openModal(mnu.Url, mnu.ID);" style="min-width: 5%; margin: 5px; height: 40px; border: solid 1px cyan; background-color: transparent; color: cyan; float: left; font-size: small; content: string(Name)">
+                    {{mnu.Name}}
+                </button>
+                <button ng-if="mnu.IsPage=='True' && mnu.Url.trim() == '' " disabled style="min-width: 5%; margin: 5px; height: 40px; border: solid 1px gray; background-color: transparent; color: silver; float: left; font-size: small; content: string(Name)">
+                    {{mnu.Name}}
+                </button>
+                <button ng-if="$index == menudata.length - 1 && mnu.PathValues.split('>').length >= 3"
+                        ng-click="openBackMenu(mnu.PathValues.split('>')[mnu.PathValues.split('>').length-2]);" style="margin:5px;width:4%; height:40px; border:solid 1px white; background-color:white;color:Black; float:left;font-size:small;">
+                    <img src="../back.png" />
+                </button>
+            </div>
+            <br />
+            <!--<button id="CMS" class="mainBtn" ng-click="openModal('mysidenavRightCMSupervisor');" style="width:7%; height:40px; border:solid 1px darkslategrey; background-color:transparent;color:white; float:left;font-size:small;border-bottom:hidden;content:string(name)">
                 01 DOP Cheese Make<span class="tooltiptext" id="myTooltipCMS"></span>
             </button>
             <button id="Sep" class="mainBtn" ng-click="openModal('mysidenavRightDOPSeparator')" style="width:7%; height:40px; border:solid 1px darkslategrey; background-color:transparent;color:white; float:left;font-size:small;border-bottom:hidden">
@@ -1576,7 +1605,7 @@
             </button>
             <button id="Tsk" class="mainBtn" ng-click="openModal('mysidenavRightPelletReport')" style="width:7%; height:40px; border:solid 1px darkslategrey; background-color:transparent;color:white; float:left;font-size:small;border-bottom:hidden">
                 Pallet Report<span class="tooltiptext" id="myTooltipFr"></span>
-            </button>
+            </button>-->
         </div>
     </div>
 
@@ -2418,6 +2447,25 @@
         <div class="modal-content" style="height:100%;  background-color:white;color:white">
             <div class="modal-body" style="height:100%;  background-color:white;color:white; overflow:auto">
                 <div style="background-color:lightblue">
+                    <!--Display Bredcrum-->
+                    <div class="row" style="background-color:black;height:35px;margin:3px">
+                        <div ng-repeat="pt in bredcrumdata" style="padding-right:5px">
+                            <div ng-if="pt.Url == 'mysidenavRightMldReport'">
+                                <div ng-if="$index != pt.Path.split('>').length-1 " ng-repeat="pt1 in pt.Path.split('>') track by $index"
+                                     ng-click="closeReportandOpenSubMenu(pt.PathValues.split('>')[$index],'mysidenavRightMldReport');"
+                                     style="cursor:pointer; text-align:left; vertical-align:middle; margin:5px; height:40px; border:solid 0px;
+                                    background-color:transparent;color:white; float:left;font-size:10px;font-weight:normal;">
+                                    {{pt1}} >
+                                </div>
+                                <div ng-if="$index == pt.Path.split('>').length-1 "
+                                     ng-repeat="pt1 in pt.Path.split('>') track by $index"
+                                     style="text-align:left; vertical-align:middle; margin:5px; height:40px; border:solid 0px;
+                                     background-color:transparent;color:cyan; float:left;font-size:10px;font-weight:normal;">
+                                    {{pt1}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row" ng-show="isHideFilters == false">
                         <div class="col-md-12">
                             <div class="col-md-2">
@@ -2538,6 +2586,25 @@
         <div class="modal-content" style="height:100%;  background-color:white;color:white">
             <div class="modal-body" style="height:100%;  background-color:white;color:white">
                 <div style="background-color:lightblue">
+                    <!--Display Bredcrum-->
+                    <div class="row" style="background-color:black;height:35px;margin:3px">
+                        <div ng-repeat="pt in bredcrumdata" style="padding-right:5px">
+                            <div ng-if="pt.Url == 'mysidenavRightPelletReport'">
+                                <div ng-if="$index != pt.Path.split('>').length-1 " ng-repeat="pt1 in pt.Path.split('>') track by $index"
+                                     ng-click="closeReportandOpenSubMenu(pt.PathValues.split('>')[$index],'mysidenavRightPelletReport');"
+                                     style="cursor:pointer; text-align:left; vertical-align:middle; margin:5px; height:40px; border:solid 0px;
+                                    background-color:transparent;color:white; float:left;font-size:10px;font-weight:normal;">
+                                    {{pt1}} >
+                                </div>
+                                <div ng-if="$index == pt.Path.split('>').length-1 "
+                                     ng-repeat="pt1 in pt.Path.split('>') track by $index"
+                                     style="text-align:left; vertical-align:middle; margin:5px; height:40px; border:solid 0px;
+                                     background-color:transparent;color:cyan; float:left;font-size:10px;font-weight:normal;">
+                                    {{pt1}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row" ng-show="isHideFilters == false" style="margin-top:10px">
                         <div class="col-md-12">
                             <div class="col-md-2">
@@ -2650,11 +2717,11 @@
                     <div class="row" style="margin-top:4px" ng-show="isHideFilters == false">
                         <div class="col-md-12">
                             <!--<div class="col-md-4">
-                                <button type="button" ng-class="{selectedButton: selectedLineNumber == '1'}" class="btnRound btn-sm btn-info" ng-click="gridPalletPagination('1')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">1</button>
-                                <button type="button" ng-class="{selectedButton: selectedLineNumber == '2'}" class="btnRound btn-sm btn-info" ng-click="gridPalletPagination('2')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">2</button>
-                                <button type="button" ng-class="{selectedButton: selectedLineNumber == '3'}" class="btnRound btn-sm btn-info" ng-click="gridPalletPagination('3')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">3</button>
-                                <button type="button" class="btnRound btn-sm btn-info" ng-click="gridPalletPagination('4')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">4</button>
-                             </div>-->
+                <button type="button" ng-class="{selectedButton: selectedLineNumber == '1'}" class="btnRound btn-sm btn-info" ng-click="gridPalletPagination('1')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">1</button>
+                <button type="button" ng-class="{selectedButton: selectedLineNumber == '2'}" class="btnRound btn-sm btn-info" ng-click="gridPalletPagination('2')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">2</button>
+                <button type="button" ng-class="{selectedButton: selectedLineNumber == '3'}" class="btnRound btn-sm btn-info" ng-click="gridPalletPagination('3')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">3</button>
+                <button type="button" class="btnRound btn-sm btn-info" ng-click="gridPalletPagination('4')" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">4</button>
+             </div>-->
                             <div class="col-md-12">
                                 <div ng-repeat="x in lineNumberList" style="float:left;padding-right:4px">
                                     <button type="button" ng-class="{selectedButton: selectedLineNumber == '{{x.label}}'}" class="btnRound btn-sm btn-info" ng-click="gridPalletPagination(x.label)" style="background-color:transparent;color:white; border-color:white; width:30px; height:30px; border-radius:24px; font-size:small;">{{x.label}}</button>

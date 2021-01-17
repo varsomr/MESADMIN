@@ -382,7 +382,21 @@
                     console.log("making api call url for Support");
 
                     return $http(req);
-                }
+                },
+
+                 //Service call for menu builder
+                getMasterMenu: function () {
+                    console.log("Loading Menus");
+                    var url = window.location.protocol + "//" + window.location.hostname + ":1630/api/Message/getMasterMenu/" + "/";
+                    console.log(url);
+                    var req = {
+                        method: 'GET',
+                        url: url
+                    };
+                    console.log("making api call url for Support");
+
+                    return $http(req);
+                },
             };
 
 

@@ -15,6 +15,32 @@ namespace BLL
     public class MessageGenerator : IMessage
 
     {
+        //Build Menu Builder BLL
+        public class MasterMenuGenerator : IMasterMenuGenerator
+        {
+            public MasterMenuCollection GetMasterMenuCollections()
+            {
+                MasterMenuCollection mc = new MasterMenuCollection();
+                DataSet dsDefect = DBConnection.DBConnectMasterMenus("_usp_MasterMenu_Get");
+                if (dsDefect.Tables.Count > 0 && dsDefect.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow dr in dsDefect.Tables[0].Rows)
+                    {
+
+                        Dictionary<string, string> menudictionary = new Dictionary<string, string>();
+                        for (int index = 0; index < dsDefect.Tables[0].Columns.Count; index++)
+                        {
+                            menudictionary[dsDefect.Tables[0].Columns[index].ToString()] = dr[index].ToString();
+                        }
+
+                        mc.MasterMenuList.Add(menudictionary);
+
+                    }
+                }
+                return mc;
+            }
+        }
+
         public ProjectCollection GetCollection(string handle, string sql)
         {
             ProjectCollection mc = new ProjectCollection();
