@@ -1555,7 +1555,7 @@
                 <button ng-if="mnu.IsPage=='False' && mnu.Cnt == 0 " style="min-width:5%; vertical-align:middle; margin:5px; height:40px; border:solid 1px lightyellow; background-color:yellow;color:silver; float:left;font-size:small;">
                     {{mnu.Name}}
                 </button>
-                <button ng-if="mnu.IsPage=='True' && mnu.Url.trim() != '' " ng-click="openModal(mnu.Url, mnu.ID);" style="min-width: 5%; margin: 5px; height: 40px; border: solid 1px cyan; background-color: transparent; color: cyan; float: left; font-size: small; content: string(Name)">
+                <button ng-if="mnu.IsPage=='True' && mnu.Url.trim() != '' " ng-click="openModal(mnu.Url);" style="min-width: 5%; margin: 5px; height: 40px; border: solid 1px cyan; background-color: transparent; color: cyan; float: left; font-size: small; content: string(Name)">
                     {{mnu.Name}}
                 </button>
                 <button ng-if="mnu.IsPage=='True' && mnu.Url.trim() == '' " disabled style="min-width: 5%; margin: 5px; height: 40px; border: solid 1px gray; background-color: transparent; color: silver; float: left; font-size: small; content: string(Name)">
