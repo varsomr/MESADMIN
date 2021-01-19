@@ -363,6 +363,7 @@
     <Content Include="app\Views\VatMkTst.html" />
     <Content Include="app\Views\WBScratch.html" />
     <Content Include="app\Views\WBIndex.html" />
+    <Content Include="back.png" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -383,6 +384,7 @@
     <Content Include="LMS1.jpg" />
     <Content Include="LMS2.jpg" />
     <Content Include="lpsWEB.PNG" />
+    <Content Include="menuhome.png" />
     <Content Include="MESPortal.PNG" />
     <Content Include="SAPShortcutKeys.png" />
     <Content Include="Scripts\angular-chart.js" />
